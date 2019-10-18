@@ -3,11 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yodlee</groupId>
-	<artifactId>yodlee-api-model</artifactId>
+	<artifactId>yodlee-java-sdk</artifactId>
 	<version>1.0.0</version>
-	<packaging>jar</packaging>
+	<name>Yodlee Java SDK</name>
 
-	<name>Yodlee API Model</name>
 	<url>https://github.com/Yodlee/java-sdk</url>
 	<licenses>
 		<license>
@@ -41,13 +40,15 @@
 		<connection>scm:git:git://github.com/Yodlee/java-sdk.git</connection>
 		<developerConnection>scm:git:git://github.com/Yodlee/java-sdk.git</developerConnection>
 		<url>https://github.com/Yodlee/java-sdk</url>
-		<tag>yodlee-api-model-1.0.0</tag>
+		<tag>yodlee-java-sdk-1.0.0</tag>
 	</scm>
 
 	<properties>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<okhttp-version>2.7.5</okhttp-version>
+		<threetenbp-version>1.3.5</threetenbp-version>
 		<license.dir>.</license.dir>
 	</properties>
 
@@ -88,65 +89,72 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>5.4.3.Final</version>
+			<groupId>com.squareup.okhttp</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>${okhttp-version}</version>
 		</dependency>
-
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator-annotation-processor</artifactId>
-			<version>5.4.3.Final</version>
+			<groupId>com.squareup.okhttp</groupId>
+			<artifactId>logging-interceptor</artifactId>
+			<version>${okhttp-version}</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.9.10</version>
+			<groupId>org.threeten</groupId>
+			<artifactId>threetenbp</artifactId>
+			<version>${threetenbp-version}</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.9.10</version>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>3.4.0</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+		<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-			<version>2.9.10</version>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.60</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
-			<groupId>javax.el</groupId>
-			<artifactId>javax.el-api</artifactId>
-			<version>3.0.0</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
 		</dependency>
-
 		<dependency>
-			<groupId>org.glassfish.web</groupId>
-			<artifactId>javax.el</artifactId>
-			<version>2.2.6</version>
+			<groupId>com.yodlee</groupId>
+			<artifactId>yodlee-api-model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.10</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-annotations</artifactId>
-			<version>1.5.18</version>
+			<groupId>org.databene</groupId>
+			<artifactId>databene-benerator</artifactId>
+			<version>0.6.2</version>
+			<scope>test</scope>
 		</dependency>
-	</dependencies>
 
+		<dependency>
+			<groupId>org.databene</groupId>
+			<artifactId>feed4testng</artifactId>
+			<version>0.6.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.7</version>
+		</dependency>
+
+
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
@@ -253,8 +261,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
 	</build>
-
 </project>
