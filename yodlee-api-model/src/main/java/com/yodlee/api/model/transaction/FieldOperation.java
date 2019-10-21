@@ -85,13 +85,13 @@ public class FieldOperation extends AbstractModelComponent {
 	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan<br>
 	 * <b>Applicable values (depends on the value of field)</b>:
 	 * <ul>
-	 * <li>field is <b>description</b> -> operation can be
+	 * <li>field is <b>description</b> -{@literal >} operation can be
 	 * <ol>
 	 * <li>stringEquals</li>
 	 * <li>stringContains</li>
 	 * </ol>
 	 * </li>
-	 * <li>field is <b>amount</b> -> operation can be
+	 * <li>field is <b>amount</b> -{@literal >} operation can be
 	 * <ol>
 	 * <li>numberEquals</li>
 	 * <li>numberLessThan</li>
@@ -120,8 +120,8 @@ public class FieldOperation extends AbstractModelComponent {
 	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan<br>
 	 * <b>Applicable Values</b>:
 	 * <ul>
-	 * <li>field is <b>description</b> -> value should be <b>min of 3 and max of 50 characters</b></li>
-	 * <li>field is <b>amount</b> -> value should be <b> min value of 0 and a max value of 99999999999.99</b></li>
+	 * <li>field is <b>description</b> -{@literal >} value should be <b>min of 3 and max of 50 characters</b></li>
+	 * <li>field is <b>amount</b> -{@literal >} value should be <b> min value of 0 and a max value of 99999999999.99</b></li>
 	 * </ul>
 	 * 
 	 * @return value

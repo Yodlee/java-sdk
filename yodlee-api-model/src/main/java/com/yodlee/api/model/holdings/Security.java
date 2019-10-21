@@ -555,7 +555,7 @@ public class Security extends AbstractModelComponent {
 	}
 
 	/**
-	 * GICS Sector is a categorization the S&P assigns to all publically traded companies. <br>
+	 * GICS Sector is a categorization the S{@literal &}P assigns to all publically traded companies. <br>
 	 * <br>
 	 * <b>Applicable containers</b>: investment<br>
 	 * 
@@ -721,7 +721,7 @@ public class Security extends AbstractModelComponent {
 	}
 
 	/**
-	 * Unique identifier for S&P rating on Envestnet platform. <br>
+	 * Unique identifier for S{@literal &}P rating on Envestnet platform. <br>
 	 * <br>
 	 * <b>Applicable containers</b>: investment<br>
 	 * 

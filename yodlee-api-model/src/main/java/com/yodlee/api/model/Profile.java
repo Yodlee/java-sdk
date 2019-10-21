@@ -60,7 +60,7 @@ public class Profile extends AbstractProfile {
 	 * <li>GET providerAccounts/profile</li>
 	 * </ul>
 	 * 
-	 * return gender
+	 * @return gender
 	 */
 	public String gender() {
 		return gender;

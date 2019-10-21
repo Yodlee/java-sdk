@@ -166,11 +166,11 @@ public enum AdditionalStatusType {
 	 * 
 	 * <b>Description: </b>Indicates there is a technical error. <br>
 	 * <b>Next Action: </b> Instruct the user to try again later. If the request fails repeatedly, report the issue to
-	 * the customer service team.</b><br>
+	 * the customer service team.<br>
 	 */
 	TECH_ERROR, //
 	/**
-	 * <b>Description: </b>The errors that require users to take action at the provider site, for example, accept T&C,
+	 * <b>Description: </b>The errors that require users to take action at the provider site, for example, accept T{@literal &}C,
 	 * etc. <br>
 	 * <b>Next Action: </b>Instruct the user to visit the provider site and perform the necessary action
 	 */

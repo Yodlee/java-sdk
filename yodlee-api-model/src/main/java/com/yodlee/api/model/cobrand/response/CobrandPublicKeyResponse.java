@@ -51,7 +51,7 @@ public class CobrandPublicKeyResponse extends AbstractModelComponent implements 
 	}
 
 	/**
-	 * Public key that the customer should be using to encrypt the credentials and answers before sending to the add &
+	 * Public key that the customer should be using to encrypt the credentials and answers before sending to the add and
 	 * update providerAccounts APIs. <br>
 	 * <br>
 	 * <b>Endpoints</b>:

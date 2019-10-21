@@ -159,6 +159,7 @@ public class Institution extends AbstractModelComponent {
 	  * <li>GET institutions</li>
 	  * </ul>
 	  * <b>Applicable Values</b><br>
+	  * @return priority
 	  */
 	@JsonProperty("PRIORITY")
 	public ProviderPriority getPriority() {
@@ -172,7 +173,7 @@ public class Institution extends AbstractModelComponent {
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
-	 * 
+	 *  @return countryISOCode
 	 */
 	public String getCountryISOCode() {
 		return countryISOCode;
@@ -185,7 +186,7 @@ public class Institution extends AbstractModelComponent {
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
-	 * 
+	 * @return isAddedByUser
 	 */
 	public String getIsAddedByUser() {
 		return isAddedByUser;
@@ -198,6 +199,7 @@ public class Institution extends AbstractModelComponent {
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * @return logo
 	 */
 	public String getLogo() {
 		return logo;
@@ -210,7 +212,7 @@ public class Institution extends AbstractModelComponent {
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
-	 * @return
+	 * @return primaryLanguageISOCode
 	 */
 	public String getPrimaryLanguageISOCode() {
 		return primaryLanguageISOCode;
@@ -223,6 +225,7 @@ public class Institution extends AbstractModelComponent {
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * @return lastModified
 	 */
 	public String getLastModified() {
 		return lastModified;
@@ -236,6 +239,7 @@ public class Institution extends AbstractModelComponent {
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * @return id
 	 */
 	public Long getId() {
 		return id;
@@ -248,6 +252,7 @@ public class Institution extends AbstractModelComponent {
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * @return baseUrl
 	 */
 	public String getBaseUrl() {
 		return baseUrl;
@@ -260,6 +265,7 @@ public class Institution extends AbstractModelComponent {
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * @return favicon
 	 */
 	public String getFavicon() {
 		return favicon;
@@ -272,6 +278,7 @@ public class Institution extends AbstractModelComponent {
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * @return name
 	 */
 	public String getName() {
 		return name;
@@ -284,6 +291,7 @@ public class Institution extends AbstractModelComponent {
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * @return loginUrl
 	 */
 	public String getLoginUrl() {
 		return loginUrl;
@@ -296,6 +304,7 @@ public class Institution extends AbstractModelComponent {
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * @return languageISOCode
 	 */
 	public String getLanguageISOCode() {
 		return languageISOCode;
@@ -308,6 +317,7 @@ public class Institution extends AbstractModelComponent {
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * @return providerId
 	 */
 	public List<Long> getProviderId() {
 		return providerId;

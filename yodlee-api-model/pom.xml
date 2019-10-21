@@ -244,6 +244,7 @@
 				<artifactId>maven-source-plugin</artifactId>
 				<configuration>
 					<encoding>UTF-8</encoding>
+					<doclint>none</doclint>
 				</configuration>
 				<executions>
 					<execution>

@@ -531,6 +531,7 @@ public abstract class AbstractProvider extends AbstractModelComponent {
 	 * <li>GET providers/{providerId}</li>
 	 * <li>GET providers</li>
 	 * </ul>
+	 * @return authParameter
 	 */
 	public List<ProviderAuthParameter> getAuthParameter() {
 		return authParameter == null ? null : Collections.unmodifiableList(authParameter);
@@ -544,6 +545,7 @@ public abstract class AbstractProvider extends AbstractModelComponent {
 	 * <li>GET providers/{providerId}</li>
 	 * <li>GET providers</li>
 	 * </ul>
+	 * @return accountType
 	 */
 	public List<ProviderAccountType> getAccountType() {
 		return accountType == null ? null : Collections.unmodifiableList(accountType);

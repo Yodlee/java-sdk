@@ -565,7 +565,7 @@ public abstract class AbstractTransaction extends AbstractModelComponent {
 	 * The CUSIP (Committee on Uniform Securities Identification Procedures) identifies the financial instruments in the
 	 * United States and Canada. <br>
 	 * <b><br>
-	 * <b>Note</b></b>: The CUSIP number field applies only to trade related transactions. <br>
+	 * Note</b>: The CUSIP number field applies only to trade related transactions. <br>
 	 * <br>
 	 * <b>Applicable containers</b>: investment<br>
 	 * 
