@@ -1,7 +1,16 @@
 {
-    "dnsName":"<Callback public URL>",
-	"userLoginName":"<loginName>",
-	"searchSite":"<Your search site>",
-	"siteLoginField":"<search site login field>",
-	"sitePasswordField":"<search site password>"
+	"dnsName": "<DNS for webhooks callback notification>",
+	"userLoginName": "<User Login Name>",
+	"searchProvider": "<Search string for searching provider>",
+	"providerId": "<providerId to link an account>",
+	"field": [
+		{
+			"id": "<field id>",
+			"value": "field password"
+		},
+		{
+			"id": "<field id>",
+			"value": "field password"
+		}
+	]
 }

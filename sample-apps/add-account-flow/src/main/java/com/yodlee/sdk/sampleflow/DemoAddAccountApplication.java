@@ -8,6 +8,7 @@ package com.yodlee.sdk.sampleflow;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+
 import com.yodlee.api.model.providers.response.ProviderDetailResponse;
 import com.yodlee.api.model.user.response.UserResponse;
 import com.yodlee.sdk.api.exception.ApiException;
@@ -27,21 +28,22 @@ public class DemoAddAccountApplication {
 			JWTAppContext jwtAppContext = ContextFactory.createJWTAppContext();
 			// Subscribe REFRESH event for webhook notification - This is a one-time activity
 			AddAccountFlow.subscribeRefreshEvent(jwtAppContext);
-			// Register a use - This is a one-time activity for a user
+			// Register a user - This is a one-time activity for a user
 			UserResponse userResponse = AddAccountFlow.registerUser(jwtAppContext, RESOURCES.getUserLoginName());
 			// Create JWT user context for the created user
 			JWTUserContext jwtUserContext = createJWTUserContext(jwtAppContext, userResponse);
-			// Search site
-			long siteId = AddAccountFlow.getSiteId(jwtUserContext, RESOURCES.getSearchSite());
-			if (siteId > 0) {
-				// Fetch the site details
-				ProviderDetailResponse siteDetails = AddAccountFlow.getSiteDetails(jwtUserContext, siteId);
+			// Search provider
+			long providerId = AddAccountFlow.getProviderId(jwtUserContext, RESOURCES.getSearchProvider(),
+					RESOURCES.getProviderId());
+			if (providerId > 0) {
+				// Fetch the provider details
+				ProviderDetailResponse providerDetails = AddAccountFlow.getProviderDetails(jwtUserContext, providerId);
 				// Link Account
-				AddAccountFlow.linkAccount(jwtUserContext, siteDetails, siteId);
+				AddAccountFlow.linkAccount(jwtUserContext, providerDetails, providerId, RESOURCES.getField());
 				// Further flow will be at Webhooks Callback Flow
 			}
 		} catch (ApiException e) {
-			System.err.println(e);
+			System.out.println("Error Occurred : " + Utils.printException(e));
 		}
 	}
 

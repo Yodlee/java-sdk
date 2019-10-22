@@ -11,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yodlee.api.model.AbstractModelComponent;
+import com.yodlee.api.model.YodleeError;
+import com.yodlee.sdk.api.exception.ApiException;
 
 public class Utils {
 
@@ -44,6 +46,21 @@ public class Utils {
 			System.out.println();
 			return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(response);
 		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static String printException(ApiException ex) {
+		try {
+			if (ex.isClientSideError()) {
+				return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(ex.getProblems());
+			} else {
+				String msg = ex.getResponseBody();
+				YodleeError yodleeError = MAPPER.readValue(msg, YodleeError.class);
+				return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(yodleeError);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

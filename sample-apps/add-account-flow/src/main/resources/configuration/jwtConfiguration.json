@@ -1,12 +1,10 @@
 {
-	"basePath": "<API_BASE_PATH>",//API base path
+	"basePath": "http://demo.yodlee.com/ysl",
 	"apiVersion": "1.1",
-	"apiKey": "<API_KEY>", //Issuer Id
-	"privateKey": "<PRIVATE_KEY>",//The private key needed to generate JWT Token
-	"expiresIn": "<EXPIRES_IN>",//lifetime for JWT token in secs, defaults to 1800
-	"locale": "<LOCALE>",
-	"sub": "<SUB>",//User Name // Applicable only for JWTUserConfiguration
-	"socketTimeout": 10000,//In milli secs, defaults to 10000
-	"readTimeout": 10000, // In milli secs, defaults to 10000
-	"writeTimeout": 10000, // In milli secs, defaults to 10000
+	"apiKey": "<Api Key>",
+	"privateKey": "<Private Key to generate JWT token>",
+	"expiresIn": 1800,
+	"socketTimeout": 10000,
+	"readTimeout": 10000,
+	"writeTimeout": 10000
 }
