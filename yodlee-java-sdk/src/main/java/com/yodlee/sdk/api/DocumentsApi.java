@@ -192,6 +192,7 @@ public class DocumentsApi extends AbstractApi {
 	 * Documents can be deleted only if the document related dataset attributes are subscribed.<br>
 	 * 
 	 * @param documentId documentId (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 */
 	public ApiResponse<AbstractModelComponent> deleteDocument(//

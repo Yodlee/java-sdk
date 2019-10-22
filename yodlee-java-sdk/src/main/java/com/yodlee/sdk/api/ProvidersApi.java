@@ -60,9 +60,11 @@ public class ProvidersApi extends AbstractApi {
 	 * <br>
 	 * Datasets,attributes and containers that are enabled for the customer alone will be returned in the response<br>
 	 * Input for the dataset$filter should adhere to the following expression:<br>
-	 * <dataset.name>[<attribute.name>.container[<container> OR <container>] OR <attribute.name>.container[<container>]]
-	 * <br>
-	 * OR <dataset.name>[<attribute.name> OR <attribute.name>]<br>
+	 * {@literal <}dataset.name{@literal >}[{@literal <}attribute.name{@literal >}.container[{@literal <}container
+	 * {@literal >} OR {@literal <}container{@literal >}] OR
+	 * {@literal <}attribute.name{@literal >}.container[{@literal <}container{@literal >}]] <br>
+	 * OR {@literal <}dataset.name{@literal >}[{@literal <}attribute.name{@literal >} OR
+	 * {@literal <}attribute.name{@literal >}]<br>
 	 * <b>dataset$filter value examples:</b><br>
 	 * ACCT_PROFILE[FULL_ACCT_NUMBER.container[bank OR investment OR creditCard]]<br>
 	 * ACCT_PROFILE[FULL_ACCT_NUMBER.container[bank]]<br>
@@ -80,7 +82,7 @@ public class ProvidersApi extends AbstractApi {
 	 * 2. The recommendation is to use this service with filters when used in a flow involving user interactions.
 	 * 
 	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (optional)
-	 * @param datasetfilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
+	 * @param datasetFilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
 	 *        will be the dataset or dataset attributes configured as default for the customer. (optional)
 	 * @param name Name in minimum 1 character or routing number. (optional)
 	 * @param priority Search priority (optional)
@@ -112,9 +114,11 @@ public class ProvidersApi extends AbstractApi {
 	 * <br>
 	 * Datasets,attributes and containers that are enabled for the customer alone will be returned in the response<br>
 	 * Input for the dataset$filter should adhere to the following expression:<br>
-	 * <dataset.name>[<attribute.name>.container[<container> OR <container>] OR <attribute.name>.container[<container>]]
-	 * <br>
-	 * OR <dataset.name>[<attribute.name> OR <attribute.name>]<br>
+	 * {@literal <}dataset.name{@literal >}[{@literal <}attribute.name{@literal >}.container[{@literal <}container
+	 * {@literal >} OR {@literal <}container{@literal >}] OR
+	 * {@literal <}attribute.name{@literal >}.container[{@literal <}container{@literal >}]] <br>
+	 * OR {@literal <}dataset.name{@literal >}[{@literal <}attribute.name{@literal >} OR {@literal
+	 * <}attribute.name{@literal >}]<br>
 	 * <b>dataset$filter value examples:</b><br>
 	 * ACCT_PROFILE[FULL_ACCT_NUMBER.container[bank OR investment OR creditCard]]<br>
 	 * ACCT_PROFILE[FULL_ACCT_NUMBER.container[bank]]<br>
@@ -132,7 +136,7 @@ public class ProvidersApi extends AbstractApi {
 	 * 2. The recommendation is to use this service with filters when used in a flow involving user interactions.
 	 * 
 	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (optional)
-	 * @param datasetfilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
+	 * @param datasetFilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
 	 *        will be the dataset or dataset attributes configured as default for the customer. (optional)
 	 * @param name Name in minimum 1 character or routing number. (optional)
 	 * @param priority Search priority (optional)
@@ -250,7 +254,7 @@ public class ProvidersApi extends AbstractApi {
 	 * .
 	 * 
 	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (optional)
-	 * @param datasetfilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
+	 * @param datasetFilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
 	 *        will be the dataset or dataset attributes configured as default for the customer. (optional)
 	 * @param name Name in minimum 1 character or routing number. (optional)
 	 * @param priority Search priority (optional)
@@ -276,7 +280,7 @@ public class ProvidersApi extends AbstractApi {
 	 * .
 	 * 
 	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (optional)
-	 * @param datasetfilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
+	 * @param datasetFilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
 	 *        will be the dataset or dataset attributes configured as default for the customer. (optional)
 	 * @param name Name in minimum 1 character or routing number. (optional)
 	 * @param priority Search priority (optional)

@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.impl.PublicClaims;
-import com.yodlee.sdk.api.exception.ApiException;
 
 public class JWTUtil {
 
@@ -31,11 +30,12 @@ public class JWTUtil {
 	/**
 	 * Description: Generates the JWT token which will be valid for provide time.
 	 * 
-	 * @param userName
-	 * @param expiresIn
-	 * @param locale
-	 * @return jwtToken
-	 * @throws ApiException
+	 * @param jwtKey - JWT Key is the issuer id (iss)
+	 * @param privateKeyString - The key used to generate the JWT Token along with JWT Key
+	 * @param userName - The sub field used to identify the user. For App Context this is null.  
+	 * @param expiresIn - The duration in seconds for which the generated JWT token is valid
+	 * @param locale - The locale for the token
+	 * @return jwtToken - The generated JWT token
 	 */
 	public static String getJWTToken(String jwtKey, String privateKeyString, String userName, int expiresIn,
 			String locale) {

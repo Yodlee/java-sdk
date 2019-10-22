@@ -38,7 +38,7 @@ public class AuthApi extends AbstractApi {
 	 * Delete Token This endpoint revokes the token passed in the Authorization header for API Key based
 	 * authentication.<br>
 	 * This service does not return a response. The HTTP response code is 204 (Success with no content).<br>
-	 * 
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -53,7 +53,7 @@ public class AuthApi extends AbstractApi {
 	 * authentication.<br>
 	 * This service does not return a response. The HTTP response code is 204 (Success with no content).<br>
 	 * 
-	 * @param apiCallback {@link ApiCallback} (required)
+	 * @param apiCallBack {@link ApiCallback} (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -72,18 +72,18 @@ public class AuthApi extends AbstractApi {
 	}
 
 	/**
-	 * Generate API Key This endpoint is used to generate an API key. The RSA public key you provide should be in<br/>
-	 * 2048 bit PKCS#8 encoded format. A public key is a mandatory input for generating the API key.<br/>
-	 * The public key should be a unique key. The apiKeyId you get in the response is what you should<br/>
+	 * Generate API Key This endpoint is used to generate an API key. The RSA public key you provide should be in<br>
+	 * 2048 bit PKCS#8 encoded format. A public key is a mandatory input for generating the API key.<br>
+	 * The public key should be a unique key. The apiKeyId you get in the response is what you should<br>
 	 * use to generate the JWT token.<br>
-	 * You can use one of the following authorization methods to access<br/>
-	 * this API:<br/>
+	 * You can use one of the following authorization methods to access<br>
+	 * this API:<br>
 	 * <ol>
 	 * <li>cobsession</li>
 	 * <li>JWT token</li>
 	 * </ol>
 	 * Alternatively, you can use base 64 encoded cobrandLogin and cobrandPassword in the Authorization header (Format:
-	 * Authorization: Basic <encoded value of cobrandLogin: cobrandPassword>)<br>
+	 * Authorization: Basic {@literal <}encoded value of cobrandLogin: cobrandPassword{@literal >})<br>
 	 * <b>Note:</b><br>
 	 * This service is not available in developer sandbox environment and will be made available for testing in your
 	 * dedicated environment. The content type has to be passed as application/json for the body parameter.
@@ -102,18 +102,18 @@ public class AuthApi extends AbstractApi {
 	}
 
 	/**
-	 * Generate API Key This endpoint is used to generate an API key. The RSA public key you provide should be in<br/>
-	 * 2048 bit PKCS#8 encoded format. A public key is a mandatory input for generating the API key.<br/>
-	 * The public key should be a unique key. The apiKeyId you get in the response is what you should<br/>
+	 * Generate API Key This endpoint is used to generate an API key. The RSA public key you provide should be in<br>
+	 * 2048 bit PKCS#8 encoded format. A public key is a mandatory input for generating the API key.<br>
+	 * The public key should be a unique key. The apiKeyId you get in the response is what you should<br>
 	 * use to generate the JWT token.<br>
-	 * You can use one of the following authorization methods to access<br/>
-	 * this API:<br/>
+	 * You can use one of the following authorization methods to access<br>
+	 * this API:<br>
 	 * <ol>
 	 * <li>cobsession</li>
 	 * <li>JWT token</li>
 	 * </ol>
 	 * Alternatively, you can use base 64 encoded cobrandLogin and cobrandPassword in the Authorization header (Format:
-	 * Authorization: Basic <encoded value of cobrandLogin: cobrandPassword>)<br>
+	 * Authorization: Basic {@literal <}encoded value of cobrandLogin: cobrandPassword{@literal >})<br>
 	 * <b>Note:</b><br>
 	 * This service is not available in developer sandbox environment and will be made available for testing in your
 	 * dedicated environment. The content type has to be passed as application/json for the body parameter.
@@ -203,6 +203,7 @@ public class AuthApi extends AbstractApi {
 	 * for testing in your dedicated environment.
 	 * 
 	 * @param key key (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */

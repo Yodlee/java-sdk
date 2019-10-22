@@ -96,9 +96,9 @@ public class TransactionsApi extends AbstractApi {
 	 * Double quotes in the merchant name will be prefixed by backslashes (&amp;#92;) in the response, <br>
 	 * e.g. Toys \&quot;R\&quot; Us.<br>
 	 * <b>Note</b> <br>
-	 * <a href=\&quot;https://developer.yodlee.com/Yodlee_API/Transaction_Data_Enrichment\&quot;>TDE</a> is made
-	 * available for bank and card accounts and for the US market only.The address field in the response is available
-	 * only when the TDE key is turned on.<br>
+	 * <a href=https://developer.yodlee.com/Yodlee_API/Transaction_Data_Enrichment>TDE</a> is made available for bank
+	 * and card accounts and for the US market only.The address field in the response is available only when the TDE key
+	 * is turned on.<br>
 	 * 
 	 * @param accountId Comma separated accountIds (optional)
 	 * @param baseType DEBIT/CREDIT (optional)
@@ -159,9 +159,9 @@ public class TransactionsApi extends AbstractApi {
 	 * Double quotes in the merchant name will be prefixed by backslashes (&amp;#92;) in the response, <br>
 	 * e.g. Toys \&quot;R\&quot; Us.<br>
 	 * <b>Note</b> <br>
-	 * <a href=\&quot;https://developer.yodlee.com/Yodlee_API/Transaction_Data_Enrichment\&quot;>TDE</a> is made
-	 * available for bank and card accounts and for the US market only.The address field in the response is available
-	 * only when the TDE key is turned on.<br>
+	 * <a href=https://developer.yodlee.com/Yodlee_API/Transaction_Data_Enrichment>TDE</a> is made available for bank
+	 * and card accounts and for the US market only.The address field in the response is available only when the TDE key
+	 * is turned on.<br>
 	 * 
 	 * @param accountId Comma separated accountIds (optional)
 	 * @param baseType DEBIT/CREDIT (optional)
@@ -415,6 +415,7 @@ public class TransactionsApi extends AbstractApi {
 	 * 
 	 * @param transactionId transactionId (required)
 	 * @param transactionRequest transactionRequest (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -478,6 +479,7 @@ public class TransactionsApi extends AbstractApi {
 	 * The HTTP response code is 201 (Created successfully).<br>
 	 * 
 	 * @param transactionCategoryRequest User Transaction Category in JSON format (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -585,6 +587,7 @@ public class TransactionsApi extends AbstractApi {
 	 * The HTTP response code is 204 (Success without content).<br>
 	 * 
 	 * @param updateCategoryRequest updateCategoryRequest (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -633,6 +636,7 @@ public class TransactionsApi extends AbstractApi {
 	 * The HTTP response code is 204 (Success without content).<br>
 	 * 
 	 * @param categoryId categoryId (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -735,8 +739,8 @@ public class TransactionsApi extends AbstractApi {
 	 * 2. value - min value 0 and a max value of 99999999999.99 is allowed<br>
 	 * The HTTP response code is 201 (Created Successfully).
 	 * 
-	 * @param action To run rules, pass action=run. Only value run is supported (optional)
-	 * @param ruleParam rules(JSON format) to categorize the transactions (optional)
+	 * @param transactionCategorizationRuleRequest rules(JSON format) to categorize the transactions (optional)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -770,15 +774,14 @@ public class TransactionsApi extends AbstractApi {
 	 * numberGreaterThanEquals<br>
 	 * 2. value - min value 0 and a max value of 99999999999.99 is allowed<br>
 	 * The HTTP response code is 201 (Created Successfully).
-	 * 
-	 * @param action To run rules, pass action=run. Only value run is supported (optional)
-	 * @param ruleParam rules(JSON format) to categorize the transactions (optional)
+	 * @param transactionCategorizationRuleRequest - rules(JSON format) to categorize the transactions (optional)
 	 * @param apiCallback {@link ApiCallback} (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
 	public void createTransactionCategorizationRulesAsync(
-			@NotNull(message = "transactions.createTransactionCategorizationRules.required") TransactionCategorizationRuleRequest transactionCategorizationRuleRequest,
+			@NotNull(message = "transactions.createTransactionCategorizationRules.required")//
+			TransactionCategorizationRuleRequest transactionCategorizationRuleRequest,
 			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
 		LOGGER.info("Transactions createTransactionCategorizationRulesAsync API execution started");
 		TransactionsValidator.validateCreateTransactionCategorizationRules(this, ApiUtils.getMethodName(),
@@ -825,7 +828,7 @@ public class TransactionsApi extends AbstractApi {
 	 * 2. value - min value 0 and a max value of 99999999999.99 is allowed<br>
 	 * The HTTP response code is 201 (Created Successfully).
 	 * 
-	 * @param action To run rules, pass action=run. Only value run is supported (optional)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -856,7 +859,6 @@ public class TransactionsApi extends AbstractApi {
 	 * 2. value - min value 0 and a max value of 99999999999.99 is allowed<br>
 	 * The HTTP response code is 201 (Created Successfully).
 	 * 
-	 * @param action To run rules, pass action=run. Only value run is supported (optional)
 	 * @param apiCallback {@link ApiCallback} (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -883,8 +885,8 @@ public class TransactionsApi extends AbstractApi {
 	 * transactions, to categorize the transactions.<br>
 	 * The HTTP response code is 204 (Success with no content).<br>
 	 * 
-	 * @param action (required)
 	 * @param ruleId Unique id of the categorization rule (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -903,7 +905,6 @@ public class TransactionsApi extends AbstractApi {
 	 * transactions, to categorize the transactions.<br>
 	 * The HTTP response code is 204 (Success with no content).<br>
 	 * 
-	 * @param action (required)
 	 * @param ruleId Unique id of the categorization rule (required)
 	 * @param apiCallback {@link ApiCallback} (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
@@ -938,6 +939,7 @@ public class TransactionsApi extends AbstractApi {
 	 * 
 	 * @param ruleId ruleId (required)
 	 * @param transactionCategoriesRuleRequest transactionCategoriesRuleRequest (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -998,6 +1000,7 @@ public class TransactionsApi extends AbstractApi {
 	 * The HTTP response code is 204 (Success without content).<br>
 	 * 
 	 * @param ruleId ruleId (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */

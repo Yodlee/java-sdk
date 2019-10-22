@@ -8,7 +8,6 @@ package com.yodlee.sdk.client;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Type;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -424,12 +423,12 @@ public class ApiClient {
 	}
 
 	/**
-	 * {@link #executeAsync(Call, Type, ApiCallback)}
+	 * {@link ApiClient#executeAsync(Call, Class, ApiCallback)}
 	 *
 	 * @param <T> Type
 	 * @param call An instance of the Call object
 	 * @param callback ApiCallback&lt;T&gt;
-	 * @throws ApiException
+	 * @throws ApiException - {@link ApiException}
 	 */
 	public <T extends AbstractModelComponent> void executeAsync(Call call, ApiCallback<T> callback)
 			throws ApiException {
@@ -439,12 +438,12 @@ public class ApiClient {
 	/**
 	 * Execute HTTP call asynchronously.
 	 *
-	 * @see #execute(Call, Type)
+	 * @see #execute(Call, Class)
 	 * @param <T> Type
 	 * @param call The callback to be executed when the API call finishes
 	 * @param returnType Return type
 	 * @param callback ApiCallback
-	 * @throws ApiException
+	 * @throws ApiException - {@link ApiException}
 	 */
 	public <T extends AbstractModelComponent> void executeAsync(Call call, final Class<T> returnType,
 			final ApiCallback<T> callback) throws ApiException {

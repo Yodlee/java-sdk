@@ -236,7 +236,7 @@ public class VerificationApi extends AbstractApi {
 	 * In the CDV process, the user-provided microtransaction details (i.e., credit and debit) is matched against the
 	 * microtransactions posted by Yodlee.<br>
 	 * For a successful verification of the account&#39;s ownership both microtransaction details should match.<br>
-	 * The CDV process is currently supported only in the United States.<>
+	 * The CDV process is currently supported only in the United States.
 	 * 
 	 * @param updateVerificationRequest verification information (required)
 	 * @return {@link ApiResponse}&lt;{@link VerificationResponse}&gt;
@@ -257,7 +257,7 @@ public class VerificationApi extends AbstractApi {
 	 * In the CDV process, the user-provided microtransaction details (i.e., credit and debit) is matched against the
 	 * microtransactions posted by Yodlee.<br>
 	 * For a successful verification of the account&#39;s ownership both microtransaction details should match.<br>
-	 * The CDV process is currently supported only in the United States.<>
+	 * The CDV process is currently supported only in the United States.
 	 * 
 	 * @param updateVerificationRequest verification information (required)
 	 * @param apiCallback {@link ApiCallback}&lt;{@link VerificationResponse}&gt; (required)

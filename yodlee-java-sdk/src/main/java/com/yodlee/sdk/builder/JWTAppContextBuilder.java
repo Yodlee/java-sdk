@@ -16,9 +16,8 @@ public class JWTAppContextBuilder implements Builder<JWTAppConfiguration, JWTApp
 	 * Cobrand context holds a JWT token generated during the invocation of this method.
 	 * 
 	 * @param jwtConfiguration - {@link JWTAppConfiguration}
-	 * @param privateKey - A secret key to generate JWT token
 	 * @return {@link JWTAppContext}
-	 * @throws ApiException
+	 * @throws ApiException - {@link ApiException}
 	 */
 	public JWTAppContext build(JWTAppConfiguration jwtConfiguration) throws ApiException {
 		ConfigValidationUtil.validateConfig(jwtConfiguration);

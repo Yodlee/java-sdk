@@ -16,9 +16,8 @@ public class JWTUserContextBuilder implements Builder<JWTUserConfiguration, JWTU
 	 * JWT token generated during the invocation of this method.
 	 * 
 	 * @param jwtConfiguration - {@link JWTUserConfiguration}
-	 * @param privateKey - A secret key to generate JWT token
 	 * @return {@link JWTUserContext}
-	 * @throws ApiException
+	 * @throws ApiException - {@link ApiException}
 	 */
 	public JWTUserContext build(JWTUserConfiguration jwtConfiguration) throws ApiException {
 		ConfigValidationUtil.validateConfig(jwtConfiguration);

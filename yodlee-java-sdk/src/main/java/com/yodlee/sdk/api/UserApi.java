@@ -199,8 +199,8 @@ public class UserApi extends AbstractApi {
 	 * <br>
 	 * preferences set at the time of user registration.<br>
 	 * 
-	 * @return UserDetailResponse
 	 * @param apiCallback {@link ApiCallback}&lt;{@link UserDetailResponse}&gt; (required)
+	 * 
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -224,6 +224,7 @@ public class UserApi extends AbstractApi {
 	 * service allows the user to log out of the application.<br>
 	 * The service does not return a response body. The HTTP response code is 204 (Success with no content).<br>
 	 * 
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -267,6 +268,7 @@ public class UserApi extends AbstractApi {
 	 * The HTTP response code is 204 (Success without content). <br>
 	 * 
 	 * @param userRequest userRequest (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -361,6 +363,7 @@ public class UserApi extends AbstractApi {
 	 * Once deleted, the information related to the users cannot be retrieved. <br>
 	 * The HTTP response code is 204 (Success without content)<br>
 	 * 
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */

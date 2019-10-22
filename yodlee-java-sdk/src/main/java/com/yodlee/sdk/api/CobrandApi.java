@@ -117,7 +117,7 @@ public class CobrandApi extends AbstractApi {
 	 * This service does not return a response. The HTTP response code is 204 (Success with no content).<br>
 	 * <b>Note:</b> This endpoint is deprecated for customers using the API Key-based authentication and is applicable
 	 * only to customers who use the SAML-based authentication.<br>
-	 * 
+	 * @return null
 	 * @throws ApiException If fail to call the API
 	 */
 	public ApiResponse<AbstractModelComponent> cobrandLogout() throws ApiException {
@@ -163,6 +163,7 @@ public class CobrandApi extends AbstractApi {
 	 * 
 	 * @param eventName event Name (required)
 	 * @param eventRequest event Request (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -219,6 +220,7 @@ public class CobrandApi extends AbstractApi {
 	 * 
 	 * @param eventName event Name (required)
 	 * @param eventRequest event Request (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -267,6 +269,7 @@ public class CobrandApi extends AbstractApi {
 	 * Delete Subscription The delete events service is used to unsubscribe from an events service.<br>
 	 * 
 	 * @param eventName event Name (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */

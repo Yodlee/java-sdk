@@ -23,10 +23,8 @@ public class CobrandContextBuilder implements Builder<CobrandConfiguration, Cobr
 	 * context holds a cobSession obtained during the invocation of this method.
 	 * 
 	 * @param cobrandConfiguration {@link CobrandConfiguration}
-	 * @param loginName - Cobrand Login Name
-	 * @param password - Cobrand Password
 	 * @return {@link CobrandContext}
-	 * @throws ApiException
+	 * @throws ApiException - {@link ApiException}
 	 */
 	public CobrandContext build(CobrandConfiguration cobrandConfiguration) throws ApiException {
 		ConfigValidationUtil.validateConfig(cobrandConfiguration);

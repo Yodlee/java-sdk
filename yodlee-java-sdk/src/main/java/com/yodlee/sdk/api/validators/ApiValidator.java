@@ -70,7 +70,7 @@ public class ApiValidator {
 	 * List of Problem
 	 * 
 	 * @param problemList List of List of Problems
-	 * @throws ApiException
+	 * @throws ApiException - {@link ApiException}
 	 */
 	@SafeVarargs
 	public static void collectProblems(List<? extends Problem>... problemList) throws ApiException {

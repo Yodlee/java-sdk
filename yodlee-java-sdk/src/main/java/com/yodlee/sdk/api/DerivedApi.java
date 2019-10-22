@@ -68,14 +68,14 @@ public class DerivedApi extends AbstractApi {
 
 	/**
 	 * Get Transaction Summary The transaction summary service provides the summary values of transactions for the given
-	 * date range by category type, high-level categories, or system-defined categories.<br\><br\>Yodlee has the
+	 * date range by category type, high-level categories, or system-defined categories.<br><br>Yodlee has the
 	 * transaction data stored for a day, month, year and week per category as per the availability of user&#39;s data.
 	 * If the include parameter value is passed as details, then summary details will be returned depending on the
-	 * interval passed-monthly is the default.<br\><br\><b\>Notes:</b\><br\>1.Details can be requested for only one
-	 * system-defined category<br\>2.Dates will not be respected for monthly, yearly, and weekly details<br\>3.When
-	 * monthly details are requested, only the fromDate and toDate month will be respected<br\>4.When yearly details are
-	 * requested, only the fromDate and toDate year will be respected<br\>5.For weekly data points, details will be
-	 * provided for every Sunday date available within the fromDate and toDate<br\>
+	 * interval passed-monthly is the default.<br><br><b>Notes:</b><br>1.Details can be requested for only one
+	 * system-defined category<br>2.Dates will not be respected for monthly, yearly, and weekly details<br>3.When
+	 * monthly details are requested, only the fromDate and toDate month will be respected<br>4.When yearly details are
+	 * requested, only the fromDate and toDate year will be respected<br>5.For weekly data points, details will be
+	 * provided for every Sunday date available within the fromDate and toDate<br>
 	 * 
 	 * @param groupBy CATEGORY_TYPE, HIGH_LEVEL_CATEGORY or CATEGORY (required)
 	 * @param accountId comma separated account Ids (optional)
@@ -112,14 +112,14 @@ public class DerivedApi extends AbstractApi {
 
 	/**
 	 * Get Transaction Summary The transaction summary service provides the summary values of transactions for the given
-	 * date range by category type, high-level categories, or system-defined categories.<br\><br\>Yodlee has the
+	 * date range by category type, high-level categories, or system-defined categories.<br><br>Yodlee has the
 	 * transaction data stored for a day, month, year and week per category as per the availability of user&#39;s data.
 	 * If the include parameter value is passed as details, then summary details will be returned depending on the
-	 * interval passed-monthly is the default.<br\><br\><b\>Notes:</b\><br\>1.Details can be requested for only one
-	 * system-defined category<br\>2.Dates will not be respected for monthly, yearly, and weekly details<br\>3.When
-	 * monthly details are requested, only the fromDate and toDate month will be respected<br\>4.When yearly details are
-	 * requested, only the fromDate and toDate year will be respected<br\>5.For weekly data points, details will be
-	 * provided for every Sunday date available within the fromDate and toDate<br\>
+	 * interval passed-monthly is the default.<br><br><b>Notes:</b><br>1.Details can be requested for only one
+	 * system-defined category<br>2.Dates will not be respected for monthly, yearly, and weekly details<br>3.When
+	 * monthly details are requested, only the fromDate and toDate month will be respected<br>4.When yearly details are
+	 * requested, only the fromDate and toDate year will be respected<br>5.For weekly data points, details will be
+	 * provided for every Sunday date available within the fromDate and toDate<br>
 	 * 
 	 * @param groupBy CATEGORY_TYPE, HIGH_LEVEL_CATEGORY or CATEGORY (required)
 	 * @param accountId comma separated account Ids (optional)
@@ -194,13 +194,13 @@ public class DerivedApi extends AbstractApi {
 
 	/**
 	 * Get Holding Summary The get holding summary service is used to get the summary of asset classifications for the
-	 * user.<br\>By default, accounts with status as ACTIVE and TO BE CLOSED will be considered.<br\>If the include
-	 * parameter value is passed as details then a summary with holdings and account information is returned.<br\>
+	 * user.<br>By default, accounts with status as ACTIVE and TO BE CLOSED will be considered.<br>If the include
+	 * parameter value is passed as details then a summary with holdings and account information is returned.<br>
 	 * 
 	 * @param accountIds Comma separated accountIds (optional)
 	 * @param classificationType e.g. Country, Sector, etc. (optional)
 	 * @param include details (optional)
-	 * @return {@link Apiresponse}&lt;{@link DerivedHoldingSummaryResponse}&gt;
+	 * @return {@link ApiResponse}&lt;{@link DerivedHoldingSummaryResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -216,8 +216,8 @@ public class DerivedApi extends AbstractApi {
 
 	/**
 	 * Get Holding Summary The get holding summary service is used to get the summary of asset classifications for the
-	 * user.<br\>By default, accounts with status as ACTIVE and TO BE CLOSED will be considered.<br\>If the include
-	 * parameter value is passed as details then a summary with holdings and account information is returned.<br\>
+	 * user.<br>By default, accounts with status as ACTIVE and TO BE CLOSED will be considered.<br>If the include
+	 * parameter value is passed as details then a summary with holdings and account information is returned.<br>
 	 * 
 	 * @param accountIds Comma separated accountIds (optional)
 	 * @param classificationType e.g. Country, Sector, etc. (optional)
@@ -257,8 +257,8 @@ public class DerivedApi extends AbstractApi {
 	}
 
 	/**
-	 * Get Networth Summary The get networth service is used to get the networth for the user.<br\>If the include
-	 * parameter value is passed as details then networth with historical balances is returned. <br\>
+	 * Get Networth Summary The get networth service is used to get the networth for the user.<br>If the include
+	 * parameter value is passed as details then networth with historical balances is returned. <br>
 	 * 
 	 * @param accountIds comma separated accountIds (optional)
 	 * @param fromDate from date for balance retrieval (YYYY-MM-DD) (optional)

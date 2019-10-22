@@ -19,10 +19,8 @@ public class UserContextBuilder implements Builder<UserConfiguration, UserContex
 	 * cobSession and userSession obtained during the invocation of this method.
 	 * 
 	 * @param userConfiguration {@link UserConfiguration}
-	 * @param cobrandLoginName - Cobrand Login Name
-	 * @param cobrandPassword - Cobrand Password
 	 * @return {@link UserContext}
-	 * @throws ApiException
+	 * @throws ApiException - {@link ApiException}
 	 */
 	public UserContext build(UserConfiguration userConfiguration) throws ApiException {
 		ConfigValidationUtil.validateConfig(userConfiguration);

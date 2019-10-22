@@ -70,7 +70,6 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * refresh, no response is returned.</li>
 	 * </ul>
 	 * 
-	 * @param providerAccountIds
 	 * @return {@link ApiResponse}&lt;{@link UpdatedProviderAccountResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -119,7 +118,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * sent to the callback URL.<br>
 	 * Updating preferences using this API will trigger refreshes
 	 * 
-	 * @param providerAccountId
+	 * @param providerAccountId - ProviderAccountId
+	 * @param refreshProviderAccountRequest - Refresh Information
 	 * @return {@link ApiResponse}&lt;{@link UpdatedProviderAccountResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -150,7 +150,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * sent to the callback URL.<br>
 	 * Updating preferences using this API will trigger refreshes
 	 * 
-	 * @param providerAccountId
+	 * @param refreshProviderAccountRequest - Refresh Information
+	 * @param providerAccountId - ProviderAccountId
 	 * @param apiCallback {@link ApiCallback}&lt;{@link UpdatedProviderAccountResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -174,7 +175,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * <li>For credentials to be updated in the Yodlee system, field array should be provided as an input</li>
 	 * <li>Field array can be obtained from the GET providerAccounts/{providerAccountId}?include=credentials API
 	 * response. The credentials provided by the user should be embedded in field array object before you pass to this
-	 * API.</li> <b> Notes:</b> <br>
+	 * API.</li>
+	 * <li><b> Notes:</b></li>
 	 * <li>Check the status of the providerAccount before invoking this API. Do not call this API to trigger any action
 	 * on a providerAccount, when an action is already in progress for the providerAccount.</li>
 	 * <li>Data to be retrieved from the provider site can be overridden using datasetName or dataset. If you pass
@@ -187,8 +189,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * SUCCESS</li>
 	 * </ul>
 	 * 
-	 * @param providerAccountId
-	 * @param providerAccountRequest
+	 * @param providerAccountId - ProviderAccountId
+	 * @param providerAccountRequest - Credentials Information
 	 * @return {@link ApiResponse}&lt;{@link UpdatedProviderAccountResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -198,7 +200,8 @@ public class ProviderAccountsApi extends AbstractApi {
 			@Digits(message = "{providerAccounts.param.providerAccountId.invalid}",
 					fraction = 0, //
 					integer = 11) long providerAccountId,//
-			@NotNull(message="{providerAccounts.param.providerAccountRequest.required}")ProviderAccountRequest providerAccountRequest) throws ApiException {
+			@NotNull(message = "{providerAccounts.param.providerAccountRequest.required}") ProviderAccountRequest providerAccountRequest)
+			throws ApiException {
 		ProviderAccountsValidator.validateUpdateProviderAccount(this, ApiUtils.getMethodName(), providerAccountId,
 				providerAccountRequest);
 		return editCredentialsOrRefreshProviderAccount(String.valueOf(providerAccountId), providerAccountRequest);
@@ -212,7 +215,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * <li>For credentials to be updated in the Yodlee system, field array should be provided as an input</li>
 	 * <li>Field array can be obtained from the GET providerAccounts/{providerAccountId}?include=credentials API
 	 * response. The credentials provided by the user should be embedded in field array object before you pass to this
-	 * API.</li> <b> Notes:</b> <br>
+	 * API.</li>
+	 * <li><b> Notes:</b></li>
 	 * <li>Check the status of the providerAccount before invoking this API. Do not call this API to trigger any action
 	 * on a providerAccount, when an action is already in progress for the providerAccount.</li>
 	 * <li>Data to be retrieved from the provider site can be overridden using datasetName or dataset. If you pass
@@ -225,8 +229,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * SUCCESS</li>
 	 * </ul>
 	 * 
-	 * @param providerAccountId
-	 * @param providerAccountRequest
+	 * @param providerAccountId - ProviderAccountId
+	 * @param providerAccountRequest - Credentials Information
 	 * @param apiCallback {@link ApiCallback}&lt;{@link UpdatedProviderAccountResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -236,8 +240,8 @@ public class ProviderAccountsApi extends AbstractApi {
 			@Digits(message = "{providerAccounts.param.providerAccountId.invalid}",
 					fraction = 0, //
 					integer = 11) long providerAccountId,//
-			@NotNull(message="{providerAccounts.param.providerAccountRequest.required}")ProviderAccountRequest providerAccountRequest, ApiCallback<UpdatedProviderAccountResponse> apiCallback)
-			throws ApiException {
+			@NotNull(message = "{providerAccounts.param.providerAccountRequest.required}") ProviderAccountRequest providerAccountRequest,
+			ApiCallback<UpdatedProviderAccountResponse> apiCallback) throws ApiException {
 		ProviderAccountsValidator.validateUpdateProviderAccount(this, ApiUtils.getMethodName(), providerAccountId,
 				providerAccountRequest);
 		editCredentialsOrRefreshProviderAccountAsync(String.valueOf(providerAccountId), providerAccountRequest,
@@ -256,8 +260,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * Encrypt the answers to the MFA questions using the public key.
 	 * 
 	 * 
-	 * @param providerAccountId
-	 * @param mfaFields
+	 * @param providerAccountId - ProviderAccountId
+	 * @param mfaFields - MFA Information
 	 * @return {@link ApiResponse}&lt;{@link UpdatedProviderAccountResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -287,8 +291,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * Encrypt the answers to the MFA questions using the public key.
 	 * 
 	 * 
-	 * @param providerAccountId
-	 * @param mfaFields
+	 * @param providerAccountId - ProviderAccountId
+	 * @param mfaFields - MFA Information
 	 * @param apiCallback {@link ApiCallback}&lt;{@link UpdatedProviderAccountResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -314,6 +318,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * The HTTP response code is 204 (Success with no content).<br>
 	 * 
 	 * @param providerAccountId providerAccountId (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -417,8 +422,9 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * user. <br>
 	 * This includes the failed and successfully added provider accounts.<br>
 	 * 
-	 * @param include include (required)
-	 * @return {@link ApiResponse}&lt;{@link ProviderAccountResponse}&gt;
+	 * @param include - preferences
+	 * @param providerIds - Comma separated providerIds
+	 * @return {@link ApiResponse}{@literal <}{@link ProviderAccountResponse}{@literal >}
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -435,7 +441,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * user. <br>
 	 * This includes the failed and successfully added provider accounts.<br>
 	 * 
-	 * @param include include (required)
+	 * @param include - preferences
+	 * @param providerIds - Comma separated providerIds
 	 * @param apiCallback {@link ApiCallback}&lt;{@link ProviderAccountResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -463,8 +470,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * to add an account, relevant notifications will be sent to the callback URL. If you have not subscribed to the
 	 * REFRESH event webhooks notification, the get providerAccount API has to be:
 	 * <ul>
-	 * <li>polled continuously till the login form (supported types are token, question & answer, and captcha) is
-	 * returned in the response for accounts that require multifactor authentication (MFA)</li>
+	 * <li>polled continuously till the login form (supported types are token, question {@literal &} answer, and
+	 * captcha) is returned in the response for accounts that require multifactor authentication (MFA)</li>
 	 * <li>polled continuously till the account addition status is FAILED or PARTIAL_SUCCESS or SUCCESS The update
 	 * account API should be called to post the MFA information to continue adding the account.</li>
 	 * </ul>
@@ -479,9 +486,9 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * credentials using the encryption utility. The content type has to be passed as application/json in the body
 	 * parameter.
 	 * 
-	 * @param providerAccountRequest
-	 * @param providerId
-	 * @return {@link ApiResponse}&lt;{@link AddedProviderAccountResponse}&gt;
+	 * @param providerAccountRequest - credentialsParam
+	 * @param providerId - providerId
+	 * @return {@link ApiResponse}{@literal <}{@link AddedProviderAccountResponse}{@literal >}
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -511,8 +518,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * to add an account, relevant notifications will be sent to the callback URL. If you have not subscribed to the
 	 * REFRESH event webhooks notification, the get providerAccount API has to be:
 	 * <ul>
-	 * <li>polled continuously till the login form (supported types are token, question & answer, and captcha) is
-	 * returned in the response for accounts that require multifactor authentication (MFA)</li>
+	 * <li>polled continuously till the login form (supported types are token, question {@literal &} answer, and
+	 * captcha) is returned in the response for accounts that require multifactor authentication (MFA)</li>
 	 * <li>polled continuously till the account addition status is FAILED or PARTIAL_SUCCESS or SUCCESS The update
 	 * account API should be called to post the MFA information to continue adding the account.</li>
 	 * </ul>
@@ -527,8 +534,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * credentials using the encryption utility. The content type has to be passed as application/json in the body
 	 * parameter.
 	 * 
-	 * @param providerAccountRequest
-	 * @param providerId
+	 * @param providerAccountRequest - credentialsParam
+	 * @param providerId - ProviderId
 	 * @param apiCallback {@link ApiCallback}&lt;{@link AddedProviderAccountResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -589,6 +596,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * 
 	 * @param preferences preferences (required)
 	 * @param providerAccountId providerAccountId (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */

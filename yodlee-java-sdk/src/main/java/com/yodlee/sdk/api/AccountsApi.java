@@ -422,6 +422,7 @@ public class AccountsApi extends AbstractApi {
 	 * 
 	 * @param accountId accountId (required)
 	 * @param accountRequest accountRequest (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -474,6 +475,7 @@ public class AccountsApi extends AbstractApi {
 	 * This service does not return a response. The HTTP response code is 204 (Success with no content).<br>
 	 * 
 	 * @param accountId accountId (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
