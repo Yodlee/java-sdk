@@ -18,9 +18,9 @@ Step to execute Demo application -
 
 The DemoAddAccountApplication (springboot application) does the following-
 
-1.Create's a JWT App Context
+1.Creates a JWT App Context
 2.Subscribes a REFRESH event for webhook notification. The callback URL provided here should be publicly accessible as Yodlee would make a POST call on this callBack URL. Please note that subscription is a one-time activity, hence, to run the application more than once, comment subscribeRefreshEvent method call. 
-3.Registers a user. Please note that user registeration is a one-time activity, hence to run the application more than once, either comment registerUser method call or change the userLoginName in sampleAppResources.json . 
+3.Registers a user. Please note that user registeration is a one-time activity, hence to re-run the application, either comment registerUser method call or change the userLoginName in sampleAppResources.json . 
 4.Creates a JWT user context for the registered user in #3.
 5.It then searches for the provider that is provided in "searchProvider".
 6.Invokes an API to fetch the provider details with login form.
