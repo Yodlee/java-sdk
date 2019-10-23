@@ -1,8 +1,8 @@
 {
-	"basePath": "http://demo.yodlee.com/ysl",
+	"basePath": "<BASEPATH>",
 	"apiVersion": "1.1",
-	"apiKey": "<Api Key>",
-	"privateKey": "<Private Key to generate JWT token>",
+	"apiKey": "<APIKEY>",
+	"privateKey": "<RSA_PRIVATE_KEY>",
 	"expiresIn": 1800,
 	"socketTimeout": 10000,
 	"readTimeout": 10000,

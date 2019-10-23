@@ -6,13 +6,11 @@
 package com.yodlee.sdk.sampleflow;
 
 import static com.yodlee.sdk.sampleflow.DemoAddAccountApplication.RESOURCES;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Field;
@@ -47,8 +45,7 @@ import com.yodlee.sdk.context.JWTUserContext;
  */
 public class AddAccountFlow {
 
-	private AddAccountFlow() {
-	}
+	private AddAccountFlow() {}
 
 	static ObjectMapper mapper = new ObjectMapper();
 
@@ -62,21 +59,13 @@ public class AddAccountFlow {
 		// Set callback URL to subscribe for REFRESH event
 		event.setCallbackUrl("http://" + dns + ":" + getPort() + "/yourApp/callback");
 		eventRequest.setCobrandNotificationEvent(event);
-		try {
-			// Delete any pre-subscribed refresh event
-			cobrandApi.deleteSubscribedEvent(CobrandNotificationEventType.REFRESH);
-		} catch (ApiException e) {
-			// Ignore if no pre-subscribed refresh event exists
-			Utils.printException(e);
-		}
-		ApiResponse<AbstractModelComponent> subribeEvent = cobrandApi
-				.createSubscriptionEvent(CobrandNotificationEventType.REFRESH, eventRequest);
+		ApiResponse<AbstractModelComponent> subribeEvent =
+				cobrandApi.createSubscriptionEvent(CobrandNotificationEventType.REFRESH, eventRequest);
 		System.out.println(String.format("subscribeEvent : %s ", subribeEvent.getStatusCode()));
 	}
 
 	public static UserResponse registerUser(JWTAppContext jwtCobrandContext, String userName) throws ApiException {
 		UserApi userApi = new UserApi(jwtCobrandContext);
-		RESOURCES.setUserLoginName(userName + "_" + System.currentTimeMillis());
 		UserResponse userResponse = null;
 		UserRequest userRequest = new UserRequest();
 		UserRegistration user = new UserRegistration();
@@ -100,8 +89,8 @@ public class AddAccountFlow {
 			throws ApiException {
 		ProvidersApi providersApi = new ProvidersApi(jwtUserContext);
 		providersApi.addApiListener(sampleApiListener());
-		ApiResponse<ProviderResponse> providerResponse = providersApi.getAllProviders(null, null, name, null, null,
-				null);
+		ApiResponse<ProviderResponse> providerResponse =
+				providersApi.getAllProviders(null, null, name, null, null, null);
 		ProviderResponse providersList = providerResponse.getData();
 		if (providersList != null) {
 			List<Providers> providers = providersList.getProviders();
@@ -127,8 +116,7 @@ public class AddAccountFlow {
 	public static AddedProviderAccountResponse linkAccount(JWTUserContext jwtUserContext,
 			ProviderDetailResponse providerDetails, Long providerId, List<Field> fieldList) throws ApiException {
 		List<Field> requestfields = new ArrayList<>();
-		// List<Row> rows =
-		// providerDetails.getProviders().get(0).getLoginForms().get(0).getRows();
+		// List<Row> rows = providerDetails.getProviders().get(0).getLoginForms().get(0).getRows();
 		// for (Row row : rows) {
 		// List<Field> fields = row.getFields();
 		// for (Field field : fields) {

@@ -1,16 +1,16 @@
 {
-	"dnsName": "<DNS for webhooks callback notification>",
-	"userLoginName": "<User Login Name>",
-	"searchProvider": "<Search string for searching provider>",
-	"providerId": "<providerId to link an account>",
+	"dnsName": "<DNSNAME>",
+	"userLoginName": "<USER LOGIN NAME>",
+	"searchProvider": "<SEARCH_PROVIDER>",
+	"providerId": "<PROVIDER_ID>",
 	"field": [
 		{
-			"id": "<field id>",
-			"value": "field password"
+			"id": "<FIELD_ID>",
+			"value": "<FIELD_VALUE>"
 		},
 		{
-			"id": "<field id>",
-			"value": "field password"
+			"id": "<FIELD_ID>",
+			"value": "<FIELD_VALUE>"
 		}
 	]
 }

@@ -8,7 +8,6 @@ package com.yodlee.sdk.sampleflow;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-
 import com.yodlee.api.model.providers.response.ProviderDetailResponse;
 import com.yodlee.api.model.user.response.UserResponse;
 import com.yodlee.sdk.api.exception.ApiException;
@@ -24,7 +23,7 @@ public class DemoAddAccountApplication {
 	public static void main(String[] args) {
 		try {
 			SpringApplication.run(DemoAddAccountApplication.class, args);
-			// Create JWT App Context to webhook subscription
+			// Create JWT App Context
 			JWTAppContext jwtAppContext = ContextFactory.createJWTAppContext();
 			// Subscribe REFRESH event for webhook notification - This is a one-time activity
 			AddAccountFlow.subscribeRefreshEvent(jwtAppContext);
