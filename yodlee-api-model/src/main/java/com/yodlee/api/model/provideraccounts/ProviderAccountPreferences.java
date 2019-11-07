@@ -1,7 +1,7 @@
-/*
+/**
  * Copyright (c) 2019 Yodlee, Inc. All Rights Reserved.
  *
- * This software is the confidential and proprietary information of Yodlee, Inc. Use is subject to license terms.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 package com.yodlee.api.model.provideraccounts;
 
