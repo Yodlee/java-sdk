@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yodlee</groupId>
 	<artifactId>yodlee-java-sdk</artifactId>
@@ -15,22 +17,8 @@
 	</licenses>
 	<developers>
 		<developer>
-			<id>dluna</id>
-			<name>Devendra Luna</name>
-			<email>YSL-Sonatype@yodlee.com</email>
-			<organization>Envestnet Yodlee</organization>
-			<organizationUrl>https://www.yodlee.com</organizationUrl>
-		</developer>
-		<developer>
-			<id>kmirajkar</id>
-			<name>KrishnaMurthy P Mirajkar</name>
-			<email>YSL-Sonatype@yodlee.com</email>
-			<organization>Envestnet Yodlee</organization>
-			<organizationUrl>https://www.yodlee.com</organizationUrl>
-		</developer>
-		<developer>
-			<id>ktandon</id>
-			<name>Khushboo Tandon</name>
+			<id>Yodlee</id>
+			<name>Envestnet Yodlee</name>
 			<email>YSL-Sonatype@yodlee.com</email>
 			<organization>Envestnet Yodlee</organization>
 			<organizationUrl>https://www.yodlee.com</organizationUrl>
@@ -135,7 +123,7 @@
 		<dependency>
 			<groupId>com.yodlee</groupId>
 			<artifactId>yodlee-api-model</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
