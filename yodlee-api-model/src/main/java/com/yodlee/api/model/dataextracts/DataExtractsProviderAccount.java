@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2019 Yodlee, Inc. All Rights Reserved.
  *
- * Licensed under the MIT License. See LICENSE file in the project root for license information.
+ * This software is the confidential and proprietary information of Yodlee, Inc. Use is subject to license terms.
  */
 package com.yodlee.api.model.dataextracts;
 
@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"id", "aggregationSource", "providerId", "isManual", "createdDate", "requestId", "status",
-		"dataset", "loginForm", "isAutoRefreshPreferred", "isDataExtractsPreferred", "preferences"})
+		"dataset", "loginForm", "isAutoRefreshPreferred", "isDataExtractsPreferred", "preferences", "isDeleted"})
 public class DataExtractsProviderAccount extends AbstractProviderAccount {
 
 	@ApiModelProperty(readOnly = true,
@@ -28,6 +28,17 @@ public class DataExtractsProviderAccount extends AbstractProviderAccount {
 							  + "</ul>")
 	@JsonProperty("createdDate")
 	private String createdDate;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "Indicates if the provider account is deleted from the system."//
+							  + "<b>Applicable containers</b>: All Containers<br>"//
+							  + "<b>Aggregated / Manual</b>: Both <br>"//
+							  + "<b>Endpoints</b>:<br>"//
+							  + "<ul>"//
+							  + "<li>GET dataExtracts/userData</li>"//
+							  + "</ul>")
+	@JsonProperty("isDeleted")
+	protected Boolean isDeleted;
 
 	/**
 	 * The date on when the provider account is created in the system. <br>
@@ -46,10 +57,24 @@ public class DataExtractsProviderAccount extends AbstractProviderAccount {
 		return createdDate;
 	}
 
+	/**
+	 * Indicates if the account is marked as deleted. <b>Applicable containers</b>: All Containers<br>
+	 * <b>Aggregated / Manual</b>: Both <br>
+	 * <b>Endpoints</b>:<br>
+	 * <ul>
+	 * <li>GET dataExtracts/userData</li>
+	 * </ul>
+	 * 
+	 * @return isDeleted
+	 */
+	public Boolean getIsDeleted() {
+		return isDeleted;
+	}
+
 	@Override
 	public String toString() {
 		return "DataExtractsProviderAccount [createdDate=" + createdDate + ", id=" + id + ", aggregationSource="
 				+ aggregationSource + ", providerId=" + providerId + ", isManual=" + isManual + ", requestId="
-				+ requestId + ", status=" + status + ", datasets=" + datasets + "]";
+				+ requestId + ", status=" + status + ", datasets=" + datasets + ", isDeleted=" + isDeleted + "]";
 	}
 }
