@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.squareup.okhttp.Call;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Field;
 import com.yodlee.api.model.provideraccounts.request.ProviderAccountPreferencesRequest;
@@ -36,6 +35,7 @@ import com.yodlee.sdk.client.CallContext;
 import com.yodlee.sdk.client.HttpMethod;
 import com.yodlee.sdk.client.Pair;
 import com.yodlee.sdk.context.Context;
+import okhttp3.Call;
 
 public class ProviderAccountsApi extends AbstractApi {
 

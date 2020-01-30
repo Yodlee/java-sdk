@@ -16,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.squareup.okhttp.Call;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.enums.BaseType;
 import com.yodlee.api.model.enums.Container;
@@ -40,6 +39,7 @@ import com.yodlee.sdk.client.CallContext;
 import com.yodlee.sdk.client.HttpMethod;
 import com.yodlee.sdk.client.Pair;
 import com.yodlee.sdk.context.Context;
+import okhttp3.Call;
 
 public class TransactionsApi extends AbstractApi {
 

@@ -5,7 +5,7 @@
  */
 package com.yodlee.sdk.client;
 
-import com.squareup.okhttp.Call;
+import okhttp3.Call;
 
 public class CallContext {
 

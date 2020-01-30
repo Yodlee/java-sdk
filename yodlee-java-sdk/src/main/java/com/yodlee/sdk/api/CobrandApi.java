@@ -8,7 +8,6 @@ package com.yodlee.sdk.api;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.squareup.okhttp.Call;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.cobrand.enums.CobrandNotificationEventType;
 import com.yodlee.api.model.cobrand.request.CobrandLoginRequest;
@@ -30,6 +29,7 @@ import com.yodlee.sdk.client.Pair;
 import com.yodlee.sdk.configuration.cobrand.CobrandConfiguration;
 import com.yodlee.sdk.context.CobrandContext;
 import com.yodlee.sdk.context.Context;
+import okhttp3.Call;
 
 public class CobrandApi extends AbstractApi {
 
@@ -117,6 +117,7 @@ public class CobrandApi extends AbstractApi {
 	 * This service does not return a response. The HTTP response code is 204 (Success with no content).<br>
 	 * <b>Note:</b> This endpoint is deprecated for customers using the API Key-based authentication and is applicable
 	 * only to customers who use the SAML-based authentication.<br>
+	 * 
 	 * @return null
 	 * @throws ApiException If fail to call the API
 	 */
@@ -395,19 +396,10 @@ public class CobrandApi extends AbstractApi {
 	}
 
 	private ApiClient getApiClient() {
-		ApiClient apiClient = new ApiClient();
+		ApiClient apiClient = new ApiClient(cobrandConfiguration);
 		apiClient.setBasePath(cobrandConfiguration.getBasePath());
 		apiClient.addHeader(ApiConstants.COBRAND_NAME, cobrandConfiguration.getName());
 		apiClient.addHeader(ApiConstants.API_VERSION, cobrandConfiguration.getApiVersion());
-		if (cobrandConfiguration.getSocketTimeout() != null) {
-			apiClient.setConnectTimeout(cobrandConfiguration.getSocketTimeout());
-		}
-		if (cobrandConfiguration.getReadTimeout() != null) {
-			apiClient.setReadTimeout(cobrandConfiguration.getReadTimeout());
-		}
-		if (cobrandConfiguration.getWriteTimeout() != null) {
-			apiClient.setWriteTimeout(cobrandConfiguration.getWriteTimeout());
-		}
 		return apiClient;
 	}
 }

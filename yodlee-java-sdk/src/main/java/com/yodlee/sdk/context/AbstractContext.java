@@ -20,15 +20,6 @@ public abstract class AbstractContext<T extends AbstractBaseConfiguration> imple
 		apiClient.setBasePath(configuration.getBasePath());
 		apiClient.addHeader(ApiConstants.API_VERSION, configuration.getApiVersion());
 		apiClient.addHeader(ApiConstants.AUTHORIZATION, getContextHeader());
-		if (configuration.getSocketTimeout() != null) {
-			apiClient.setConnectTimeout(configuration.getSocketTimeout());
-		}
-		if (configuration.getReadTimeout() != null) {
-			apiClient.setReadTimeout(configuration.getReadTimeout());
-		}
-		if (configuration.getWriteTimeout() != null) {
-			apiClient.setWriteTimeout(configuration.getWriteTimeout());
-		}
 		return apiClient;
 	}
 }

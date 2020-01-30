@@ -8,7 +8,6 @@ package com.yodlee.sdk.api;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.squareup.okhttp.Call;
 import com.yodlee.api.model.verification.enums.VerificationType;
 import com.yodlee.api.model.verification.request.UpdateVerificationRequest;
 import com.yodlee.api.model.verification.request.VerificationMatchingRequest;
@@ -26,6 +25,7 @@ import com.yodlee.sdk.client.CallContext;
 import com.yodlee.sdk.client.HttpMethod;
 import com.yodlee.sdk.client.Pair;
 import com.yodlee.sdk.context.Context;
+import okhttp3.Call;
 
 public class VerificationApi extends AbstractApi {
 

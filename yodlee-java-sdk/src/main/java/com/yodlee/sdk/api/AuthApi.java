@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.squareup.okhttp.Call;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.auth.request.ApiKeyRequest;
 import com.yodlee.api.model.auth.response.ApiKeyResponse;
@@ -23,6 +22,7 @@ import com.yodlee.sdk.client.ApiResponse;
 import com.yodlee.sdk.client.CallContext;
 import com.yodlee.sdk.client.HttpMethod;
 import com.yodlee.sdk.context.Context;
+import okhttp3.Call;
 
 public class AuthApi extends AbstractApi {
 

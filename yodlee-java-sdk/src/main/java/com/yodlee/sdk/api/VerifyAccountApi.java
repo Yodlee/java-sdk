@@ -9,7 +9,6 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.squareup.okhttp.Call;
 import com.yodlee.api.model.verifyaccount.request.VerifyAccountRequest;
 import com.yodlee.api.model.verifyaccount.response.VerifyAccountResponse;
 import com.yodlee.sdk.api.exception.ApiException;
@@ -22,6 +21,7 @@ import com.yodlee.sdk.client.ApiResponse;
 import com.yodlee.sdk.client.CallContext;
 import com.yodlee.sdk.client.HttpMethod;
 import com.yodlee.sdk.context.Context;
+import okhttp3.Call;
 
 public class VerifyAccountApi extends AbstractApi {
 

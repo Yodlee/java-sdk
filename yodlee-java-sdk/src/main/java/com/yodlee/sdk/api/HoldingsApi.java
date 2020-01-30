@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.squareup.okhttp.Call;
 import com.yodlee.api.model.holdings.response.HoldingAssetClassificationListResponse;
 import com.yodlee.api.model.holdings.response.HoldingResponse;
 import com.yodlee.api.model.holdings.response.HoldingSecuritiesResponse;
@@ -28,6 +27,7 @@ import com.yodlee.sdk.client.CallContext;
 import com.yodlee.sdk.client.HttpMethod;
 import com.yodlee.sdk.client.Pair;
 import com.yodlee.sdk.context.Context;
+import okhttp3.Call;
 
 public class HoldingsApi extends AbstractApi {
 

@@ -11,7 +11,6 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.squareup.okhttp.Call;
 import com.yodlee.api.model.account.enums.ItemAccountStatus;
 import com.yodlee.api.model.enums.Container;
 import com.yodlee.api.model.statement.response.StatementResponse;
@@ -26,6 +25,7 @@ import com.yodlee.sdk.client.CallContext;
 import com.yodlee.sdk.client.HttpMethod;
 import com.yodlee.sdk.client.Pair;
 import com.yodlee.sdk.context.Context;
+import okhttp3.Call;
 
 public class StatementsApi extends AbstractApi {
 

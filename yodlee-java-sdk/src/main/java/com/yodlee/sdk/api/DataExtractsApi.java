@@ -14,7 +14,6 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.squareup.okhttp.Call;
 import com.yodlee.api.model.dataextracts.response.DataExtractsEventResponse;
 import com.yodlee.api.model.dataextracts.response.DataExtractsUserDataResponse;
 import com.yodlee.sdk.api.exception.ApiException;
@@ -29,6 +28,7 @@ import com.yodlee.sdk.client.CallContext;
 import com.yodlee.sdk.client.HttpMethod;
 import com.yodlee.sdk.client.Pair;
 import com.yodlee.sdk.context.Context;
+import okhttp3.Call;
 
 public class DataExtractsApi extends AbstractApi {
 

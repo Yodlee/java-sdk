@@ -14,6 +14,8 @@ import com.yodlee.sdk.client.ProgressRequestBody.ProgressRequestListener;
 import com.yodlee.sdk.client.ProgressResponseBody;
 import com.yodlee.sdk.client.ProgressResponseBody.ProgressListener;
 import com.yodlee.sdk.context.Context;
+import okhttp3.Interceptor;
+import okhttp3.Response;
 
 public abstract class AbstractApi {
 
@@ -50,34 +52,22 @@ public abstract class AbstractApi {
 	}
 
 	protected void registerResponseInterceptor(final ApiClient apiClient) {
-		final ProgressListener progressListener = new ProgressListener() {
+		final ProgressListener progressListener =
+				(bytesRead, contentLength, done) -> fireResponseUpdate(bytesRead, contentLength, done);
+		Interceptor interceptor = new Interceptor() {
 
 			@Override
-			public void update(long bytesRead, long contentLength, boolean done) {
-				fireResponseUpdate(bytesRead, contentLength, done);
-			}
-		};
-		com.squareup.okhttp.Interceptor interceptor = new com.squareup.okhttp.Interceptor() {
-
-			@Override
-			public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain)
-					throws IOException {
-				com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+			public Response intercept(Interceptor.Chain chain) throws IOException {
+				Response originalResponse = chain.proceed(chain.request());
 				return originalResponse.newBuilder()
 						.body(new ProgressResponseBody(originalResponse.body(), progressListener)).build();
 			}
 		};
-		apiClient.getHttpClient().networkInterceptors().add(interceptor);
+		apiClient.registerNetworkInterceptor(interceptor);
 	}
 
 	protected ProgressRequestListener requestListener() {
-		return new ProgressRequestListener() {
-
-			@Override
-			public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
-				fireRequestUpdate(bytesWritten, contentLength, done);
-			}
-		};
+		return (bytesWritten, contentLength, done) -> fireRequestUpdate(bytesWritten, contentLength, done);
 	}
 
 	protected String replacePathVariable(String endPoint, String pathVariable, String value) {

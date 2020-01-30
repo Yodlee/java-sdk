@@ -27,32 +27,37 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.FormEncodingBuilder;
-import com.squareup.okhttp.Headers;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.MultipartBuilder;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
-import com.squareup.okhttp.internal.http.HttpMethod;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.validator.Problem;
 import com.yodlee.sdk.api.exception.ApiException;
 import com.yodlee.sdk.api.util.ApiUtils;
 import com.yodlee.sdk.builder.JWTUtil;
 import com.yodlee.sdk.configuration.AbstractConfiguration;
+import com.yodlee.sdk.configuration.cobrand.AbstractBaseConfiguration;
 import com.yodlee.sdk.configuration.cobrand.AbstractJWTConfiguration;
 import com.yodlee.sdk.configuration.user.JWTUserConfiguration;
 import com.yodlee.sdk.context.AbstractJWTContext;
 import com.yodlee.sdk.context.Context;
 import com.yodlee.sdk.context.ContextType;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.FormBody.Builder;
+import okhttp3.Headers;
+import okhttp3.Interceptor;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.internal.http.HttpMethod;
+import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 
 public class ApiClient {
+
+	private static final int DEFAULT_TIMEOUT = 10000;
 
 	private static final String APPLICATION_JSON = "application/json";
 
@@ -72,15 +77,56 @@ public class ApiClient {
 
 	private Context<?> context;
 
+	private OkHttpClient.Builder httpBuilder;
+
 	public ApiClient() {
-		this(null);
+		this((AbstractConfiguration) null);
 	}
 
 	public ApiClient(Context<?> context) {
-		super();
-		this.context = context;
-		httpClient = new OkHttpClient();
+		this(context != null ? context.getConfiguration() : null);
+	}
+
+	public ApiClient(AbstractConfiguration configuration) {
+		this(configuration == null ? DEFAULT_TIMEOUT : getSocketTimeOutFromConfig(configuration),
+				configuration == null ? DEFAULT_TIMEOUT : getReadTimeOutFromConfig(configuration),
+				configuration == null ? DEFAULT_TIMEOUT : getWriteTimeOutFromConfig(configuration));
+	}
+
+	public ApiClient(int socketTimeOut, int readTimeOut, int writeTimeOut) {
+		httpBuilder = new OkHttpClient().newBuilder()//
+				.connectTimeout(socketTimeOut, TimeUnit.MILLISECONDS)//
+				.readTimeout(readTimeOut, TimeUnit.MILLISECONDS)//
+				.writeTimeout(writeTimeOut, TimeUnit.MILLISECONDS);
+		httpClient = httpBuilder.build();
 		setUserAgent("JavaSDK" + AbstractConfiguration.SDK_VERSION);
+	}
+
+	private static int getSocketTimeOutFromConfig(AbstractConfiguration configuration) {
+		if (configuration instanceof AbstractBaseConfiguration) {
+			AbstractBaseConfiguration config = (AbstractBaseConfiguration) configuration;
+			Integer socketTimeout = config.getSocketTimeout();
+			return socketTimeout == null ? DEFAULT_TIMEOUT : socketTimeout;
+		}
+		return DEFAULT_TIMEOUT;
+	}
+
+	private static int getReadTimeOutFromConfig(AbstractConfiguration configuration) {
+		if (configuration instanceof AbstractBaseConfiguration) {
+			AbstractBaseConfiguration config = (AbstractBaseConfiguration) configuration;
+			Integer readTimeout = config.getReadTimeout();
+			return readTimeout == null ? DEFAULT_TIMEOUT : readTimeout;
+		}
+		return DEFAULT_TIMEOUT;
+	}
+
+	private static int getWriteTimeOutFromConfig(AbstractConfiguration configuration) {
+		if (configuration instanceof AbstractBaseConfiguration) {
+			AbstractBaseConfiguration config = (AbstractBaseConfiguration) configuration;
+			Integer writeTimeout = config.getWriteTimeout();
+			return writeTimeout == null ? DEFAULT_TIMEOUT : writeTimeout;
+		}
+		return DEFAULT_TIMEOUT;
 	}
 
 	public String getBasePath() {
@@ -157,15 +203,6 @@ public class ApiClient {
 	}
 
 	/**
-	 * Get connection timeout (in milliseconds).
-	 *
-	 * @return Timeout in milliseconds
-	 */
-	public int getConnectTimeout() {
-		return httpClient.getConnectTimeout();
-	}
-
-	/**
 	 * Sets the connect timeout (in milliseconds). A value of 0 means no timeout, otherwise values must be between 1 and
 	 * {@link Integer#MAX_VALUE}.
 	 *
@@ -173,17 +210,17 @@ public class ApiClient {
 	 * @return Api client
 	 */
 	public ApiClient setConnectTimeout(int connectionTimeout) {
-		httpClient.setConnectTimeout(connectionTimeout, TimeUnit.MILLISECONDS);
+		httpClient = httpBuilder.connectTimeout(connectionTimeout, TimeUnit.MILLISECONDS).build();
 		return this;
 	}
 
 	/**
-	 * Get read timeout (in milliseconds).
+	 * Get connection timeout (in milliseconds).
 	 *
 	 * @return Timeout in milliseconds
 	 */
-	public int getReadTimeout() {
-		return httpClient.getReadTimeout();
+	public int getConnectTimeout() {
+		return httpClient.connectTimeoutMillis();
 	}
 
 	/**
@@ -194,17 +231,17 @@ public class ApiClient {
 	 * @return Api client
 	 */
 	public ApiClient setReadTimeout(int readTimeout) {
-		httpClient.setReadTimeout(readTimeout, TimeUnit.MILLISECONDS);
+		httpClient = httpBuilder.readTimeout(readTimeout, TimeUnit.MILLISECONDS).build();
 		return this;
 	}
 
 	/**
-	 * Get write timeout (in milliseconds).
+	 * Get read timeout (in milliseconds).
 	 *
 	 * @return Timeout in milliseconds
 	 */
-	public int getWriteTimeout() {
-		return httpClient.getWriteTimeout();
+	public int getReadTimeout() {
+		return httpClient.readTimeoutMillis();
 	}
 
 	/**
@@ -215,8 +252,17 @@ public class ApiClient {
 	 * @return Api client
 	 */
 	public ApiClient setWriteTimeout(int writeTimeout) {
-		httpClient.setWriteTimeout(writeTimeout, TimeUnit.MILLISECONDS);
+		httpClient = httpBuilder.writeTimeout(writeTimeout, TimeUnit.MILLISECONDS).build();
 		return this;
+	}
+
+	/**
+	 * Get write timeout (in milliseconds).
+	 *
+	 * @return Timeout in milliseconds
+	 */
+	public int getWriteTimeout() {
+		return httpClient.writeTimeoutMillis();
 	}
 
 	/**
@@ -454,12 +500,12 @@ public class ApiClient {
 		call.enqueue(new Callback() {
 
 			@Override
-			public void onFailure(Request request, IOException e) {
+			public void onFailure(Call call, IOException e) {
 				callback.onFailure(new ApiException(e), 0, null);
 			}
 
 			@Override
-			public void onResponse(Response response) throws IOException {
+			public void onResponse(Call call, Response response) throws IOException {
 				T result;
 				try {
 					result = handleResponse(response, returnType);
@@ -496,12 +542,7 @@ public class ApiClient {
 			// returning null if the returnType is not defined,
 			// or the status code is 204 (No Content)
 			if (response.body() != null) {
-				try {
-					response.body().close();
-				} catch (IOException e) {
-					logException(e);
-					throw new ApiException(response.message(), e, response.code(), response.headers().toMultimap());
-				}
+				response.body().close();
 			}
 			return null;
 		} else {
@@ -642,7 +683,7 @@ public class ApiClient {
 				reqBody = null;
 			} else {
 				// use an empty request body (for POST, PUT and PATCH)
-				reqBody = RequestBody.create(MediaType.parse(contentType), "");
+				reqBody = RequestBody.create("", MediaType.parse(contentType));
 			}
 		} else {
 			reqBody = serialize(body, contentType);
@@ -737,11 +778,11 @@ public class ApiClient {
 	 * @return RequestBody
 	 */
 	public RequestBody buildRequestBodyFormEncoding(Map<String, Object> formParams) {
-		FormEncodingBuilder formBuilder = new FormEncodingBuilder();
+		Builder formBodyBuilder = new FormBody.Builder();
 		for (Entry<String, Object> param : formParams.entrySet()) {
-			formBuilder.add(param.getKey(), parameterToString(param.getValue()));
+			formBodyBuilder.add(param.getKey(), parameterToString(param.getValue()));
 		}
-		return formBuilder.build();
+		return formBodyBuilder.build();
 	}
 
 	/**
@@ -752,20 +793,21 @@ public class ApiClient {
 	 * @return RequestBody
 	 */
 	public RequestBody buildRequestBodyMultipart(Map<String, Object> formParams) {
-		MultipartBuilder mpBuilder = new MultipartBuilder().type(MultipartBuilder.FORM);
+		MultipartBody.Builder multiPartBuilder = new MultipartBody.Builder();
+		multiPartBuilder.setType(MultipartBody.FORM);
 		for (Entry<String, Object> param : formParams.entrySet()) {
 			if (param.getValue() instanceof File) {
 				File file = (File) param.getValue();
 				Headers partHeaders = Headers.of("Content-Disposition",
 						"form-data; name=\"" + param.getKey() + "\"; filename=\"" + file.getName() + "\"");
 				MediaType mediaType = MediaType.parse(guessContentTypeFromFile(file));
-				mpBuilder.addPart(partHeaders, RequestBody.create(mediaType, file));
+				multiPartBuilder.addPart(partHeaders, RequestBody.create(file, mediaType));
 			} else {
 				Headers partHeaders = Headers.of("Content-Disposition", "form-data; name=\"" + param.getKey() + "\"");
-				mpBuilder.addPart(partHeaders, RequestBody.create(null, parameterToString(param.getValue())));
+				multiPartBuilder.addPart(partHeaders, RequestBody.create(parameterToString(param.getValue()), null));
 			}
 		}
-		return mpBuilder.build();
+		return multiPartBuilder.build();
 	}
 
 	/**
@@ -794,25 +836,29 @@ public class ApiClient {
 	public RequestBody serialize(Object obj, String contentType) throws ApiException {
 		if (obj instanceof byte[]) {
 			// Binary (byte array) body parameter support.
-			return RequestBody.create(MediaType.parse(contentType), (byte[]) obj);
+			return RequestBody.create((byte[]) obj, MediaType.parse(contentType));
 		} else if (obj instanceof File) {
 			// File body parameter support.
-			return RequestBody.create(MediaType.parse(contentType), (File) obj);
+			return RequestBody.create((File) obj, MediaType.parse(contentType));
 		} else if (isJsonMime(contentType)) {
 			String content;
 			if (obj != null) {
 				try {
 					content = mapper.writeValueAsString(obj);
 				} catch (JsonProcessingException e) {
-					content = null;
+					content = "{}";
 				}
 			} else {
-				content = null;
+				content = "{}";
 			}
-			return RequestBody.create(MediaType.parse(contentType), content);
+			return RequestBody.create(content, MediaType.parse(contentType));
 		} else {
 			String msg = String.format("Content type %s is not supported", contentType);
 			throw new ApiException(Collections.<Problem>emptyList(), msg, false);
 		}
+	}
+
+	public void registerNetworkInterceptor(Interceptor interceptor) {
+		httpClient = httpBuilder.addNetworkInterceptor(interceptor).build();
 	}
 }

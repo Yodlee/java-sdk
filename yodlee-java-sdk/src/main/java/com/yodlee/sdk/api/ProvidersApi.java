@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.squareup.okhttp.Call;
 import com.yodlee.api.model.providers.response.ProviderDetailResponse;
 import com.yodlee.api.model.providers.response.ProviderResponse;
 import com.yodlee.api.model.providers.response.ProvidersCountResponse;
@@ -28,6 +27,7 @@ import com.yodlee.sdk.client.CallContext;
 import com.yodlee.sdk.client.HttpMethod;
 import com.yodlee.sdk.client.Pair;
 import com.yodlee.sdk.context.Context;
+import okhttp3.Call;
 
 public class ProvidersApi extends AbstractApi {
 
@@ -187,7 +187,7 @@ public class ProvidersApi extends AbstractApi {
 			apiCallModel.addQueryParam(new Pair(PARAM_TOP, top.toString()));
 		}
 		registerResponseInterceptor(apiClient);
-		com.squareup.okhttp.Call call = apiClient.buildCall(apiCallModel, requestListener());
+		Call call = apiClient.buildCall(apiCallModel, requestListener());
 		return new CallContext(apiClient, call);
 	}
 
