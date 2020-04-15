@@ -8,10 +8,12 @@ package com.yodlee.api.model.webhooks;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.yodlee.api.model.AbstractModelComponent;
+import com.yodlee.api.model.Response;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"event"})
-public class CallBackRefreshEventResponse {
+public class CallBackRefreshEventResponse extends AbstractModelComponent implements Response {
 
 	@JsonProperty("event")
 	private CallBackRefreshEvent event;

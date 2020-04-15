@@ -10,10 +10,11 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.yodlee.api.model.AbstractModelComponent;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"notificationId", "info", "loginName", "data"})
-public class CallBackAutoRefreshUpdatesEvent {
+public class CallBackAutoRefreshUpdatesEvent extends AbstractModelComponent {
 
 	@JsonProperty("notificationId")
 	private String notificationId;

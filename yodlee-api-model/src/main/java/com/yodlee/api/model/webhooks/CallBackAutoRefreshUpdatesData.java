@@ -9,11 +9,11 @@ import java.util.Collections;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.account.AutoRefresh;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CallBackAutoRefreshUpdatesData {
+public class CallBackAutoRefreshUpdatesData extends AbstractModelComponent {
 
 	@JsonProperty("accountId")
 	private List<Long> accountId;

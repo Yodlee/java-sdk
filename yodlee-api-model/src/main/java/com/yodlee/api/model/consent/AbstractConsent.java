@@ -38,7 +38,7 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 	protected String expirationDate;
 
 	@ApiModelProperty(name = "dataAccessFrequency",
-					  required = true,
+					  required = false,
 					  value = "Data Access Frequency explains the number of times that this consent can be used."
 							  + "<br>"//
 							  + " Otherwise called as consent frequency type.") //

@@ -3,28 +3,25 @@
  *
  * Licensed under the MIT License. See LICENSE file in the project root for license information.
  */
-package com.yodlee.api.model.webhooks;
+package com.yodlee.api.model.configs.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Response;
+import com.yodlee.api.model.configs.ConfigsPublicKey;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"event"})
-public class CallBackDataExtractEventResponse extends AbstractModelComponent implements Response {
+@JsonPropertyOrder({"publicKey"})
+public class ConfigsPublicKeyResponse extends AbstractModelComponent implements Response {
 
-	@JsonProperty("event")
-	private CallBackDataExtractEvent event;
+	@JsonProperty("publicKey")
+	private ConfigsPublicKey publicKey = new ConfigsPublicKey();
 
-	@JsonProperty("event")
-	public CallBackDataExtractEvent getEvent() {
-		return event;
-	}
+	public ConfigsPublicKeyResponse() {}
 
-	@Override
-	public String toString() {
-		return "CallBackDataExtractEventResponse [event=" + event + "]";
+	public ConfigsPublicKey getPublicKey() {
+		return publicKey;
 	}
 }

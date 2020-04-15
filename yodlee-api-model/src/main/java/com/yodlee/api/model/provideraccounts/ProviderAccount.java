@@ -40,7 +40,7 @@ public class ProviderAccount extends AbstractProviderAccount {
 	private ProviderAccountPreferences preferences;
 	
 	@ApiModelProperty(name = "consentId",
-			  required = true,
+			  required = false,
 			  value = "Consent Id generated through POST Consent."//
 			  + "<br><br>"//
 			  + "<b>Endpoints</b>:"//

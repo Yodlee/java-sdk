@@ -10,11 +10,12 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.dataextracts.DataExtractsUser;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"links", "user"})
-public class UserData {
+public class UserData extends AbstractModelComponent {
 
 	@JsonProperty("links")
 	private List<Link> links;

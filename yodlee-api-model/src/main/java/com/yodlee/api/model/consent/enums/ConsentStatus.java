@@ -7,6 +7,7 @@ package com.yodlee.api.model.consent.enums;
 
 
 public enum ConsentStatus {
+	ACTIVE,//
 	/**
 	* Consent generated from input dataset or implicit dataset.<br>
 	*/

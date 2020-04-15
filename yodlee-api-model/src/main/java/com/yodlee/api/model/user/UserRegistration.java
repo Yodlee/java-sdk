@@ -7,7 +7,6 @@ package com.yodlee.api.model.user;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,12 +18,9 @@ public class UserRegistration extends AbstractUserRegistration {
 
 	@NotEmpty(message = "{user.loginName.required}")
 	@Size(min = 3, max = 150, message = "{user.loginName.length.invalid}")
-	@Pattern(regexp = "[^\\s]+", message = "{user.loginName.invalid}")
 	@JsonProperty("loginName")
 	private String loginName;
 
-	@NotEmpty(message = "{user.email.required}")
-	@Email(message = "{user.email.invalid}")
 	@JsonProperty("email")
 	private String email;
 

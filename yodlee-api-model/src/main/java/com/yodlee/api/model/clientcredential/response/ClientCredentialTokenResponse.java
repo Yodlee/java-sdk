@@ -3,27 +3,26 @@
  *
  * Licensed under the MIT License. See LICENSE file in the project root for license information.
  */
-package com.yodlee.api.model.webhooks;
+package com.yodlee.api.model.clientcredential.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.yodlee.api.model.AbstractModelComponent;
+import com.yodlee.api.model.clientcredential.ClientCredentialToken;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"event"})
-public class CallBackAutoRefreshUpdatesEventResponse extends AbstractModelComponent {
+@JsonPropertyOrder({"token"})
+public class ClientCredentialTokenResponse extends AbstractModelComponent {
 
-	@JsonProperty("event")
-	private CallBackAutoRefreshUpdatesEvent event;
+	@JsonProperty("token")
+	private ClientCredentialToken token;
 
-	@JsonProperty("event")
-	public CallBackAutoRefreshUpdatesEvent getEvent() {
-		return event;
+	public ClientCredentialToken getToken() {
+		return token;
 	}
 
-	@Override
-	public String toString() {
-		return "CallBackAutoRefreshUpdatesEventResponse [event=" + event + "]";
+	public void setToken(ClientCredentialToken token) {
+		this.token = token;
 	}
 }

@@ -56,4 +56,9 @@ public class Name extends AbstractModelComponent {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
+
+	@Override
+	public String toString() {
+		return "Name [first=" + first + ", middle=" + middle + ", last=" + last + ", fullName=" + fullName + "]";
+	}
 }

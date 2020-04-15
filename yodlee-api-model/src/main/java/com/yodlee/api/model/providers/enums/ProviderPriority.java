@@ -21,5 +21,9 @@ public enum ProviderPriority {
 	/**
 	 * Providers matching the search text
 	 */
-	SEARCH
+	SEARCH,
+	/**
+	 *  All Institutions
+	 */
+	ALL
 }

@@ -8,10 +8,11 @@ package com.yodlee.api.model.webhooks;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.yodlee.api.model.AbstractModelComponent;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"methodType", "rel", "href"})
-public class Link {
+public class Link extends AbstractModelComponent {
 
 	@JsonProperty("methodType")
 	private String methodType;

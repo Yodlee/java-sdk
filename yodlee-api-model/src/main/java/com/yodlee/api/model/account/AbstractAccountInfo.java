@@ -53,6 +53,10 @@ public class AbstractAccountInfo extends AbstractModelComponent {
 
 	@JsonProperty("frequency")
 	protected FrequencyType frequency;
+	
+	@Valid
+	@JsonProperty("address")
+	protected AccountAddress address;
 
 	public Money getBalance() {
 		return balance;
@@ -124,5 +128,13 @@ public class AbstractAccountInfo extends AbstractModelComponent {
 
 	public void setFrequency(FrequencyType frequency) {
 		this.frequency = frequency;
+	}
+	
+	public AccountAddress getAddress() {
+		return address;
+	}
+
+	public void setAddress(AccountAddress address) {
+		this.address = address;
 	}
 }

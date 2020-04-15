@@ -20,7 +20,6 @@ import com.yodlee.api.model.enums.Container;
 public class UpdateAccountInfo extends AbstractAccountInfo {
 
 	@Size(min = 1, max = 100, message = "{accounts.accountName.size.invalid}")
-	@Pattern(regexp = "^[[\\s]+]", message = "{accounts.accountName.space}")
 	@JsonProperty("accountName")
 	private String accountName;
 
