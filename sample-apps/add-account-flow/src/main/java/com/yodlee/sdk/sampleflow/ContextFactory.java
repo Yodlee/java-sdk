@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2019 Yodlee, Inc. All Rights Reserved.
  *
- * This software is the confidential and proprietary information of Yodlee, Inc. Use is subject to license terms.
+ * Licensed under the MIT License. See LICENSE file in the project root for license information.
  */
 package com.yodlee.sdk.sampleflow;
 
@@ -15,6 +15,8 @@ import com.yodlee.sdk.context.JWTAppContext;
 import com.yodlee.sdk.context.JWTUserContext;
 
 public class ContextFactory {
+
+	private ContextFactory() {}
 
 	public static JWTAppContext createJWTAppContext() throws ApiException {
 		JWTAppContext jwtAppContext = null;

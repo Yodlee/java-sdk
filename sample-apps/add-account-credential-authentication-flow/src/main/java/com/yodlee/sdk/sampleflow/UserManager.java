@@ -7,13 +7,13 @@ package com.yodlee.sdk.sampleflow;
 
 import java.util.HashMap;
 import java.util.Map;
-import com.yodlee.sdk.context.JWTUserContext;
+import com.yodlee.sdk.context.ClientCredentialUserContext;;
 
 public class UserManager {
 
 	private static final UserManager INSTANCE = new UserManager();
 
-	private final Map<String, JWTUserContext> userContextMap = new HashMap<>();
+	private final Map<String, ClientCredentialUserContext> userContextMap = new HashMap<>();
 
 	private UserManager() {}
 
@@ -21,12 +21,12 @@ public class UserManager {
 		return INSTANCE;
 	}
 
-	public JWTUserContext getContext(String userIdentity) {
+	public ClientCredentialUserContext getContext(String userIdentity) {
 		return userContextMap.get(userIdentity);
 	}
-	
-	public void addUser(String userIdentity, JWTUserContext jwtUserContext) {
-		userContextMap.put(userIdentity, jwtUserContext);
+
+	public void addUser(String userIdentity, ClientCredentialUserContext clientCredentialUserContext) {
+		userContextMap.put(userIdentity, clientCredentialUserContext);
 	}
 
 	public void removeUser(String userIdentity) {

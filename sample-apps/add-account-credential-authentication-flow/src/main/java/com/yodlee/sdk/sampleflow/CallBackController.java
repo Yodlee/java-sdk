@@ -21,7 +21,7 @@ import com.yodlee.api.model.webhooks.CallBackRefreshData;
 import com.yodlee.api.model.webhooks.CallBackRefreshEvent;
 import com.yodlee.api.model.webhooks.CallBackRefreshEventResponse;
 import com.yodlee.sdk.api.exception.ApiException;
-import com.yodlee.sdk.context.JWTUserContext;
+import com.yodlee.sdk.context.ClientCredentialUserContext;
 
 @RestController
 public class CallBackController {
@@ -98,9 +98,9 @@ public class CallBackController {
 
 	private static void handleSuccessFlow(UpdatedProviderAccount providerAccount) throws ApiException {
 		String loginName = RESOURCES.getUserLoginName();
-		JWTUserContext jwtUserContext = UserManager.getInstance().getContext(loginName);
+		ClientCredentialUserContext clientCredentialUserContext = UserManager.getInstance().getContext(loginName);
 		Long providerAccountId = providerAccount.getId();
-		AccountResponse accounts = AddAccountFlow.getAccounts(jwtUserContext, providerAccountId);
+		AccountResponse accounts = AddAccountFlow.getAccounts(clientCredentialUserContext, providerAccountId);
 		System.out.println("Linked Accounts : " + Utils.printResponse(accounts));
 	}
 }

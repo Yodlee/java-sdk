@@ -18,7 +18,7 @@ public class SampleAppResources {
 	private String searchProvider;
 
 	private String providerId;
-	
+
 	private List<Field> field;
 
 	public String getDnsName() {
@@ -53,15 +53,11 @@ public class SampleAppResources {
 		this.providerId = providerId;
 	}
 
-	
 	public List<Field> getField() {
 		return field == null ? null : Collections.unmodifiableList(field);
 	}
 
-	
 	public void setField(List<Field> field) {
 		this.field = field;
 	}
-
-
 }
