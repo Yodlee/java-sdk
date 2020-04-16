@@ -17,6 +17,8 @@ public class CobrandContext extends AbstractContext<CobrandConfiguration> {
 
 	private final String contextHeader;
 
+	private boolean autoRenew = false;
+
 	public CobrandContext(String cobSession, CobrandConfiguration cobrandConfiguration) {
 		this.cobSession = cobSession;
 		this.cobrandConfiguration = cobrandConfiguration;
@@ -42,6 +44,16 @@ public class CobrandContext extends AbstractContext<CobrandConfiguration> {
 	@Override
 	public CobrandConfiguration getConfiguration() {
 		return cobrandConfiguration;
+	}
+
+	@Override
+	public boolean isAutoRenew() {
+		return autoRenew;
+	}
+
+	@Override
+	public void setAutoRenew(boolean autoRenew) {
+		this.autoRenew = autoRenew;
 	}
 
 	public String getCobSession() {

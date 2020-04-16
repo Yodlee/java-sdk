@@ -1,0 +1,16 @@
+{
+                     "account": {
+                        "accountType": "REAL_ESTATE",
+                        "accountName": "BNP Account",
+                        "nickname": "Flood Cash",
+                        "address": {
+                            "street": "1380 Utah St",
+                            "city": "SAN FRANCISCO",
+                            "state" : "CA",
+                            "zip": "94110"
+                         },
+                        "valuationType": "SYSTEM",
+                        "includeInNetWorth": "TRUE",
+                        "memo": "This is a real estate account"
+                     }
+               }

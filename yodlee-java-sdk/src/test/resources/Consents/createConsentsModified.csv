@@ -1,0 +1,2 @@
+testCaseId,testCaseName,fileName,enabled
+1,Call Create Consents,/request/consents/createConsent.json,TRUE

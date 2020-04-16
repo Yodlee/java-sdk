@@ -15,13 +15,13 @@ public abstract class AbstractJWTContext<C extends AbstractJWTConfiguration> ext
 
 	private String contextHeader;
 
-	private boolean autoRenewToken;
+	private boolean autoRenew = true;
 
 	public AbstractJWTContext(String jwtToken, C configuration) {
 		super();
 		this.jwtToken = jwtToken;
 		this.configuration = configuration;
-		this.autoRenewToken = true;
+		this.autoRenew = true;
 		updateContextHeader(jwtToken);
 	}
 
@@ -43,12 +43,12 @@ public abstract class AbstractJWTContext<C extends AbstractJWTConfiguration> ext
 		return configuration;
 	}
 
-	public boolean isAutoRenewToken() {
-		return autoRenewToken;
+	public boolean isAutoRenew() {
+		return autoRenew;
 	}
 
-	public void setAutoRenewToken(boolean autoRenewToken) {
-		this.autoRenewToken = autoRenewToken;
+	public void setAutoRenew(boolean autoRenewToken) {
+		this.autoRenew = autoRenewToken;
 	}
 
 	private void updateContextHeader(String jwtToken) {

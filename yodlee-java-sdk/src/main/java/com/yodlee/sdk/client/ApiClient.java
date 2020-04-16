@@ -19,26 +19,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.interfaces.DecodedJWT;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.validator.Problem;
 import com.yodlee.sdk.api.exception.ApiException;
 import com.yodlee.sdk.api.util.ApiUtils;
-import com.yodlee.sdk.builder.JWTUtil;
 import com.yodlee.sdk.configuration.AbstractConfiguration;
 import com.yodlee.sdk.configuration.cobrand.AbstractBaseConfiguration;
-import com.yodlee.sdk.configuration.cobrand.AbstractJWTConfiguration;
-import com.yodlee.sdk.configuration.user.JWTUserConfiguration;
-import com.yodlee.sdk.context.AbstractJWTContext;
 import com.yodlee.sdk.context.Context;
-import com.yodlee.sdk.context.ContextType;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -437,34 +433,13 @@ public class ApiClient {
 	public <T extends AbstractModelComponent> ApiResponse<T> execute(Call call, Class<T> returnType)
 			throws ApiException {
 		try {
-			renewJwtContextIfRequired();
+			RenewTokenHandler.checkAndRenewToken(context);
 			Response response = call.execute();
 			T data = handleResponse(response, returnType);
 			return new ApiResponse<>(response.code(), response.headers().toMultimap(), data);
 		} catch (IOException e) {
 			logException(e);
 			throw new ApiException(e);
-		}
-	}
-
-	private void renewJwtContextIfRequired() {
-		if (context instanceof AbstractJWTContext) {
-			AbstractJWTContext<?> jwtContext = (AbstractJWTContext<?>) context;
-			if (jwtContext.isAutoRenewToken()) {
-				DecodedJWT jwtToken = JWT.decode(jwtContext.getJwtToken());
-				if (jwtToken.getExpiresAt().before(new Date())) {
-					AbstractJWTConfiguration jwtConfiguration =
-							(AbstractJWTConfiguration) jwtContext.getConfiguration();
-					String user = null;
-					if (context.getContextType().equals(ContextType.USER)) {
-						user = ((JWTUserConfiguration) context.getConfiguration()).getUser();
-					}
-					String renewedJwtToken =
-							JWTUtil.getJWTToken(jwtConfiguration.getApiKey(), jwtConfiguration.getPrivateKey(), user,
-									jwtConfiguration.getExpiresIn(), jwtConfiguration.getLocale());
-					jwtContext.setJwtToken(renewedJwtToken);
-				}
-			}
 		}
 	}
 
@@ -496,7 +471,7 @@ public class ApiClient {
 		if (callback == null) {
 			throw new ApiException(ApiUtils.getErrorMessage("callback.required"));
 		}
-		renewJwtContextIfRequired();
+		RenewTokenHandler.checkAndRenewToken(context);
 		call.enqueue(new Callback() {
 
 			@Override

@@ -1,0 +1,14 @@
+{
+  "verification": {
+      "accountId": 1111,
+      "verificationType": "CHALLENGE_DEPOSIT",
+      "account" : {
+        "accountNumber": "12345678345",
+        "accountType": "SAVINGS",
+        "bankTransferCode": {          
+          "id": "031311878",
+          "type": "ROUTING_NUMBER"
+      }
+    }
+  }
+}

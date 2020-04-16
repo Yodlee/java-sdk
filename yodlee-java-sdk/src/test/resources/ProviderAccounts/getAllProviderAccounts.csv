@@ -1,0 +1,2 @@
+testCaseId,testCaseName,include,providerIds,enabled
+1,getAllProviderAccounts,,,TRUE

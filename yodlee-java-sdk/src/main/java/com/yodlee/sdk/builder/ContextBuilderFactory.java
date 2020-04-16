@@ -59,4 +59,12 @@ public class ContextBuilderFactory {
 	public static UserContextBuilder createUserContextBuilder() {
 		return new UserContextBuilder();
 	}
+
+	public static ClientCredentialAdminContextBuilder createClientCredentialAdminContextBuilder() {
+		return new ClientCredentialAdminContextBuilder();
+	}
+	
+	public static ClientCredentialUserContextBuilder createClientCredentialUserContextBuilder() {
+		return new ClientCredentialUserContextBuilder();
+	}
 }

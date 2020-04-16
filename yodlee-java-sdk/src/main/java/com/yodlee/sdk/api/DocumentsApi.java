@@ -57,8 +57,7 @@ public class DocumentsApi extends AbstractApi {
 	 * <br>
 	 * documents will be retrieved. Details of deleted documents or documents associated to closed providerAccount will
 	 * not be returned <br>
-	 * Metadata related to documents can be searched or retrieved only if the document related dataset attributes are
-	 * subscribed. <br>
+	 * This API is a premium service which requires subscription in advance to use. Please contact Yodlee Client Services for more information.<br>
 	 * 
 	 * @param keyword The string used to search a document by its name. (optional)
 	 * @param accountId The unique identifier of an account. Retrieve documents for a given accountId. (optional)
@@ -89,8 +88,7 @@ public class DocumentsApi extends AbstractApi {
 	 * <br>
 	 * documents will be retrieved. Details of deleted documents or documents associated to closed providerAccount will
 	 * not be returned <br>
-	 * Metadata related to documents can be searched or retrieved only if the document related dataset attributes are
-	 * subscribed. <br>
+	 * This API is a premium service which requires subscription in advance to use. Please contact Yodlee Client Services for more information. <br>
 	 * 
 	 * @param keyword The string used to search a document by its name. (optional)
 	 * @param accountId The unique identifier of an account. Retrieve documents for a given accountId. (optional)

@@ -80,4 +80,14 @@ public class ApiUtils {
 			problems.add(new Problem(ApiUtils.getErrorMessage(errMsg), ""));
 		return problems;
 	}
+
+	public static List<Problem> validatePattern(String source, String pattern, String message) {
+		List<Problem> problems = new ArrayList<>();
+		if (source != null
+				&& source.matches(pattern)) {
+			problems.add(new Problem(
+					getErrorMessage(message, source), ""));
+		}
+		return problems;
+	}
 }

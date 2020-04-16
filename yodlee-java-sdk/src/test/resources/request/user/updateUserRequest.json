@@ -1,0 +1,23 @@
+{
+	"user": {
+		"email": "xyz@yodlee.com",
+		"name": {
+			"first": "FIRSTNAME",
+			"last": "LASTNAME"
+		},
+		"address": {
+			"address1": "3600 Bridge Parkway",
+			"state": "CALIFORNIA",
+			"city": "Redwood City",
+			"zip": "93901",
+			"country": "USA"
+		},
+		"preferences": {
+			"currency": "USD",
+			"timeZone": "PST",
+			"dateFormat": "MM/dd/yyyy",
+			"locale": "en_US"
+		}
+	}
+} 
+ 

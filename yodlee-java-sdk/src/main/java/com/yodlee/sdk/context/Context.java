@@ -15,4 +15,8 @@ public interface Context<C extends AbstractConfiguration> {
 	public ApiClient getApiClient();
 
 	public C getConfiguration();
+	
+	public boolean isAutoRenew();
+	
+	public void setAutoRenew(boolean autoRenew);
 }

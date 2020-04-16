@@ -1,0 +1,10 @@
+{
+	"account": {
+		"accountType": "ANNUITY",
+		"accountName":"accountName",
+		"balance": {
+			"amount": 12345.12,
+			"currency": "USD"
+		}
+		}
+}

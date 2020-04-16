@@ -1,0 +1,2 @@
+testCaseId,testCaseName,fileName,enabled
+1,Generate new api key,/request/auth/validPublicKey.json,TRUE

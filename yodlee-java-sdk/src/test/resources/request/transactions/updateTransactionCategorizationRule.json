@@ -1,0 +1,22 @@
+{
+	"rule": 
+	{
+		"categoryId": 3,
+		"priority": 1,
+		"source": "SYSTEM",
+		"ruleClause": 
+		[
+			{
+				"field": "description",
+				"operation": "stringEquals",
+				"value": "gifts"
+			},
+
+			{
+				"field": "amount",
+				"operation": "numberLessThan",
+				"value": 1000
+			}
+		]
+	}
+}

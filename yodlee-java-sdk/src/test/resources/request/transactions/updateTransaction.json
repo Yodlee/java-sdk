@@ -1,0 +1,12 @@
+{
+"transaction": {
+
+		"container":"bank",
+		"categoryId": 2,
+		"categorySource": "SYSTEM",
+		"description":{
+     			"consumer": "Electronic Purchases"
+		 },
+		"memo":"acsd"
+}
+}

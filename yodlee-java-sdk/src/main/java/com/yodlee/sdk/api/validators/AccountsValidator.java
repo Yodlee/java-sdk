@@ -146,9 +146,6 @@ public class AccountsValidator {
 	}
 
 	private static void processRealEstateAccounts(List<Problem> problems, CreateAccountInfo accountInfo) {
-		if (accountInfo.getHomeValue() == null) {
-			problems.add(new Problem(ApiUtils.getErrorMessage("accounts.manualAccountInfo.homeValue.required"), ""));
-		}
 		if (accountInfo.getValuationType() == null) {
 			problems.add(
 					new Problem(ApiUtils.getErrorMessage("accounts.manualAccountInfo.valuationType.required"), ""));
@@ -168,6 +165,7 @@ public class AccountsValidator {
 			String includeInNetWorth = accountInfo.getIncludeInNetWorth();
 			problems.addAll(isValidIncludeInNetworth(includeInNetWorth));
 			problems.addAll(validAccountStatus(accountInfo));
+			problems.addAll(ApiUtils.validatePattern(accountInfo.getAccountName(), "^\\s+.*", "accounts.accountName.space"));
 		}
 		return problems;
 	}

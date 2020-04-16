@@ -1,0 +1,30 @@
+{
+	"field": 
+	[
+		{
+			"id": 65499,
+			"value": "YSLL1QA.site16441.2"
+		},
+
+		{
+			"id": 65500,
+			"value": "site16441.2"
+		}
+	],
+ "dataset": [{
+   "name": "BASIC_AGG_DATA",
+   "attribute": [{
+    "name": "ACCOUNT_DETAILS",
+    "container": ["bank"]
+   }]
+  },
+  {
+   "name": "ACCT_PROFILE",
+   "attribute": [{
+    "name": "FULL_ACCT_NUMBER",
+    "container": ["bank"]
+   }]
+  }
+ 
+ ]
+}

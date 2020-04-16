@@ -481,7 +481,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * the provider account status is drawn from the dataset additional statuses.
 	 * 
 	 * For detailed implementation, refer to the add account flow chart in portal. Pass linkedProviderAccountId in the
-	 * input to link a user’s credential-based providerAccount with the open banking providerAccount. Ensure that the
+	 * input to link a user's credential-based providerAccount with the open banking providerAccount. Ensure that the
 	 * credential-based providerAccount belongs to the same institution. While testing the PKI feature, encrypt the
 	 * credentials using the encryption utility. The content type has to be passed as application/json in the body
 	 * parameter.
@@ -529,7 +529,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * the provider account status is drawn from the dataset additional statuses.
 	 * 
 	 * For detailed implementation, refer to the add account flow chart in portal. Pass linkedProviderAccountId in the
-	 * input to link a user’s credential-based providerAccount with the open banking providerAccount. Ensure that the
+	 * input to link a user's credential-based providerAccount with the open banking providerAccount. Ensure that the
 	 * credential-based providerAccount belongs to the same institution. While testing the PKI feature, encrypt the
 	 * credentials using the encryption utility. The content type has to be passed as application/json in the body
 	 * parameter.

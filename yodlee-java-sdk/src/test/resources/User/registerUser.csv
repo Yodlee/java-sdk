@@ -1,0 +1,2 @@
+testCaseId,testCaseName,requestModelFile,enabled
+1,Register user,/request/user/registerUser.json,TRUE

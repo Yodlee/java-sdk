@@ -1,0 +1,3 @@
+testCaseId,testCaseName,fileName,eventName,enabled
+1,Delete REFRESH event,/request/cobrand/subscribeEvents.json,REFRESH,TRUE
+2,Delete DATA_UPDATES event,/request/cobrand/subscribeEvents.json,DATA_UPDATES,TRUE

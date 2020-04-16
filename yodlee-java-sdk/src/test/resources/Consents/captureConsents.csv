@@ -1,0 +1,2 @@
+testCaseId,testCaseName,providerId,dataClusters,enabled
+2,Call Capture Consents,24016,ACCOUNT_DETAILS|TRANSACTION_DETAILS,TRUE

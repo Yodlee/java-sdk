@@ -37,11 +37,6 @@ public class CobrandContextBuilder implements Builder<CobrandConfiguration, Cobr
 		cobrand.setLocale(cobrandConfiguration.getLocale());
 		cobrandLoginRequest.setCobrand(cobrand);
 		ApiValidator.validate(cobrandLoginRequest);
-		// Prepare ApiClient
-		ApiClient apiClient = new ApiClient();
-		apiClient.setBasePath(cobrandConfiguration.getBasePath());
-		apiClient.addHeader(ApiConstants.API_VERSION, cobrandConfiguration.getApiVersion());
-		apiClient.addHeader(ApiConstants.COBRAND_NAME, cobrandConfiguration.getName());
 		// invoke cobrandLogin API
 		cobrandApi.cobrandLogin(cobrandLoginRequest);
 		Context<?> context = cobrandApi.getContext();

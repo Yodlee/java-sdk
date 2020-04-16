@@ -167,7 +167,10 @@ public class CobrandApi extends AbstractApi {
 	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
+	 *         
+	 * @deprecated Refer {@link ConfigsApi#createSubscriptionNotificationEvent()}
 	 */
+	@Deprecated
 	public ApiResponse<AbstractModelComponent> createSubscriptionEvent(
 			@NotNull(message = "{cobrand.param.eventName.required}") CobrandNotificationEventType eventName,//
 			@NotNull(message = "{cobrand.CreateCobrandNotificationEventRequest.required}") CreateCobrandNotificationEventRequest eventRequest)
@@ -193,7 +196,10 @@ public class CobrandApi extends AbstractApi {
 	 * @param apiCallBack {@link ApiCallback} (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
+	 *         
+	 * @deprecated Refer {@link ConfigsApi#createSubscriptionNotificationEventAsync()}
 	 */
+	@Deprecated
 	public void createSubscriptionEventAsync(
 			@NotNull(message = "{cobrand.param.eventName.required}") CobrandNotificationEventType eventName,//
 			@NotNull(message = "{cobrand.CreateCobrandNotificationEventRequest.required}") CreateCobrandNotificationEventRequest eventRequest,
@@ -224,7 +230,10 @@ public class CobrandApi extends AbstractApi {
 	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
+	 *         
+	 * @deprecated Refer {@link ConfigsApi#updateSubscribedNotificationEvent()}
 	 */
+	@Deprecated
 	public ApiResponse<AbstractModelComponent> updateSubscribedEvent(
 			@NotNull(message = "{cobrand.param.eventName.required}") CobrandNotificationEventType eventName,
 			@NotNull(message = "{cobrand.UpdateCobrandNotificationEventRequest.required}") UpdateCobrandNotificationEventRequest eventRequest)
@@ -244,7 +253,10 @@ public class CobrandApi extends AbstractApi {
 	 * @param apiCallback {@link ApiCallback} (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
+	 *         
+	 * @deprecated Refer {@link ConfigsApi#updateSubscribedNotificationEventAsync( )}
 	 */
+	@Deprecated
 	public void updateSubscribedEventAsync(
 			@NotNull(message = "{cobrand.param.eventName.required}") CobrandNotificationEventType eventName,
 			@NotNull(message = "{cobrand.UpdateCobrandNotificationEventRequest.required}") UpdateCobrandNotificationEventRequest eventRequest,
@@ -273,7 +285,10 @@ public class CobrandApi extends AbstractApi {
 	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
+	 *         
+	 * @deprecated Refer {@link ConfigsApi#deleteSubscribedNotificationEvent()}
 	 */
+	@Deprecated
 	public ApiResponse<AbstractModelComponent> deleteSubscribedEvent(
 			@NotNull(message = "{cobrand.param.eventName.required}") CobrandNotificationEventType eventName)
 			throws ApiException {
@@ -290,7 +305,10 @@ public class CobrandApi extends AbstractApi {
 	 * @param apiCallback {@link ApiCallback} (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
+	 *         
+	 * @deprecated Refer {@link ConfigsApi#deleteSubscribedNotificationEventAsync()}
 	 */
+	@Deprecated
 	public void deleteSubscribedEventAsync(
 			@NotNull(message = "{cobrand.param.eventName.required}") CobrandNotificationEventType eventName,
 			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
@@ -318,7 +336,10 @@ public class CobrandApi extends AbstractApi {
 	 * @return {@link ApiResponse}&lt;{@link CobrandPublicKeyResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
+	 *         
+	 * @deprecated Refer {@link ConfigsApi#getPublicEncryptionKey()}
 	 */
+	@Deprecated
 	public ApiResponse<CobrandPublicKeyResponse> getPublicKey() throws ApiException {
 		LOGGER.info("Cobrand getPublicKey API execution started");
 		CobrandValidator.validateApiContext(this);
@@ -334,7 +355,10 @@ public class CobrandApi extends AbstractApi {
 	 * @param apiCallback {@link ApiCallback}&lt;{@link CobrandPublicKeyResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
+	 *         
+	 * @deprecated Refer {@link ConfigsApi#getPublicEncryptionKeyAsync()}
 	 */
+	@Deprecated
 	public void getPublicKeyAsync(ApiCallback<CobrandPublicKeyResponse> apiCallback) throws ApiException {
 		LOGGER.info("Cobrand getPublicKeyAsync API execution started");
 		CobrandValidator.validateApiContext(this);
@@ -358,7 +382,10 @@ public class CobrandApi extends AbstractApi {
 	 * @return {@link ApiResponse}&lt;{@link CobrandNotificationResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
+	 *         
+	 * @deprecated Refer {@link ConfigsApi#getSubscribedNotificationEvents()}
 	 */
+	@Deprecated
 	public ApiResponse<CobrandNotificationResponse> getSubscribedEvents(CobrandNotificationEventType eventName)
 			throws ApiException {
 		LOGGER.info("Cobrand getPublicKey API execution started");
@@ -375,7 +402,10 @@ public class CobrandApi extends AbstractApi {
 	 * @param apiCallback {@link ApiCallback}&lt;{@link CobrandNotificationResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
+	 *         
+	 * @deprecated Refer {@link ConfigsApi#getSubscribedNotificationEventsAsync()}
 	 */
+	@Deprecated
 	public void getSubscribedEventsAsync(CobrandNotificationEventType eventName,
 			ApiCallback<CobrandNotificationResponse> apiCallback) throws ApiException {
 		LOGGER.info("Cobrand getPublicKeyAsync API execution started");
@@ -396,10 +426,22 @@ public class CobrandApi extends AbstractApi {
 	}
 
 	private ApiClient getApiClient() {
-		ApiClient apiClient = new ApiClient(cobrandConfiguration);
+		ApiClient apiClient = new ApiClient();
 		apiClient.setBasePath(cobrandConfiguration.getBasePath());
 		apiClient.addHeader(ApiConstants.COBRAND_NAME, cobrandConfiguration.getName());
 		apiClient.addHeader(ApiConstants.API_VERSION, cobrandConfiguration.getApiVersion());
+		if (cobrandConfiguration.getLocale() != null) {
+			apiClient.addHeader(ApiConstants.LOCALE, cobrandConfiguration.getLocale());
+		}
+		if (cobrandConfiguration.getSocketTimeout() != null) {
+			apiClient.setConnectTimeout(cobrandConfiguration.getSocketTimeout());
+		}
+		if (cobrandConfiguration.getReadTimeout() != null) {
+			apiClient.setReadTimeout(cobrandConfiguration.getReadTimeout());
+		}
+		if (cobrandConfiguration.getWriteTimeout() != null) {
+			apiClient.setWriteTimeout(cobrandConfiguration.getWriteTimeout());
+		}
 		return apiClient;
 	}
 }

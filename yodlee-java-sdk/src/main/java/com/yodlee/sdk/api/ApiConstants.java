@@ -16,8 +16,22 @@ public class ApiConstants {
 	public static final String API_VERSION = "Api-Version";
 
 	public static final String YYYY_MM_DD_T_HH_MM_SS_Z = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+	
+	public static final int THOUSAND_MILLIS = 1000;
 
 	public static final String YYYY_MM_DD = "yyyy-MM-dd";
 
 	public static final String ONLY_NUMBER = "[0-9]+";
+
+	public static final String CLIENT_ID = "clientId";
+
+	public static final String SECRET = "secret";
+
+	public static final String X_WWW_FORM_URL_ENCODED = "application/x-www-form-urlencoded";
+
+	public static final String CONTENT_TYPE = "Content-Type";
+
+	public static final String LOGIN_NAME = "loginName";
+	
+	public static final String LOCALE = "locale";
 }

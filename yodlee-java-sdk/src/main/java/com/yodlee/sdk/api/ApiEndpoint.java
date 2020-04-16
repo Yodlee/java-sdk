@@ -5,7 +5,7 @@
  */
 package com.yodlee.sdk.api;
 
-class ApiEndpoint {
+public class ApiEndpoint {
 
 	private ApiEndpoint() {}
 
@@ -19,6 +19,13 @@ class ApiEndpoint {
 	static final String COBRAND_CONFIG_NOTIFICATIONS_EVENTS = "/cobrand/config/notifications/events";
 
 	static final String COBRAND_PUBLIC_KEY = "/cobrand/publicKey";
+	
+	static final String CONFIGS_NOTIFICATIONS_EVENTS_EVENT_NAME =
+			"/configs/notifications/events/{eventName}";
+
+	static final String CONFIGS_NOTIFICATIONS_EVENTS = "/configs/notifications/events";
+
+	static final String CONFIGS_PUBLIC_KEY = "/configs/publicKey";
 
 	static final String USER_DETAILS = "/user";
 
@@ -63,6 +70,8 @@ class ApiEndpoint {
 	static final String PROVIDER_ACCOUNTS_PREFERENCES = "/providerAccounts/{providerAccountId}/preferences";
 
 	static final String AUTH_DELETE_TOKEN = "/auth/token";
+	
+	public static final String AUTH = "/auth/token";
 
 	static final String AUTH_APIKEY = "/auth/apiKey";
 

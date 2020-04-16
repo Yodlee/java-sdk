@@ -36,7 +36,8 @@ public class UserValidator {
 		List<Problem> modelProblems = ApiValidator.validate(userRequest);
 		List<Problem> contextProblems =
 				validateContextTypeForRegisteration(ContextType.COBRAND, userApi.getContext().getContextType());
-		ApiValidator.collectProblems(methodProblems, modelProblems, contextProblems);
+		List<Problem> problems = ApiUtils.validatePattern(userRequest.getUser().getLoginName(), "^\\s+.*", "user.loginName.invalid");
+		ApiValidator.collectProblems(methodProblems, modelProblems, contextProblems, problems);
 	}
 
 	public static void validateUpdateUser(UserApi userApi, String methodName, UpdateUserRequest userRequest)

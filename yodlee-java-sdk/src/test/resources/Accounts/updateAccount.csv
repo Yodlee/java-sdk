@@ -1,0 +1,3 @@
+testCaseId,testCaseName,accountId,fileName,enabled
+1,Update Manual Account,1112711322,/request/accounts/updateManualAccountinvestment.json,TRUE
+2,Update Aggregated Account,1112711324,/request/accounts/updateAggregatedAccountbill.json,TRUE

@@ -19,6 +19,8 @@ public class UserContext extends AbstractContext<UserConfiguration> {
 
 	private final UserConfiguration userConfiguration;
 
+	private boolean autoRenew;
+
 	public UserContext(String cobsession, String userSession, UserConfiguration userConfiguration) {
 		super();
 		this.cobsession = cobsession;
@@ -54,5 +56,15 @@ public class UserContext extends AbstractContext<UserConfiguration> {
 	@Override
 	public UserConfiguration getConfiguration() {
 		return userConfiguration;
+	}
+
+	@Override
+	public boolean isAutoRenew() {
+		return autoRenew;
+	}
+
+	@Override
+	public void setAutoRenew(boolean autoRenew) {
+		this.autoRenew = autoRenew;
 	}
 }
