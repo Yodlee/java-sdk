@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.ProvidersDataset;
 import com.yodlee.api.model.Request;
-import com.yodlee.api.model.enums.AggregationSource;
 import com.yodlee.api.model.enums.DatasetNameType;
 import com.yodlee.api.model.provideraccounts.ProviderAccountPreferences;
 
@@ -26,9 +25,6 @@ public abstract class AbstractProviderAccountRequest extends AbstractModelCompon
 
 	@JsonProperty("datasetName")
 	protected List<DatasetNameType> datasetNames;
-	
-	@JsonProperty("aggregationSource")
-	protected AggregationSource aggregationSource;
 
 	public AbstractProviderAccountRequest() {
 		super();
@@ -108,14 +104,5 @@ public abstract class AbstractProviderAccountRequest extends AbstractModelCompon
 		if (datasetNames != null) {
 			datasetNames.clear();
 		}
-	}
-	
-	public void setAggregationSource(AggregationSource aggregationSource) {
-		this.aggregationSource = aggregationSource;
-	}
-	
-	
-	public AggregationSource getAggregationSource() {
-		return aggregationSource;
 	}
 }

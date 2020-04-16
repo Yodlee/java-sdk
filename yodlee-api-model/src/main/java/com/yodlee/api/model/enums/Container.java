@@ -9,7 +9,6 @@ import java.util.EnumSet;
 import java.util.Set;
 
 public enum Container {
-
 	/**
 	 * Applicable for Aggregated and Manual
 	 */
