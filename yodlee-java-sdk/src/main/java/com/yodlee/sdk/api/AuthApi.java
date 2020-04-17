@@ -278,7 +278,7 @@ public class AuthApi extends AbstractApi {
 	 * <br>
 	 * <b>Admin access token:</b> using this token api's which need admin level privilege can be access, like POST
 	 * /user/register etc. This token is generated when admin user name is passed in loginName with valid
-	 * credentials(clientId and secret). You can find your credentials by navigating to My Accounts -> API Dashboard ->
+	 * credentials(clientId and secret). You can find your credentials by navigating to My Accounts and then click on API Dashboard then go to
 	 * Credentials. <br>
 	 * <br>
 	 * <b>User access token:</b> Using this token api's which need user level privileges can be accessed, like GET

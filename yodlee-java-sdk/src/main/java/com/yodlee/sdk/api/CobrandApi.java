@@ -168,7 +168,7 @@ public class CobrandApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 *         
-	 * @deprecated Refer {@link ConfigsApi#createSubscriptionNotificationEvent()}
+	 * @deprecated Refer {@link ConfigsApi#createSubscriptionNotificationEvent}
 	 */
 	@Deprecated
 	public ApiResponse<AbstractModelComponent> createSubscriptionEvent(
@@ -197,7 +197,7 @@ public class CobrandApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 *         
-	 * @deprecated Refer {@link ConfigsApi#createSubscriptionNotificationEventAsync()}
+	 * @deprecated Refer {@link ConfigsApi#createSubscriptionNotificationEventAsync}
 	 */
 	@Deprecated
 	public void createSubscriptionEventAsync(
@@ -231,7 +231,7 @@ public class CobrandApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 *         
-	 * @deprecated Refer {@link ConfigsApi#updateSubscribedNotificationEvent()}
+	 * @deprecated Refer {@link ConfigsApi#updateSubscribedNotificationEvent}
 	 */
 	@Deprecated
 	public ApiResponse<AbstractModelComponent> updateSubscribedEvent(
@@ -254,7 +254,7 @@ public class CobrandApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 *         
-	 * @deprecated Refer {@link ConfigsApi#updateSubscribedNotificationEventAsync( )}
+	 * @deprecated Refer {@link ConfigsApi#updateSubscribedNotificationEventAsync}
 	 */
 	@Deprecated
 	public void updateSubscribedEventAsync(
@@ -286,7 +286,7 @@ public class CobrandApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 *         
-	 * @deprecated Refer {@link ConfigsApi#deleteSubscribedNotificationEvent()}
+	 * @deprecated Refer {@link ConfigsApi#deleteSubscribedNotificationEvent}
 	 */
 	@Deprecated
 	public ApiResponse<AbstractModelComponent> deleteSubscribedEvent(
@@ -306,7 +306,7 @@ public class CobrandApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 *         
-	 * @deprecated Refer {@link ConfigsApi#deleteSubscribedNotificationEventAsync()}
+	 * @deprecated Refer {@link ConfigsApi#deleteSubscribedNotificationEventAsync}
 	 */
 	@Deprecated
 	public void deleteSubscribedEventAsync(
@@ -337,7 +337,7 @@ public class CobrandApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 *         
-	 * @deprecated Refer {@link ConfigsApi#getPublicEncryptionKey()}
+	 * @deprecated Refer {@link ConfigsApi#getPublicEncryptionKey}
 	 */
 	@Deprecated
 	public ApiResponse<CobrandPublicKeyResponse> getPublicKey() throws ApiException {
@@ -356,7 +356,7 @@ public class CobrandApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 *         
-	 * @deprecated Refer {@link ConfigsApi#getPublicEncryptionKeyAsync()}
+	 * @deprecated Refer {@link ConfigsApi#getPublicEncryptionKeyAsync}
 	 */
 	@Deprecated
 	public void getPublicKeyAsync(ApiCallback<CobrandPublicKeyResponse> apiCallback) throws ApiException {
@@ -383,7 +383,7 @@ public class CobrandApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 *         
-	 * @deprecated Refer {@link ConfigsApi#getSubscribedNotificationEvents()}
+	 * @deprecated Refer {@link ConfigsApi#getSubscribedNotificationEvents}
 	 */
 	@Deprecated
 	public ApiResponse<CobrandNotificationResponse> getSubscribedEvents(CobrandNotificationEventType eventName)
@@ -403,7 +403,7 @@ public class CobrandApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 *         
-	 * @deprecated Refer {@link ConfigsApi#getSubscribedNotificationEventsAsync()}
+	 * @deprecated Refer {@link ConfigsApi#getSubscribedNotificationEventsAsync}
 	 */
 	@Deprecated
 	public void getSubscribedEventsAsync(CobrandNotificationEventType eventName,

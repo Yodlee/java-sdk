@@ -48,6 +48,7 @@ public class ConfigsApi extends AbstractApi {
 	 * 
 	 * @param eventName event Name (required)
 	 * @param eventRequest event Request (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -104,6 +105,7 @@ public class ConfigsApi extends AbstractApi {
 	 * 
 	 * @param eventName event Name (required)
 	 * @param eventRequest event Request (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -152,6 +154,7 @@ public class ConfigsApi extends AbstractApi {
 	 * Delete Subscription The delete events service is used to unsubscribe from an events service.<br>
 	 * 
 	 * @param eventName event Name (required)
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
