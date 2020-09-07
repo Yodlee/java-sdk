@@ -60,6 +60,8 @@ public class DerivedApi extends AbstractApi {
 
 	private static final String PARAM_ACCOUNT_ID = "accountId";
 
+	private static final String PARAM_ACCOUNT_IDS = "accountIds";
+
 	private static final String PARAM_GROUP_BY = "groupBy";
 
 	public DerivedApi(Context<?> context) {
@@ -68,14 +70,19 @@ public class DerivedApi extends AbstractApi {
 
 	/**
 	 * Get Transaction Summary The transaction summary service provides the summary values of transactions for the given
-	 * date range by category type, high-level categories, or system-defined categories.<br><br>Yodlee has the
-	 * transaction data stored for a day, month, year and week per category as per the availability of user&#39;s data.
-	 * If the include parameter value is passed as details, then summary details will be returned depending on the
-	 * interval passed-monthly is the default.<br><br><b>Notes:</b><br>1.Details can be requested for only one
-	 * system-defined category<br>2.Dates will not be respected for monthly, yearly, and weekly details<br>3.When
-	 * monthly details are requested, only the fromDate and toDate month will be respected<br>4.When yearly details are
-	 * requested, only the fromDate and toDate year will be respected<br>5.For weekly data points, details will be
-	 * provided for every Sunday date available within the fromDate and toDate<br>
+	 * date range by category type, high-level categories, or system-defined categories.<br>
+	 * <br>
+	 * Yodlee has the transaction data stored for a day, month, year and week per category as per the availability of
+	 * user&#39;s data. If the include parameter value is passed as details, then summary details will be returned
+	 * depending on the interval passed-monthly is the default.<br>
+	 * <br>
+	 * <b>Notes:</b><br>
+	 * 1.Details can be requested for only one system-defined category<br>
+	 * 2.Dates will not be respected for monthly, yearly, and weekly details<br>
+	 * 3.When monthly details are requested, only the fromDate and toDate month will be respected<br>
+	 * 4.When yearly details are requested, only the fromDate and toDate year will be respected<br>
+	 * 5.For weekly data points, details will be provided for every Sunday date available within the fromDate and
+	 * toDate<br>
 	 * 
 	 * @param groupBy CATEGORY_TYPE, HIGH_LEVEL_CATEGORY or CATEGORY (required)
 	 * @param accountId comma separated account Ids (optional)
@@ -112,14 +119,19 @@ public class DerivedApi extends AbstractApi {
 
 	/**
 	 * Get Transaction Summary The transaction summary service provides the summary values of transactions for the given
-	 * date range by category type, high-level categories, or system-defined categories.<br><br>Yodlee has the
-	 * transaction data stored for a day, month, year and week per category as per the availability of user&#39;s data.
-	 * If the include parameter value is passed as details, then summary details will be returned depending on the
-	 * interval passed-monthly is the default.<br><br><b>Notes:</b><br>1.Details can be requested for only one
-	 * system-defined category<br>2.Dates will not be respected for monthly, yearly, and weekly details<br>3.When
-	 * monthly details are requested, only the fromDate and toDate month will be respected<br>4.When yearly details are
-	 * requested, only the fromDate and toDate year will be respected<br>5.For weekly data points, details will be
-	 * provided for every Sunday date available within the fromDate and toDate<br>
+	 * date range by category type, high-level categories, or system-defined categories.<br>
+	 * <br>
+	 * Yodlee has the transaction data stored for a day, month, year and week per category as per the availability of
+	 * user&#39;s data. If the include parameter value is passed as details, then summary details will be returned
+	 * depending on the interval passed-monthly is the default.<br>
+	 * <br>
+	 * <b>Notes:</b><br>
+	 * 1.Details can be requested for only one system-defined category<br>
+	 * 2.Dates will not be respected for monthly, yearly, and weekly details<br>
+	 * 3.When monthly details are requested, only the fromDate and toDate month will be respected<br>
+	 * 4.When yearly details are requested, only the fromDate and toDate year will be respected<br>
+	 * 5.For weekly data points, details will be provided for every Sunday date available within the fromDate and
+	 * toDate<br>
 	 * 
 	 * @param groupBy CATEGORY_TYPE, HIGH_LEVEL_CATEGORY or CATEGORY (required)
 	 * @param accountId comma separated account Ids (optional)
@@ -160,7 +172,7 @@ public class DerivedApi extends AbstractApi {
 			CategoryType[] categoryTypes, Date fromDate, DerivedInclude include, Boolean includeUserCategory,
 			DataPointInterval interval, Date toDate) throws ApiException {
 		Format formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD);
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.DERIVED_TRANSACTION_SUMMARY, HttpMethod.GET, null);
 		registerResponseInterceptor(apiClient);
 		apiContext.addQueryParam(new Pair(PARAM_GROUP_BY, groupBy.toString()));
@@ -194,8 +206,10 @@ public class DerivedApi extends AbstractApi {
 
 	/**
 	 * Get Holding Summary The get holding summary service is used to get the summary of asset classifications for the
-	 * user.<br>By default, accounts with status as ACTIVE and TO BE CLOSED will be considered.<br>If the include
-	 * parameter value is passed as details then a summary with holdings and account information is returned.<br>
+	 * user.<br>
+	 * By default, accounts with status as ACTIVE and TO BE CLOSED will be considered.<br>
+	 * If the include parameter value is passed as details then a summary with holdings and account information is
+	 * returned.<br>
 	 * 
 	 * @param accountIds Comma separated accountIds (optional)
 	 * @param classificationType e.g. Country, Sector, etc. (optional)
@@ -216,8 +230,10 @@ public class DerivedApi extends AbstractApi {
 
 	/**
 	 * Get Holding Summary The get holding summary service is used to get the summary of asset classifications for the
-	 * user.<br>By default, accounts with status as ACTIVE and TO BE CLOSED will be considered.<br>If the include
-	 * parameter value is passed as details then a summary with holdings and account information is returned.<br>
+	 * user.<br>
+	 * By default, accounts with status as ACTIVE and TO BE CLOSED will be considered.<br>
+	 * If the include parameter value is passed as details then a summary with holdings and account information is
+	 * returned.<br>
 	 * 
 	 * @param accountIds Comma separated accountIds (optional)
 	 * @param classificationType e.g. Country, Sector, etc. (optional)
@@ -240,11 +256,11 @@ public class DerivedApi extends AbstractApi {
 
 	private CallContext buildGetHoldingSummaryContext(Long[] accountIds, String classificationType,
 			DerivedInclude include) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.DERIVED_HOLDING_SUMMARY, HttpMethod.GET, null);
 		registerResponseInterceptor(apiClient);
 		if (accountIds != null && accountIds.length > 0) {
-			apiContext.addQueryParam(new Pair(PARAM_ACCOUNT_ID, ApiUtils.convertArrayToString(accountIds)));
+			apiContext.addQueryParam(new Pair(PARAM_ACCOUNT_IDS, ApiUtils.convertArrayToString(accountIds)));
 		}
 		if (!StringUtils.isEmpty(classificationType)) {
 			apiContext.addQueryParam(new Pair(PARAM_FROM_DATE, classificationType));
@@ -257,8 +273,8 @@ public class DerivedApi extends AbstractApi {
 	}
 
 	/**
-	 * Get Networth Summary The get networth service is used to get the networth for the user.<br>If the include
-	 * parameter value is passed as details then networth with historical balances is returned. <br>
+	 * Get Networth Summary The get networth service is used to get the networth for the user.<br>
+	 * If the include parameter value is passed as details then networth with historical balances is returned. <br>
 	 * 
 	 * @param accountIds comma separated accountIds (optional)
 	 * @param fromDate from date for balance retrieval (YYYY-MM-DD) (optional)
@@ -289,8 +305,8 @@ public class DerivedApi extends AbstractApi {
 	}
 
 	/**
-	 * Get Networth Summary The get networth service is used to get the networth for the user.<br>If the include
-	 * parameter value is passed as details then networth with historical balances is returned. <br>
+	 * Get Networth Summary The get networth service is used to get the networth for the user.<br>
+	 * If the include parameter value is passed as details then networth with historical balances is returned. <br>
 	 * 
 	 * @param accountIds comma separated accountIds (optional)
 	 * @param fromDate from date for balance retrieval (YYYY-MM-DD) (optional)
@@ -324,11 +340,11 @@ public class DerivedApi extends AbstractApi {
 	private CallContext buildGetNetworthContext(Long[] accountIds, Date fromDate, DerivedInclude include,
 			DataPointInterval interval, Integer skip, Date toDate, Integer top) throws ApiException {
 		Format formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD);
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.DERIVED_NETWORTH, HttpMethod.GET, null);
 		registerResponseInterceptor(apiClient);
 		if (accountIds != null && accountIds.length > 0) {
-			apiContext.addQueryParam(new Pair(PARAM_ACCOUNT_ID, ApiUtils.convertArrayToString(accountIds)));
+			apiContext.addQueryParam(new Pair(PARAM_ACCOUNT_IDS, ApiUtils.convertArrayToString(accountIds)));
 		}
 		if (fromDate != null) {
 			apiContext.addQueryParam(new Pair(PARAM_FROM_DATE, formatter.format(fromDate)));

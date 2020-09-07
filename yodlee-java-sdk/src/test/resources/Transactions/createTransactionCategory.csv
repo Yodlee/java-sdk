@@ -1,2 +1,0 @@
-testCaseId,testCaseName,fileName,enabled
-1,Call Create Transaction Category,/request/transactions/createTransactionCategory.json,TRUE

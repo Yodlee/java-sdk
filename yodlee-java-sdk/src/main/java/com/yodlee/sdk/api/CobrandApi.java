@@ -146,7 +146,7 @@ public class CobrandApi extends AbstractApi {
 
 	private CallContext buildCobrandLogoutContext() throws ApiException {
 		ApiContext apiContext = new ApiContext(ApiEndpoint.COBRAND_LOGOUT, HttpMethod.POST, null);
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
@@ -167,8 +167,8 @@ public class CobrandApi extends AbstractApi {
 	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
-	 *         
-	 * @deprecated Refer {@link ConfigsApi#createSubscriptionNotificationEvent}
+	 * 
+	 * @deprecated Refer {@link ConfigsApi#createSubscriptionNotificationEvent()}
 	 */
 	@Deprecated
 	public ApiResponse<AbstractModelComponent> createSubscriptionEvent(
@@ -196,8 +196,8 @@ public class CobrandApi extends AbstractApi {
 	 * @param apiCallBack {@link ApiCallback} (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
-	 *         
-	 * @deprecated Refer {@link ConfigsApi#createSubscriptionNotificationEventAsync}
+	 * 
+	 * @deprecated Refer {@link ConfigsApi#createSubscriptionNotificationEventAsync()}
 	 */
 	@Deprecated
 	public void createSubscriptionEventAsync(
@@ -212,7 +212,7 @@ public class CobrandApi extends AbstractApi {
 
 	private CallContext buildCreateSubscriptionEventContext(CobrandNotificationEventType eventName,
 			CreateCobrandNotificationEventRequest eventRequest) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String endPoint = replacePathVariable(ApiEndpoint.COBRAND_CONFIG_NOTIFICATIONS_EVENTS_EVENT_NAME,
 				PARAM_EVENT_NAME, eventName.toString());
 		ApiContext apiContext = new ApiContext(endPoint, HttpMethod.POST, eventRequest);
@@ -230,8 +230,8 @@ public class CobrandApi extends AbstractApi {
 	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
-	 *         
-	 * @deprecated Refer {@link ConfigsApi#updateSubscribedNotificationEvent}
+	 * 
+	 * @deprecated Refer {@link ConfigsApi#updateSubscribedNotificationEvent()}
 	 */
 	@Deprecated
 	public ApiResponse<AbstractModelComponent> updateSubscribedEvent(
@@ -253,8 +253,8 @@ public class CobrandApi extends AbstractApi {
 	 * @param apiCallback {@link ApiCallback} (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
-	 *         
-	 * @deprecated Refer {@link ConfigsApi#updateSubscribedNotificationEventAsync}
+	 * 
+	 * @deprecated Refer {@link ConfigsApi#updateSubscribedNotificationEventAsync( )}
 	 */
 	@Deprecated
 	public void updateSubscribedEventAsync(
@@ -269,7 +269,7 @@ public class CobrandApi extends AbstractApi {
 
 	private CallContext buildUpdateSubscribedEventContext(CobrandNotificationEventType eventName,
 			UpdateCobrandNotificationEventRequest eventRequest) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String endPoint = replacePathVariable(ApiEndpoint.COBRAND_CONFIG_NOTIFICATIONS_EVENTS_EVENT_NAME,
 				PARAM_EVENT_NAME, eventName.toString());
 		ApiContext apiContext = new ApiContext(endPoint, HttpMethod.PUT, eventRequest);
@@ -285,8 +285,8 @@ public class CobrandApi extends AbstractApi {
 	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
-	 *         
-	 * @deprecated Refer {@link ConfigsApi#deleteSubscribedNotificationEvent}
+	 * 
+	 * @deprecated Refer {@link ConfigsApi#deleteSubscribedNotificationEvent()}
 	 */
 	@Deprecated
 	public ApiResponse<AbstractModelComponent> deleteSubscribedEvent(
@@ -305,8 +305,8 @@ public class CobrandApi extends AbstractApi {
 	 * @param apiCallback {@link ApiCallback} (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
-	 *         
-	 * @deprecated Refer {@link ConfigsApi#deleteSubscribedNotificationEventAsync}
+	 * 
+	 * @deprecated Refer {@link ConfigsApi#deleteSubscribedNotificationEventAsync()}
 	 */
 	@Deprecated
 	public void deleteSubscribedEventAsync(
@@ -319,7 +319,7 @@ public class CobrandApi extends AbstractApi {
 	}
 
 	private CallContext buildDeleteSubscribedEventContext(CobrandNotificationEventType eventName) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String endPoint = replacePathVariable(ApiEndpoint.COBRAND_CONFIG_NOTIFICATIONS_EVENTS_EVENT_NAME,
 				PARAM_EVENT_NAME, eventName.toString());
 		ApiContext apiContext = new ApiContext(endPoint, HttpMethod.DELETE, null);
@@ -336,8 +336,8 @@ public class CobrandApi extends AbstractApi {
 	 * @return {@link ApiResponse}&lt;{@link CobrandPublicKeyResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
-	 *         
-	 * @deprecated Refer {@link ConfigsApi#getPublicEncryptionKey}
+	 * 
+	 * @deprecated Refer {@link ConfigsApi#getPublicEncryptionKey()}
 	 */
 	@Deprecated
 	public ApiResponse<CobrandPublicKeyResponse> getPublicKey() throws ApiException {
@@ -355,8 +355,8 @@ public class CobrandApi extends AbstractApi {
 	 * @param apiCallback {@link ApiCallback}&lt;{@link CobrandPublicKeyResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
-	 *         
-	 * @deprecated Refer {@link ConfigsApi#getPublicEncryptionKeyAsync}
+	 * 
+	 * @deprecated Refer {@link ConfigsApi#getPublicEncryptionKeyAsync()}
 	 */
 	@Deprecated
 	public void getPublicKeyAsync(ApiCallback<CobrandPublicKeyResponse> apiCallback) throws ApiException {
@@ -368,7 +368,7 @@ public class CobrandApi extends AbstractApi {
 
 	private CallContext buildGetPublicKeyContext() throws ApiException {
 		ApiContext apiContext = new ApiContext(ApiEndpoint.COBRAND_PUBLIC_KEY, HttpMethod.GET, null);
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
@@ -382,8 +382,8 @@ public class CobrandApi extends AbstractApi {
 	 * @return {@link ApiResponse}&lt;{@link CobrandNotificationResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
-	 *         
-	 * @deprecated Refer {@link ConfigsApi#getSubscribedNotificationEvents}
+	 * 
+	 * @deprecated Refer {@link ConfigsApi#getSubscribedNotificationEvents()}
 	 */
 	@Deprecated
 	public ApiResponse<CobrandNotificationResponse> getSubscribedEvents(CobrandNotificationEventType eventName)
@@ -402,8 +402,8 @@ public class CobrandApi extends AbstractApi {
 	 * @param apiCallback {@link ApiCallback}&lt;{@link CobrandNotificationResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
-	 *         
-	 * @deprecated Refer {@link ConfigsApi#getSubscribedNotificationEventsAsync}
+	 * 
+	 * @deprecated Refer {@link ConfigsApi#getSubscribedNotificationEventsAsync()}
 	 */
 	@Deprecated
 	public void getSubscribedEventsAsync(CobrandNotificationEventType eventName,
@@ -419,7 +419,7 @@ public class CobrandApi extends AbstractApi {
 		if (eventName != null) {
 			apiContext.addQueryParam(new Pair(PARAM_EVENT_NAME, eventName.name()));
 		}
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);

@@ -481,7 +481,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * the provider account status is drawn from the dataset additional statuses.
 	 * 
 	 * For detailed implementation, refer to the add account flow chart in portal. Pass linkedProviderAccountId in the
-	 * input to link a user's credential-based providerAccount with the open banking providerAccount. Ensure that the
+	 * input to link a user’s credential-based providerAccount with the open banking providerAccount. Ensure that the
 	 * credential-based providerAccount belongs to the same institution. While testing the PKI feature, encrypt the
 	 * credentials using the encryption utility. The content type has to be passed as application/json in the body
 	 * parameter.
@@ -529,7 +529,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * the provider account status is drawn from the dataset additional statuses.
 	 * 
 	 * For detailed implementation, refer to the add account flow chart in portal. Pass linkedProviderAccountId in the
-	 * input to link a user's credential-based providerAccount with the open banking providerAccount. Ensure that the
+	 * input to link a user’s credential-based providerAccount with the open banking providerAccount. Ensure that the
 	 * credential-based providerAccount belongs to the same institution. While testing the PKI feature, encrypt the
 	 * credentials using the encryption utility. The content type has to be passed as application/json in the body
 	 * parameter.
@@ -658,7 +658,7 @@ public class ProviderAccountsApi extends AbstractApi {
 
 	private CallContext buildEditCredentialsOrRefreshProviderAccountContext(String providerAccountIds,
 			ProviderAccountRequest providerAccountRequest) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.PROVIDER_ACCOUNTS, HttpMethod.PUT, providerAccountRequest);
 		apiContext.addQueryParam(new Pair(PARAM_PROVIDER_ACCOUNT_IDS, providerAccountIds));
 		registerResponseInterceptor(apiClient);
@@ -667,7 +667,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	}
 
 	private CallContext buildDeleteProviderAccountContext(long providerAccountId) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String apiEndPoint = replacePathVariable(ApiEndpoint.PROVIDER_ACCOUNT_DETAILS, PROVIDER_ACCOUNT_ID,
 				String.valueOf(providerAccountId));
 		ApiContext apiContext = new ApiContext(apiEndPoint, HttpMethod.DELETE, null);
@@ -678,7 +678,7 @@ public class ProviderAccountsApi extends AbstractApi {
 
 	private CallContext buildGetProviderAccountContext(long providerAccountId,//
 			ProviderAccountInclude[] include, String requestId) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String apiEndPoint = replacePathVariable(ApiEndpoint.PROVIDER_ACCOUNT_DETAILS, PROVIDER_ACCOUNT_ID,
 				String.valueOf(providerAccountId));
 		ApiContext apiContext = new ApiContext(apiEndPoint, HttpMethod.GET, null);
@@ -695,7 +695,7 @@ public class ProviderAccountsApi extends AbstractApi {
 
 	private CallContext buildGetAllProviderAccountsContext(ProviderAccountDetailsInclude include, //
 			Long[] providerIds) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.PROVIDER_ACCOUNTS, HttpMethod.GET, null);
 		if (include != null) {
 			apiContext.addQueryParam(new Pair(PARAM_INCLUDE, include.toString()));
@@ -724,7 +724,7 @@ public class ProviderAccountsApi extends AbstractApi {
 
 	private CallContext buildLinkProviderAccountContext(ProviderAccountRequest providerAccountRequest,//
 			Long providerId) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.PROVIDER_ACCOUNTS, HttpMethod.POST, providerAccountRequest);
 		apiContext.addQueryParam(new Pair(PROVIDER_ID, providerId.toString()));
 		registerResponseInterceptor(apiClient);
@@ -733,7 +733,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	}
 
 	private CallContext buildGetProviderAccountProfilesContext(Long[] providerAccountId) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.PROVIDER_ACCOUNTS_PROFILE, HttpMethod.GET, null);
 		if (providerAccountId != null) {
 			apiContext.addQueryParam(new Pair(PROVIDER_ACCOUNT_ID, ApiUtils.convertArrayToString(providerAccountId)));
@@ -745,7 +745,7 @@ public class ProviderAccountsApi extends AbstractApi {
 
 	private CallContext buildUpdatePreferencesContext(ProviderAccountPreferencesRequest preferences, //
 			Long providerAccountId) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String apiEndPoint = replacePathVariable(ApiEndpoint.PROVIDER_ACCOUNTS_PREFERENCES, PROVIDER_ACCOUNT_ID,
 				providerAccountId.toString());
 		ApiContext apiContext = new ApiContext(apiEndPoint, HttpMethod.PUT, preferences);

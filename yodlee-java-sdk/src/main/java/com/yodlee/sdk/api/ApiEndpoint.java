@@ -19,9 +19,8 @@ public class ApiEndpoint {
 	static final String COBRAND_CONFIG_NOTIFICATIONS_EVENTS = "/cobrand/config/notifications/events";
 
 	static final String COBRAND_PUBLIC_KEY = "/cobrand/publicKey";
-	
-	static final String CONFIGS_NOTIFICATIONS_EVENTS_EVENT_NAME =
-			"/configs/notifications/events/{eventName}";
+
+	static final String CONFIGS_NOTIFICATIONS_EVENTS_EVENT_NAME = "/configs/notifications/events/{eventName}";
 
 	static final String CONFIGS_NOTIFICATIONS_EVENTS = "/configs/notifications/events";
 
@@ -70,7 +69,7 @@ public class ApiEndpoint {
 	static final String PROVIDER_ACCOUNTS_PREFERENCES = "/providerAccounts/{providerAccountId}/preferences";
 
 	static final String AUTH_DELETE_TOKEN = "/auth/token";
-	
+
 	public static final String AUTH = "/auth/token";
 
 	static final String AUTH_APIKEY = "/auth/apiKey";
@@ -110,4 +109,6 @@ public class ApiEndpoint {
 	static final String DOCUMENTS = "/documents";
 
 	static final String DOCUMENTS_WITH_ID = "/documents/{documentId}";
+
+	static final String DATAENRICH_USER_DATA = "/enrichData/userData";
 }

@@ -23,10 +23,11 @@ public class StatementsValidator {
 			Container container, Date fromDate, Boolean isLatest, ItemAccountStatus status) throws ApiException {
 		List<Problem> problems = new ArrayList<>();
 		if (container != null && !Container.getStatementContainers().contains(container)) {
-			problems.add(new Problem(ApiUtils.getErrorMessage("statements.param.container.invalid",container.name()), ""));
+			problems.add(
+					new Problem(ApiUtils.getErrorMessage("statements.param.container.invalid", container.name()), ""));
 		}
 		if (status != null && !ItemAccountStatus.getStatementApplicableStatusTypes().contains(status)) {
-			problems.add(new Problem(ApiUtils.getErrorMessage("statements.param.status.invalid",status.name()), ""));
+			problems.add(new Problem(ApiUtils.getErrorMessage("statements.param.status.invalid", status.name()), ""));
 		}
 		Class<?>[] argTypes =
 				new Class[] {Long.class, Container.class, Date.class, Boolean.class, ItemAccountStatus.class};

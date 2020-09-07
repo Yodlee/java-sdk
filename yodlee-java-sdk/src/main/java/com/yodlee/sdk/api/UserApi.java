@@ -64,7 +64,7 @@ public class UserApi extends AbstractApi {
 	 * 
 	 * @param issuer issuer (required)
 	 * @param samlResponse samlResponse (required)
-	 * @param source source (required)
+	 * @param source source
 	 * @return {@link ApiResponse}&lt;{@link UserResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -72,7 +72,7 @@ public class UserApi extends AbstractApi {
 	public ApiResponse<UserResponse> samlLogin(//
 			@NotEmpty(message = "{user.param.samlResponse.required}") String samlResponse,//
 			@NotEmpty(message = "{user.param.issuer.required}") String issuer,//
-			@NotEmpty(message = "{user.param.source.required}") String source) throws ApiException {
+			String source) throws ApiException {
 		LOGGER.info("User SamlLogin API execution started");
 		UserValidator.validateSamlLogin(this, ApiUtils.getMethodName(), samlResponse, issuer, source);
 		CallContext callContext = buildSamlLoginContext(samlResponse, issuer, source);
@@ -95,7 +95,7 @@ public class UserApi extends AbstractApi {
 	 * 
 	 * @param issuer issuer (required)
 	 * @param samlResponse samlResponse (required)
-	 * @param source source (required)
+	 * @param source source
 	 * @param apiCallback {@link ApiCallback}&lt;{@link UserResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -103,7 +103,7 @@ public class UserApi extends AbstractApi {
 	public void samlLoginAsync(//
 			@NotEmpty(message = "{user.param.samlResponse.required}") String samlResponse,//
 			@NotEmpty(message = "{user.param.issuer.required}") String issuer,//
-			@NotEmpty(message = "{user.param.source.required}") String source,//
+			String source,//
 			ApiCallback<UserResponse> apiCallback) throws ApiException {
 		LOGGER.info("User SamlLoginAsync API execution started");
 		UserValidator.validateSamlLogin(this, ApiUtils.getMethodName(), samlResponse, issuer, source);
@@ -118,7 +118,7 @@ public class UserApi extends AbstractApi {
 		apiContext.addQueryParam(new Pair(PARAM_SAML_RESPONSE, samlResponse));
 		apiContext.addQueryParam(new Pair(PARAM_ISSUER, issuer));
 		apiContext.addQueryParam(new Pair(PARAM_SOURCE, source));
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
@@ -172,7 +172,7 @@ public class UserApi extends AbstractApi {
 
 	private CallContext buildRegisterUserContext(UserRequest userRequest) throws ApiException {
 		ApiContext apiContext = new ApiContext(ApiEndpoint.USER_REGISTER, HttpMethod.POST, userRequest);
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
@@ -213,7 +213,7 @@ public class UserApi extends AbstractApi {
 
 	private CallContext buildGetUserContext() throws ApiException {
 		ApiContext apiContext = new ApiContext(ApiEndpoint.USER_DETAILS, HttpMethod.GET, null);
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
@@ -253,7 +253,7 @@ public class UserApi extends AbstractApi {
 
 	private CallContext buildUserLogoutContext() throws ApiException {
 		ApiContext apiContext = new ApiContext(ApiEndpoint.USER_LOGOUT, HttpMethod.POST, null);
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
@@ -303,7 +303,7 @@ public class UserApi extends AbstractApi {
 
 	private CallContext buildUpdateUserContext(UpdateUserRequest userRequest) throws ApiException {
 		ApiContext apiContext = new ApiContext(ApiEndpoint.USER_DETAILS, HttpMethod.PUT, userRequest);
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
@@ -351,7 +351,7 @@ public class UserApi extends AbstractApi {
 
 	private CallContext buildGetAccessTokensContext(Long[] appIds) throws ApiException {
 		ApiContext apiContext = new ApiContext(ApiEndpoint.USER_ACCESS_TOKEN, HttpMethod.GET, null);
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		apiContext.addQueryParam(new Pair(PARAM_APP_IDS, ApiUtils.convertArrayToString(appIds)));
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -392,7 +392,7 @@ public class UserApi extends AbstractApi {
 
 	private CallContext buildUnregisterContext() throws ApiException {
 		ApiContext apiContext = new ApiContext(ApiEndpoint.USER_UNREGISTER, HttpMethod.DELETE, null);
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);

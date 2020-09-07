@@ -92,7 +92,7 @@ public class VerificationApi extends AbstractApi {
 
 	private CallContext buildGetVerificationDetailsContext(Long[] accountId, Long[] providerAccountId,
 			VerificationType verificationType) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.VERIFICATION, HttpMethod.GET, null);
 		if (accountId != null && accountId.length > 0) {
 			apiContext.addQueryParam(new Pair(ACCOUNT_ID, ApiUtils.convertArrayToString(accountId)));
@@ -159,7 +159,7 @@ public class VerificationApi extends AbstractApi {
 	}
 
 	private CallContext buildInitiateCDVerificationContext(VerificationRequest verificationParam) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.VERIFICATION, HttpMethod.POST, verificationParam);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -224,7 +224,7 @@ public class VerificationApi extends AbstractApi {
 
 	private CallContext buildPerformMatchingVerificationContext(VerificationMatchingRequest verificationParam)
 			throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.VERIFICATION, HttpMethod.POST, verificationParam);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -275,7 +275,7 @@ public class VerificationApi extends AbstractApi {
 
 	private CallContext buildPerformCDVerificationContext(UpdateVerificationRequest updateVerificationRequest)
 			throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.VERIFICATION, HttpMethod.PUT, updateVerificationRequest);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());

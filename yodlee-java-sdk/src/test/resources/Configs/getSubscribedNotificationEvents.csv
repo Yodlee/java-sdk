@@ -1,3 +1,0 @@
-testCaseId,testCaseName,fileName,eventName,enabled
-1,Call GET Subscribed events with eventName as REFRESH,/request/configs/subscribeNotificationEvents.json,REFRESH,TRUE
-2,Call GET Subscribed events with eventName as DATA_UPDATES,/request/configs/subscribeNotificationEvents.json,DATA_UPDATES,TRUE

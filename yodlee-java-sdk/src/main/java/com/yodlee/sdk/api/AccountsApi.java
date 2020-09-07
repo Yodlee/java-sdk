@@ -120,7 +120,7 @@ public class AccountsApi extends AbstractApi {
 			throws ApiException {
 		String endPoint =
 				replacePathVariable(ApiEndpoint.ACCOUNT_ACCOUNTID, PARAM_ACCOUNT_ID, String.valueOf(accountId));
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endPoint, HttpMethod.GET, null);
 		if (container != null) {
 			apiContext.addQueryParam(new Pair(PARAM_CONTAINER, container.name()));
@@ -207,7 +207,7 @@ public class AccountsApi extends AbstractApi {
 			Long[] providerAccountId,//
 			String requestId,//
 			ItemAccountStatus[] status) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.ACCOUNTS, HttpMethod.GET, null);
 		if (accountId != null) {
 			apiContext.addQueryParam(new Pair(PARAM_ACCOUNT_ID, ApiUtils.convertArrayToString(accountId)));
@@ -331,7 +331,7 @@ public class AccountsApi extends AbstractApi {
 			HistoricalBalancesIntervalValue interval, //
 			Integer skip,//
 			Integer top) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.GET_HISTORICAL_BALANCES, HttpMethod.GET, null);
 		SimpleDateFormat formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD);
 		if (accountId != null) {
@@ -406,7 +406,7 @@ public class AccountsApi extends AbstractApi {
 
 	private CallContext buildcreateManualAccountContext(CreateAccountRequest accountParam) throws ApiException {
 		AccountsValidator.validateCreateManualAccount(this, ApiUtils.getMethodName(), accountParam);
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.ACCOUNTS, HttpMethod.POST, accountParam);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -463,7 +463,7 @@ public class AccountsApi extends AbstractApi {
 			UpdateAccountRequest accountRequest) throws ApiException {
 		String endpoint =
 				replacePathVariable(ApiEndpoint.ACCOUNT_ACCOUNTID, PARAM_ACCOUNT_ID, String.valueOf(accountId));
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.PUT, accountRequest);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -509,7 +509,7 @@ public class AccountsApi extends AbstractApi {
 	private CallContext buildDeleteAccountContext(long accountId) throws ApiException {
 		String endpoint =
 				replacePathVariable(ApiEndpoint.ACCOUNT_ACCOUNTID, PARAM_ACCOUNT_ID, String.valueOf(accountId));
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.DELETE, null);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());

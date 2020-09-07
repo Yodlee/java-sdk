@@ -7,11 +7,9 @@ package com.yodlee.sdk.builder;
 
 import com.yodlee.api.model.cobrand.request.CobrandLoginRequest;
 import com.yodlee.api.model.cobrand.request.CobrandLoginRequest.Cobrand;
-import com.yodlee.sdk.api.ApiConstants;
 import com.yodlee.sdk.api.CobrandApi;
 import com.yodlee.sdk.api.exception.ApiException;
 import com.yodlee.sdk.api.validators.ApiValidator;
-import com.yodlee.sdk.client.ApiClient;
 import com.yodlee.sdk.configuration.cobrand.CobrandConfiguration;
 import com.yodlee.sdk.context.CobrandContext;
 import com.yodlee.sdk.context.Context;

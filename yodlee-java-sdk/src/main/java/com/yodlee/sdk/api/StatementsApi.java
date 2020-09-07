@@ -114,7 +114,7 @@ public class StatementsApi extends AbstractApi {
 			Date fromDate,//
 			Boolean isLatest,//
 			ItemAccountStatus status) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.STATEMENTS, HttpMethod.GET, null);
 		SimpleDateFormat formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD);
 		if (accountId != null) {

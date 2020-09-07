@@ -7,8 +7,7 @@ package com.yodlee.sdk.context;
 
 import com.yodlee.sdk.configuration.cobrand.AbstractClientCredentialConfiguration;
 
-public abstract class AbstractClientCredentialContext<C extends AbstractClientCredentialConfiguration>
-		extends AbstractContext<C> {
+public abstract class AbstractClientCredentialContext<C extends AbstractClientCredentialConfiguration> extends AbstractContext<C> {
 
 	private String accessToken;
 

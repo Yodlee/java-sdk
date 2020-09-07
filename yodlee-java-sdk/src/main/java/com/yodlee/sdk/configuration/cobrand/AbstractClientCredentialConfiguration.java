@@ -13,9 +13,11 @@ public abstract class AbstractClientCredentialConfiguration extends AbstractBase
 	@NotEmpty(message = "{config.clientId.required}")
 	@JsonProperty("clientId")
 	private String clientId;
+
 	@NotEmpty(message = "{config.secret.required}")
 	@JsonProperty("secret")
 	private String secret;
+
 	@NotEmpty(message = "{config.loginName.required}")
 	@JsonProperty("loginName")
 	private String loginName;

@@ -1,2 +1,0 @@
-testCaseId,testCaseName,capability, datasetFilter, name, priority, skip, top,enabled
-1,getAllProviders,CHALLENGE_deposit_VERIFICATION,,,,,,TRUE

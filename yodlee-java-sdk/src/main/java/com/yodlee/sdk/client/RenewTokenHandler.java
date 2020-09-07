@@ -45,9 +45,11 @@ public class RenewTokenHandler {
 				handleJWTAppContextRenewal(context);
 			} else if (context instanceof JWTUserContext && isJWTTokenExpired((JWTUserContext) context)) {
 				handleJWTUserContextRenewal(context);
-			} else if (context instanceof ClientCredentialAdminContext && isClientCredentialTokenExpired((ClientCredentialAdminContext) context)) {
+			} else if (context instanceof ClientCredentialAdminContext
+					&& isClientCredentialTokenExpired((ClientCredentialAdminContext) context)) {
 				handleClientCredentialAppContextRenewal(context);
-			} else if (context instanceof ClientCredentialUserContext && isClientCredentialTokenExpired((ClientCredentialUserContext) context)) {
+			} else if (context instanceof ClientCredentialUserContext
+					&& isClientCredentialTokenExpired((ClientCredentialUserContext) context)) {
 				handleClientCredentialUserContextRenewal(context);
 			}
 		} catch (ApiException e) {
@@ -76,29 +78,33 @@ public class RenewTokenHandler {
 	}
 
 	private static void handleClientCredentialAppContextRenewal(Context<?> context) throws ApiException {
-		ClientCredentialAdminContextBuilder clientCredentialAppContextBuilder = ContextBuilderFactory.createClientCredentialAdminContextBuilder();
-		ClientCredentialAdminContext renewedClientCredentialContext =
-				clientCredentialAppContextBuilder.build((ClientCredentialAdminConfiguration) context.getConfiguration());
+		ClientCredentialAdminContextBuilder clientCredentialAppContextBuilder =
+				ContextBuilderFactory.createClientCredentialAdminContextBuilder();
+		ClientCredentialAdminContext renewedClientCredentialContext = clientCredentialAppContextBuilder
+				.build((ClientCredentialAdminConfiguration) context.getConfiguration());
 		ClientCredentialAdminContext originalContext = (ClientCredentialAdminContext) context;
 		updateClientCredentialContextValues(renewedClientCredentialContext, originalContext);
 	}
 
 	private static void handleClientCredentialUserContextRenewal(Context<?> context) throws ApiException {
-		ClientCredentialUserContextBuilder clientCredentialAppContextBuilder = ContextBuilderFactory.createClientCredentialUserContextBuilder();
+		ClientCredentialUserContextBuilder clientCredentialAppContextBuilder =
+				ContextBuilderFactory.createClientCredentialUserContextBuilder();
 		ClientCredentialUserContext renewedClientCredentialContext =
 				clientCredentialAppContextBuilder.build((ClientCredentialUserConfiguration) context.getConfiguration());
 		ClientCredentialUserContext originalContext = (ClientCredentialUserContext) context;
 		updateClientCredentialContextValues(renewedClientCredentialContext, originalContext);
 	}
 
-	private static void updateClientCredentialContextValues(AbstractClientCredentialContext<?> renewedClientCredentialContext,
+	private static void updateClientCredentialContextValues(
+			AbstractClientCredentialContext<?> renewedClientCredentialContext,
 			AbstractClientCredentialContext<?> originalContext) {
 		originalContext.setAccessToken(renewedClientCredentialContext.getAccessToken());
 		originalContext.setIssuedAt(renewedClientCredentialContext.getIssuedAt());
 		originalContext.setExpiresIn(renewedClientCredentialContext.getExpiresIn());
 	}
 
-	private static boolean isClientCredentialTokenExpired(final AbstractClientCredentialContext<?> clientCredentialContext) {
+	private static boolean
+			isClientCredentialTokenExpired(final AbstractClientCredentialContext<?> clientCredentialContext) {
 		final Calendar currentTime = Calendar.getInstance();
 		final String issuedAt = clientCredentialContext.getIssuedAt();
 		final int expiresIn = clientCredentialContext.getExpiresIn();

@@ -24,15 +24,14 @@ public class JWTUtil {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(JWTUtil.class);
 
-	private JWTUtil() {
-		
-	}
+	private JWTUtil() {}
+
 	/**
 	 * Description: Generates the JWT token which will be valid for provide time.
 	 * 
 	 * @param jwtKey - JWT Key is the issuer id (iss)
 	 * @param privateKeyString - The key used to generate the JWT Token along with JWT Key
-	 * @param userName - The sub field used to identify the user. For App Context this is null.  
+	 * @param userName - The sub field used to identify the user. For App Context this is null.
 	 * @param expiresIn - The duration in seconds for which the generated JWT token is valid
 	 * @param locale - The locale for the token
 	 * @return jwtToken - The generated JWT token

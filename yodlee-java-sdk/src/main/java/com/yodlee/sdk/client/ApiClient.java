@@ -19,12 +19,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yodlee.api.model.AbstractModelComponent;
@@ -34,7 +32,6 @@ import com.yodlee.sdk.api.util.ApiUtils;
 import com.yodlee.sdk.configuration.AbstractConfiguration;
 import com.yodlee.sdk.configuration.cobrand.AbstractBaseConfiguration;
 import com.yodlee.sdk.context.Context;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;

@@ -16,7 +16,7 @@ public class ApiConstants {
 	public static final String API_VERSION = "Api-Version";
 
 	public static final String YYYY_MM_DD_T_HH_MM_SS_Z = "yyyy-MM-dd'T'HH:mm:ss'Z'";
-	
+
 	public static final int THOUSAND_MILLIS = 1000;
 
 	public static final String YYYY_MM_DD = "yyyy-MM-dd";
@@ -32,6 +32,6 @@ public class ApiConstants {
 	public static final String CONTENT_TYPE = "Content-Type";
 
 	public static final String LOGIN_NAME = "loginName";
-	
+
 	public static final String LOCALE = "locale";
 }

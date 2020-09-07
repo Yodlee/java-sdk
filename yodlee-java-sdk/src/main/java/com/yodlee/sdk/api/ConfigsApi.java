@@ -36,6 +36,7 @@ public class ConfigsApi extends AbstractApi {
 	public ConfigsApi(Context<?> context) {
 		super(context);
 	}
+
 	/**
 	 * Subscribe Event The subscribe events service is used to subscribe to an event for receiving notifications.<br>
 	 * The callback URL, where the notification will be posted should be provided to this service.<br>
@@ -48,7 +49,6 @@ public class ConfigsApi extends AbstractApi {
 	 * 
 	 * @param eventName event Name (required)
 	 * @param eventRequest event Request (required)
-	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -57,7 +57,8 @@ public class ConfigsApi extends AbstractApi {
 			@NotNull(message = "{configs.CreateConfigsNotificationEventRequest.required}") CreateConfigsNotificationEventRequest eventRequest)
 			throws ApiException {
 		LOGGER.info("Configs createSubscriptionNotificationEvent API execution started");
-		ConfigsValidator.validateCreateSubscriptionNotificationEvent(this, ApiUtils.getMethodName(), eventName, eventRequest);
+		ConfigsValidator.validateCreateSubscriptionNotificationEvent(this, ApiUtils.getMethodName(), eventName,
+				eventRequest);
 		CallContext callContext = buildCreateSubscriptionNotificationEventContext(eventName, eventRequest);
 		return callContext.getApiClient().execute(callContext.getCall(), null);
 	}
@@ -83,16 +84,17 @@ public class ConfigsApi extends AbstractApi {
 			@NotNull(message = "{configs.CreateConfigsNotificationEventRequest.required}") CreateConfigsNotificationEventRequest eventRequest,
 			ApiCallback<AbstractModelComponent> apiCallBack) throws ApiException {
 		LOGGER.info("Configs createSubscriptionNotificationEventAsync API execution started");
-		ConfigsValidator.validateCreateSubscriptionNotificationEvent(this, ApiUtils.getMethodName(), eventName, eventRequest);
+		ConfigsValidator.validateCreateSubscriptionNotificationEvent(this, ApiUtils.getMethodName(), eventName,
+				eventRequest);
 		CallContext callContext = buildCreateSubscriptionNotificationEventContext(eventName, eventRequest);
 		callContext.getApiClient().executeAsync(callContext.getCall(), apiCallBack);
 	}
 
 	private CallContext buildCreateSubscriptionNotificationEventContext(ConfigsNotificationEventType eventName,
 			CreateConfigsNotificationEventRequest eventRequest) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
-		String endPoint = replacePathVariable(ApiEndpoint.CONFIGS_NOTIFICATIONS_EVENTS_EVENT_NAME,
-				PARAM_EVENT_NAME, eventName.toString());
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
+		String endPoint = replacePathVariable(ApiEndpoint.CONFIGS_NOTIFICATIONS_EVENTS_EVENT_NAME, PARAM_EVENT_NAME,
+				eventName.toString());
 		ApiContext apiContext = new ApiContext(endPoint, HttpMethod.POST, eventRequest);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -105,7 +107,6 @@ public class ConfigsApi extends AbstractApi {
 	 * 
 	 * @param eventName event Name (required)
 	 * @param eventRequest event Request (required)
-	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -114,7 +115,8 @@ public class ConfigsApi extends AbstractApi {
 			@NotNull(message = "{configs.UpdateConfigsNotificationEventRequest.required}") UpdateConfigsNotificationEventRequest eventRequest)
 			throws ApiException {
 		LOGGER.info("Configs updateSubscribedNotificationEvent API execution started");
-		ConfigsValidator.validateUpdateSubscribedNotificationEvent(this, ApiUtils.getMethodName(), eventName, eventRequest);
+		ConfigsValidator.validateUpdateSubscribedNotificationEvent(this, ApiUtils.getMethodName(), eventName,
+				eventRequest);
 		CallContext callContext = buildUpdateSubscribedNotificationEventContext(eventName, eventRequest);
 		return callContext.getApiClient().execute(callContext.getCall(), null);
 	}
@@ -134,16 +136,17 @@ public class ConfigsApi extends AbstractApi {
 			@NotNull(message = "{configs.UpdateConfigsNotificationEventRequest.required}") UpdateConfigsNotificationEventRequest eventRequest,
 			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
 		LOGGER.info("Configs updateSubscribedNotificationEventAsync API execution started");
-		ConfigsValidator.validateUpdateSubscribedNotificationEvent(this, ApiUtils.getMethodName(), eventName, eventRequest);
+		ConfigsValidator.validateUpdateSubscribedNotificationEvent(this, ApiUtils.getMethodName(), eventName,
+				eventRequest);
 		CallContext callContext = buildUpdateSubscribedNotificationEventContext(eventName, eventRequest);
 		callContext.getApiClient().executeAsync(callContext.getCall(), apiCallback);
 	}
 
 	private CallContext buildUpdateSubscribedNotificationEventContext(ConfigsNotificationEventType eventName,
 			UpdateConfigsNotificationEventRequest eventRequest) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
-		String endPoint = replacePathVariable(ApiEndpoint.CONFIGS_NOTIFICATIONS_EVENTS_EVENT_NAME,
-				PARAM_EVENT_NAME, eventName.toString());
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
+		String endPoint = replacePathVariable(ApiEndpoint.CONFIGS_NOTIFICATIONS_EVENTS_EVENT_NAME, PARAM_EVENT_NAME,
+				eventName.toString());
 		ApiContext apiContext = new ApiContext(endPoint, HttpMethod.PUT, eventRequest);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -154,7 +157,6 @@ public class ConfigsApi extends AbstractApi {
 	 * Delete Subscription The delete events service is used to unsubscribe from an events service.<br>
 	 * 
 	 * @param eventName event Name (required)
-	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -184,10 +186,11 @@ public class ConfigsApi extends AbstractApi {
 		callContext.getApiClient().executeAsync(callContext.getCall(), apiCallback);
 	}
 
-	private CallContext buildDeleteSubscribedNotificationEventContext(ConfigsNotificationEventType eventName) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
-		String endPoint = replacePathVariable(ApiEndpoint.CONFIGS_NOTIFICATIONS_EVENTS_EVENT_NAME,
-				PARAM_EVENT_NAME, eventName.toString());
+	private CallContext buildDeleteSubscribedNotificationEventContext(ConfigsNotificationEventType eventName)
+			throws ApiException {
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
+		String endPoint = replacePathVariable(ApiEndpoint.CONFIGS_NOTIFICATIONS_EVENTS_EVENT_NAME, PARAM_EVENT_NAME,
+				eventName.toString());
 		ApiContext apiContext = new ApiContext(endPoint, HttpMethod.DELETE, null);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -196,7 +199,7 @@ public class ConfigsApi extends AbstractApi {
 
 	/**
 	 * Get Public Key The get public key service provides the public key that should be used to encrypt user credentials
-	 *  while invoking POST /providerAccounts and PUT /providerAccounts endpoints.<br>
+	 * while invoking POST /providerAccounts and PUT /providerAccounts endpoints.<br>
 	 * This service will only work if the PKI (public key infrastructure) feature is enabled for the customer.<br>
 	 * <b>Note:</b> The key in the response is a string in PEM format. <br>
 	 * 
@@ -213,7 +216,7 @@ public class ConfigsApi extends AbstractApi {
 
 	/**
 	 * Get Public Key The get public key service provides the public key that should be used to encrypt user credentials
-	 *  while invoking POST /providerAccounts and PUT /providerAccounts endpoints.<br>
+	 * while invoking POST /providerAccounts and PUT /providerAccounts endpoints.<br>
 	 * This service will only work if the PKI (public key infrastructure) feature is enabled for the customer.<br>
 	 * <b>Note:</b> The key in the response is a string in PEM format. <br>
 	 * 
@@ -230,7 +233,7 @@ public class ConfigsApi extends AbstractApi {
 
 	private CallContext buildGetPublicEncryptionKeyContext() throws ApiException {
 		ApiContext apiContext = new ApiContext(ApiEndpoint.CONFIGS_PUBLIC_KEY, HttpMethod.GET, null);
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
@@ -245,8 +248,8 @@ public class ConfigsApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
-	public ApiResponse<ConfigsNotificationResponse> getSubscribedNotificationEvents(ConfigsNotificationEventType eventName)
-			throws ApiException {
+	public ApiResponse<ConfigsNotificationResponse>
+			getSubscribedNotificationEvents(ConfigsNotificationEventType eventName) throws ApiException {
 		LOGGER.info("Configs getSubscribedNotificationEvents API execution started");
 		ConfigsValidator.validateApiContext(this);
 		CallContext callContext = buildGetSubscribedNotificationEventsContext(eventName);
@@ -270,15 +273,15 @@ public class ConfigsApi extends AbstractApi {
 		callContext.getApiClient().executeAsync(callContext.getCall(), ConfigsNotificationResponse.class, apiCallback);
 	}
 
-	private CallContext buildGetSubscribedNotificationEventsContext(ConfigsNotificationEventType eventName) throws ApiException {
+	private CallContext buildGetSubscribedNotificationEventsContext(ConfigsNotificationEventType eventName)
+			throws ApiException {
 		ApiContext apiContext = new ApiContext(ApiEndpoint.CONFIGS_NOTIFICATIONS_EVENTS, HttpMethod.GET, null);
 		if (eventName != null) {
 			apiContext.addQueryParam(new Pair(PARAM_EVENT_NAME, eventName.name()));
 		}
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
 	}
-
 }

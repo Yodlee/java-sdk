@@ -5,6 +5,7 @@
  */
 package com.yodlee.sdk.context;
 
+import java.util.Map;
 import com.yodlee.sdk.api.ApiConstants;
 import com.yodlee.sdk.client.ApiClient;
 import com.yodlee.sdk.configuration.cobrand.CobrandConfiguration;
@@ -35,8 +36,8 @@ public class CobrandContext extends AbstractContext<CobrandConfiguration> {
 	}
 
 	@Override
-	public ApiClient getApiClient() {
-		ApiClient apiClient = super.getApiClient();
+	public ApiClient getApiClient(Map<String, String> requestHeaderMap) {
+		ApiClient apiClient = super.getApiClient(requestHeaderMap);
 		apiClient.addHeader(ApiConstants.COBRAND_NAME, cobrandConfiguration.getName());
 		return apiClient;
 	}

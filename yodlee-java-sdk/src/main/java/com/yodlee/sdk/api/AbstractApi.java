@@ -6,7 +6,12 @@
 package com.yodlee.sdk.api;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import com.yodlee.sdk.client.ApiClient;
 import com.yodlee.sdk.client.ApiListener;
@@ -23,6 +28,8 @@ public abstract class AbstractApi {
 
 	private final List<ApiListener> apiListeners = new CopyOnWriteArrayList<>();
 
+	private final Map<String, String> requestHeaderMap = new HashMap<>();
+
 	public AbstractApi(Context<?> context) {
 		super();
 		this.context = context;
@@ -34,6 +41,44 @@ public abstract class AbstractApi {
 
 	public void setContext(Context<?> context) {
 		this.context = context;
+	}
+
+	public boolean addRequestHeader(String headerKey, String headerValue) {
+		if (headerKey == null || headerValue == null) {
+			return false;
+		}
+		requestHeaderMap.put(headerKey, headerValue);
+		return true;
+	}
+
+	public boolean removeRequestHeader(String headerkey) {
+		if (headerkey == null) {
+			return false;
+		}
+		requestHeaderMap.remove(headerkey);
+		return true;
+	}
+
+	public void clearRequestHeaderMap() {
+		requestHeaderMap.clear();
+	}
+
+	public String getRequestHeaderKey(String headerkey) {
+		return requestHeaderMap.get(headerkey);
+	}
+
+	public Map<String, String> getRequestHeaderMap() {
+		return Collections.unmodifiableMap(requestHeaderMap);
+	}
+
+	public void setRequestHeaderMap(Map<String, String> requestHeaderMap) {
+		this.requestHeaderMap.clear();
+		Set<Entry<String, String>> entrySet = requestHeaderMap.entrySet();
+		for (Entry<String, String> entry : entrySet) {
+			if (entry.getKey() == null || entry.getValue() == null) {
+				continue;
+			}
+		}
 	}
 
 	public boolean addApiListener(ApiListener listener) {
@@ -71,7 +116,9 @@ public abstract class AbstractApi {
 	}
 
 	protected String replacePathVariable(String endPoint, String pathVariable, String value) {
-		return endPoint.replaceAll("\\{" + pathVariable + "\\}", getContext().getApiClient().escapeString(value));
+		Map<String, String> requestHeaderMap = getRequestHeaderMap();
+		return endPoint.replaceAll("\\{" + pathVariable + "\\}",
+				getContext().getApiClient(requestHeaderMap).escapeString(value));
 	}
 
 	private void fireResponseUpdate(long bytesRead, long contentLength, boolean done) {

@@ -79,9 +79,10 @@ public class ProvidersApi extends AbstractApi {
 	 * <b>Note:</b> <br>
 	 * 1. When this service is invoked without any filters, the service performs slowly and takes a few minutes to
 	 * return data in the response.<br>
-	 * 2. The recommendation is to use this service with filters when used in a flow involving user interactions.
+	 * 2. The recommendation is to use this service with filters when used in a flow involving user interactions. 3. The
+	 * capability has been deprecated in query parameter and response.
 	 * 
-	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (optional)
+	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (deprecated)
 	 * @param datasetFilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
 	 *        will be the dataset or dataset attributes configured as default for the customer. (optional)
 	 * @param name Name in minimum 1 character or routing number. (optional)
@@ -133,9 +134,10 @@ public class ProvidersApi extends AbstractApi {
 	 * <b>Note:</b> <br>
 	 * 1. When this service is invoked without any filters, the service performs slowly and takes a few minutes to
 	 * return data in the response.<br>
-	 * 2. The recommendation is to use this service with filters when used in a flow involving user interactions.
+	 * 2. The recommendation is to use this service with filters when used in a flow involving user interactions. 3. The
+	 * capability has been deprecated in query parameter and response.
 	 * 
-	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (optional)
+	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (deprecated)
 	 * @param datasetFilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
 	 *        will be the dataset or dataset attributes configured as default for the customer. (optional)
 	 * @param name Name in minimum 1 character or routing number. (optional)
@@ -165,7 +167,7 @@ public class ProvidersApi extends AbstractApi {
 			String name, ProvidersPriorityType priority,//
 			Integer skip,//
 			Integer top) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiCallModel = new ApiContext(ApiEndpoint.PROVIDERS, HttpMethod.GET, null);
 		// Add query params
 		if (capability != null) {
@@ -237,7 +239,7 @@ public class ProvidersApi extends AbstractApi {
 	}
 
 	private CallContext buildgetProviderContext(Long providerId) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String apiEndPoint = replacePathVariable(ApiEndpoint.PROVIDER_DETAIL, PARAM_PROVIDER_ID, providerId.toString());
 		registerResponseInterceptor(apiClient);
 		ApiContext apiCallModel = new ApiContext(apiEndPoint, HttpMethod.GET, null);
@@ -251,9 +253,10 @@ public class ProvidersApi extends AbstractApi {
 	 * If you are implementing pagination for providers, call this endpoint before calling GET /providers to know the
 	 * number of providers that are returned for the input parameters passed.<br>
 	 * The functionality of the input parameters remains the same as that of the GET /providers endpoint<br>
-	 * .
+	 * <b>Note:</b> <br>
+	 * 1. The capability has been deprecated in query parameter.
 	 * 
-	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (optional)
+	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (deprecated)
 	 * @param datasetFilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
 	 *        will be the dataset or dataset attributes configured as default for the customer. (optional)
 	 * @param name Name in minimum 1 character or routing number. (optional)
@@ -277,9 +280,10 @@ public class ProvidersApi extends AbstractApi {
 	 * If you are implementing pagination for providers, call this endpoint before calling GET /providers to know the
 	 * number of providers that are returned for the input parameters passed.<br>
 	 * The functionality of the input parameters remains the same as that of the GET /providers endpoint<br>
-	 * .
+	 * <b>Note:</b> <br>
+	 * 1. The capability has been deprecated in query parameter.
 	 * 
-	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (optional)
+	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (deprecated)
 	 * @param datasetFilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
 	 *        will be the dataset or dataset attributes configured as default for the customer. (optional)
 	 * @param name Name in minimum 1 character or routing number. (optional)
@@ -300,7 +304,7 @@ public class ProvidersApi extends AbstractApi {
 
 	private CallContext buildGetProvidersCountContext(ProvidersCapability capability,//
 			String datasetFilter, String name, ProvidersPriorityType priority) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiCallModel = new ApiContext(ApiEndpoint.PROVIDERS_COUNT, HttpMethod.GET, null);
 		if (capability != null) {
 			apiCallModel.addQueryParam(new Pair(PARAM_CAPABILITY, capability.toString()));

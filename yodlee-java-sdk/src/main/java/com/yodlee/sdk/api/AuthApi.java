@@ -87,7 +87,7 @@ public class AuthApi extends AbstractApi {
 	}
 
 	private CallContext buildDeleteTokenContext() throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.AUTH_DELETE_TOKEN, HttpMethod.DELETE, null);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -155,7 +155,7 @@ public class AuthApi extends AbstractApi {
 	}
 
 	private CallContext buildGenerateApiKeyContext(ApiKeyRequest apiKeyRequest) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.AUTH_APIKEY, HttpMethod.POST, apiKeyRequest);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -207,7 +207,7 @@ public class AuthApi extends AbstractApi {
 	}
 
 	private CallContext buildGetApiKeysContext() throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.AUTH_APIKEY, HttpMethod.GET, null);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -264,7 +264,7 @@ public class AuthApi extends AbstractApi {
 
 	private CallContext buildDeleteApiKeyContext(@NotEmpty(message = "{auth.param.apiKey.required}") String key)
 			throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String endpoint = replacePathVariable(ApiEndpoint.AUTH_DELETE_APIKEY, PARAM_API_KEY, key);
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.DELETE, null);
 		registerResponseInterceptor(apiClient);
@@ -278,7 +278,7 @@ public class AuthApi extends AbstractApi {
 	 * <br>
 	 * <b>Admin access token:</b> using this token api's which need admin level privilege can be access, like POST
 	 * /user/register etc. This token is generated when admin user name is passed in loginName with valid
-	 * credentials(clientId and secret). You can find your credentials by navigating to My Accounts and then click on API Dashboard then go to
+	 * credentials(clientId and secret). You can find your credentials by navigating to My Accounts -> API Dashboard ->
 	 * Credentials. <br>
 	 * <br>
 	 * <b>User access token:</b> Using this token api's which need user level privileges can be accessed, like GET
@@ -298,7 +298,8 @@ public class AuthApi extends AbstractApi {
 		ApiContext apiContext = generateAccessTokenApiContext();
 		ApiClient apiClient = getApiClient();
 		Call call = apiClient.buildCall(apiContext, null);
-		ApiResponse<ClientCredentialTokenResponse> clientCredentialTokenResponse = apiClient.execute(call, ClientCredentialTokenResponse.class);
+		ApiResponse<ClientCredentialTokenResponse> clientCredentialTokenResponse =
+				apiClient.execute(call, ClientCredentialTokenResponse.class);
 		if (clientCredentialTokenResponse != null && clientCredentialTokenResponse.getData() != null) {
 			ClientCredentialToken token = clientCredentialTokenResponse.getData().getToken();
 			setContext(createContext(token));
@@ -309,11 +310,11 @@ public class AuthApi extends AbstractApi {
 	private Context<?> createContext(ClientCredentialToken token) {
 		if (token != null) {
 			if (clientCredentialConfiguration instanceof ClientCredentialAdminConfiguration) {
-				return new ClientCredentialAdminContext(token.getAccessToken(), token.getIssuedAt(), token.getExpiresIn(),
-						(ClientCredentialAdminConfiguration) clientCredentialConfiguration);
+				return new ClientCredentialAdminContext(token.getAccessToken(), token.getIssuedAt(),
+						token.getExpiresIn(), (ClientCredentialAdminConfiguration) clientCredentialConfiguration);
 			} else if (clientCredentialConfiguration instanceof ClientCredentialUserConfiguration) {
-				return new ClientCredentialUserContext(token.getAccessToken(), token.getIssuedAt(), token.getExpiresIn(),
-						(ClientCredentialUserConfiguration) clientCredentialConfiguration);
+				return new ClientCredentialUserContext(token.getAccessToken(), token.getIssuedAt(),
+						token.getExpiresIn(), (ClientCredentialUserConfiguration) clientCredentialConfiguration);
 			}
 		}
 		return null;

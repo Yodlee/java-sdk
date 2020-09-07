@@ -1,2 +1,0 @@
-testCaseId,testCaseName,transactionId,fileName,enabled
-1,Call Update Transaction,6199641179,/request/transactions/updateTransaction.json,TRUE

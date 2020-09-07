@@ -57,7 +57,8 @@ public class DocumentsApi extends AbstractApi {
 	 * <br>
 	 * documents will be retrieved. Details of deleted documents or documents associated to closed providerAccount will
 	 * not be returned <br>
-	 * This API is a premium service which requires subscription in advance to use. Please contact Yodlee Client Services for more information.<br>
+	 * This API is a premium service which requires subscription in advance to use. Please contact Yodlee Client
+	 * Services for more information.<br>
 	 * 
 	 * @param keyword The string used to search a document by its name. (optional)
 	 * @param accountId The unique identifier of an account. Retrieve documents for a given accountId. (optional)
@@ -88,7 +89,8 @@ public class DocumentsApi extends AbstractApi {
 	 * <br>
 	 * documents will be retrieved. Details of deleted documents or documents associated to closed providerAccount will
 	 * not be returned <br>
-	 * This API is a premium service which requires subscription in advance to use. Please contact Yodlee Client Services for more information. <br>
+	 * This API is a premium service which requires subscription in advance to use. Please contact Yodlee Client
+	 * Services for more information. <br>
 	 * 
 	 * @param keyword The string used to search a document by its name. (optional)
 	 * @param accountId The unique identifier of an account. Retrieve documents for a given accountId. (optional)
@@ -115,7 +117,7 @@ public class DocumentsApi extends AbstractApi {
 
 	private CallContext buildGetDocumentsContext(String keyword, Long accountId, DocType docType, Date fromDate,
 			Date toDate) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.DOCUMENTS, HttpMethod.GET, null);
 		SimpleDateFormat formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD);
 		if (!StringUtils.isBlank(keyword)) {
@@ -175,7 +177,7 @@ public class DocumentsApi extends AbstractApi {
 	}
 
 	private CallContext buildDownloadDocumentContext(String documentId) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String endpoint = replacePathVariable(ApiEndpoint.DOCUMENTS_WITH_ID, PARAM_DOCUMENT_ID, documentId);
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.GET, null);
 		registerResponseInterceptor(apiClient);
@@ -221,7 +223,7 @@ public class DocumentsApi extends AbstractApi {
 	}
 
 	private CallContext buildDeleteDocumentContext(String documentId) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String endpoint = replacePathVariable(ApiEndpoint.DOCUMENTS_WITH_ID, PARAM_DOCUMENT_ID, documentId);
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.DELETE, null);
 		registerResponseInterceptor(apiClient);

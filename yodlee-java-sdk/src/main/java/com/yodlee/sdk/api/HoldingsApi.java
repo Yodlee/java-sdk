@@ -112,7 +112,7 @@ public class HoldingsApi extends AbstractApi {
 
 	private CallContext buildGetHoldingsContext(Long[] accountId, String assetClassificationClassificationType,
 			String classificationValue, HoldingInclude include, Long providerAccountId) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.HOLDINGS, HttpMethod.GET, null);
 		if (accountId != null) {
 			apiContext.addQueryParam(new Pair(PARAM_ACCOUNT_ID, ApiUtils.convertArrayToString(accountId)));
@@ -172,7 +172,7 @@ public class HoldingsApi extends AbstractApi {
 	}
 
 	private CallContext buildGetSecuritiesContext(Long[] holdingId) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.HOLDINGS_SECURITIES, HttpMethod.GET, null);
 		if (holdingId != null) {
 			apiContext.addQueryParam(new Pair(PARAM_HOLDING_ID, ApiUtils.convertArrayToString(holdingId)));
@@ -215,7 +215,7 @@ public class HoldingsApi extends AbstractApi {
 	}
 
 	private CallContext buildGetHoldingTypeListContext() throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.HOLDINGS_TYPE_LIST, HttpMethod.GET, null);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -259,7 +259,7 @@ public class HoldingsApi extends AbstractApi {
 	}
 
 	private CallContext buildGetAssetClassificationListContext() throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.HOLDINGS_ASSET_CLASSIFICATION_LIST, HttpMethod.GET, null);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());

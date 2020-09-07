@@ -13,7 +13,8 @@ import com.yodlee.sdk.context.ClientCredentialAdminContext;
 public class ClientCredentialAdminContextBuilder implements Builder<ClientCredentialAdminConfiguration, ClientCredentialAdminContext> {
 
 	@Override
-	public ClientCredentialAdminContext build(ClientCredentialAdminConfiguration clientCredentialConfiguration) throws ApiException {
+	public ClientCredentialAdminContext build(ClientCredentialAdminConfiguration clientCredentialConfiguration)
+			throws ApiException {
 		ConfigValidationUtil.validateConfig(clientCredentialConfiguration);
 		AuthApi authApi = new AuthApi(clientCredentialConfiguration);
 		authApi.generateAccessToken();

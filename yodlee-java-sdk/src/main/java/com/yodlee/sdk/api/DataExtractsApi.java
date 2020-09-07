@@ -5,9 +5,9 @@
  */
 package com.yodlee.sdk.api;
 
-import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -48,11 +48,12 @@ public class DataExtractsApi extends AbstractApi {
 
 	/**
 	 * Get Events The get extracts events service is used to learn about occurrences of data extract related events.
-	 * This service currently supports only the DATA_UPDATES event.<br>Passing the event name as DATA_UPDATES
-	 * provides information about users for whom data has been modified in the system for the specified time range. To
-	 * learn more, please refer to the dataExtracts page.<br>The fromDate or the toDate parameters value cannot be
-	 * less than 7 days. The time difference between these fields cannot be more than 60 minutes.<br>Cobrand
-	 * session only has to be passed to invoke this service.<br>
+	 * This service currently supports only the DATA_UPDATES event.<br>
+	 * Passing the event name as DATA_UPDATES provides information about users for whom data has been modified in the
+	 * system for the specified time range. To learn more, please refer to the dataExtracts page.<br>
+	 * The fromDate or the toDate parameters value cannot be less than 7 days. The time difference between these fields
+	 * cannot be more than 60 minutes.<br>
+	 * Cobrand session only has to be passed to invoke this service.<br>
 	 * 
 	 * @param eventName Event Name (required)
 	 * @param fromDate From DateTime (YYYY-MM-DDThh:mm:ssZ) (required)
@@ -75,11 +76,12 @@ public class DataExtractsApi extends AbstractApi {
 
 	/**
 	 * Get Events The get extracts events service is used to learn about occurrences of data extract related events.
-	 * This service currently supports only the DATA_UPDATES event.<br>Passing the event name as DATA_UPDATES
-	 * provides information about users for whom data has been modified in the system for the specified time range. To
-	 * learn more, please refer to the dataExtracts page.<br>The fromDate or the toDate parameters value cannot be
-	 * less than 7 days. The time difference between these fields cannot be more than 60 minutes.<br>Cobrand
-	 * session only has to be passed to invoke this service.<br>
+	 * This service currently supports only the DATA_UPDATES event.<br>
+	 * Passing the event name as DATA_UPDATES provides information about users for whom data has been modified in the
+	 * system for the specified time range. To learn more, please refer to the dataExtracts page.<br>
+	 * The fromDate or the toDate parameters value cannot be less than 7 days. The time difference between these fields
+	 * cannot be more than 60 minutes.<br>
+	 * Cobrand session only has to be passed to invoke this service.<br>
 	 * 
 	 * @param eventName Event Name (required)
 	 * @param fromDate From DateTime (YYYY-MM-DDThh:mm:ssZ) (required)
@@ -103,22 +105,22 @@ public class DataExtractsApi extends AbstractApi {
 
 	private CallContext buildGetDataExtractsEventsContext(//
 			DataExtractsEventType eventName, Date fromDate, Date toDate) throws ApiException {
-		Format formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD_T_HH_MM_SS_Z);
-		ApiClient apiClient = getContext().getApiClient();
+		SimpleDateFormat sdf = getUTCSimpleDateFormat();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.DATA_EXTRACTS_EVENTS, HttpMethod.GET, null);
 		registerResponseInterceptor(apiClient);
 		apiContext.addQueryParam(new Pair(PARAM_EVENT_NAME, eventName.name()));
-		apiContext.addQueryParam(new Pair(PARAM_FROM_DATE, formatter.format(fromDate)));
-		apiContext.addQueryParam(new Pair(PARAM_TO_DATE, formatter.format(toDate)));
+		apiContext.addQueryParam(new Pair(PARAM_FROM_DATE, sdf.format(fromDate)));
+		apiContext.addQueryParam(new Pair(PARAM_TO_DATE, sdf.format(toDate)));
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
 	}
 
 	/**
-	 * Get userData The get user data service is used to get a user's modified data for a particular period of time
-	 * for accounts, transactions, holdings, and provider account information.<br>Cobrand session only has to be
-	 * passed to invoke this service. The time difference between fromDate and toDate fields cannot be more than 60
-	 * minutes.<br>
+	 * Get userData The get user data service is used to get a user's modified data for a particular period of time for
+	 * accounts, transactions, holdings, and provider account information.<br>
+	 * Cobrand session only has to be passed to invoke this service. The time difference between fromDate and toDate
+	 * fields cannot be more than 60 minutes.<br>
 	 * 
 	 * @param fromDate From DateTime (YYYY-MM-DDThh:mm:ssZ) (required)
 	 * @param loginName Login Name (required)
@@ -141,10 +143,10 @@ public class DataExtractsApi extends AbstractApi {
 	}
 
 	/**
-	 * Get userData The get user data service is used to get a user's modified data for a particular period of time
-	 * for accounts, transactions, holdings, and provider account information.<br>Cobrand session only has to be
-	 * passed to invoke this service. The time difference between fromDate and toDate fields cannot be more than 60
-	 * minutes.<br>
+	 * Get userData The get user data service is used to get a user's modified data for a particular period of time for
+	 * accounts, transactions, holdings, and provider account information.<br>
+	 * Cobrand session only has to be passed to invoke this service. The time difference between fromDate and toDate
+	 * fields cannot be more than 60 minutes.<br>
 	 * 
 	 * @param fromDate From Date (required)
 	 * @param loginName Login Name (required)
@@ -169,14 +171,20 @@ public class DataExtractsApi extends AbstractApi {
 
 	private CallContext buildGetDataExtractsUserDataContext(Date fromDate, String loginName, Date toDate)
 			throws ApiException {
-		Format formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD_T_HH_MM_SS_Z);
-		ApiClient apiClient = getContext().getApiClient();
+		SimpleDateFormat sdf = getUTCSimpleDateFormat();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.DATA_EXTRACTS_USER_DATA, HttpMethod.GET, null);
 		registerResponseInterceptor(apiClient);
 		apiContext.addQueryParam(new Pair(PARAM_LOGIN_NAME, loginName));
-		apiContext.addQueryParam(new Pair(PARAM_FROM_DATE, formatter.format(fromDate)));
-		apiContext.addQueryParam(new Pair(PARAM_TO_DATE, formatter.format(toDate)));
+		apiContext.addQueryParam(new Pair(PARAM_FROM_DATE, sdf.format(fromDate)));
+		apiContext.addQueryParam(new Pair(PARAM_TO_DATE, sdf.format(toDate)));
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
+	}
+
+	private static SimpleDateFormat getUTCSimpleDateFormat() {
+		SimpleDateFormat formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD_T_HH_MM_SS_Z);
+		formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return formatter;
 	}
 }

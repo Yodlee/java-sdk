@@ -165,7 +165,8 @@ public class AccountsValidator {
 			String includeInNetWorth = accountInfo.getIncludeInNetWorth();
 			problems.addAll(isValidIncludeInNetworth(includeInNetWorth));
 			problems.addAll(validAccountStatus(accountInfo));
-			problems.addAll(ApiUtils.validatePattern(accountInfo.getAccountName(), "^\\s+.*", "accounts.accountName.space"));
+			problems.addAll(
+					ApiUtils.validatePattern(accountInfo.getAccountName(), "^\\s+.*", "accounts.accountName.space"));
 		}
 		return problems;
 	}

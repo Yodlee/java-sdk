@@ -1,2 +1,0 @@
-testCaseId,testCaseName,eventName,fromDate,toDate,enabled
-1,getDataExtractsEvent,DATA_UPDATES,2019-08-01T10:18:44Z,2019-08-01T11:18:44Z,TRUE

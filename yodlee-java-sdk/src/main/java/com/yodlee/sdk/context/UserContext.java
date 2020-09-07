@@ -5,6 +5,7 @@
  */
 package com.yodlee.sdk.context;
 
+import java.util.Map;
 import com.yodlee.sdk.api.ApiConstants;
 import com.yodlee.sdk.client.ApiClient;
 import com.yodlee.sdk.configuration.user.UserConfiguration;
@@ -43,8 +44,8 @@ public class UserContext extends AbstractContext<UserConfiguration> {
 	}
 
 	@Override
-	public ApiClient getApiClient() {
-		ApiClient apiClient = super.getApiClient();
+	public ApiClient getApiClient(Map<String, String> requestHeaderMap) {
+		ApiClient apiClient = super.getApiClient(requestHeaderMap);
 		apiClient.addHeader(ApiConstants.COBRAND_NAME, userConfiguration.getName());
 		return apiClient;
 	}

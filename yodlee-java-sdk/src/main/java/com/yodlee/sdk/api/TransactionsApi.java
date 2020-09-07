@@ -213,7 +213,7 @@ public class TransactionsApi extends AbstractApi {
 			TransactionCategoryType categoryType, Container container, Long[] detailCategoryId, Date fromDate,
 			Long[] highLevelCategoryId, String keyword, Integer skip, Date toDate, Integer top, String type)
 			throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.TRANSACTIONS, HttpMethod.GET, null);
 		SimpleDateFormat formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD);
 		if (accountId != null) {
@@ -363,7 +363,7 @@ public class TransactionsApi extends AbstractApi {
 	private CallContext buildGetTransactionsCountContext(Long[] accountId, BaseType baseType, Long[] categoryId,
 			TransactionCategoryType categoryType, Container container, Long[] detailCategoryId, Date fromDate,
 			Long[] highLevelCategoryId, String keyword, Date toDate, String type) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.TRANSACTIONS_COUNT, HttpMethod.GET, null);
 		SimpleDateFormat formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD);
 		if (accountId != null) {
@@ -461,7 +461,7 @@ public class TransactionsApi extends AbstractApi {
 	private CallContext buildUpdateTransactionContext(//
 			long transactionId,//
 			TransactionRequest transactionRequest) throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String endpoint = replacePathVariable(ApiEndpoint.UPDATE_TRANSACTIONS, PARAM_TRANSACTION_ID,
 				String.valueOf(transactionId));
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.PUT, transactionRequest);
@@ -518,7 +518,7 @@ public class TransactionsApi extends AbstractApi {
 
 	private CallContext buildCreateTransactionCategoryContext(TransactionCategoryRequest transactionCategoryRequest)
 			throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext =
 				new ApiContext(ApiEndpoint.TRANSACTIONS_CATEGORIZATION, HttpMethod.POST, transactionCategoryRequest);
 		registerResponseInterceptor(apiClient);
@@ -572,7 +572,7 @@ public class TransactionsApi extends AbstractApi {
 	}
 
 	private CallContext buildGetTransactionCategoriesContext() throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.TRANSACTIONS_CATEGORIZATION, HttpMethod.GET, null);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -623,7 +623,7 @@ public class TransactionsApi extends AbstractApi {
 
 	private CallContext buildUpdateTransactionCategoryContext(UpdateCategoryRequest updateCategoryRequest)
 			throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext =
 				new ApiContext(ApiEndpoint.TRANSACTIONS_CATEGORIZATION, HttpMethod.PUT, updateCategoryRequest);
 		registerResponseInterceptor(apiClient);
@@ -672,7 +672,7 @@ public class TransactionsApi extends AbstractApi {
 	private CallContext buildDeleteTransactionCategoryContext(long categoryId) throws ApiException {
 		String endpoint = replacePathVariable(ApiEndpoint.TRANSACTIONS_CATEGORIZATION_WITH_CATEGORYID,
 				PARAM_CATEGORY_ID, String.valueOf(categoryId));
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.DELETE, null);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -712,7 +712,7 @@ public class TransactionsApi extends AbstractApi {
 	}
 
 	private CallContext buildGetTransactionCategorizationRulesContext() throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.GET_TRANSACTIONS_CATEGORIZATION_RULES, HttpMethod.GET, null);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -774,6 +774,7 @@ public class TransactionsApi extends AbstractApi {
 	 * numberGreaterThanEquals<br>
 	 * 2. value - min value 0 and a max value of 99999999999.99 is allowed<br>
 	 * The HTTP response code is 201 (Created Successfully).
+	 * 
 	 * @param transactionCategorizationRuleRequest - rules(JSON format) to categorize the transactions (optional)
 	 * @param apiCallback {@link ApiCallback} (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
@@ -800,7 +801,7 @@ public class TransactionsApi extends AbstractApi {
 		} catch (JsonProcessingException e) {
 			LOGGER.error("Already validated, exception will never occur.");
 		}
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.TRANSACTIONS_CATEGORIZATION_RULES, HttpMethod.POST, null);
 		apiContext.addQueryParam(new Pair("ruleParam", ruleParamValue));
 		registerResponseInterceptor(apiClient);
@@ -872,7 +873,7 @@ public class TransactionsApi extends AbstractApi {
 	}
 
 	private CallContext buildRunTransactionCategorizationRulesContext() throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.TRANSACTIONS_CATEGORIZATION_RULES, HttpMethod.POST, null);
 		apiContext.addQueryParam(new Pair(PARAM_ACTION, VALUE_RUN));
 		registerResponseInterceptor(apiClient);
@@ -923,7 +924,7 @@ public class TransactionsApi extends AbstractApi {
 	private CallContext buildRunTransactionCategorizationRuleContext(long ruleId) throws ApiException {
 		String endpoint = replacePathVariable(ApiEndpoint.TRANSACTIONS_CATEGORIZATION_RULES_WITH_RULEID, PARAM_RULE_ID,
 				String.valueOf(ruleId));
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.POST, null);
 		apiContext.addQueryParam(new Pair(PARAM_ACTION, VALUE_RUN));
 		registerResponseInterceptor(apiClient);
@@ -985,7 +986,7 @@ public class TransactionsApi extends AbstractApi {
 			TransactionCategorizationRuleRequest transactionCategoriesRuleRequest) throws ApiException {
 		String endpoint = replacePathVariable(ApiEndpoint.TRANSACTIONS_CATEGORIZATION_RULES_WITH_RULEID, PARAM_RULE_ID,
 				String.valueOf(ruleId));
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.PUT, transactionCategoriesRuleRequest);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -1039,7 +1040,7 @@ public class TransactionsApi extends AbstractApi {
 	private CallContext buildDeleteTransactionCategorizationRuleContext(long ruleId) throws ApiException {
 		String endpoint = replacePathVariable(ApiEndpoint.TRANSACTIONS_CATEGORIZATION_RULES_WITH_RULEID, PARAM_RULE_ID,
 				String.valueOf(ruleId));
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.DELETE, null);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());

@@ -97,7 +97,7 @@ public class VerifyAccountApi extends AbstractApi {
 
 	private CallContext buildverifyAccountsContext(long providerAccountId, VerifyAccountRequest verificationParam)
 			throws ApiException {
-		ApiClient apiClient = getContext().getApiClient();
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String apiEndPoint = replacePathVariable(ApiEndpoint.VERIFY_ACCOUNTS, PROVIDER_ACCOUNT_ID,
 				String.valueOf(providerAccountId));
 		ApiContext apiContext = new ApiContext(apiEndPoint, HttpMethod.POST, verificationParam);

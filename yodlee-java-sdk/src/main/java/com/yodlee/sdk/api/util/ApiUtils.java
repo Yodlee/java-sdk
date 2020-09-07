@@ -83,10 +83,8 @@ public class ApiUtils {
 
 	public static List<Problem> validatePattern(String source, String pattern, String message) {
 		List<Problem> problems = new ArrayList<>();
-		if (source != null
-				&& source.matches(pattern)) {
-			problems.add(new Problem(
-					getErrorMessage(message, source), ""));
+		if (source != null && source.matches(pattern)) {
+			problems.add(new Problem(getErrorMessage(message, source), ""));
 		}
 		return problems;
 	}

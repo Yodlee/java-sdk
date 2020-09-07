@@ -1,2 +1,0 @@
-testCaseId,testCaseName,consentId,fileName,enabled
-2,Call Capture Consents,10063852,/request/consents/captureConsent.json,TRUE
