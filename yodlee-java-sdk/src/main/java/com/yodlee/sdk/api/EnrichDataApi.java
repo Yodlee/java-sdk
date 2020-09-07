@@ -132,16 +132,17 @@ public class EnrichDataApi extends AbstractApi {
 	 * complete sense to the consumers when it is displayed in the Yodlee applications or widgets.</li>
 	 * </ul>
 	 * 
+	 * @param apiCallback {@link ApiCallback}&lt;{@link EnrichedTransactionResponse}&gt;
 	 * @param userData - user data (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
-	public void pushUserDataAsync(ApiCallback<EnrichedTransactionResponse> apiCallBack, EnrichDataRequest userData)
+	public void pushUserDataAsync(ApiCallback<EnrichedTransactionResponse> apiCallback, EnrichDataRequest userData)
 			throws ApiException {
 		LOGGER.info("DataFeed pushUserDataAsync API execution started");
 		EnrichDataValidator.validatePushUserData(this, ApiUtils.getMethodName());
 		CallContext callContext = buildPushUserDataContext(userData);
-		callContext.getApiClient().executeAsync(callContext.getCall(), EnrichedTransactionResponse.class, apiCallBack);
+		callContext.getApiClient().executeAsync(callContext.getCall(), EnrichedTransactionResponse.class, apiCallback);
 	}
 
 	private CallContext buildPushUserDataContext(EnrichDataRequest userData) throws ApiException {
