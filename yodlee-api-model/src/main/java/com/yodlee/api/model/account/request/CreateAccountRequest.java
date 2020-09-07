@@ -14,7 +14,7 @@ import com.yodlee.api.model.Request;
 import com.yodlee.api.model.account.CreateAccountInfo;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CreateAccountRequest extends AbstractModelComponent implements Request{
+public class CreateAccountRequest extends AbstractModelComponent implements Request {
 
 	@NotNull(message = "{accounts.manualAccountInfo.required}")
 	@Valid

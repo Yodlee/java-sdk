@@ -68,7 +68,6 @@ public class Merchant extends AbstractModelComponent {
 	)
 	@JsonProperty("coordinates")
 	private Coordinates coordinates;
-	
 
 	@ApiModelProperty(value = "The merchant contact information like phone and email."//
 			+ "<br><br>"//
@@ -157,7 +156,6 @@ public class Merchant extends AbstractModelComponent {
 	public Coordinates getCoordinates() {
 		return coordinates;
 	}
-	
 
 	/**
 	 * The Contact information of merchant which includes phone number and email id information <br>
@@ -170,8 +168,6 @@ public class Merchant extends AbstractModelComponent {
 	public Contact getContact() {
 		return contact;
 	}
-
-	
 
 	/**
 	 * The website of the merchant<br>

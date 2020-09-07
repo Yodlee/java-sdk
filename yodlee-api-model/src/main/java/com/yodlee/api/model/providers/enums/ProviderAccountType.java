@@ -11,7 +11,8 @@ public enum ProviderAccountType {
 	 */
 	CURRENT,//
 	/**
-	 * TypeOfAccount - A cash account is a brokerage account in which the investor must pay the full amount for securities purchased.
+	 * TypeOfAccount - A cash account is a brokerage account in which the investor must pay the full amount for
+	 * securities purchased.
 	 */
 	BROKERAGE_CASH
 }

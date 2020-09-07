@@ -23,7 +23,7 @@ public enum ProviderPriority {
 	 */
 	SEARCH,
 	/**
-	 *  All Institutions
+	 * All Institutions
 	 */
 	ALL
 }

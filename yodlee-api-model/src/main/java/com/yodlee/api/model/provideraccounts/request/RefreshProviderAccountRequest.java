@@ -13,6 +13,6 @@ public class RefreshProviderAccountRequest extends AbstractProviderAccountReques
 	@Override
 	public String toString() {
 		return "RefreshProviderAccountRequest [datasets=" + datasets + ", preferences=" + preferences
-				+ ", datasetNames=" + datasetNames + "]";
+				+ ", datasetNames=" + datasetNames + ", aggregationSource" + aggregationSource + "]";
 	}
 }

@@ -143,6 +143,7 @@ public abstract class AbstractProvider extends AbstractModelComponent {
 	@JsonProperty("isAutoRefreshEnabled")
 	protected Boolean isAutoRefreshEnabled;
 
+	@Deprecated
 	@ApiModelProperty(readOnly = true,
 					  value = "Capability of the site"//
 							  + "<br><br>"//
@@ -150,7 +151,7 @@ public abstract class AbstractProvider extends AbstractModelComponent {
 							  + "<ul>"//
 							  + "<li>GET providers/{providerId}</li>"//
 							  + "<li>GET providers</li>"//
-							  + "</ul>")
+							  + "</ul><br>" + "<b>Note : </b> capability has been deprecated")
 	@JsonProperty("capability")
 	protected List<Capability> capabilities;
 
@@ -501,8 +502,11 @@ public abstract class AbstractProvider extends AbstractModelComponent {
 	 * <li>GET providers</li>
 	 * </ul>
 	 * 
+	 * <b> Note : </b> capability has been deprecated
+	 * 
 	 * @return capability
 	 */
+	@Deprecated
 	@JsonProperty("capability")
 	public List<Capability> getCapability() {
 		return capabilities == null ? null : Collections.unmodifiableList(capabilities);
@@ -531,6 +535,7 @@ public abstract class AbstractProvider extends AbstractModelComponent {
 	 * <li>GET providers/{providerId}</li>
 	 * <li>GET providers</li>
 	 * </ul>
+	 * 
 	 * @return authParameter
 	 */
 	public List<ProviderAuthParameter> getAuthParameter() {
@@ -545,6 +550,7 @@ public abstract class AbstractProvider extends AbstractModelComponent {
 	 * <li>GET providers/{providerId}</li>
 	 * <li>GET providers</li>
 	 * </ul>
+	 * 
 	 * @return accountType
 	 */
 	public List<ProviderAccountType> getAccountType() {

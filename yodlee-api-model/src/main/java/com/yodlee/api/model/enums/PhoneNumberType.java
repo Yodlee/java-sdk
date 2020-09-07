@@ -6,5 +6,5 @@
 package com.yodlee.api.model.enums;
 
 public enum PhoneNumberType {
-	home, work, landline, mobile;
+	HOME, WORK, LANDLINE, MOBILE;
 }

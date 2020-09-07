@@ -14,7 +14,7 @@ import com.yodlee.api.model.AbstractModelComponent;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"address", "identifier"})
+@JsonPropertyOrder({"address", "identifier", "paymentBankTransferCode"})
 public class PaymentProfile extends AbstractModelComponent {
 
 	@ApiModelProperty(value = "The address of the lender to which the monthly payments or the loan payoff amount should be paid. "
@@ -42,6 +42,32 @@ public class PaymentProfile extends AbstractModelComponent {
 			+ "</ul>")
 	@JsonProperty("identifier")
 	private PaymentIdentifier identifier;
+
+	@ApiModelProperty(value = "The additional information for payment bank transfer code."//
+			+ "<br><br>"//
+			+ "<b>Applicable containers</b>: loan<br>"//
+			+ "<b>Endpoints</b>:"//
+			+ "<ul>"//
+			+ "<li>GET accounts</li>"//
+			+ "<li>GET accounts/{accountId}</li>"//
+			+ "</ul>")
+	@JsonProperty("paymentBankTransferCode")
+	private PaymentBankTransferCode paymentBankTransferCode;
+
+	/**
+	 * The additional information for payment bank transfer code.<br>
+	 * <b>Applicable containers</b>: loan<br>
+	 * <b>Endpoints</b>:<br>
+	 * <ul>
+	 * <li>GET accounts</li>
+	 * <li>GET accounts/{accountId}</li>
+	 * </ul>
+	 * 
+	 * @return paymentBankTransferCode
+	 */
+	public PaymentBankTransferCode getPaymentBankTransferCode() {
+		return paymentBankTransferCode;
+	}
 
 	/**
 	 * The address of the lender to which the monthly payments or the loan payoff amount should be paid. <br>
@@ -82,6 +108,7 @@ public class PaymentProfile extends AbstractModelComponent {
 
 	@Override
 	public String toString() {
-		return "PaymentProfile [addresses=" + addresses + ", identifier=" + identifier + "]";
+		return "PaymentProfile [addresses=" + addresses + ", identifier=" + identifier + ", paymentBankTransferCode="
+				+ paymentBankTransferCode + "]";
 	}
 }

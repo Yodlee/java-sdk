@@ -66,12 +66,12 @@ public abstract class AbstractTransaction extends AbstractModelComponent {
 	protected Boolean isManual;
 
 	@ApiModelProperty(readOnly = true,
-			  value = "A unique ID that the provider site has assigned to the transaction. The source ID is only available for the pre-populated accounts."//
-			           + "<br>Pre-populated accounts are the accounts that the FI customers shares with Yodlee, so that the user does not have to add or aggregate those accounts."//
+					  value = "A unique ID that the provider site has assigned to the transaction. The source ID is only available for the pre-populated accounts."//
+							  + "<br>Pre-populated accounts are the accounts that the FI customers shares with Yodlee, so that the user does not have to add or aggregate those accounts."//
 	)
 	@JsonProperty("sourceId")
 	protected Long sourceId;
-	
+
 	@ApiModelProperty(readOnly = true,
 					  value = "The date on which the transaction is posted to the account."//
 							  + "<br><br>"//
@@ -693,16 +693,14 @@ public abstract class AbstractTransaction extends AbstractModelComponent {
 	public void setIsManual(Boolean isManual) {
 		this.isManual = isManual;
 	}
-	
-	
+
 	/**
-	 * A unique ID that the provider site has assigned to the transaction. The source ID is only available for the pre-populated accounts.
-	 * Pre-populated accounts are the accounts that the FI customers shares with Yodlee, so that the user does not have to add or aggregate those accounts.
-	 * <br>
+	 * A unique ID that the provider site has assigned to the transaction. The source ID is only available for the
+	 * pre-populated accounts. Pre-populated accounts are the accounts that the FI customers shares with Yodlee, so that
+	 * the user does not have to add or aggregate those accounts. <br>
 	 * 
 	 * @return sourceId
 	 */
-	
 	public Long getSourceId() {
 		return sourceId;
 	}

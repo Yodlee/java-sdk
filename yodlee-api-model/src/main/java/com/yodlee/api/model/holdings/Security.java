@@ -5,6 +5,8 @@
  */
 package com.yodlee.api.model.holdings;
 
+import java.util.Collections;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -18,13 +20,13 @@ import io.swagger.annotations.ApiModelProperty;
 		"accrualMethod", "statTaxableCode", "federalTaxable", "exchangeCode", "tradeCurrency", "couponFrequency",
 		"isin", "sedol", "firstCouponDate", "lastCouponDate", "minimumPurchase", "incomeCurrency", "isDummySecurity",
 		"stateTaxable", "tradeCurrencyCode", "frequency", "isSyntheticSecurity", "isEnvestnetDummySecurity",
-		"gicsSector"})
+		"gicsSector", "stockExchangeDetails"})
 public class Security extends AbstractModelComponent {
 
 	@ApiModelProperty(readOnly = true,
 					  value = "The unique identifier of the security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("id")
 	private Long id;
@@ -32,7 +34,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "A CUSIP is a nine-character alphanumeric code that identifies a North American financial security for the purposes of facilitating clearing and settlement of trades."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("cusip")
 	private String cusip;
@@ -40,7 +42,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The description (name) of the security. For example, Cisco Systems."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("description")
 	private String description;
@@ -48,7 +50,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Indicates the type of security like stocks, mutual fund, etc. "//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("type")
 	private String type;
@@ -56,7 +58,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Classification of the style for the security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("style")
 	private String style;
@@ -64,7 +66,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Price units corresponding to the security style. This is used to derive actual price of the security from market value."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("issueTypeMultiplier")
 	private Double issueTypeMultiplier;
@@ -72,7 +74,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Agency factor of the security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("agencyFactor")
 	private Double agencyFactor;
@@ -80,7 +82,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Share class of the security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("shareClass")
 	private String shareClass;
@@ -88,7 +90,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "cdsc fund flag of the security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("cdscFundFlag")
 	private Boolean cdscFundFlag;
@@ -96,7 +98,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Mutual Fund Family Name."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("fundFamily")
 	private String fundFamily;
@@ -104,7 +106,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "<b>true</b>:Closed for all investors , <b>false</b>: Open to all investors."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("closedFlag")
 	private Boolean closedFlag;
@@ -112,7 +114,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Unique identifier for S&P rating on Envestnet platform."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("sAndPRating")
 	private String sAndPRating;
@@ -120,7 +122,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Unique identifier for Moody rating on Envestnet platform."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("moodyRating")
 	private String moodyRating;
@@ -128,7 +130,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "<b>1</b>- indicates Eligible,<b>0</b>- indicates firm is not eligible."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("firmEligible")
 	private String firmEligible;
@@ -136,7 +138,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Issue date of the security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("issueDate")
 	private String issueDate;
@@ -144,7 +146,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Maturity date of the security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("maturityDate")
 	private String maturityDate;
@@ -152,7 +154,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Next call date of the security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("callDate")
 	private String callDate;
@@ -160,7 +162,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Next call price of the security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("callPrice")
 	private Double callPrice;
@@ -168,7 +170,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Identifier of the sector to which the security belongs to."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("sector")
 	private String sector;
@@ -176,7 +178,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "GICS sector ID to which the security belongs to."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("subSector")
 	private String subSector;
@@ -184,7 +186,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The last updated date of the security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("lastModifiedDate")
 	private String lastModifiedDate;
@@ -192,7 +194,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The rate of interest paid annually, expressed as a percentage of the bond's par or face value."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("interestRate")
 	private Double interestRate;
@@ -200,7 +202,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The method in which interest is accrued or earned."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("accrualMethod")
 	private String accrualMethod;
@@ -208,7 +210,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Flag indicating federal taxable."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("federalTaxable")
 	private Boolean federalTaxable;
@@ -216,7 +218,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The International Securities Identification Number (ISIN) is used worldwide to identify specific securities. It is equivalent to CUSIP for international markets."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("isin")
 	private String isin;
@@ -225,7 +227,7 @@ public class Security extends AbstractModelComponent {
 					  value = "The Stock Exchange Daily Official List (SEDOL) is a set of security identifiers used in the United Kingdom and Ireland for clearing purposes."
 							  + "<br><b>Note</b>: The SEDOL field is only applicable to the trade related transactions."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("sedol")
 	private String sedol;
@@ -233,7 +235,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "First coupon date of security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("firstCouponDate")
 	private String firstCouponDate;
@@ -241,7 +243,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Last coupon date of security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("lastCouponDate")
 	private String lastCouponDate;
@@ -249,7 +251,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Minimum purchase of security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("minimumPurchase")
 	private Integer minimumPurchase;
@@ -257,7 +259,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "ISO 4217 currency code indicating income currency of the security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("incomeCurrency")
 	private String incomeCurrency;
@@ -265,7 +267,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Indicates whether the security is a dummy security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("isDummySecurity")
 	private Boolean isDummySecurity;
@@ -274,7 +276,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The state in which the security is taxed."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("stateTaxable")
 	private Boolean stateTaxable;
@@ -282,7 +284,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "ISO 4217 currency code indicating trading currency of the security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("tradeCurrencyCode")
 	private String tradeCurrencyCode;
@@ -290,7 +292,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Coupon Frequency."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("frequency")
 	private Integer frequency;
@@ -298,7 +300,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Indicates whether the security is a simulated security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("isSyntheticSecurity")
 	private Boolean isSyntheticSecurity;
@@ -306,7 +308,7 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Flag indicating a dummy security."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("isEnvestnetDummySecurity")
 	private Boolean isEnvestnetDummySecurity;
@@ -314,15 +316,23 @@ public class Security extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "GICS Sector is a categorization the S&P assigns to all publically traded companies. "//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
 	)
 	@JsonProperty("gicsSector")
 	private String gicsSector;
 
+	@ApiModelProperty(readOnly = true,
+					  value = "Securities exchange provide the securities information at the corresponding exchanges. "//
+							  + "<br><br>"//
+							  + "<b>Applicable containers</b>: investment, insurance<br>"//
+	)
+	@JsonProperty("stockExchangeDetails")
+	private List<StockExchangeDetail> stockExchangeDetails;
+
 	/**
 	 * Identifier of the sector to which the security belongs to. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return sector
 	 */
@@ -333,7 +343,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Share class of the security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return shareClass
 	 */
@@ -344,7 +354,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * GICS sector ID to which the security belongs to. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return subSector
 	 */
@@ -357,7 +367,7 @@ public class Security extends AbstractModelComponent {
 	 * Ireland for clearing purposes. <br>
 	 * <b>Note</b>: The SEDOL field is only applicable to the trade related transactions. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return sedol
 	 */
@@ -368,7 +378,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Indicates the type of security like stocks, mutual fund, etc. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return type
 	 */
@@ -379,7 +389,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * <b>1</b>- indicates Eligible,<b>0</b>- indicates firm is not eligible. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return firmEligible
 	 */
@@ -390,7 +400,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Last coupon date of security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return lastCouponDate
 	 */
@@ -401,7 +411,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * ISO 4217 currency code indicating income currency of the security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return incomeCurrency
 	 */
@@ -412,7 +422,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Classification of the style for the security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return style
 	 */
@@ -423,7 +433,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * The description (name) of the security. For example, Cisco Systems. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return description
 	 */
@@ -434,7 +444,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Unique identifier for Moody rating on Envestnet platform. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return moodyRating
 	 */
@@ -445,7 +455,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Maturity date of the security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return maturityDate
 	 */
@@ -456,7 +466,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * The method in which interest is accrued or earned. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return accrualMethod
 	 */
@@ -467,7 +477,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Issue date of the security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return issueDate
 	 */
@@ -478,7 +488,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Next call date of the security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return callDate
 	 */
@@ -489,7 +499,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * First coupon date of security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return firstCouponDate
 	 */
@@ -500,7 +510,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Mutual Fund Family Name. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return fundFamily
 	 */
@@ -511,7 +521,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * The last updated date of the security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return lastModifiedDate
 	 */
@@ -523,7 +533,7 @@ public class Security extends AbstractModelComponent {
 	 * A CUSIP is a nine-character alphanumeric code that identifies a North American financial security for the
 	 * purposes of facilitating clearing and settlement of trades. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return cusip
 	 */
@@ -535,7 +545,7 @@ public class Security extends AbstractModelComponent {
 	 * The International Securities Identification Number (ISIN) is used worldwide to identify specific securities. It
 	 * is equivalent to CUSIP for international markets. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return isin
 	 */
@@ -546,7 +556,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * ISO 4217 currency code indicating trading currency of the security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return tradeCurrencyCode
 	 */
@@ -557,7 +567,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * GICS Sector is a categorization the S{@literal &}P assigns to all publically traded companies. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return gicsSector
 	 */
@@ -568,7 +578,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * The unique identifier of the security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return id
 	 */
@@ -580,7 +590,7 @@ public class Security extends AbstractModelComponent {
 	 * Price units corresponding to the security style. This is used to derive actual price of the security from market
 	 * value. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return issueTypeMultiplier
 	 */
@@ -591,7 +601,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Agency factor of the security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return agencyFactor
 	 */
@@ -602,7 +612,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * cdsc fund flag of the security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return cdscFundFlag
 	 */
@@ -613,7 +623,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * <b>true</b>:Closed for all investors , <b>false</b>: Open to all investors. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return closedFlag
 	 */
@@ -624,7 +634,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Next call price of the security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return callPrice
 	 */
@@ -635,7 +645,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * The rate of interest paid annually, expressed as a percentage of the bond's par or face value. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return interestRate
 	 */
@@ -646,7 +656,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Flag indicating federal taxable. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return federalTaxable
 	 */
@@ -657,7 +667,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Minimum purchase of security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return minimumPurchase
 	 */
@@ -668,7 +678,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Indicates whether the security is a dummy security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return isDummySecurity
 	 */
@@ -679,7 +689,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * The state in which the security is taxed. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return stateTaxable
 	 */
@@ -690,7 +700,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Coupon Frequency. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return frequency
 	 */
@@ -701,7 +711,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Indicates whether the security is a simulated security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return isSyntheticSecurity
 	 */
@@ -712,7 +722,7 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Flag indicating a dummy security. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return isEnvestnetDummySecurity
 	 */
@@ -723,12 +733,23 @@ public class Security extends AbstractModelComponent {
 	/**
 	 * Unique identifier for S{@literal &}P rating on Envestnet platform. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
 	 * 
 	 * @return sAndPRating
 	 */
 	public String getsAndPRating() {
 		return sAndPRating;
+	}
+
+	/**
+	 * Securities exchange provide the securities information at the corresponding exchanges. <br>
+	 * <br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
+	 * 
+	 * @return stockExchangeDetails
+	 */
+	public List<StockExchangeDetail> getStockExchangeDetails() {
+		return stockExchangeDetails == null ? null : Collections.unmodifiableList(stockExchangeDetails);
 	}
 
 	@Override
@@ -745,6 +766,7 @@ public class Security extends AbstractModelComponent {
 				+ ", minimumPurchase=" + minimumPurchase + ", incomeCurrency=" + incomeCurrency + ", isDummySecurity="
 				+ isDummySecurity + ", stateTaxable=" + stateTaxable + ", tradeCurrencyCode=" + tradeCurrencyCode
 				+ ", frequency=" + frequency + ", isSyntheticSecurity=" + isSyntheticSecurity
-				+ ", isEnvestnetDummySecurity=" + isEnvestnetDummySecurity + ", gicsSector=" + gicsSector + "]";
+				+ ", isEnvestnetDummySecurity=" + isEnvestnetDummySecurity + ", gicsSector=" + gicsSector
+				+ ", stockExchangeDetails=" + stockExchangeDetails + "]";
 	}
 }

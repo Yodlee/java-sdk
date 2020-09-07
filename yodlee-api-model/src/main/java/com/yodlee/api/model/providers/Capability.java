@@ -15,6 +15,11 @@ import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.enums.Container;
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * Capability has been deprecated.
+ *
+ */
+@Deprecated
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"name", "container", "containerAttributes"})
 public class Capability extends AbstractModelComponent {

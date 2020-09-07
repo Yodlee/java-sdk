@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 		"categoryId", "type", "date", "runningBalance", "id", "amount", "category", "baseType", "highLevelCategoryId",
 		"subType", "description", "categorySource", "memo", "cusipNumber", "holdingDescription", "interest", "price",
 		"principal", "quantity", "settleDate", "symbol", "transactionDate", "parentCategoryId", "detailCategoryId",
-		"checkNumber", "commission", "frequency", "isRecurring","intermediary","isPhysical", "merchantType","sourceType", "createdDate", "lastUpdated"})
+		"checkNumber", "commission", "frequency", "isRecurring", "intermediary", "isPhysical", "merchantType",
+		"sourceType", "createdDate", "lastUpdated"})
 public class Transaction extends AbstractTransaction {
 
 	@Override

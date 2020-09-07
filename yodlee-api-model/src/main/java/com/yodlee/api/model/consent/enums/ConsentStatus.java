@@ -5,23 +5,22 @@
  */
 package com.yodlee.api.model.consent.enums;
 
-
 public enum ConsentStatus {
 	ACTIVE,//
 	/**
-	* Consent generated from input dataset or implicit dataset.<br>
-	*/
+	 * Consent generated from input dataset or implicit dataset.<br>
+	 */
 	CONSENT_GENERATED,//
 	/**
-	* Consent is accepted by user by selecting from list of consent attributes.<br>
-	*/
+	 * Consent is accepted by user by selecting from list of consent attributes.<br>
+	 */
 	CONSENT_ACCEPTED,//
 	/**
-	* Consent is authorized when user adds/updates an account with generated consent id.<br>
-	*/
+	 * Consent is authorized when user adds/updates an account with generated consent id.<br>
+	 */
 	CONSENT_AUTHORIZED,//
 	/**
-	* When user provides not accepted consent id or already authorized consent for add/update account.<br>
-	*/
+	 * When user provides not accepted consent id or already authorized consent for add/update account.<br>
+	 */
 	CONSENT_MISMATCH//
 }

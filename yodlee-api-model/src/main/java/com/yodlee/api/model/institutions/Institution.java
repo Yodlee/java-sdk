@@ -15,7 +15,8 @@ import com.yodlee.api.model.providers.enums.ProviderPriority;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"id", "name", "loginUrl", "baseUrl", "favicon", "logo", "languageISOCode", "primaryLanguageISOCode", "lastModified", "providerId","isAddedByUser", "PRIORITY", "countryISOCode"})
+@JsonPropertyOrder({"id", "name", "loginUrl", "baseUrl", "favicon", "logo", "languageISOCode", "primaryLanguageISOCode",
+		"lastModified", "providerId", "isAddedByUser", "PRIORITY", "countryISOCode"})
 public class Institution extends AbstractModelComponent {
 
 	@ApiModelProperty(readOnly = true,
@@ -150,41 +151,45 @@ public class Institution extends AbstractModelComponent {
 							  + "</ul>")
 	@JsonProperty("countryISOCode")
 	private String countryISOCode;
+
 	/**
-	  * Indicates the priority for which the service is invoked.
-	  * <br><br>
-	  * <b>Endpoints</b>:
-	  * <ul>
-	  * <li>GET institutions</li>
-	  * </ul>
-	  * <b>Applicable Values</b><br>
-	  * @return priority
-	  */
+	 * Indicates the priority for which the service is invoked. <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET institutions</li>
+	 * </ul>
+	 * <b>Applicable Values</b><br>
+	 * 
+	 * @return priority
+	 */
 	@JsonProperty("PRIORITY")
 	public ProviderPriority getPriority() {
 		return priority;
 	}
 
 	/**
-	 * Country to which the provider belongs.
-	 * <br><br>
+	 * Country to which the provider belongs. <br>
+	 * <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
-	 *  @return countryISOCode
+	 * 
+	 * @return countryISOCode
 	 */
 	public String getCountryISOCode() {
 		return countryISOCode;
 	}
 
 	/**
-	 * Indicates that the site has been added by the user at least once.
-	 * <br><br>
+	 * Indicates that the site has been added by the user at least once. <br>
+	 * <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * 
 	 * @return isAddedByUser
 	 */
 	public String getIsAddedByUser() {
@@ -192,12 +197,13 @@ public class Institution extends AbstractModelComponent {
 	}
 
 	/**
-	 * The logo link of the provider institution. The link will return the logo in the PNG format.
-	 * <br><br>
+	 * The logo link of the provider institution. The link will return the logo in the PNG format. <br>
+	 * <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * 
 	 * @return logo
 	 */
 	public String getLogo() {
@@ -205,12 +211,13 @@ public class Institution extends AbstractModelComponent {
 	}
 
 	/**
-	 * The primary language of the site.
-	 * <br><br>
+	 * The primary language of the site. <br>
+	 * <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * 
 	 * @return primaryLanguageISOCode
 	 */
 	public String getPrimaryLanguageISOCode() {
@@ -218,12 +225,14 @@ public class Institution extends AbstractModelComponent {
 	}
 
 	/**
-	 * Determines when the provider information was updated by Yodlee. If the customer caches the data, the cache is recommended to be refreshed based on this field.
-	 * <br><br>
+	 * Determines when the provider information was updated by Yodlee. If the customer caches the data, the cache is
+	 * recommended to be refreshed based on this field. <br>
+	 * <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * 
 	 * @return lastModified
 	 */
 	public String getLastModified() {
@@ -231,13 +240,14 @@ public class Institution extends AbstractModelComponent {
 	}
 
 	/**
-	 * Unique identifier for the provider site.
-	 * (e.g., financial institution sites, biller sites, lender sites, etc.).
-	 * <br><br>
+	 * Unique identifier for the provider site. (e.g., financial institution sites, biller sites, lender sites, etc.).
+	 * <br>
+	 * <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * 
 	 * @return id
 	 */
 	public Long getId() {
@@ -245,12 +255,13 @@ public class Institution extends AbstractModelComponent {
 	}
 
 	/**
-	 * The base URL of the provider's site.
-	 * <br><br>
+	 * The base URL of the provider's site. <br>
+	 * <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * 
 	 * @return baseUrl
 	 */
 	public String getBaseUrl() {
@@ -258,12 +269,13 @@ public class Institution extends AbstractModelComponent {
 	}
 
 	/**
-	 * Favicon link of the provider.
-	 * <br><br>
+	 * Favicon link of the provider. <br>
+	 * <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * 
 	 * @return favicon
 	 */
 	public String getFavicon() {
@@ -271,12 +283,13 @@ public class Institution extends AbstractModelComponent {
 	}
 
 	/**
-	 * The name of a provider site.
-	 * <br><br>
+	 * The name of a provider site. <br>
+	 * <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * 
 	 * @return name
 	 */
 	public String getName() {
@@ -284,12 +297,13 @@ public class Institution extends AbstractModelComponent {
 	}
 
 	/**
-	 * The login URL of the provider's site.
-	 * <br><br>
+	 * The login URL of the provider's site. <br>
+	 * <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * 
 	 * @return loginUrl
 	 */
 	public String getLoginUrl() {
@@ -297,12 +311,15 @@ public class Institution extends AbstractModelComponent {
 	}
 
 	/**
-	 * The language in which the provider details are provided. For example, a site supports two languages English and French. English being the primary language, the provider response will be provided in French depending on the user's locale. The language follows the two letter ISO code.
-	 * <br><br>
+	 * The language in which the provider details are provided. For example, a site supports two languages English and
+	 * French. English being the primary language, the provider response will be provided in French depending on the
+	 * user's locale. The language follows the two letter ISO code. <br>
+	 * <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * 
 	 * @return languageISOCode
 	 */
 	public String getLanguageISOCode() {
@@ -310,12 +327,13 @@ public class Institution extends AbstractModelComponent {
 	}
 
 	/**
-	 * providerId
-	 * <br><br>
+	 * providerId <br>
+	 * <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET institutions</li>
 	 * </ul>
+	 * 
 	 * @return providerId
 	 */
 	public List<Long> getProviderId() {
@@ -324,11 +342,10 @@ public class Institution extends AbstractModelComponent {
 
 	@Override
 	public String toString() {
-		return "Institution [id=" + id
-				+ ", name=" + name + ", loginUrl=" + loginUrl + ", baseUrl=" + baseUrl + ", favicon=" + favicon
-				+ ", logo=" + logo + ", languageISOCode=" + languageISOCode
+		return "Institution [id=" + id + ", name=" + name + ", loginUrl=" + loginUrl + ", baseUrl=" + baseUrl
+				+ ", favicon=" + favicon + ", logo=" + logo + ", languageISOCode=" + languageISOCode
 				+ ", primaryLanguageISOCode=" + primaryLanguageISOCode + ", lastModified=" + lastModified
-				+ ", providerId=" + providerId + ", isAddedByUser=" + isAddedByUser
-				+ ", priority=" + priority + ", countryISOCode=" + countryISOCode + "]";
+				+ ", providerId=" + providerId + ", isAddedByUser=" + isAddedByUser + ", priority=" + priority
+				+ ", countryISOCode=" + countryISOCode + "]";
 	}
 }

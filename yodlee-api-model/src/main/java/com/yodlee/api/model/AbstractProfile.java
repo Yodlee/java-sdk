@@ -14,50 +14,50 @@ import io.swagger.annotations.ApiModelProperty;
 public abstract class AbstractProfile extends AbstractModelComponent {
 
 	@ApiModelProperty(readOnly = true,
-			 value = "Address available in the profile page of the account."//
-			  + "<br><br>"//
-			  + "<b>Account Type</b>: Aggregated<br>"//
-			  + "<b>Endpoints</b>:"//
-			  + "<ul>"//
-			  + "<li>GET accounts</li>"//
-			  + "<li>GET accounts/{accountId}</li>"//
-			  + "</ul>")
+					  value = "Address available in the profile page of the account."//
+							  + "<br><br>"//
+							  + "<b>Account Type</b>: Aggregated<br>"//
+							  + "<b>Endpoints</b>:"//
+							  + "<ul>"//
+							  + "<li>GET accounts</li>"//
+							  + "<li>GET accounts/{accountId}</li>"//
+							  + "</ul>")
 	@JsonProperty("address")
 	protected List<AccountAddress> addresses;
 
 	@ApiModelProperty(readOnly = true,
-			 value = "Phone number available in the profile page of the account."//
-			  + "<br><br>"//
-			  + "<b>Account Type</b>: Aggregated<br>"//
-			  + "<b>Endpoints</b>:"//
-			  + "<ul>"//
-			  + "<li>GET accounts</li>"//
-			  + "<li>GET accounts/{accountId}</li>"//
-			  + "</ul>")
+					  value = "Phone number available in the profile page of the account."//
+							  + "<br><br>"//
+							  + "<b>Account Type</b>: Aggregated<br>"//
+							  + "<b>Endpoints</b>:"//
+							  + "<ul>"//
+							  + "<li>GET accounts</li>"//
+							  + "<li>GET accounts/{accountId}</li>"//
+							  + "</ul>")
 	@JsonProperty("phoneNumber")
 	protected List<PhoneNumber> phoneNumbers;
 
 	@ApiModelProperty(readOnly = true,
-			value = "Email Id available in the profile page of the account."//
-			  + "<br><br>"//
-			  + "<b>Account Type</b>: Aggregated<br>"//
-			  + "<b>Endpoints</b>:"//
-			  + "<ul>"//
-			  + "<li>GET accounts</li>"//
-			  + "<li>GET accounts/{accountId}</li>"//
-			  + "</ul>")
+					  value = "Email Id available in the profile page of the account."//
+							  + "<br><br>"//
+							  + "<b>Account Type</b>: Aggregated<br>"//
+							  + "<b>Endpoints</b>:"//
+							  + "<ul>"//
+							  + "<li>GET accounts</li>"//
+							  + "<li>GET accounts/{accountId}</li>"//
+							  + "</ul>")
 	@JsonProperty("email")
 	protected List<Email> emails;
 
 	@ApiModelProperty(readOnly = true,
-			value = "Identifiers available in the profile page of the account."//
-			  + "<br><br>"//
-			  + "<b>Account Type</b>: Aggregated<br>"//
-			  + "<b>Endpoints</b>:"//
-			  + "<ul>"//
-			  + "<li>GET accounts</li>"//
-			  + "<li>GET accounts/{accountId}</li>"//
-			  + "</ul>")
+					  value = "Identifiers available in the profile page of the account."//
+							  + "<br><br>"//
+							  + "<b>Account Type</b>: Aggregated<br>"//
+							  + "<b>Endpoints</b>:"//
+							  + "<ul>"//
+							  + "<li>GET accounts</li>"//
+							  + "<li>GET accounts/{accountId}</li>"//
+							  + "</ul>")
 	@JsonProperty("identifier")
 	protected List<Identifier> identifiers;
 

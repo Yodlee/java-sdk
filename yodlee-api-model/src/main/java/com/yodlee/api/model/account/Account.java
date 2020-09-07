@@ -224,7 +224,7 @@ public class Account extends AbstractAccount {
 				+ address + ", loanPayoffAmount=" + loanPayoffAmount + ", loanPayByDate=" + loanPayByDate
 				+ ", bankTransferCode=" + bankTransferCode + ", rewardBalance=" + rewardBalance + ", frequency="
 				+ frequency + ", amountDue=" + amountDue + ", minimumAmountDue=" + minimumAmountDue + ", datasets="
-				+ datasets + ", associatedProviderAccountIds=" + associatedProviderAccountIds + ", loanPayOffDetails="
+				+ datasets + ", associatedProviderAccountIds=" + associatedProviderAccountIds + ", loanPayoffDetails="
 				+ loanPayOffDetails + ", coverage=" + coverage + ", sourceAccountStatus=" + sourceAccountStatus
 				+ ", repaymentPlanType=" + repaymentPlanType + ", guarantor=" + guarantor + ", lender=" + lender + "]";
 	}

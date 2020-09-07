@@ -5,14 +5,9 @@
  */
 package com.yodlee.api.model.dataextracts;
 
-import java.util.Collections;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.yodlee.api.model.AssetClassification;
 import com.yodlee.api.model.holdings.AbstractHolding;
-import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"id", "accountId", "providerAccountId", "costBasis", "cusipNumber", "securityType", "matchStatus",
@@ -22,26 +17,6 @@ import io.swagger.annotations.ApiModelProperty;
 		"maturityDate", "optionType", "spread", "strikePrice", "term", "accruedInterest", "accruedIncome",
 		"createdDate", "lastUpdated", "assetClassification"})
 public class DataExtractsHolding extends AbstractHolding {
-
-	@ApiModelProperty(readOnly = true,
-					  value = "Asset classification applied to the holding. "//
-							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: investment<br>"//
-	)
-	@JsonProperty("assetClassification")
-	private List<AssetClassification> assetClassifications;
-
-	/**
-	 * Asset classification applied to the holding. <br>
-	 * <br>
-	 * <b>Applicable containers</b>: investment<br>
-	 * 
-	 * @return assetClassification
-	 */
-	@JsonProperty("assetClassification")
-	public List<AssetClassification> getAssetClassifications() {
-		return assetClassifications == null ? null : Collections.unmodifiableList(assetClassifications);
-	}
 
 	@Override
 	public String toString() {
@@ -57,6 +32,6 @@ public class DataExtractsHolding extends AbstractHolding {
 				+ ", maturityDate=" + maturityDate + ", optionType=" + optionType + ", spread=" + spread
 				+ ", strikePrice=" + strikePrice + ", term=" + term + ", accruedInterest=" + accruedInterest
 				+ ", accruedIncome=" + accruedIncome + ", createdDate=" + createdDate + ", lastUpdated=" + lastUpdated
-				+ ", assetClassifications=" + assetClassifications + ", holdingType=" + holdingType + "]";
+				+ ", holdingType=" + holdingType + "]";
 	}
 }

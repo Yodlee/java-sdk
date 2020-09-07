@@ -7,7 +7,7 @@ package com.yodlee.api.model.providers.enums;
 
 public enum ProviderAuthParameter {
 	/**
-	 * Authorization code used to refer to authorization associated with a consent during open banking data retrieval. 
+	 * Authorization code used to refer to authorization associated with a consent during open banking data retrieval.
 	 */
 	authorizationCode,//
 	/**

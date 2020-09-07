@@ -121,7 +121,8 @@ public class FieldOperation extends AbstractModelComponent {
 	 * <b>Applicable Values</b>:
 	 * <ul>
 	 * <li>field is <b>description</b> -{@literal >} value should be <b>min of 3 and max of 50 characters</b></li>
-	 * <li>field is <b>amount</b> -{@literal >} value should be <b> min value of 0 and a max value of 99999999999.99</b></li>
+	 * <li>field is <b>amount</b> -{@literal >} value should be <b> min value of 0 and a max value of
+	 * 99999999999.99</b></li>
 	 * </ul>
 	 * 
 	 * @return value

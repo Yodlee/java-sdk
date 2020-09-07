@@ -28,7 +28,7 @@ public class TransactionCategoryRequest extends AbstractModelComponent implement
 
 	@NotNull(message = "{transactions.parentCategoryId.required}")
 	@Digits(message = "{transactions.parentCategoryId.invalid}", fraction = 0, integer = 11)
-	@Min(value=1, message = "{transactions.parentCategoryId.invalid}")
+	@Min(value = 1, message = "{transactions.parentCategoryId.invalid}")
 	@ApiModelProperty(required = true)
 	@JsonProperty("parentCategoryId")
 	private Integer parentCategoryId;

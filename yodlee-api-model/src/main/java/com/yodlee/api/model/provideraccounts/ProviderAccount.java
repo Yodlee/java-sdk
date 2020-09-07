@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"id", "aggregationSource", "providerId", "consentId", "isManual", "createdDate", "requestId", "status",
-		"dataset", "loginForm", "isAutoRefreshPreferred", "isDataExtractsPreferred", "preferences"})
+@JsonPropertyOrder({"id", "aggregationSource", "providerId", "consentId", "isManual", "createdDate", "requestId",
+		"status", "dataset", "loginForm", "isAutoRefreshPreferred", "isDataExtractsPreferred", "preferences"})
 public class ProviderAccount extends AbstractProviderAccount {
 
 	@ApiModelProperty(readOnly = true,
@@ -38,21 +38,21 @@ public class ProviderAccount extends AbstractProviderAccount {
 							  + "</ul>")
 	@JsonProperty("preferences")
 	private ProviderAccountPreferences preferences;
-	
+
 	@ApiModelProperty(name = "consentId",
-			  required = false,
-			  value = "Consent Id generated through POST Consent."//
-			  + "<br><br>"//
-			  + "<b>Endpoints</b>:"//
-			  + "<ul>"//
-			  + "<li>GET providerAccounts</li>"//
-			  + "<li>POST providerAccounts</li>"//
-			  + "<li>PUT providerAccounts/{providerAccountId}</li>"//
-			  + "<li>GET providerAccounts/{providerAccountId}</li>"//
-			  + "</ul>")
+					  required = false,
+					  value = "Consent Id generated through POST Consent."//
+							  + "<br><br>"//
+							  + "<b>Endpoints</b>:"//
+							  + "<ul>"//
+							  + "<li>GET providerAccounts</li>"//
+							  + "<li>POST providerAccounts</li>"//
+							  + "<li>PUT providerAccounts/{providerAccountId}</li>"//
+							  + "<li>GET providerAccounts/{providerAccountId}</li>"//
+							  + "</ul>")
 	@JsonProperty("consentId")
 	private Long consentId;
-	
+
 	public Long getConsentId() {
 		return consentId;
 	}
@@ -91,6 +91,7 @@ public class ProviderAccount extends AbstractProviderAccount {
 
 	@Override
 	public String toString() {
-		return "ProviderAccount [createdDate=" + createdDate + ", consentId=" + consentId + ", preferences=" + preferences + "]";
+		return "ProviderAccount [createdDate=" + createdDate + ", consentId=" + consentId + ", preferences="
+				+ preferences + "]";
 	}
 }

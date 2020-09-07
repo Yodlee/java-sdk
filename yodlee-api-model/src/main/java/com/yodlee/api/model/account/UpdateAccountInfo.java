@@ -5,7 +5,6 @@
  */
 package com.yodlee.api.model.account;
 
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

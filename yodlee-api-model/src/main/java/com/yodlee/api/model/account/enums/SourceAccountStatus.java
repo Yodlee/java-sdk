@@ -32,5 +32,10 @@ public enum SourceAccountStatus {
 	/**
 	 * A period when the student postpones the loan repayments
 	 */
-	DEFERMENT
+	DEFERMENT,
+	/**
+	 * The borrower is currently experiencing financial hardship and does not need to repay the student loan for the
+	 * time being.
+	 */
+	FORBEARANCE
 }

@@ -1667,7 +1667,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "<li>GET accounts/{accountId}</li>"//
 							  + "<li>GET dataExtracts/userData</li>"//
 							  + "</ul>")
-	@JsonProperty("loanPayOffDetails")
+	@JsonProperty("loanPayoffDetails")
 	protected LoanPayoffDetails loanPayOffDetails;
 
 	@ApiModelProperty(readOnly = true,
@@ -1756,6 +1756,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 * 
 	 * @return loanPayOffDetails
 	 */
+	@JsonProperty("loanPayoffDetails")
 	public LoanPayoffDetails getLoanPayOffDetails() {
 		return loanPayOffDetails;
 	}

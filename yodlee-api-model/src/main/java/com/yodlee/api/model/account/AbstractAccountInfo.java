@@ -53,7 +53,7 @@ public class AbstractAccountInfo extends AbstractModelComponent {
 
 	@JsonProperty("frequency")
 	protected FrequencyType frequency;
-	
+
 	@Valid
 	@JsonProperty("address")
 	protected AccountAddress address;
@@ -129,7 +129,7 @@ public class AbstractAccountInfo extends AbstractModelComponent {
 	public void setFrequency(FrequencyType frequency) {
 		this.frequency = frequency;
 	}
-	
+
 	public AccountAddress getAddress() {
 		return address;
 	}

@@ -6,9 +6,9 @@
 package com.yodlee.api.model.enums;
 
 public enum EmailType {
-	primary,//
-	secondary,
-	personal,
-	work,
-	others
+	PRIMARY,//
+	SECONDARY,
+	PERSONAL,
+	WORK,
+	OTHERS
 }

@@ -35,17 +35,16 @@ public class ProviderAccountPreferences extends AbstractModelComponent {
 	)
 	@JsonProperty("isAutoRefreshEnabled")
 	private Boolean isAutoRefreshEnabled;
-	
+
 	@ApiModelProperty(value = "LinkedproviderAccountd is a providerAccountId linked by the user to the primary provider account. <br>"//
-			+ "LinkedProviderAccountId and the providerAccountId belongs to the same institution."
-            + "<br><br>"//
-            + "<b>Endpoints</b>:"//
-            + "<ul>"//
-            + "<li>POST Provider Account</li>"//
-            + "<li>PUT Provider Account</li>"//
-            + "<li>GET Provider Accounts</li>"//
-            + "</ul>" )
-	@JsonProperty(value ="linkedProviderAccountId", required = false)
+			+ "LinkedProviderAccountId and the providerAccountId belongs to the same institution." + "<br><br>"//
+			+ "<b>Endpoints</b>:"//
+			+ "<ul>"//
+			+ "<li>POST Provider Account</li>"//
+			+ "<li>PUT Provider Account</li>"//
+			+ "<li>GET Provider Accounts</li>"//
+			+ "</ul>")
+	@JsonProperty(value = "linkedProviderAccountId", required = false)
 	private Long linkedProviderAccountId;
 
 	/**
@@ -86,25 +85,24 @@ public class ProviderAccountPreferences extends AbstractModelComponent {
 	public void setIsAutoRefreshEnabled(Boolean isAutoRefreshEnabled) {
 		this.isAutoRefreshEnabled = isAutoRefreshEnabled;
 	}
-	
-	
+
 	/**
-	* LinkedproviderAccountd is a providerAccountId linked by the user to the primary provider account. <br>
-	* LinkedProviderAccountId and the providerAccountId belongs to the same institution.
-    * <br><br>
-    * <b>Endpoints</b>:
-    * <ul>
-    * <li>POST Provider Account</li>
-    * <li>PUT Provider Account</li>
-    * <li>GET Provider Accounts</li>
-    * </ul>
-    * 
-    * @return linkedProviderAccountId
-    */
+	 * LinkedproviderAccountd is a providerAccountId linked by the user to the primary provider account. <br>
+	 * LinkedProviderAccountId and the providerAccountId belongs to the same institution. <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>POST Provider Account</li>
+	 * <li>PUT Provider Account</li>
+	 * <li>GET Provider Accounts</li>
+	 * </ul>
+	 * 
+	 * @return linkedProviderAccountId
+	 */
 	public Long getLinkedProviderAccountId() {
 		return linkedProviderAccountId;
 	}
-	
+
 	public void setLinkedProviderAccountId(Long linkedProviderAccountId) {
 		this.linkedProviderAccountId = linkedProviderAccountId;
 	}
@@ -114,5 +112,4 @@ public class ProviderAccountPreferences extends AbstractModelComponent {
 		return "ProviderAccountPreferences [isDataExtractsEnabled=" + isDataExtractsEnabled + ", isAutoRefreshEnabled="
 				+ isAutoRefreshEnabled + ", linkedProviderAccountId=" + linkedProviderAccountId + "]";
 	}
-	
 }

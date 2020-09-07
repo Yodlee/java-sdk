@@ -22,7 +22,7 @@ public class ConfigsPublicKey extends AbstractModelComponent {
 	private String alias;
 
 	@ApiModelProperty(readOnly = true,
-					  value = "Public key that the customer should be using to encrypt the credentials and answers before sending to the add and update providerAccounts APIs."//
+					  value = "Public key that the customer should be using to encrypt the credentials and answers before sending to the add & update providerAccounts APIs."//
 							  + "<br><br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
@@ -46,7 +46,7 @@ public class ConfigsPublicKey extends AbstractModelComponent {
 	}
 
 	/**
-	 * Public key that the customer should be using to encrypt the credentials and answers before sending to the add and
+	 * Public key that the customer should be using to encrypt the credentials and answers before sending to the add &
 	 * update providerAccounts APIs. <br>
 	 * <br>
 	 * <b>Endpoints</b>:

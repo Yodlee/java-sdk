@@ -5,14 +5,13 @@
  */
 package com.yodlee.api.model.consent.enums;
 
-
 public enum DataAccessFrequency {
 	/**
-	* Every time a new consent is obtained.<br>
-	*/
+	 * Every time a new consent is obtained.<br>
+	 */
 	ONE_TIME,//
 	/**
-	* The same consent is used for multiple aggregations till expirationDate.<br>
-	*/	
+	 * The same consent is used for multiple aggregations till expirationDate.<br>
+	 */
 	RECURRING//
 }

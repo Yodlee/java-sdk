@@ -21,5 +21,4 @@ public class CreateConsent extends AbstractConsent {
 				+ getConsentStatus() + ", getProviderId()=" + getProviderId() + ", toString()=" + super.toString()
 				+ ", validate()=" + validate() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
-	
 }
