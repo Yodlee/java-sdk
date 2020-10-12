@@ -603,7 +603,7 @@ public class AccountsApi extends AbstractApi {
 	 * in the migration process.<br>
 	 * 
 	 * @param providerAccountId (required)
-	 * @return {@link ApiResponse}&lt;{@link MigrateAccountsResponse}&gt;
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
@@ -674,7 +674,7 @@ public class AccountsApi extends AbstractApi {
 	 * share account data.<br>
 	 * 
 	 * @param providerAccountId (required)
-	 * @return {@link ApiResponse}&lt;{@link AssociatedAccountsResponse}&gt;
+	 * @return null
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */

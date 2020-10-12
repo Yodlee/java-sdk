@@ -287,6 +287,7 @@ public class DerivedApi extends AbstractApi {
 	 * @param skip skip (Min 0) (optional)
 	 * @param toDate toDate for balance retrieval (YYYY-MM-DD) (optional)
 	 * @param top top (Max 500) (optional)
+	 * @param container container (optional)
 	 * @return {@link ApiResponse}&lt;{@link DerivedNetworthResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -325,6 +326,7 @@ public class DerivedApi extends AbstractApi {
 	 * @param skip skip (Min 0) (optional)
 	 * @param toDate toDate for balance retrieval (YYYY-MM-DD) (optional)
 	 * @param top top (Max 500) (optional)
+	 * @param container container (optional)
 	 * @param apiCallback {@link ApiCallback}&lt;{@link DerivedNetworthResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body

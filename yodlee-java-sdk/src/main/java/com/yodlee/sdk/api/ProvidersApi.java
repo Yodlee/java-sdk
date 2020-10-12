@@ -101,17 +101,18 @@ public class ProvidersApi extends AbstractApi {
 	 * @param priority Search priority (optional)
 	 * @param skip skip (Min 0) - This is not applicable along with &#39;name&#39; parameter. (optional)
 	 * @param top top (Max 500) - This is not applicable along with &#39;name&#39; parameter. (optional)
+	 * @param fullAccountNumberFields fullAccountNumber (optional)
 	 * @return {@link ApiResponse}&lt;{@link ProviderResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
 	public ApiResponse<ProviderResponse> getAllProviders(@Deprecated ProvidersCapability capability, //
 			String datasetFilter,//
-			String fullAccountNumberFields,//
 			String name, ProvidersPriorityType priority,//
 			@Min(value = 0, message = "{providers.param.skip.invalid}") Integer skip,//
 			@Min(value = 1, message = "{providers.param.top.invalid}") //
-			@Max(value = 500, message = "{providers.param.top.invalid}") Integer top) throws ApiException {
+			@Max(value = 500, message = "{providers.param.top.invalid}") Integer top,//
+			String fullAccountNumberFields) throws ApiException {
 		LOGGER.info("Providers getAllProviders API execution started");
 		ProvidersValidator.validateGetProviders(this, ApiUtils.getMethodName(), capability, datasetFilter,
 				fullAccountNumberFields, name, priority, skip, top);
@@ -168,17 +169,18 @@ public class ProvidersApi extends AbstractApi {
 	 * @param priority Search priority (optional)
 	 * @param skip skip (Min 0) - This is not applicable along with &#39;name&#39; parameter. (optional)
 	 * @param top top (Max 500) - This is not applicable along with &#39;name&#39; parameter. (optional)
+	 * @param fullAccountNumberFields fullAccountNumber (optional)
 	 * @param apiCallBack {@link ApiCallback}&lt;{@link ProviderResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
 	public void getAllProvidersAsync(@Deprecated ProvidersCapability capability, //
 			String datasetFilter,//
-			String fullAccountNumberFields,//
 			String name, ProvidersPriorityType priority,//
 			@Min(value = 0, message = "{providers.param.skip.invalid}") Integer skip,//
 			@Min(value = 1, message = "{providers.param.top.invalid}") //
-			@Max(value = 500, message = "{providers.param.top.invalid}") Integer top,
+			@Max(value = 500, message = "{providers.param.top.invalid}") Integer top,//
+			String fullAccountNumberFields,//
 			ApiCallback<ProviderResponse> apiCallBack) throws ApiException {
 		LOGGER.info("Providers getAllProvidersAsync API execution started");
 		ProvidersValidator.validateGetProviders(this, ApiUtils.getMethodName(), capability, datasetFilter,
@@ -290,12 +292,13 @@ public class ProvidersApi extends AbstractApi {
 	 *        will be the dataset or dataset attributes configured as default for the customer. (optional)
 	 * @param name Name in minimum 1 character or routing number. (optional)
 	 * @param priority Search priority (optional)
+	 * @param fullAccountNumberFields fullAccountNumber (optional)
 	 * @return {@link ApiResponse}&lt;{@link ProvidersCountResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
 	public ApiResponse<ProvidersCountResponse> getProvidersCount(@Deprecated ProvidersCapability capability,//
-			String datasetFilter, String fullAccountNumberFields, String name, ProvidersPriorityType priority)
+			String datasetFilter, String name, ProvidersPriorityType priority, String fullAccountNumberFields)
 			throws ApiException {
 		LOGGER.info("Providers getProvidersCount API execution started");
 		ProvidersValidator.validateGetProvidersCount(this, ApiUtils.getMethodName(), capability, datasetFilter,
@@ -318,12 +321,14 @@ public class ProvidersApi extends AbstractApi {
 	 *        will be the dataset or dataset attributes configured as default for the customer. (optional)
 	 * @param name Name in minimum 1 character or routing number. (optional)
 	 * @param priority Search priority (optional)
+	 * @param fullAccountNumberFields fullAccountNumber (optional)
 	 * @param apiCallback {@link ApiCallback}&lt;{@link ProvidersCountResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
 	public void getProvidersCountAsync(@Deprecated ProvidersCapability capability,//
-			String datasetFilter, String fullAccountNumberFields, String name, ProvidersPriorityType priority,
+			String datasetFilter, String name, ProvidersPriorityType priority,
+			String fullAccountNumberFields, //
 			ApiCallback<ProvidersCountResponse> apiCallback) throws ApiException {
 		LOGGER.info("Providers getProvidersCountAsync API execution started");
 		ProvidersValidator.validateGetProvidersCount(this, ApiUtils.getMethodName(), capability, datasetFilter,
