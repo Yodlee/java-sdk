@@ -43,6 +43,8 @@ public class ProvidersApi extends AbstractApi {
 
 	private static final String PARAM_DATASET$FILTER = "dataset$filter";
 
+	private static final String FULL_ACCT_NUMBER_FIELDS = "fullAccountNumberFields";
+
 	private static final String PARAM_CAPABILITY = "capability";
 
 	private static final String PARAM_PROVIDER_ID = "providerId";
@@ -76,11 +78,21 @@ public class ProvidersApi extends AbstractApi {
 	 * BASIC_AGG_DATA [ ACCOUNT_DETAILS] OR DOCUMENT <br>
 	 * BASIC_AGG_DATA [ BASIC_ACCOUNT_INFO OR ACCOUNT_DETAILS ] <br>
 	 * <br>
+	 * The fullAcountNumberFields is specified to filter the providers that have paymentAccountNumber or
+	 * unmaskedAccountNumber support in the FULL_ACCT_NUMBER dataset attribute.<br>
+	 * <b>Examples for usage of fullAccountNumberFields –</b><br>
+	 * dataset$filter=ACCT_PROFILE[ FULL_ACCT_NUMBER.container [ bank ]] &amp;
+	 * fullAccountNumberFields=paymentAccountNumber<br>
+	 * dataset$filter=ACCT_PROFILE[ FULL_ACCT_NUMBER.container [ bank ]] &amp;
+	 * fullAccountNumberFields=unmaskedAccountNumber<br>
+	 * dataset$filter=ACCT_PROFILE[ FULL_ACCT_NUMBER.container [ bank ]] &amp;
+	 * fullAccountNumberFields=unmaskedAccountNumber,paymentAccountNumber<br>
+	 * <br>
+	 * 
 	 * <b>Note:</b> <br>
 	 * 1. When this service is invoked without any filters, the service performs slowly and takes a few minutes to
 	 * return data in the response.<br>
-	 * 2. The recommendation is to use this service with filters when used in a flow involving user interactions. 3. The
-	 * capability has been deprecated in query parameter and response.
+	 * 2. The recommendation is to use this service with filters when used in a flow involving user interactions.
 	 * 
 	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (deprecated)
 	 * @param datasetFilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
@@ -93,16 +105,18 @@ public class ProvidersApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
-	public ApiResponse<ProviderResponse> getAllProviders(ProvidersCapability capability, //
+	public ApiResponse<ProviderResponse> getAllProviders(@Deprecated ProvidersCapability capability, //
 			String datasetFilter,//
+			String fullAccountNumberFields,//
 			String name, ProvidersPriorityType priority,//
 			@Min(value = 0, message = "{providers.param.skip.invalid}") Integer skip,//
 			@Min(value = 1, message = "{providers.param.top.invalid}") //
 			@Max(value = 500, message = "{providers.param.top.invalid}") Integer top) throws ApiException {
 		LOGGER.info("Providers getAllProviders API execution started");
-		ProvidersValidator.validateGetProviders(this, ApiUtils.getMethodName(), capability, datasetFilter, name,
+		ProvidersValidator.validateGetProviders(this, ApiUtils.getMethodName(), capability, datasetFilter,
+				fullAccountNumberFields, name, priority, skip, top);
+		CallContext callContext = buildGetAllProvidersContext(capability, datasetFilter, fullAccountNumberFields, name,
 				priority, skip, top);
-		CallContext callContext = buildGetAllProvidersContext(capability, datasetFilter, name, priority, skip, top);
 		return callContext.getApiClient().execute(callContext.getCall(), ProviderResponse.class);
 	}
 
@@ -131,11 +145,21 @@ public class ProvidersApi extends AbstractApi {
 	 * BASIC_AGG_DATA [ ACCOUNT_DETAILS] OR DOCUMENT <br>
 	 * BASIC_AGG_DATA [ BASIC_ACCOUNT_INFO OR ACCOUNT_DETAILS ] <br>
 	 * <br>
+	 * The fullAcountNumberFields is specified to filter the providers that have paymentAccountNumber or
+	 * unmaskedAccountNumber support in the FULL_ACCT_NUMBER dataset attribute.<br>
+	 * <b>Examples for usage of fullAccountNumberFields –</b><br>
+	 * dataset$filter=ACCT_PROFILE[ FULL_ACCT_NUMBER.container [ bank ]] &amp;
+	 * fullAccountNumberFields=paymentAccountNumber<br>
+	 * dataset$filter=ACCT_PROFILE[ FULL_ACCT_NUMBER.container [ bank ]] &amp;
+	 * fullAccountNumberFields=unmaskedAccountNumber<br>
+	 * dataset$filter=ACCT_PROFILE[ FULL_ACCT_NUMBER.container [ bank ]] &amp;
+	 * fullAccountNumberFields=unmaskedAccountNumber,paymentAccountNumber<br>
+	 * <br>
+	 * 
 	 * <b>Note:</b> <br>
 	 * 1. When this service is invoked without any filters, the service performs slowly and takes a few minutes to
 	 * return data in the response.<br>
-	 * 2. The recommendation is to use this service with filters when used in a flow involving user interactions. 3. The
-	 * capability has been deprecated in query parameter and response.
+	 * 2. The recommendation is to use this service with filters when used in a flow involving user interactions.
 	 * 
 	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (deprecated)
 	 * @param datasetFilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
@@ -148,22 +172,25 @@ public class ProvidersApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
-	public void getAllProvidersAsync(ProvidersCapability capability, //
+	public void getAllProvidersAsync(@Deprecated ProvidersCapability capability, //
 			String datasetFilter,//
+			String fullAccountNumberFields,//
 			String name, ProvidersPriorityType priority,//
 			@Min(value = 0, message = "{providers.param.skip.invalid}") Integer skip,//
 			@Min(value = 1, message = "{providers.param.top.invalid}") //
 			@Max(value = 500, message = "{providers.param.top.invalid}") Integer top,
 			ApiCallback<ProviderResponse> apiCallBack) throws ApiException {
 		LOGGER.info("Providers getAllProvidersAsync API execution started");
-		ProvidersValidator.validateGetProviders(this, ApiUtils.getMethodName(), capability, datasetFilter, name,
+		ProvidersValidator.validateGetProviders(this, ApiUtils.getMethodName(), capability, datasetFilter,
+				fullAccountNumberFields, name, priority, skip, top);
+		CallContext callContext = buildGetAllProvidersContext(capability, datasetFilter, fullAccountNumberFields, name,
 				priority, skip, top);
-		CallContext callContext = buildGetAllProvidersContext(capability, datasetFilter, name, priority, skip, top);
 		callContext.getApiClient().executeAsync(callContext.getCall(), ProviderResponse.class, apiCallBack);
 	}
 
 	private CallContext buildGetAllProvidersContext(ProvidersCapability capability, //
 			String datasetFilter,//
+			String fullAccountNumberFields,//
 			String name, ProvidersPriorityType priority,//
 			Integer skip,//
 			Integer top) throws ApiException {
@@ -175,6 +202,9 @@ public class ProvidersApi extends AbstractApi {
 		}
 		if (!StringUtils.isEmpty(datasetFilter)) {
 			apiCallModel.addQueryParam(new Pair(PARAM_DATASET$FILTER, datasetFilter));
+		}
+		if (!StringUtils.isEmpty(fullAccountNumberFields)) {
+			apiCallModel.addQueryParam(new Pair(FULL_ACCT_NUMBER_FIELDS, fullAccountNumberFields));
 		}
 		if (!StringUtils.isEmpty(name)) {
 			apiCallModel.addQueryParam(new Pair(PARAM_NAME, name));
@@ -253,8 +283,7 @@ public class ProvidersApi extends AbstractApi {
 	 * If you are implementing pagination for providers, call this endpoint before calling GET /providers to know the
 	 * number of providers that are returned for the input parameters passed.<br>
 	 * The functionality of the input parameters remains the same as that of the GET /providers endpoint<br>
-	 * <b>Note:</b> <br>
-	 * 1. The capability has been deprecated in query parameter.
+	 * .
 	 * 
 	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (deprecated)
 	 * @param datasetFilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
@@ -265,12 +294,14 @@ public class ProvidersApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
-	public ApiResponse<ProvidersCountResponse> getProvidersCount(ProvidersCapability capability,//
-			String datasetFilter, String name, ProvidersPriorityType priority) throws ApiException {
+	public ApiResponse<ProvidersCountResponse> getProvidersCount(@Deprecated ProvidersCapability capability,//
+			String datasetFilter, String fullAccountNumberFields, String name, ProvidersPriorityType priority)
+			throws ApiException {
 		LOGGER.info("Providers getProvidersCount API execution started");
-		ProvidersValidator.validateGetProvidersCount(this, ApiUtils.getMethodName(), capability, datasetFilter, name,
-				priority);
-		CallContext callContext = buildGetProvidersCountContext(capability, datasetFilter, name, priority);
+		ProvidersValidator.validateGetProvidersCount(this, ApiUtils.getMethodName(), capability, datasetFilter,
+				fullAccountNumberFields, name, priority);
+		CallContext callContext =
+				buildGetProvidersCountContext(capability, datasetFilter, fullAccountNumberFields, name, priority);
 		return callContext.getApiClient().execute(callContext.getCall(), ProvidersCountResponse.class);
 	}
 
@@ -280,8 +311,7 @@ public class ProvidersApi extends AbstractApi {
 	 * If you are implementing pagination for providers, call this endpoint before calling GET /providers to know the
 	 * number of providers that are returned for the input parameters passed.<br>
 	 * The functionality of the input parameters remains the same as that of the GET /providers endpoint<br>
-	 * <b>Note:</b> <br>
-	 * 1. The capability has been deprecated in query parameter.
+	 * .
 	 * 
 	 * @param capability CHALLENGE_DEPOSIT_VERIFICATION (deprecated)
 	 * @param datasetFilter Expression to filter the providers by dataset(s) or dataset attribute(s). The default value
@@ -292,18 +322,20 @@ public class ProvidersApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
-	public void getProvidersCountAsync(ProvidersCapability capability,//
-			String datasetFilter, String name, ProvidersPriorityType priority,
+	public void getProvidersCountAsync(@Deprecated ProvidersCapability capability,//
+			String datasetFilter, String fullAccountNumberFields, String name, ProvidersPriorityType priority,
 			ApiCallback<ProvidersCountResponse> apiCallback) throws ApiException {
 		LOGGER.info("Providers getProvidersCountAsync API execution started");
-		ProvidersValidator.validateGetProvidersCount(this, ApiUtils.getMethodName(), capability, datasetFilter, name,
-				priority);
-		CallContext callContext = buildGetProvidersCountContext(capability, datasetFilter, name, priority);
+		ProvidersValidator.validateGetProvidersCount(this, ApiUtils.getMethodName(), capability, datasetFilter,
+				fullAccountNumberFields, name, priority);
+		CallContext callContext =
+				buildGetProvidersCountContext(capability, datasetFilter, fullAccountNumberFields, name, priority);
 		callContext.getApiClient().executeAsync(callContext.getCall(), ProvidersCountResponse.class, apiCallback);
 	}
 
 	private CallContext buildGetProvidersCountContext(ProvidersCapability capability,//
-			String datasetFilter, String name, ProvidersPriorityType priority) throws ApiException {
+			String datasetFilter, String fullAccountNumberFields, String name, ProvidersPriorityType priority)
+			throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiCallModel = new ApiContext(ApiEndpoint.PROVIDERS_COUNT, HttpMethod.GET, null);
 		if (capability != null) {
@@ -311,6 +343,9 @@ public class ProvidersApi extends AbstractApi {
 		}
 		if (!StringUtils.isEmpty(datasetFilter)) {
 			apiCallModel.addQueryParam(new Pair(PARAM_DATASET$FILTER, datasetFilter));
+		}
+		if (!StringUtils.isEmpty(fullAccountNumberFields)) {
+			apiCallModel.addQueryParam(new Pair(FULL_ACCT_NUMBER_FIELDS, fullAccountNumberFields));
 		}
 		if (!StringUtils.isEmpty(name)) {
 			apiCallModel.addQueryParam(new Pair(PARAM_NAME, name));

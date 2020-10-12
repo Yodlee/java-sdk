@@ -36,11 +36,11 @@ public class ProvidersValidator {
 	}
 
 	public static void validateGetProviders(ProvidersApi providersApi, String method, ProvidersCapability capability,
-			String datasetFilter, String name, ProvidersPriorityType priority, Integer skip, Integer top)
+			String datasetFilter, String fullAccountNumberFields, String name, ProvidersPriorityType priority, Integer skip, Integer top)
 			throws ApiException {
-		Class<?>[] argTypes = new Class[] {ProvidersCapability.class, String.class, String.class,
+		Class<?>[] argTypes = new Class[] {ProvidersCapability.class, String.class, String.class, String.class,
 				ProvidersPriorityType.class, Integer.class, Integer.class};
-		Object[] argValues = new Object[] {capability, datasetFilter, name, priority, skip, top};
+		Object[] argValues = new Object[] {capability, datasetFilter, fullAccountNumberFields, name, priority, skip, top};
 		List<Problem> methodProblems = ApiValidator.validate(providersApi, method, argTypes, argValues);
 		List<Problem> contextProblems = ApiValidator.validateCobrandContext(providersApi);
 		methodProblems.addAll(ApiUtils.isConflictingParams(name, top, "providers.param.name.top.invalid"));
@@ -58,11 +58,11 @@ public class ProvidersValidator {
 	}
 
 	public static void validateGetProvidersCount(ProvidersApi providersApi, String method,
-			ProvidersCapability capability, String datasetFilter, String name, ProvidersPriorityType priority)
+			ProvidersCapability capability, String datasetFilter, String fullAccountNumberFields, String name, ProvidersPriorityType priority)
 			throws ApiException {
 		Class<?>[] argTypes =
-				new Class[] {ProvidersCapability.class, String.class, String.class, ProvidersPriorityType.class,};
-		Object[] argValues = new Object[] {capability, datasetFilter, name, priority};
+				new Class[] {ProvidersCapability.class, String.class, String.class, String.class, ProvidersPriorityType.class,};
+		Object[] argValues = new Object[] {capability, datasetFilter, fullAccountNumberFields, name, priority};
 		List<Problem> methodProblems = ApiValidator.validate(providersApi, method, argTypes, argValues);
 		List<Problem> contextProblems = ApiValidator.validateCobrandContext(providersApi);
 		ApiValidator.collectProblems(methodProblems, contextProblems);

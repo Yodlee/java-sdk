@@ -8,24 +8,30 @@ package com.yodlee.sdk.api.validators;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import com.yodlee.api.model.account.CreateAccountInfo;
+import com.yodlee.api.model.account.EvaluateAccountAddress;
 import com.yodlee.api.model.account.UpdateAccountInfo;
 import com.yodlee.api.model.account.enums.FrequencyType;
 import com.yodlee.api.model.account.enums.ItemAccountStatus;
 import com.yodlee.api.model.account.request.CreateAccountRequest;
+import com.yodlee.api.model.account.request.EvaluateAddressRequest;
 import com.yodlee.api.model.account.request.UpdateAccountRequest;
 import com.yodlee.api.model.enums.Container;
 import com.yodlee.api.model.validator.Problem;
 import com.yodlee.sdk.api.AccountsApi;
 import com.yodlee.sdk.api.exception.ApiException;
 import com.yodlee.sdk.api.util.ApiUtils;
-
+/**
+ * <b> Note : </b> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response.
+ */
 public class AccountsValidator {
 
 	public enum IncludeParameterValue {
 		profile,//
 		holder,//
 		fullAccountNumber,//
+		fullAccountNumberList,
 		paymentProfile,//
 		autoRefresh;
 	}
@@ -165,8 +171,7 @@ public class AccountsValidator {
 			String includeInNetWorth = accountInfo.getIncludeInNetWorth();
 			problems.addAll(isValidIncludeInNetworth(includeInNetWorth));
 			problems.addAll(validAccountStatus(accountInfo));
-			problems.addAll(
-					ApiUtils.validatePattern(accountInfo.getAccountName(), "^\\s+.*", "accounts.accountName.space"));
+			problems.addAll(ApiUtils.validatePattern(accountInfo.getAccountName(), "^\\s+.*", "accounts.accountName.space"));
 		}
 		return problems;
 	}
@@ -220,4 +225,63 @@ public class AccountsValidator {
 		}
 		return problems;
 	}
+
+	public static void validateEvaluateAddress(AccountsApi accountsApi, String methodName,
+			EvaluateAddressRequest evaluateAddressRequest) throws ApiException {
+		Class<?>[] argTypes = new Class[] {EvaluateAddressRequest.class};
+		Object[] argValues = new Object[] {evaluateAddressRequest};
+		List<Problem> methodProblems = ApiValidator.validate(accountsApi, methodName, argTypes, argValues);
+		List<Problem> contextProblems = ApiValidator.validateUserContext(accountsApi);
+		List<Problem> modelProblems = evaluateAddressRequest.validate();
+		List<Problem> cityStateOrZipPresentProblems =
+				validateCityStateOrZipPresent(evaluateAddressRequest.getAddress());
+		ApiValidator.collectProblems(methodProblems, contextProblems, modelProblems, cityStateOrZipPresentProblems);
+	}
+	
+	private static List<Problem> validateCityStateOrZipPresent(EvaluateAccountAddress evaluateAccountAddress) {
+		List<Problem> problems = new ArrayList<>();
+		if (evaluateAccountAddress != null && isZipEmpty(evaluateAccountAddress)) {
+			boolean isCityEmpty = isCityEmpty(evaluateAccountAddress);
+			boolean isStateEmpty = isStateEmpty(evaluateAccountAddress);
+			if (isCityEmpty && isStateEmpty) {
+				problems.add(new Problem(ApiUtils.getErrorMessage("evaluateAddress.address.zip.required"), ""));
+			} else if (isCityEmpty) {
+				problems.add(new Problem(ApiUtils.getErrorMessage("evaluateAddress.address.city.required"), ""));
+			} else if (isStateEmpty) {
+				problems.add(new Problem(ApiUtils.getErrorMessage("evaluateAddress.address.state.required"), ""));
+			}
+		}
+		return problems;
+	}
+
+	private static boolean isZipEmpty(EvaluateAccountAddress evaluateAccountAddress) {
+		return StringUtils.isEmpty(evaluateAccountAddress.getZip());
+	}
+
+	private static boolean isCityEmpty(EvaluateAccountAddress evaluateAccountAddress) {
+		return StringUtils.isEmpty(evaluateAccountAddress.getCity());
+	}
+
+	private static boolean isStateEmpty(EvaluateAccountAddress evaluateAccountAddress) {
+		return StringUtils.isEmpty(evaluateAccountAddress.getState());
+	}
+	
+	public static void validateMigrateAccounts(AccountsApi accountsApi, String methodName, long providerAccountId)
+			throws ApiException {
+		Class<?>[] argTypes = new Class[] {long.class};
+		Object[] argValues = new Object[] {providerAccountId};
+		List<Problem> methodProblems = ApiValidator.validate(accountsApi, methodName, argTypes, argValues);
+		List<Problem> contextProblems = ApiValidator.validateUserContext(accountsApi);
+		ApiValidator.collectProblems(methodProblems, contextProblems);
+	}
+	
+	public static void validateAssociatedAccounts(AccountsApi accountsApi, String methodName, long providerAccountId)
+			throws ApiException {
+		Class<?>[] argTypes = new Class[] {long.class};
+		Object[] argValues = new Object[] {providerAccountId};
+		List<Problem> methodProblems = ApiValidator.validate(accountsApi, methodName, argTypes, argValues);
+		List<Problem> contextProblems = ApiValidator.validateUserContext(accountsApi);
+		ApiValidator.collectProblems(methodProblems, contextProblems);
+	}
+
 }

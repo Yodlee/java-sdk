@@ -111,4 +111,10 @@ public class ApiEndpoint {
 	static final String DOCUMENTS_WITH_ID = "/documents/{documentId}";
 
 	static final String DATAENRICH_USER_DATA = "/enrichData/userData";
+
+	static final String EVALUATE_ADDRESS = "/accounts/evaluateAddress";
+
+	static final String MIGRATEACCOUNTS_PROVIDERACCOUNTID = "/accounts/migrateAccounts/{providerAccountId}";
+	
+	static final String ASSOCIATEDACCOUNTS_PROVIDERACCOUNTID = "/accounts/associatedAccounts/{providerAccountId}";
 }

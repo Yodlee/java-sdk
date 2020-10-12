@@ -18,10 +18,12 @@ import org.slf4j.LoggerFactory;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.account.enums.ItemAccountStatus;
 import com.yodlee.api.model.account.request.CreateAccountRequest;
+import com.yodlee.api.model.account.request.EvaluateAddressRequest;
 import com.yodlee.api.model.account.request.UpdateAccountRequest;
 import com.yodlee.api.model.account.response.AccountHistoricalBalancesResponse;
 import com.yodlee.api.model.account.response.AccountResponse;
 import com.yodlee.api.model.account.response.CreatedAccountResponse;
+import com.yodlee.api.model.account.response.EvaluateAddressResponse;
 import com.yodlee.api.model.enums.Container;
 import com.yodlee.sdk.api.exception.ApiException;
 import com.yodlee.sdk.api.util.ApiUtils;
@@ -74,10 +76,13 @@ public class AccountsApi extends AbstractApi {
 	 * Get Account Details <br>
 	 * The get account details service provides detailed information of an account.<br>
 	 * 
+	 * <b> Note : </b> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter
+	 * and response.
+	 * 
 	 * @param accountId accountId (required)
 	 * @param container bank/creditCard/investment/insurance/loan/reward/bill/realEstate/otherAssets/otherLiabilities
 	 *        (required)
-	 * @param include profile, holder, fullAccountNumber, paymentProfile, autoRefresh (optional)
+	 * @param include profile, holder, fullAccountNumberList, paymentProfile, autoRefresh (optional)
 	 * @return {@link ApiResponse}&lt;{@link AccountResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -97,10 +102,13 @@ public class AccountsApi extends AbstractApi {
 	 * Get Account Details <br>
 	 * The get account details service provides detailed information of an account.<br>
 	 * 
+	 * <b> Note : </b> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter
+	 * and response.
+	 * 
 	 * @param accountId accountId (required)
 	 * @param container bank/creditCard/investment/insurance/loan/reward/bill/realEstate/otherAssets/otherLiabilities
 	 *        (required)
-	 * @param include profile, holder, fullAccountNumber, paymentProfile, autoRefresh (optional)
+	 * @param include profile, holder, fullAccountNumberList, paymentProfile, autoRefresh (optional)
 	 * @param apiCallback {@link ApiCallback}&lt;{@link AccountResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -139,10 +147,13 @@ public class AccountsApi extends AbstractApi {
 	 * If requestId is provided, the accounts that are updated in the context of the requestId will be provided in the
 	 * response.<br>
 	 * 
+	 * <b> Note : </b> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter
+	 * and response.
+	 * 
 	 * @param accountId Comma separated accountIds (optional)
 	 * @param container bank/creditCard/investment/insurance/loan/reward/bill/realEstate/otherAssets/otherLiabilities
 	 *        (optional)
-	 * @param include profile, holder, fullAccountNumber, paymentProfile, autoRefresh (optional)
+	 * @param include profile, holder, fullAccountNumberList, paymentProfile, autoRefresh (optional)
 	 * @param providerAccountId Comma separated providerAccountIds (optional)
 	 * @param requestId The unique identifier that returns contextual data (optional)
 	 * @param status Comma separated values ACTIVE/INACTIVE/TO_BE_CLOSED/CLOSED (optional)
@@ -173,10 +184,13 @@ public class AccountsApi extends AbstractApi {
 	 * If requestId is provided, the accounts that are updated in the context of the requestId will be provided in the
 	 * response.<br>
 	 * 
+	 * <b> Note : </b> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter
+	 * and response.
+	 * 
 	 * @param accountId Comma separated accountIds (optional)
 	 * @param container bank/creditCard/investment/insurance/loan/reward/bill/realEstate/otherAssets/otherLiabilities
 	 *        (optional)
-	 * @param include profile, holder, fullAccountNumber, paymentProfile, autoRefresh (optional)
+	 * @param include profile, holder, fullAccountNumberList, paymentProfile, autoRefresh (optional)
 	 * @param providerAccountId Comma separated providerAccountIds (optional)
 	 * @param requestId The unique identifier that returns contextual data (optional)
 	 * @param status Comma separated values ACTIVE/INACTIVE/TO_BE_CLOSED/CLOSED (optional)
@@ -511,6 +525,202 @@ public class AccountsApi extends AbstractApi {
 				replacePathVariable(ApiEndpoint.ACCOUNT_ACCOUNTID, PARAM_ACCOUNT_ID, String.valueOf(accountId));
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.DELETE, null);
+		registerResponseInterceptor(apiClient);
+		Call call = apiClient.buildCall(apiContext, requestListener());
+		return new CallContext(apiClient, call);
+	}
+
+	/**
+	 * Use this service to validate the address before adding the real estate account.<br>
+	 * If the address is valid, the service will return the complete address information.<br>
+	 * The response will contain multiple addresses if the user-provided input matches with multiple entries in the
+	 * vendor database.<br>
+	 * In the case of multiple matches, the user can select the appropriate address from the list and then invoke the
+	 * add account service with the complete address.<br>
+	 * <b>Note:</b> Yodlee recommends to use this service before adding the real estate account to avoid failures.<br>
+	 * 
+	 * @param evaluateAddressRequest (required)
+	 * @return {@link ApiResponse}&lt;{@link EvaluateAddressResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<EvaluateAddressResponse> evaluateAddress(
+			@NotNull(message = "{evaluateAddress.address.required}") EvaluateAddressRequest evaluateAddressRequest)
+			throws ApiException {
+		LOGGER.info("Evaluate Address API execution started");
+		AccountsValidator.validateEvaluateAddress(this, ApiUtils.getMethodName(), evaluateAddressRequest);
+		CallContext callContext = buildEvaluateAddressContext(evaluateAddressRequest);
+		return callContext.getApiClient().execute(callContext.getCall(), EvaluateAddressResponse.class);
+	}
+
+	/**
+	 * Use this service to validate the address before adding the real estate account.<br>
+	 * If the address is valid, the service will return the complete address information.<br>
+	 * The response will contain multiple addresses if the user-provided input matches with multiple entries in the
+	 * vendor database.<br>
+	 * In the case of multiple matches, the user can select the appropriate address from the list and then invoke the
+	 * add account service with the complete address.<br>
+	 * <b>Note:</b> Yodlee recommends to use this service before adding the real estate account to avoid failures.<br>
+	 * 
+	 * @param evaluateAddressRequest (required)
+	 * @param apiCallback {@link ApiCallback} (required)
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public void evaluateAddressAsync(
+			@NotNull(message = "{evaluateAddress.address.required}") EvaluateAddressRequest evaluateAddressRequest,
+			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
+		LOGGER.info("Evaluate Address Async API execution started");
+		AccountsValidator.validateEvaluateAddress(this, ApiUtils.getMethodName(), evaluateAddressRequest);
+		CallContext callContext = buildEvaluateAddressContext(evaluateAddressRequest);
+		callContext.getApiClient().executeAsync(callContext.getCall(), apiCallback);
+	}
+
+	private CallContext buildEvaluateAddressContext(EvaluateAddressRequest evaluateAddressRequest) throws ApiException {
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
+		ApiContext apiContext = new ApiContext(ApiEndpoint.EVALUATE_ADDRESS, HttpMethod.POST, evaluateAddressRequest);
+		registerResponseInterceptor(apiClient);
+		Call call = apiClient.buildCall(apiContext, requestListener());
+		return new CallContext(apiClient, call);
+	}
+
+	/**
+	 * Migrate Accounts, This service is associated with the open banking (OB) flow.<br>
+	 * Before invoking this service, display all the associated accounts to the user by calling the GET
+	 * /associatedAccounts API.<br>
+	 * The migrate accounts API treats the user's consent acceptance to initiate account migration. Invoking this
+	 * service indicates that the user has given the consent to access the associated account information from the
+	 * financial institution.<br>
+	 * If an existing provider supports bank, card, and loan accounts, and chose only to provide bank and card through
+	 * OB APIs, a new providerAccountId for OB will be created.<br>
+	 * The bank and card account information will be moved to the new providerAccountId. The loan account will be
+	 * retained in the existing provider account.<br>
+	 * This service returns the OB providerId and the OB providerAccountId. Note that, as part of this process, there is
+	 * a possibility of one or more providerAccounts getting merged.<br>
+	 * The update or delete actions will not be allowed for the providerAccounts involved in the migration process until
+	 * the user completes the authorization on the OB provider.<br>
+	 * The oauthMigrationEligibilityStatus attribute in the GET /accounts API response indicates the accounts included
+	 * in the migration process.<br>
+	 * 
+	 * @param providerAccountId (required)
+	 * @return {@link ApiResponse}&lt;{@link MigrateAccountsResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<AbstractModelComponent> migrateAccounts(
+			@Digits(integer = 11,
+					fraction = 0,
+					message = "{accounts.param.providerAccountId.invalid}") long providerAccountId)
+			throws ApiException {
+		LOGGER.info("Accounts migrateAccounts API execution started");
+		AccountsValidator.validateMigrateAccounts(this, ApiUtils.getMethodName(), providerAccountId);
+		CallContext callContext = buildMigrateAccountsContext(providerAccountId);
+		return callContext.getApiClient().execute(callContext.getCall(), null);
+	}
+
+	/**
+	 * Migrate Accounts, This service is associated with the open banking (OB) flow.<br>
+	 * Before invoking this service, display all the associated accounts to the user by calling the GET
+	 * /associatedAccounts API.<br>
+	 * The migrate accounts API treats the user's consent acceptance to initiate account migration. Invoking this
+	 * service indicates that the user has given the consent to access the associated account information from the
+	 * financial institution.<br>
+	 * If an existing provider supports bank, card, and loan accounts, and chose only to provide bank and card through
+	 * OB APIs, a new providerAccountId for OB will be created.<br>
+	 * The bank and card account information will be moved to the new providerAccountId. The loan account will be
+	 * retained in the existing provider account.<br>
+	 * This service returns the OB providerId and the OB providerAccountId. Note that, as part of this process, there is
+	 * a possibility of one or more providerAccounts getting merged.<br>
+	 * The update or delete actions will not be allowed for the providerAccounts involved in the migration process until
+	 * the user completes the authorization on the OB provider.<br>
+	 * The oauthMigrationEligibilityStatus attribute in the GET /accounts API response indicates the accounts included
+	 * in the migration process.<br>
+	 * 
+	 * @param providerAccountId (required)
+	 * @param apiCallback {@link ApiCallback} (required)
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public void migrateAccountsAsync(
+			@Digits(integer = 11,
+					fraction = 0,
+					message = "{accounts.param.providerAccountId.invalid}") long providerAccountId,
+			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
+		LOGGER.info("Accounts migrateAccountsAsync API execution started");
+		AccountsValidator.validateMigrateAccounts(this, ApiUtils.getMethodName(), providerAccountId);
+		CallContext callContext = buildMigrateAccountsContext(providerAccountId);
+		callContext.getApiClient().executeAsync(callContext.getCall(), apiCallback);
+	}
+
+	private CallContext buildMigrateAccountsContext(long providerAccountId) throws ApiException {
+		String endpoint = replacePathVariable(ApiEndpoint.MIGRATEACCOUNTS_PROVIDERACCOUNTID, PARAM_PROVIDER_ACCOUNT_ID,
+				String.valueOf(providerAccountId));
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
+		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.PUT, null);
+		registerResponseInterceptor(apiClient);
+		Call call = apiClient.buildCall(apiContext, requestListener());
+		return new CallContext(apiClient, call);
+	}
+
+	/**
+	 * Associated Accounts, Yodlee classifies providers into credential-based aggregation and Open Banking (OB)
+	 * providers.<br>
+	 * This service is associated with the OB aggregation flow. As part of the OB solution, financial institutions may
+	 * merge their subsidiaries and provide data as a single OB provider.<br>
+	 * Before the OB solution, this data was aggregated with different provider IDs.<br>
+	 * This service accepts the providerAccountId and returns all accounts of the associated providerAccounts that
+	 * belong to the subsidiary of the financial institution.<br>
+	 * This data should be displayed to the user to let them select the accounts that they wish to provide consent to
+	 * share account data.<br>
+	 * 
+	 * @param providerAccountId (required)
+	 * @return {@link ApiResponse}&lt;{@link AssociatedAccountsResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<AbstractModelComponent> getAssociatedAccounts(
+			@Digits(integer = 11,
+					fraction = 0,
+					message = "{accounts.param.providerAccountId.invalid}") long providerAccountId)
+			throws ApiException {
+		LOGGER.info("Accounts getAssociatedAccounts API execution started");
+		AccountsValidator.validateAssociatedAccounts(this, ApiUtils.getMethodName(), providerAccountId);
+		CallContext callContext = buildAssociatedAccountsContext(providerAccountId);
+		return callContext.getApiClient().execute(callContext.getCall(), null);
+	}
+
+	/**
+	 * Associated Accounts, Yodlee classifies providers into credential-based aggregation and Open Banking (OB)
+	 * providers.<br>
+	 * This service is associated with the OB aggregation flow. As part of the OB solution, financial institutions may
+	 * merge their subsidiaries and provide data as a single OB provider.<br>
+	 * Before the OB solution, this data was aggregated with different provider IDs.<br>
+	 * This service accepts the providerAccountId and returns all accounts of the associated providerAccounts that
+	 * belong to the subsidiary of the financial institution.<br>
+	 * This data should be displayed to the user to let them select the accounts that they wish to provide consent to
+	 * share account data.<br>
+	 * 
+	 * @param providerAccountId (required)
+	 * @param apiCallback {@link ApiCallback} (required)
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public void getAssociatedAccountsAsync(
+			@Digits(integer = 11,
+					fraction = 0,
+					message = "{accounts.param.providerAccountId.invalid}") long providerAccountId,
+			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
+		LOGGER.info("Accounts getAssociatedAccountsAsync API execution started");
+		AccountsValidator.validateAssociatedAccounts(this, ApiUtils.getMethodName(), providerAccountId);
+		CallContext callContext = buildAssociatedAccountsContext(providerAccountId);
+		callContext.getApiClient().executeAsync(callContext.getCall(), apiCallback);
+	}
+
+	private CallContext buildAssociatedAccountsContext(long providerAccountId) throws ApiException {
+		String endpoint = replacePathVariable(ApiEndpoint.ASSOCIATEDACCOUNTS_PROVIDERACCOUNTID,
+				PARAM_PROVIDER_ACCOUNT_ID, String.valueOf(providerAccountId));
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
+		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.GET, null);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);

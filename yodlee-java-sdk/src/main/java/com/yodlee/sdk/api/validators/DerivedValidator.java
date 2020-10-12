@@ -8,6 +8,7 @@ package com.yodlee.sdk.api.validators;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import com.yodlee.api.model.enums.Container;
 import com.yodlee.api.model.validator.Problem;
 import com.yodlee.sdk.api.DerivedApi;
 import com.yodlee.sdk.api.exception.ApiException;
@@ -86,11 +87,11 @@ public class DerivedValidator {
 	}
 
 	public static void validateNetworth(DerivedApi derivedApi, String methodName, Long[] accountIds, Date fromDate,
-			DerivedInclude include, DataPointInterval interval, Integer skip, Date toDate, Integer top)
-			throws ApiException {
+			DerivedInclude include, DataPointInterval interval, Integer skip, Date toDate, Integer top,
+			Container container) throws ApiException {
 		Class<?>[] argTypes = new Class[] {Long[].class, Date.class, DerivedInclude.class, DataPointInterval.class,
-				Integer.class, Date.class, Integer.class};
-		Object[] argValues = new Object[] {accountIds, fromDate, include, interval, skip, toDate, top};
+				Integer.class, Date.class, Integer.class, Container.class};
+		Object[] argValues = new Object[] {accountIds, fromDate, include, interval, skip, toDate, top, container};
 		List<Problem> methodProblems = ApiValidator.validate(derivedApi, methodName, argTypes, argValues);
 		List<Problem> contextProblems = ApiValidator.validateUserContext(derivedApi);
 		methodProblems.addAll(ApiValidator.isValidDateRange(fromDate, toDate, "derived.param.date.range.invalid"));

@@ -16,9 +16,11 @@ import javax.validation.constraints.Size;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.yodlee.api.model.annotations.AllowedContainer;
 import com.yodlee.api.model.derived.response.DerivedHoldingSummaryResponse;
 import com.yodlee.api.model.derived.response.DerivedNetworthResponse;
 import com.yodlee.api.model.derived.response.DerivedTransactionSummaryResponse;
+import com.yodlee.api.model.enums.Container;
 import com.yodlee.sdk.api.exception.ApiException;
 import com.yodlee.sdk.api.util.ApiUtils;
 import com.yodlee.sdk.api.validators.DerivedValidator;
@@ -63,6 +65,8 @@ public class DerivedApi extends AbstractApi {
 	private static final String PARAM_ACCOUNT_IDS = "accountIds";
 
 	private static final String PARAM_GROUP_BY = "groupBy";
+
+	private static final String PARAM_CONTAINER = "container";
 
 	public DerivedApi(Context<?> context) {
 		super(context);
@@ -295,12 +299,18 @@ public class DerivedApi extends AbstractApi {
 			@Min(value = 0, message = "{derived.param.skip.invalid}") Integer skip, //
 			@Past(message = "{derived.param.toDate.invalid}") Date toDate, //
 			@Min(value = 1, message = "{derived.param.top.invalid}") //
-			@Max(value = 500, message = "{derived.param.top.invalid}") Integer top)//
-			throws ApiException {
+			@Max(value = 500, message = "{derived.param.top.invalid}") Integer top, //
+			@AllowedContainer(value = {//
+					Container.bank, Container.creditCard,//
+					Container.investment, Container.insurance,//
+					Container.loan, Container.realEstate,//
+					Container.otherAssets, Container.otherLiabilities//
+			}, message = "{derived.param.container.invalid}") Container container) throws ApiException {
 		LOGGER.info("Derived getNetworth API execution started");
 		DerivedValidator.validateNetworth(this, ApiUtils.getMethodName(), accountIds, fromDate, include, interval, skip,
-				toDate, top);
-		CallContext callContext = buildGetNetworthContext(accountIds, fromDate, include, interval, skip, toDate, top);
+				toDate, top, container);
+		CallContext callContext =
+				buildGetNetworthContext(accountIds, fromDate, include, interval, skip, toDate, top, container);
 		return callContext.getApiClient().execute(callContext.getCall(), DerivedNetworthResponse.class);
 	}
 
@@ -327,18 +337,26 @@ public class DerivedApi extends AbstractApi {
 			@Min(value = 0, message = "{derived.param.skip.invalid}") Integer skip, //
 			@Past(message = "{derived.param.toDate.invalid}") Date toDate, //
 			@Min(value = 1, message = "{derived.param.top.invalid}") //
-			@Max(value = 500, message = "{derived.param.top.invalid}") Integer top,
+			@Max(value = 500, message = "{derived.param.top.invalid}") Integer top, //
+			@AllowedContainer(value = {//
+					Container.bank, Container.creditCard,//
+					Container.investment, Container.insurance,//
+					Container.loan, Container.realEstate,//
+					Container.otherAssets, Container.otherLiabilities//
+			}, message = "{derived.param.container.invalid}") Container container,
 			ApiCallback<DerivedNetworthResponse> apiCallback)//
 			throws ApiException {
 		LOGGER.info("Derived getNetworthAsync API execution started");
 		DerivedValidator.validateNetworth(this, ApiUtils.getMethodName(), accountIds, fromDate, include, interval, skip,
-				toDate, top);
-		CallContext callContext = buildGetNetworthContext(accountIds, fromDate, include, interval, skip, toDate, top);
+				toDate, top, container);
+		CallContext callContext =
+				buildGetNetworthContext(accountIds, fromDate, include, interval, skip, toDate, top, container);
 		callContext.getApiClient().executeAsync(callContext.getCall(), DerivedNetworthResponse.class, apiCallback);
 	}
 
 	private CallContext buildGetNetworthContext(Long[] accountIds, Date fromDate, DerivedInclude include,
-			DataPointInterval interval, Integer skip, Date toDate, Integer top) throws ApiException {
+			DataPointInterval interval, Integer skip, Date toDate, Integer top, Container container)
+			throws ApiException {
 		Format formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD);
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.DERIVED_NETWORTH, HttpMethod.GET, null);
@@ -363,6 +381,9 @@ public class DerivedApi extends AbstractApi {
 		}
 		if (top != null) {
 			apiContext.addQueryParam(new Pair(PARAM_TOP, String.valueOf(top)));
+		}
+		if (container != null) {
+			apiContext.addQueryParam(new Pair(PARAM_CONTAINER, String.valueOf(container)));
 		}
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
