@@ -7,6 +7,7 @@ package com.yodlee.api.model.annotations;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import com.yodlee.api.model.enums.Container;
@@ -22,6 +23,9 @@ public class AllowedContainerValidator implements ConstraintValidator<AllowedCon
 
 	@Override
 	public boolean isValid(Container container, ConstraintValidatorContext constraintValidatorContext) {
+		if (Objects.isNull(container)) {
+			return true;
+		}
 		return containers.contains(container);
 	}
 }

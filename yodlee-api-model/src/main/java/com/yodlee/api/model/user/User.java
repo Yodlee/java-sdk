@@ -40,6 +40,8 @@ public class User extends AbstractUser {
 		return session;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "User [session=" + session + ", id=" + id + ", loginName=" + loginName + ", name=" + name

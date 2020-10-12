@@ -16,11 +16,11 @@ import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UpdatedConsentResponse extends AbstractModelComponent implements Response {
-
-	@ApiModelProperty(readOnly = true)
+	
+	@ApiModelProperty(readOnly=true)
 	@JsonProperty(value = "consent", required = false)
 	private List<UpdateConsent> consents;
-
+	
 	@JsonProperty("consent")
 	public List<UpdateConsent> getConsents() {
 		return consents == null ? null : Collections.unmodifiableList(consents);
@@ -30,4 +30,5 @@ public class UpdatedConsentResponse extends AbstractModelComponent implements Re
 	public String toString() {
 		return "UpdatedConsentResponse [consents=" + consents + "]";
 	}
+	
 }

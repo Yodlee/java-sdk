@@ -14,10 +14,10 @@ import com.yodlee.api.model.AccountHolder;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"fullAccountNumber", "CONTAINER", "providerAccountId", "accountName", "accountStatus",
+@JsonPropertyOrder({"fullAccountNumber", "fullAccountNumberList", "CONTAINER", "providerAccountId", "accountName", "accountStatus",
 		"accountNumber", "aggregationSource", "isAsset", "balance", "id", "userClassification", "includeInNetWorth",
 		"providerId", "providerName", "isManual", "availableBalance", "currentBalance", "accountType", "displayedName",
-		"createdDate", "dueDate", "401kLoan", "annuityBalance", "interestPaidYTD", "interestPaidLastYear",
+		"createdDate", "sourceId", "dueDate", "401kLoan", "annuityBalance", "interestPaidYTD", "interestPaidLastYear",
 		"interestRateType", "collateral", "annualPercentageYield", "premium", "remainingBalance", "policyEffectiveDate",
 		"policyFromDate", "policyToDate", "deathBenefit", "policyTerm", "policyStatus", "apr", "cashApr",
 		"availableCash", "availableCredit", "cash", "cashValue", "classification", "expirationDate", "faceAmount",
@@ -30,9 +30,10 @@ import io.swagger.annotations.ApiModelProperty;
 		"valuationType", "homeValue", "estimatedDate", "address", "historicalBalances", "loanPayoffAmount",
 		"loanPayByDate", "profile", "bankTransferCode", "rewardBalance", "frequency", "amountDue", "minimumAmountDue",
 		"dataset", "holder", "associatedProviderAccountId", "loanPayOffDetails", "coverage", "sourceAccountStatus",
-		"repaymentPlanType", "guarantor", "lender", "paymentProfile", "autoRefresh"})
+		"repaymentPlanType", "guarantor", "lender", "paymentProfile", "autoRefresh", "oauthMigrationStatus"})
 public class Account extends AbstractAccount {
 
+	@Deprecated
 	@ApiModelProperty(readOnly = true,
 					  value = "Full account number of the account that is included only when include = fullAccountNumber is provided in the request. "
 							  + "For student loan account the account number that will be used for ACH or fund transfer"//
@@ -43,10 +44,25 @@ public class Account extends AbstractAccount {
 							  + "<ul>"//
 							  + "<li>GET accounts</li>"//
 							  + "<li>GET accounts/{accountId}</li>"//
+							  +	"<b> Note : </b> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response."
 							  + "</ul>")
 	@JsonProperty("fullAccountNumber")
 	private String fullAccountNumber;
+	
+	@ApiModelProperty(readOnly = true,
+					  value = "Full account number List of the account that is included only when include = fullAccountNumberList is provided in the request. "
+							  + "<br><br>"//
+							  + "<b>Aggregated / Manual</b>: Both <br>"//
+							  + "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward, bill, otherAssets, otherLiabilities <br>"////
+							  + "<b>Endpoints</b>:"//
+							  + "<ul>"//
+							  + "<li>GET accounts</li>"//
+							  + "<li>GET accounts/{accountId}</li>"//
+							  + "</ul>")
+	@JsonProperty("fullAccountNumberList")
+	private FullAccountNumberList fullAccountNumberList;
 
+	
 	@ApiModelProperty(readOnly = true,
 					  value = "Profile information of the account."//
 							  + "<br><br>"//
@@ -126,12 +142,35 @@ public class Account extends AbstractAccount {
 	 * <li>GET accounts/{accountId}</li>
 	 * </ul>
 	 * 
+	 * <b> Note : </b> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response.
+	 * 
 	 * @return fullAccountNumber
 	 */
+	@Deprecated
 	public String getFullAccountNumber() {
 		return fullAccountNumber;
 	}
 
+	/**
+	 * Full account number List of the account that is included only when include = fullAccountNumberList is provided in the
+	 * request. <br>
+	 * <br>
+	 * <b>Aggregated / Manual</b>: Both <br>
+	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward, bill, otherAssets,
+	 * otherLiabilities <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET accounts</li>
+	 * <li>GET accounts/{accountId}</li>
+	 * </ul>
+	 * 
+	 * 
+	 * @return fullAccountNumberList
+	 */
+	public FullAccountNumberList getFullAccountNumberList() {
+		return fullAccountNumberList;
+	}
+	
 	/**
 	 * Holder details of the account. <br>
 	 * <br>
@@ -187,7 +226,7 @@ public class Account extends AbstractAccount {
 
 	@Override
 	public String toString() {
-		return "Account [fullAccountNumber=" + fullAccountNumber + ", profile=" + profile + ", holders=" + holders
+		return "Account [fullAccountNumber=" + fullAccountNumber  + ", fullAccountNumberList=" + fullAccountNumberList + ", profile=" + profile + ", holders=" + holders
 				+ ", paymentProfile=" + paymentProfile + ", autoRefresh=" + autoRefresh + ", container=" + container
 				+ ", providerAccountId=" + providerAccountId + ", accountName=" + accountName + ", accountStatus="
 				+ accountStatus + ", accountNumber=" + accountNumber + ", aggregationSource=" + aggregationSource
@@ -195,15 +234,15 @@ public class Account extends AbstractAccount {
 				+ userClassification + ", includeInNetWorth=" + includeInNetWorth + ", providerId=" + providerId
 				+ ", providerName=" + providerName + ", isManual=" + isManual + ", availableBalance=" + availableBalance
 				+ ", currentBalance=" + currentBalance + ", accountType=" + accountType + ", displayedName="
-				+ displayedName + ", createdDate=" + createdDate + ", dueDate=" + dueDate + ", loan401k=" + loan401k
-				+ ", annuityBalance=" + annuityBalance + ", interestPaidYTD=" + interestPaidYTD
-				+ ", interestPaidLastYear=" + interestPaidLastYear + ", interestRateType=" + interestRateType
-				+ ", collateral=" + collateral + ", annualPercentageYield=" + annualPercentageYield + ", premium="
-				+ premium + ", remainingBalance=" + remainingBalance + ", policyEffectiveDate=" + policyEffectiveDate
-				+ ", policyFromDate=" + policyFromDate + ", policyToDate=" + policyToDate + ", deathBenefit="
-				+ deathBenefit + ", policyTerm=" + policyTerm + ", policyStatus=" + policyStatus + ", apr=" + apr
-				+ ", cashApr=" + cashApr + ", availableCash=" + availableCash + ", availableCredit=" + availableCredit
-				+ ", cash=" + cash + ", cashValue=" + cashValue + ", classification=" + classification
+				+ displayedName + ", createdDate=" + createdDate + ", sourceId=" + sourceId + ", dueDate=" + dueDate
+				+ ", loan401k=" + loan401k + ", annuityBalance=" + annuityBalance + ", interestPaidYTD="
+				+ interestPaidYTD + ", interestPaidLastYear=" + interestPaidLastYear + ", interestRateType="
+				+ interestRateType + ", collateral=" + collateral + ", annualPercentageYield=" + annualPercentageYield
+				+ ", premium=" + premium + ", remainingBalance=" + remainingBalance + ", policyEffectiveDate="
+				+ policyEffectiveDate + ", policyFromDate=" + policyFromDate + ", policyToDate=" + policyToDate
+				+ ", deathBenefit=" + deathBenefit + ", policyTerm=" + policyTerm + ", policyStatus=" + policyStatus
+				+ ", apr=" + apr + ", cashApr=" + cashApr + ", availableCash=" + availableCash + ", availableCredit="
+				+ availableCredit + ", cash=" + cash + ", cashValue=" + cashValue + ", classification=" + classification
 				+ ", expirationDate=" + expirationDate + ", faceAmount=" + faceAmount + ", interestRate=" + interestRate
 				+ ", lastPayment=" + lastPayment + ", lastPaymentAmount=" + lastPaymentAmount + ", lastPaymentDate="
 				+ lastPaymentDate + ", lastUpdated=" + lastUpdated + ", marginBalance=" + marginBalance
@@ -226,6 +265,7 @@ public class Account extends AbstractAccount {
 				+ frequency + ", amountDue=" + amountDue + ", minimumAmountDue=" + minimumAmountDue + ", datasets="
 				+ datasets + ", associatedProviderAccountIds=" + associatedProviderAccountIds + ", loanPayoffDetails="
 				+ loanPayOffDetails + ", coverage=" + coverage + ", sourceAccountStatus=" + sourceAccountStatus
-				+ ", repaymentPlanType=" + repaymentPlanType + ", guarantor=" + guarantor + ", lender=" + lender + "]";
+				+ ", repaymentPlanType=" + repaymentPlanType + ", guarantor=" + guarantor + ", lender=" + lender 
+				+ ", oauthMigrationStatus=" + openBankingMigrationStatusType +"]";
 	}
 }

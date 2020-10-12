@@ -14,7 +14,8 @@ import com.yodlee.api.model.account.enums.ValuationType;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"accountType", "accountName", "nickname", "accountNumber", "balance", "url", "loginName",
-		"password", "includeInNetWorth", "memo", "dueDate", "homeValue", "valuationType", "amountDue", "frequency"})
+		"password", "includeInNetWorth", "memo", "dueDate", "homeValue", "valuationType", "amountDue",
+		"frequency"})
 public class CreateAccountInfo extends AbstractAccountInfo {
 
 	@NotEmpty(message = "{accounts.accountName.required}")

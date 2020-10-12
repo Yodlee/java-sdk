@@ -19,7 +19,7 @@ public class UpdateCategoryRequest extends AbstractModelComponent implements Req
 
 	@NotNull(message = "{transactions.updateTransactionCategory.id.required}")
 	@Digits(message = "{transactions.updateTransactionCategory.id.invalid}", fraction = 0, integer = 11)
-	@Min(value = 1, message = "{transactions.updateTransactionCategory.id.invalid}")
+	@Min(value=1, message = "{transactions.updateTransactionCategory.id.invalid}")
 	@JsonProperty("id")
 	private Long id;
 

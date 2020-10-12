@@ -15,11 +15,11 @@ import com.yodlee.api.model.user.enums.Currency;
 @JsonPropertyOrder({"amount", "currency"})
 public class Money extends AbstractModelComponent {
 
-	@NotNull(message = "{amount.required}")
+	@NotNull(message="{amount.required}")
 	@JsonProperty("amount")
 	private Double amount;
 
-	@NotNull(message = "{currency.required}")
+	@NotNull(message="{currency.required}")
 	@JsonProperty("currency")
 	private Currency currency;
 

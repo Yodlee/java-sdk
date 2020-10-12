@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class MatchingVerification extends AbstractModelComponent {
 
+
 	@ApiModelProperty(value = "Unique identifier for the account."//
 			+ "<br><br>"//
 			+ "<b>Endpoints</b>:"//
@@ -47,6 +48,7 @@ public class MatchingVerification extends AbstractModelComponent {
 			+ "</ul>")
 	@JsonProperty("providerAccountId")
 	protected Long providerAccountId;
+
 
 	/**
 	 * Unique identifier for the account. <br>
@@ -115,4 +117,5 @@ public class MatchingVerification extends AbstractModelComponent {
 		return "Verification [accountId=" + accountId + ", verificationType=" + verificationType
 				+ ", providerAccountId=" + providerAccountId + "]";
 	}
+
 }

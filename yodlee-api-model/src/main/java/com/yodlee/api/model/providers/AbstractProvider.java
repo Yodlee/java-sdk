@@ -556,4 +556,33 @@ public abstract class AbstractProvider extends AbstractModelComponent {
 	public List<ProviderAccountType> getAccountType() {
 		return accountType == null ? null : Collections.unmodifiableList(accountType);
 	}
+	
+	@ApiModelProperty(readOnly = true,
+					  value = "The screen-scraping providers that are associated to the Open Banking provider ID."//
+							  + "<br><br>"//
+							  + "<b>Applicable containers</b>: All Containers<br>"//
+							  + "<b>Endpoints</b>:"//
+							  + "<ul>"//
+							  + "<li>GET providers</li>"//
+							  + "<li>GET providers/{providerId}</li>"//
+							  + "</ul>")
+	@JsonProperty("associatedProviderIds")
+	protected List<Long> associatedProviderIds;
+
+	/**
+	 * The screen-scraping providers that are associated to the Open Banking provider ID. <br>
+	 * <br>
+	 * <b>Applicable containers</b>: All Containers<br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET providers</li>
+	 * <li>GET providers/{providerId}</li>
+	 * </ul>
+	 * 
+	 * @return associatedProviderIds
+	 */
+	@JsonProperty("associatedProviderIds")
+	public List<Long> getAssociatedProviderIds() {
+		return associatedProviderIds == null ? null : Collections.unmodifiableList(associatedProviderIds);
+	}
 }

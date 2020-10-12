@@ -25,6 +25,7 @@ import com.yodlee.api.model.account.enums.UserClassification;
 import com.yodlee.api.model.account.enums.ValuationType;
 import com.yodlee.api.model.enums.AggregationSource;
 import com.yodlee.api.model.enums.Container;
+import com.yodlee.api.model.enums.OpenBankingMigrationStatusType;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -597,6 +598,19 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "</ul>")
 	@JsonProperty("createdDate")
 	protected String createdDate;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "A unique ID that the provider site has assigned to the account. "
+							  + "The source ID is only available for the HELD accounts." + "<br><br>"//
+							  + "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, bill, reward<br>"//
+							  + "<b>Endpoints</b>:"//
+							  + "<ul>"//
+							  + "<li>GET accounts</li>"//
+							  + "<li>GET accounts/{accountId}</li>"//
+							  + "<li>GET dataExtracts/userData</li>"//
+							  + "</ul>")
+	@JsonProperty("sourceId")
+	protected String sourceId;
 
 	@ApiModelProperty(readOnly = true,
 					  value = "The date on which the due amount has to be paid. " + "<br><b>Additional Details:</b>"
@@ -3820,5 +3834,34 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 */
 	public String getLender() {
 		return lender;
+	}
+	
+	@ApiModelProperty(readOnly = true,
+			  value = "Indicates the migration status of the account from screen-scraping provider to the Open Banking provider. "//
+					  + "<br><br>"//
+					  + "<b>Endpoints</b>:"//
+					  + "<ul>"//
+					  + "<li>GET accounts</li>"//
+					  + "<li>GET accounts/{accountId}</li>"//
+					  + "<li>GET dataExtracts/userData</li>"//
+					  + "</ul>")
+	@JsonProperty("oauthMigrationStatus")
+	protected OpenBankingMigrationStatusType openBankingMigrationStatusType;
+
+	/**
+	 * Indicates the migration status of the account from screen-scraping provider to the Open Banking provider. <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET accounts</li>
+	 * <li>GET accounts/{accountId}</li>
+	 * <li>GET dataExtracts/userData</li>
+	 * </ul>
+	 * 
+	 * @return OpenBankingMigrationStatusType
+	 */
+	@JsonProperty("oauthMigrationStatus")
+	public OpenBankingMigrationStatusType getOpenBankingMigrationStatusType() {
+		return openBankingMigrationStatusType;
 	}
 }

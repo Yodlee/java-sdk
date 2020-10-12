@@ -5,6 +5,7 @@
  */
 package com.yodlee.api.model.documents.enums;
 
+
 public enum DocType {
 	STMT, TAX, EBILL
 }

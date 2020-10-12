@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"id", "aggregationSource", "providerId", "consentId", "isManual", "createdDate", "requestId",
-		"status", "dataset", "loginForm", "isAutoRefreshPreferred", "isDataExtractsPreferred", "preferences"})
+		"status", "dataset", "loginForm", "isAutoRefreshPreferred", "isDataExtractsPreferred", "preferences", "oauthMigrationStatus"})
 public class ProviderAccountDetail extends AbstractProviderAccount {
 
 	@ApiModelProperty(readOnly = true,
@@ -130,6 +130,6 @@ public class ProviderAccountDetail extends AbstractProviderAccount {
 		return "ProviderAccount [createdDate=" + createdDate + ", loginForm=" + loginForm + ", preferences="
 				+ preferences + ", id=" + id + ", consentId=" + consentId + ", aggregationSource=" + aggregationSource
 				+ ", providerId=" + providerId + ", isManual=" + isManual + ", requestId=" + requestId + ", status="
-				+ status + ", datasets=" + datasets + "]";
+				+ status + ", datasets=" + datasets + ", oauthMigrationStatus=" + openBankingMigrationStatusType +"]";
 	}
 }

@@ -12,7 +12,8 @@ import com.yodlee.api.model.Request;
 import com.yodlee.api.model.verification.MatchingVerification;
 
 public class VerificationMatchingRequest extends AbstractModelComponent implements Request {
-
+	
+	
 	@JsonProperty("verification")
 	@NotNull(message = "{verifications.MatchingVerification.required}")
 	private MatchingVerification verification;

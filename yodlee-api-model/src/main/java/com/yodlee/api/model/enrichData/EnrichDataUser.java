@@ -26,7 +26,7 @@ public class EnrichDataUser extends AbstractModelComponent {
 	private String loginName;
 
 	@NotEmpty(message = "{enrichData.data.invalid}")
-	@Email(message = "{user.email.invalid}")
+	@Email(message= "{user.email.invalid}")
 	@JsonProperty("email")
 	private String email;
 

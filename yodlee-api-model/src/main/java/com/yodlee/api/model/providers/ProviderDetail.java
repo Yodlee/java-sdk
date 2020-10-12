@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({"id", "name", "loginUrl", "baseUrl", "favicon", "logo", "status", "languageISOCode",
 		"primaryLanguageISOCode", "lastModified", "isAutoRefreshEnabled", "capability", "dataset", "authType", "help",
 		"oAuthSite", "isProviderOwned", "isAddedByUser", "PRIORITY", "countryISOCode", "mfaType", "loginForm",
-		"authParameter", "accountType", "isConsentRequired"})
+		"authParameter", "accountType", "isConsentRequired", "associatedProviderIds"})
 public class ProviderDetail extends AbstractProvider {
 
 	@ApiModelProperty(readOnly = true,
@@ -55,6 +55,7 @@ public class ProviderDetail extends AbstractProvider {
 				+ ", capabilities=" + capabilities + ", datasets=" + datasets + ", authType=" + authType + ", help="
 				+ help + ", isAddedByUser=" + isAddedByUser + ", priority=" + priority + ", countryISOCode="
 				+ countryISOCode + ", authParameter=" + authParameter + ", accountType=" + accountType
-				+ ", isConsentRequired=" + isConsentRequired + "]";
+				+ ", isConsentRequired=" + isConsentRequired  
+				+ ", associatedProviderIds=" + associatedProviderIds  +"]";
 	}
 }

@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.AccountDataset;
 import com.yodlee.api.model.enums.AggregationSource;
+import com.yodlee.api.model.enums.OpenBankingMigrationStatusType;
 import com.yodlee.api.model.provideraccounts.enums.ProviderAccountStatus;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -266,5 +267,36 @@ public abstract class AbstractProviderAccount extends AbstractModelComponent {
 	 */
 	public String getLastUpdated() {
 		return lastUpdated;
+	}
+	
+	@ApiModelProperty(readOnly = true,
+			  value = "Indicates the migration status of the provider account from screen-scraping provider to the Open Banking provider. "//
+					  + "<br><br>"//
+					  + "<b>Endpoints</b>:"//
+					  + "<ul>"//
+					  + "<li>GET providerAccounts</li>"//
+					  + "<li>GET providerAccounts/{providerAccountId}</li>"
+					  + "<li>PUT providerAccounts/{providerAccountId}</li>"
+					  + "<li>GET dataExtracts/userData</li>"//
+					  + "</ul>")
+	@JsonProperty("oauthMigrationStatus")
+	protected OpenBankingMigrationStatusType openBankingMigrationStatusType;
+
+	/**
+	 * Indicates the migration status of the provider account from screen-scraping provider to the Open Banking provider. <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET providerAccounts</li>
+	 * <li>GET providerAccounts/{providerAccountId}</li>
+	 * <li>PUT providerAccounts/{providerAccountId}</li>
+	 * <li>GET dataExtracts/userData</li>
+	 * </ul>
+	 * 
+	 * @return OpenBankingMigrationStatusType
+	 */
+	@JsonProperty("oauthMigrationStatus")
+	public OpenBankingMigrationStatusType getOpenBankingMigrationStatusType() {
+		return openBankingMigrationStatusType;
 	}
 }

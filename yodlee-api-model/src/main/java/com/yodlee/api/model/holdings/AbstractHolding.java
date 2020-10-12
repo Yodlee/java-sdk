@@ -63,6 +63,14 @@ public abstract class AbstractHolding extends AbstractModelComponent {
 	)
 	@JsonProperty("securityType")
 	protected String securityType;
+	
+	@ApiModelProperty(readOnly = true,
+			  value = "Indicates the security style of holding identified through the security service."//
+					  + "<br><br>"//
+					  + "<b>Applicable containers</b>: investment, insurance<br>"//
+	)
+	@JsonProperty("securityStyle")
+	protected String securityStyle;
 
 	@ApiModelProperty(readOnly = true,
 					  value = "Indicates the security match status id of the investment option identified during security normalization."//
@@ -80,6 +88,14 @@ public abstract class AbstractHolding extends AbstractModelComponent {
 	)
 	@JsonProperty("description")
 	protected String description;
+
+	@ApiModelProperty(readOnly = true,
+			  value = "The enrichedDescription is the security description of the normalized holding"
+					  + "<br><br>"//
+					  + "<b>Applicable containers</b>: investment, insurance<br>"//
+	)
+	@JsonProperty("enrichedDescription")
+	protected String enrichedDescription;
 
 	@ApiModelProperty(readOnly = true,
 					  value = "The current price of the security."
@@ -382,6 +398,17 @@ public abstract class AbstractHolding extends AbstractModelComponent {
 	public String getSecurityType() {
 		return securityType;
 	}
+	
+	/**
+	 * Indicates the security style of holding identified through the security service. <br>
+	 * <br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
+	 * 
+	 * @return securityStyle
+	 */
+	public String getSecurityStyle() {
+		return securityStyle;
+	}
 
 	/**
 	 * The description (name) for the holding (E.g., Cisco Systems) <br>
@@ -394,6 +421,18 @@ public abstract class AbstractHolding extends AbstractModelComponent {
 	 */
 	public String getDescription() {
 		return description;
+	}
+	
+	/**
+	 * The enrichedDescription is the security description of the normalized holding <br>
+	 * <br>
+	 * <br>
+	 * <b>Applicable containers</b>: investment, insurance<br>
+	 * 
+	 * @return enrichedDescription
+	 */
+	public String getEnrichedDescription() {
+		return enrichedDescription;
 	}
 
 	/**

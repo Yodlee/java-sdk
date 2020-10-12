@@ -27,7 +27,7 @@ public class Field extends AbstractModelComponent {
 			+ "<li>GET providerAccounts/{providerAccountId}</li>"//
 			+ "<li>GET providers/{providerId}</li>"//
 			+ "</ul>")
-	@NotEmpty(message = "{providerAccounts.param.field.id.required}")
+	@NotEmpty(message="{providerAccounts.param.field.id.required}")
 	@JsonProperty("id")
 	private String id;
 

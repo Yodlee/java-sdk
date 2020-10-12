@@ -11,28 +11,28 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Request;
-import com.yodlee.api.model.account.CreateAccountInfo;
+import com.yodlee.api.model.account.EvaluateAccountAddress;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CreateAccountRequest extends AbstractModelComponent implements Request{
+public class EvaluateAddressRequest extends AbstractModelComponent implements Request {
 
-	@NotNull(message = "{accounts.manualAccountInfo.required}")
+	@NotNull(message = "{evaluateAddress.address.required}")
 	@Valid
-	@JsonProperty("account")
-	private CreateAccountInfo accountInfo;
+	@JsonProperty("address")
+	private EvaluateAccountAddress address;
 
-	@JsonProperty("account")
-	public CreateAccountInfo getAccountInfo() {
-		return accountInfo;
+	@JsonProperty("address")
+	public EvaluateAccountAddress getAddress() {
+		return address;
 	}
 
-	@JsonProperty("account")
-	public void setAccountInfo(CreateAccountInfo accountInfo) {
-		this.accountInfo = accountInfo;
+	@JsonProperty("address")
+	public void setAddress(EvaluateAccountAddress address) {
+		this.address = address;
 	}
 
 	@Override
 	public String toString() {
-		return "CreateAccountRequest [accountInfo=" + accountInfo + "]";
+		return "EvaluateAddressRequest [address=" + address + "]";
 	}
 }

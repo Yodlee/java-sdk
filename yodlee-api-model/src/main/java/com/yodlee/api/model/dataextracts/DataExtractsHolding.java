@@ -10,21 +10,22 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.yodlee.api.model.holdings.AbstractHolding;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"id", "accountId", "providerAccountId", "costBasis", "cusipNumber", "securityType", "matchStatus",
+@JsonPropertyOrder({ "id", "accountId", "providerAccountId", "costBasis", "cusipNumber", "securityType", "matchStatus",
 		"description", "holdingType", "price", "quantity", "symbol", "value", "isin", "sedol", "isShort",
 		"unvestedQuantity", "unvestedValue", "vestedQuantity", "vestedSharesExercisable", "vestedValue", "vestingDate",
 		"contractQuantity", "couponRate", "exercisedQuantity", "expirationDate", "grantDate", "interestRate",
 		"maturityDate", "optionType", "spread", "strikePrice", "term", "accruedInterest", "accruedIncome",
-		"createdDate", "lastUpdated", "assetClassification"})
+		"createdDate", "lastUpdated" })
 public class DataExtractsHolding extends AbstractHolding {
 
 	@Override
 	public String toString() {
 		return "DataExtractsHolding [id=" + id + ", accountId=" + accountId + ", providerAccountId=" + providerAccountId
 				+ ", costBasis=" + costBasis + ", cusipNumber=" + cusipNumber + ", securityType=" + securityType
-				+ ", matchStatus=" + matchStatus + ", description=" + description + ", price=" + price + ", quantity="
-				+ quantity + ", symbol=" + symbol + ", value=" + value + ", isin=" + isin + ", sedol=" + sedol
-				+ ", isShort=" + isShort + ", unvestedQuantity=" + unvestedQuantity + ", unvestedValue=" + unvestedValue
+				+ ", securityStyle=" + securityStyle + ", matchStatus=" + matchStatus + ", description=" + description
+				+ ", enrichedDescription=" + enrichedDescription + ", price=" + price + ", quantity=" + quantity
+				+ ", symbol=" + symbol + ", value=" + value + ", isin=" + isin + ", sedol=" + sedol + ", isShort="
+				+ isShort + ", unvestedQuantity=" + unvestedQuantity + ", unvestedValue=" + unvestedValue
 				+ ", vestedQuantity=" + vestedQuantity + ", vestedSharesExercisable=" + vestedSharesExercisable
 				+ ", vestedValue=" + vestedValue + ", vestingDate=" + vestingDate + ", contractQuantity="
 				+ contractQuantity + ", couponRate=" + couponRate + ", exercisedQuantity=" + exercisedQuantity
@@ -34,4 +35,5 @@ public class DataExtractsHolding extends AbstractHolding {
 				+ ", accruedIncome=" + accruedIncome + ", createdDate=" + createdDate + ", lastUpdated=" + lastUpdated
 				+ ", holdingType=" + holdingType + "]";
 	}
+
 }

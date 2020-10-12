@@ -169,8 +169,8 @@ public enum AdditionalStatusType {
 	 */
 	TECH_ERROR, //
 	/**
-	 * <b>Description: </b>The errors that require users to take action at the provider site, for example, accept
-	 * T{@literal &}C, etc. <br>
+	 * <b>Description: </b>The errors that require users to take action at the provider site, for example, accept T{@literal &}C,
+	 * etc. <br>
 	 * <b>Next Action: </b>Instruct the user to visit the provider site and perform the necessary action
 	 */
 	USER_ACTION_NEEDED_AT_SITE,

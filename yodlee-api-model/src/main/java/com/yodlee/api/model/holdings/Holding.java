@@ -14,12 +14,12 @@ import com.yodlee.api.model.AssetClassification;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"id", "accountId", "providerAccountId", "costBasis", "cusipNumber", "securityType", "matchStatus",
-		"description", "holdingType", "price", "quantity", "symbol", "value", "isin", "sedol", "isShort",
-		"unvestedQuantity", "unvestedValue", "vestedQuantity", "vestedSharesExercisable", "vestedValue", "vestingDate",
-		"contractQuantity", "couponRate", "exercisedQuantity", "expirationDate", "grantDate", "interestRate",
-		"maturityDate", "optionType", "spread", "strikePrice", "term", "accruedInterest", "accruedIncome",
-		"createdDate", "lastUpdated", "assetClassification"})
+@JsonPropertyOrder({"id", "accountId", "providerAccountId", "costBasis", "cusipNumber", "securityType", "securityStyle",
+		"matchStatus", "enrichedDescription", "description", "holdingType", "price", "quantity", "symbol", "value",
+		"isin", "sedol", "isShort", "unvestedQuantity", "unvestedValue", "vestedQuantity", "vestedSharesExercisable",
+		"vestedValue", "vestingDate", "contractQuantity", "couponRate", "exercisedQuantity", "expirationDate",
+		"grantDate", "interestRate", "maturityDate", "optionType", "spread", "strikePrice", "term", "accruedInterest",
+		"accruedIncome", "createdDate", "lastUpdated", "assetClassification"})
 public class Holding extends AbstractHolding {
 
 	@ApiModelProperty(readOnly = true,
@@ -46,9 +46,10 @@ public class Holding extends AbstractHolding {
 	public String toString() {
 		return "Holding [id=" + id + ", accountId=" + accountId + ", providerAccountId=" + providerAccountId
 				+ ", costBasis=" + costBasis + ", cusipNumber=" + cusipNumber + ", securityType=" + securityType
-				+ ", matchStatus=" + matchStatus + ", description=" + description + ", price=" + price + ", quantity="
-				+ quantity + ", symbol=" + symbol + ", value=" + value + ", isin=" + isin + ", sedol=" + sedol
-				+ ", isShort=" + isShort + ", unvestedQuantity=" + unvestedQuantity + ", unvestedValue=" + unvestedValue
+				+ ", securityStyle=" + securityStyle + ", matchStatus=" + matchStatus + ", enrichedDescription="
+				+ enrichedDescription + ", description=" + description + ", price=" + price + ", quantity=" + quantity
+				+ ", symbol=" + symbol + ", value=" + value + ", isin=" + isin + ", sedol=" + sedol + ", isShort="
+				+ isShort + ", unvestedQuantity=" + unvestedQuantity + ", unvestedValue=" + unvestedValue
 				+ ", vestedQuantity=" + vestedQuantity + ", vestedSharesExercisable=" + vestedSharesExercisable
 				+ ", vestedValue=" + vestedValue + ", vestingDate=" + vestingDate + ", contractQuantity="
 				+ contractQuantity + ", couponRate=" + couponRate + ", exercisedQuantity=" + exercisedQuantity
