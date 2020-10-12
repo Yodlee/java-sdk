@@ -8,10 +8,10 @@ package com.yodlee.api.model.account;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Money;
 import com.yodlee.api.model.enums.Container;
+import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"CONTAINER", "lastUpdated", "id", "accountName", "accountNumber", "accountType", "providerId",
@@ -493,7 +493,8 @@ public class AssociatedAccount extends AbstractModelComponent {
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET Associated Accounts/{providerAccountId}</li>
-	 *
+	 * </ul>
+	 * 
 	 * @return accountNumber
 	 */
 	public String getAccountNumber() {
@@ -596,7 +597,8 @@ public class AssociatedAccount extends AbstractModelComponent {
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET Associated Accounts/{providerAccountId}</li>
-	 *
+	 * </ul>
+	 * 
 	 * @return availableBalance
 	 */
 	public Money getAvailableBalance() {
