@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2019 Yodlee, Inc. All Rights Reserved.
  *
- * Licensed under the MIT License. See LICENSE file in the project root for license information.
+ * This software is the confidential and proprietary information of Yodlee, Inc. Use is subject to license terms.
  */
 package com.yodlee.sdk.sampleflow;
 
@@ -90,7 +90,7 @@ public class AddAccountFlow {
 		ProvidersApi providersApi = new ProvidersApi(jwtUserContext);
 		providersApi.addApiListener(sampleApiListener());
 		ApiResponse<ProviderResponse> providerResponse =
-				providersApi.getAllProviders(null, null, name, null, null, null);
+				providersApi.getAllProviders(null, null, name, null, null, null, null);
 		ProviderResponse providersList = providerResponse.getData();
 		if (providersList != null) {
 			List<Providers> providers = providersList.getProviders();

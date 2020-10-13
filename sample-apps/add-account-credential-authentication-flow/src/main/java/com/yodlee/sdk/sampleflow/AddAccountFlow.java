@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2019 Yodlee, Inc. All Rights Reserved.
  *
- * Licensed under the MIT License. See LICENSE file in the project root for license information.
+ * This software is the confidential and proprietary information of Yodlee, Inc. Use is subject to license terms.
  */
 package com.yodlee.sdk.sampleflow;
 
@@ -49,7 +49,8 @@ public class AddAccountFlow {
 
 	static ObjectMapper mapper = new ObjectMapper();
 
-	public static void subscribeRefreshEvent(ClientCredentialAdminContext clientCredentialAdminContext) throws ApiException {
+	public static void subscribeRefreshEvent(ClientCredentialAdminContext clientCredentialAdminContext)
+			throws ApiException {
 		ConfigsApi configsApi = new ConfigsApi(clientCredentialAdminContext);
 		CreateConfigsNotificationEventRequest eventRequest = new CreateConfigsNotificationEventRequest();
 		CreateConfigsNotificationEvent event = new CreateConfigsNotificationEvent();
@@ -85,12 +86,12 @@ public class AddAccountFlow {
 		return userResponse;
 	}
 
-	public static long getProviderId(ClientCredentialUserContext clientCredentialUserContext, String name, String providerId)
-			throws ApiException {
+	public static long getProviderId(ClientCredentialUserContext clientCredentialUserContext, String name,
+			String providerId) throws ApiException {
 		ProvidersApi providersApi = new ProvidersApi(clientCredentialUserContext);
 		providersApi.addApiListener(sampleApiListener());
 		ApiResponse<ProviderResponse> providerResponse =
-				providersApi.getAllProviders(null, null, name, null, null, null);
+				providersApi.getAllProviders(null, null, name, null, null, null, null);
 		ProviderResponse providersList = providerResponse.getData();
 		if (providersList != null) {
 			List<Providers> providers = providersList.getProviders();
@@ -144,8 +145,8 @@ public class AddAccountFlow {
 		return linkedProviderAccount.getData();
 	}
 
-	public static AccountResponse getAccounts(ClientCredentialUserContext clientCredentialUserContext, Long providerAccountIds)
-			throws ApiException {
+	public static AccountResponse getAccounts(ClientCredentialUserContext clientCredentialUserContext,
+			Long providerAccountIds) throws ApiException {
 		AccountsApi accountsApi = new AccountsApi(clientCredentialUserContext);
 		Long[] providerAccountId = Utils.convertStringtoLongArray(providerAccountIds.toString());
 		ApiResponse<AccountResponse> accounts = null;
