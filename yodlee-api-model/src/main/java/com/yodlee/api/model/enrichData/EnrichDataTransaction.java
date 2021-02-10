@@ -6,6 +6,7 @@
 package com.yodlee.api.model.enrichData;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,7 +25,7 @@ public class EnrichDataTransaction extends AbstractModelComponent {
 	@ApiModelProperty(value = "A unique ID that the provider site has assigned to the transaction. The source ID is only available for the pre-populated accounts."//
 			+ "<br>Pre-populated accounts are the accounts that the FI customers shares with Yodlee, so that the user does not have to add or aggregate those accounts."//
 	)
-	@NotEmpty(message = "{enrichData.data.invalid}")
+	@Size(min = 1, max = 100, message = "{enrichData.data.invalid}")
 	@JsonProperty("sourceId")
 	protected String sourceId;
 

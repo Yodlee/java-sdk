@@ -70,7 +70,7 @@ public abstract class AbstractTransaction extends AbstractModelComponent {
 							  + "<br>Pre-populated accounts are the accounts that the FI customers shares with Yodlee, so that the user does not have to add or aggregate those accounts."//
 	)
 	@JsonProperty("sourceId")
-	protected Long sourceId;
+	protected String sourceId;
 
 	@ApiModelProperty(readOnly = true,
 					  value = "The date on which the transaction is posted to the account."//
@@ -205,6 +205,30 @@ public abstract class AbstractTransaction extends AbstractModelComponent {
 	)
 	@JsonProperty("cusipNumber")
 	protected String cusipNumber;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "International Securities Identification Number (ISIN) standard is used worldwide to identify specific securities."
+							  + "<br><br>"//
+							  + "<b>Applicable containers</b>: investment<br>"//
+	)
+	@JsonProperty("isin")
+	protected String isin;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "SEDOL stands for Stock Exchange Daily Official List, a list of security identifiers used in the United Kingdom and Ireland for clearing purposes."
+							  + "<br><br>"//
+							  + "<b>Applicable containers</b>: investment<br>"//
+	)
+	@JsonProperty("sedol")
+	protected String sedol;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "It is an identification number that is assigned to financial instruments such as stocks and bonds trading in Switzerland."
+							  + "<br><br>"//
+							  + "<b>Applicable containers</b>: investment<br>"//
+	)
+	@JsonProperty("valoren")
+	protected String valoren;
 
 	@ApiModelProperty(readOnly = true,
 					  value = "For transactions involving securities, this captures the securities description."//
@@ -587,6 +611,42 @@ public abstract class AbstractTransaction extends AbstractModelComponent {
 	}
 
 	/**
+	 * International Securities Identification Number (ISIN) standard is used worldwide to identify specific securities.
+	 * <br>
+	 * <br>
+	 * <b>Applicable containers</b>: investment<br>
+	 * 
+	 * @return the isin
+	 */
+	public String getIsin() {
+		return isin;
+	}
+
+	/**
+	 * SEDOL stands for Stock Exchange Daily Official List, a list of security identifiers used in the United Kingdom
+	 * and Ireland for clearing purposes. <br>
+	 * <br>
+	 * <b>Applicable containers</b>: investment<br>
+	 * 
+	 * @return the sedol
+	 */
+	public String getSedol() {
+		return sedol;
+	}
+
+	/**
+	 * It is an identification number that is assigned to financial instruments such as stocks and bonds trading in
+	 * Switzerland. <br>
+	 * <br>
+	 * <b>Applicable containers</b>: investment<br>
+	 * 
+	 * @return the valoren
+	 */
+	public String getValoren() {
+		return valoren;
+	}
+
+	/**
 	 * For transactions involving securities, this captures the securities description. <br>
 	 * <br>
 	 * <b>Applicable containers</b>: investment<br>
@@ -701,7 +761,7 @@ public abstract class AbstractTransaction extends AbstractModelComponent {
 	 * 
 	 * @return sourceId
 	 */
-	public Long getSourceId() {
+	public String getSourceId() {
 		return sourceId;
 	}
 

@@ -241,26 +241,26 @@ public class Account extends AbstractAccount {
 				+ ", premium=" + premium + ", remainingBalance=" + remainingBalance + ", policyEffectiveDate="
 				+ policyEffectiveDate + ", policyFromDate=" + policyFromDate + ", policyToDate=" + policyToDate
 				+ ", deathBenefit=" + deathBenefit + ", policyTerm=" + policyTerm + ", policyStatus=" + policyStatus
-				+ ", apr=" + apr + ", cashApr=" + cashApr + ", availableCash=" + availableCash + ", availableCredit="
-				+ availableCredit + ", cash=" + cash + ", cashValue=" + cashValue + ", classification=" + classification
-				+ ", expirationDate=" + expirationDate + ", faceAmount=" + faceAmount + ", interestRate=" + interestRate
-				+ ", lastPayment=" + lastPayment + ", lastPaymentAmount=" + lastPaymentAmount + ", lastPaymentDate="
-				+ lastPaymentDate + ", lastUpdated=" + lastUpdated + ", marginBalance=" + marginBalance
-				+ ", maturityAmount=" + maturityAmount + ", maturityDate=" + maturityDate + ", moneyMarketBalance="
-				+ moneyMarketBalance + ", nickname=" + nickname + ", runningBalance=" + runningBalance
-				+ ", totalCashLimit=" + totalCashLimit + ", totalCreditLine=" + totalCreditLine
-				+ ", totalUnvestedBalance=" + totalUnvestedBalance + ", totalVestedBalance=" + totalVestedBalance
-				+ ", escrowBalance=" + escrowBalance + ", homeInsuranceType=" + homeInsuranceType
-				+ ", lifeInsuranceType=" + lifeInsuranceType + ", originalLoanAmount=" + originalLoanAmount
-				+ ", principalBalance=" + principalBalance + ", premiumPaymentTerm=" + premiumPaymentTerm
-				+ ", recurringPayment=" + recurringPayment + ", term=" + term + ", totalCreditLimit=" + totalCreditLimit
-				+ ", enrollmentDate=" + enrollmentDate + ", primaryRewardUnit=" + primaryRewardUnit + ", currentLevel="
-				+ currentLevel + ", nextLevel=" + nextLevel + ", shortBalance=" + shortBalance
-				+ ", lastEmployeeContributionAmount=" + lastEmployeeContributionAmount
-				+ ", lastEmployeeContributionDate=" + lastEmployeeContributionDate + ", memo=" + memo
-				+ ", originationDate=" + originationDate + ", overDraftLimit=" + overDraftLimit + ", valuationType="
-				+ valuationType + ", homeValue=" + homeValue + ", estimatedDate=" + estimatedDate + ", address="
-				+ address + ", loanPayoffAmount=" + loanPayoffAmount + ", loanPayByDate=" + loanPayByDate
+				+ ", apr=" + apr + ", derivedApr =" + derivedApr + ", cashApr=" + cashApr + ", availableCash="
+				+ availableCash + ", availableCredit=" + availableCredit + ", cash=" + cash + ", cashValue=" + cashValue
+				+ ", classification=" + classification + ", expirationDate=" + expirationDate + ", faceAmount="
+				+ faceAmount + ", interestRate=" + interestRate + ", lastPayment=" + lastPayment
+				+ ", lastPaymentAmount=" + lastPaymentAmount + ", lastPaymentDate=" + lastPaymentDate + ", lastUpdated="
+				+ lastUpdated + ", marginBalance=" + marginBalance + ", maturityAmount=" + maturityAmount
+				+ ", maturityDate=" + maturityDate + ", moneyMarketBalance=" + moneyMarketBalance + ", nickname="
+				+ nickname + ", runningBalance=" + runningBalance + ", totalCashLimit=" + totalCashLimit
+				+ ", totalCreditLine=" + totalCreditLine + ", totalUnvestedBalance=" + totalUnvestedBalance
+				+ ", totalVestedBalance=" + totalVestedBalance + ", escrowBalance=" + escrowBalance
+				+ ", homeInsuranceType=" + homeInsuranceType + ", lifeInsuranceType=" + lifeInsuranceType
+				+ ", originalLoanAmount=" + originalLoanAmount + ", principalBalance=" + principalBalance
+				+ ", premiumPaymentTerm=" + premiumPaymentTerm + ", recurringPayment=" + recurringPayment + ", term="
+				+ term + ", totalCreditLimit=" + totalCreditLimit + ", enrollmentDate=" + enrollmentDate
+				+ ", primaryRewardUnit=" + primaryRewardUnit + ", currentLevel=" + currentLevel + ", nextLevel="
+				+ nextLevel + ", shortBalance=" + shortBalance + ", lastEmployeeContributionAmount="
+				+ lastEmployeeContributionAmount + ", lastEmployeeContributionDate=" + lastEmployeeContributionDate
+				+ ", memo=" + memo + ", originationDate=" + originationDate + ", overDraftLimit=" + overDraftLimit
+				+ ", valuationType=" + valuationType + ", homeValue=" + homeValue + ", estimatedDate=" + estimatedDate
+				+ ", address=" + address + ", loanPayoffAmount=" + loanPayoffAmount + ", loanPayByDate=" + loanPayByDate
 				+ ", bankTransferCode=" + bankTransferCode + ", rewardBalance=" + rewardBalance + ", frequency="
 				+ frequency + ", amountDue=" + amountDue + ", minimumAmountDue=" + minimumAmountDue + ", datasets="
 				+ datasets + ", associatedProviderAccountIds=" + associatedProviderAccountIds + ", loanPayoffDetails="

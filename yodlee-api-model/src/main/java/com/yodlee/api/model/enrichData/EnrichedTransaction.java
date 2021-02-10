@@ -96,7 +96,7 @@ public class EnrichedTransaction extends AbstractModelComponent {
 							  + "<br>Pre-populated accounts are the accounts that the FI customers shares with Yodlee, so that the user does not have to add or aggregate those accounts."//
 	)
 	@JsonProperty("sourceId")
-	protected Long sourceId;
+	protected String sourceId;
 
 	@ApiModelProperty(readOnly = true,
 					  value = "The transaction description that appears at the FI site may not be self-explanatory, i.e., the source, purpose of the transaction may not be evident. Yodlee attempts to simplify and make the transaction meaningful to the consumer, and this simplified transaction description is provided in the simple description field."
@@ -167,7 +167,7 @@ public class EnrichedTransaction extends AbstractModelComponent {
 		return container;
 	}
 
-	public Long getSourceId() {
+	public String getSourceId() {
 		return sourceId;
 	}
 

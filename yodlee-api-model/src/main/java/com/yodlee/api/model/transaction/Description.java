@@ -12,7 +12,7 @@ import com.yodlee.api.model.AbstractModelComponent;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"simple", "original", "consumer"})
+@JsonPropertyOrder({"simple", "original", "consumer", "security"})
 public class Description extends AbstractModelComponent {
 
 	@ApiModelProperty(readOnly = true,
@@ -38,6 +38,13 @@ public class Description extends AbstractModelComponent {
 	)
 	@JsonProperty("consumer")
 	private String consumer;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "The description will provide the actual name of the security." + "<br><br>"//
+							  + "<b>Applicable containers</b>: investment<br>"//
+	)
+	@JsonProperty("security")
+	private String security;
 
 	/**
 	 * The transaction description that appears at the FI site may not be self-explanatory, i.e., the source, purpose of
@@ -88,8 +95,20 @@ public class Description extends AbstractModelComponent {
 		this.consumer = consumer;
 	}
 
+	/**
+	 * The description will provide the actual name of the security. <br>
+	 * <br>
+	 * <b>Applicable containers</b>: investment<br>
+	 * 
+	 * @return security
+	 */
+	public String getSecurity() {
+		return security;
+	}
+
 	@Override
 	public String toString() {
-		return "Description [simple=" + simple + ", original=" + original + ", consumer=" + consumer + "]";
+		return "Description [simple=" + simple + ", original=" + original + ", consumer=" + consumer + ", security="
+				+ security + "]";
 	}
 }

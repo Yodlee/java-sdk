@@ -8,7 +8,7 @@ package com.yodlee.api.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -16,7 +16,7 @@ import com.yodlee.api.model.enums.FieldType;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"id", "name", "size", "maxLength", "minLength", "type", "isValueProvided", "value", "isOptional",
+@JsonPropertyOrder({"id", "name", "maxLength", "minLength", "type", "isValueProvided", "value", "isOptional",
 		"valueEditable", "option", "prefix", "suffix", "validation"})
 public class Field extends AbstractModelComponent {
 
@@ -27,9 +27,9 @@ public class Field extends AbstractModelComponent {
 			+ "<li>GET providerAccounts/{providerAccountId}</li>"//
 			+ "<li>GET providers/{providerId}</li>"//
 			+ "</ul>")
-	@NotEmpty(message="{providerAccounts.param.field.id.required}")
+	@NotNull(message = "{providerAccounts.param.field.id.required}")
 	@JsonProperty("id")
-	private String id;
+	private Long id;
 
 	@ApiModelProperty(readOnly = true,
 					  value = "Name of the field."//
@@ -41,9 +41,6 @@ public class Field extends AbstractModelComponent {
 							  + "</ul>")
 	@JsonProperty("name")
 	private String name;
-
-	@JsonProperty("size")
-	private Long size;
 
 	@ApiModelProperty(readOnly = true,
 					  value = "The maximum length of the login form field."//
@@ -168,11 +165,11 @@ public class Field extends AbstractModelComponent {
 	 * 
 	 * @return id
 	 */
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -415,19 +412,11 @@ public class Field extends AbstractModelComponent {
 		this.suffix = suffix;
 	}
 
-	public Long getSize() {
-		return size;
-	}
-
-	public void setSize(Long size) {
-		this.size = size;
-	}
-
 	@Override
 	public String toString() {
-		return "Field [id=" + id + ", name=" + name + ", size=" + size + ", maxLength=" + maxLength + ", minLength="
-				+ minLength + ", type=" + type + ", isValueProvided=" + isValueProvided + ", value=" + value
-				+ ", isOptional=" + isOptional + ", valueEditable=" + valueEditable + ", options=" + options
-				+ ", prefix=" + prefix + ", suffix=" + suffix + "]";
+		return "Field [id=" + id + ", name=" + name + ", maxLength=" + maxLength + ", minLength=" + minLength
+				+ ", type=" + type + ", isValueProvided=" + isValueProvided + ", value=" + value + ", isOptional="
+				+ isOptional + ", valueEditable=" + valueEditable + ", options=" + options + ", prefix=" + prefix
+				+ ", suffix=" + suffix + "]";
 	}
 }

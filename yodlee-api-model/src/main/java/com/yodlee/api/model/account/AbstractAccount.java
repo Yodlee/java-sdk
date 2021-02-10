@@ -834,6 +834,18 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "</ul>")
 	@JsonProperty("apr")
 	protected Double apr;
+	
+	@ApiModelProperty(readOnly = true,
+			  value = "Derived APR will be an estimated purchase APR based on consumers credit card transactions and credit card purchase.<br>"
+					  + "<b>Aggregated / Manual / Derived</b>: Derived<br>"//
+					  + "<b>Applicable containers</b>: creditCard<br>"//
+					  + "<b>Endpoints</b>:<br>"//
+					  + "<ul><li>GET accounts</li>"//
+					  + "<li>GET accounts/{accountId}</li>"//
+					  + "<li>GET dataExtracts/userData</li>"//
+					  + "</ul>")
+	@JsonProperty("derivedApr")
+	protected Double derivedApr;
 
 	@ApiModelProperty(value = "Annual percentage rate applied to cash withdrawals on the card.<br><br>"//
 			+ "<b>Account Type</b>: Aggregated<br>"//
@@ -2806,6 +2818,23 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 */
 	public Double getApr() {
 		return apr;
+	}
+	
+	/**
+	 * Derived APR will be an estimated purchase APR based on consumers credit card transactions and credit card purchase.<br>
+	 * <b>Aggregated / Manual / Derived</b>: Derived<br>
+	 * <b>Applicable containers</b>: creditCard<br>
+	 * <b>Endpoints</b>:<br>
+	 * <ul>
+	 * <li>GET accounts</li>
+	 * <li>GET accounts/{accountId}</li>
+	 * <li>GET dataExtracts/userData</li>
+	 * </ul>
+	 * 
+	 * @return derivedApr
+	 */
+	public Double getDerivedApr() {
+		return derivedApr;
 	}
 
 	/**
