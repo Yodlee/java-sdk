@@ -114,8 +114,8 @@ public class ProvidersApi extends AbstractApi {
 			@Max(value = 500, message = "{providers.param.top.invalid}") Integer top,//
 			String fullAccountNumberFields) throws ApiException {
 		LOGGER.info("Providers getAllProviders API execution started");
-		ProvidersValidator.validateGetProviders(this, ApiUtils.getMethodName(), capability, datasetFilter,
-				fullAccountNumberFields, name, priority, skip, top);
+		ProvidersValidator.validateGetProviders(this, ApiUtils.getMethodName(), capability, datasetFilter, name,
+				priority, skip, top, fullAccountNumberFields);
 		CallContext callContext = buildGetAllProvidersContext(capability, datasetFilter, fullAccountNumberFields, name,
 				priority, skip, top);
 		return callContext.getApiClient().execute(callContext.getCall(), ProviderResponse.class);
@@ -183,8 +183,8 @@ public class ProvidersApi extends AbstractApi {
 			String fullAccountNumberFields,//
 			ApiCallback<ProviderResponse> apiCallBack) throws ApiException {
 		LOGGER.info("Providers getAllProvidersAsync API execution started");
-		ProvidersValidator.validateGetProviders(this, ApiUtils.getMethodName(), capability, datasetFilter,
-				fullAccountNumberFields, name, priority, skip, top);
+		ProvidersValidator.validateGetProviders(this, ApiUtils.getMethodName(), capability, datasetFilter, name,
+				priority, skip, top, fullAccountNumberFields);
 		CallContext callContext = buildGetAllProvidersContext(capability, datasetFilter, fullAccountNumberFields, name,
 				priority, skip, top);
 		callContext.getApiClient().executeAsync(callContext.getCall(), ProviderResponse.class, apiCallBack);
@@ -301,10 +301,10 @@ public class ProvidersApi extends AbstractApi {
 			String datasetFilter, String name, ProvidersPriorityType priority, String fullAccountNumberFields)
 			throws ApiException {
 		LOGGER.info("Providers getProvidersCount API execution started");
-		ProvidersValidator.validateGetProvidersCount(this, ApiUtils.getMethodName(), capability, datasetFilter,
-				fullAccountNumberFields, name, priority);
+		ProvidersValidator.validateGetProvidersCount(this, ApiUtils.getMethodName(), capability, datasetFilter, name,
+				priority, fullAccountNumberFields);
 		CallContext callContext =
-				buildGetProvidersCountContext(capability, datasetFilter, fullAccountNumberFields, name, priority);
+				buildGetProvidersCountContext(capability, datasetFilter, name, priority, fullAccountNumberFields);
 		return callContext.getApiClient().execute(callContext.getCall(), ProvidersCountResponse.class);
 	}
 
@@ -327,19 +327,18 @@ public class ProvidersApi extends AbstractApi {
 	 *         response body
 	 */
 	public void getProvidersCountAsync(@Deprecated ProvidersCapability capability,//
-			String datasetFilter, String name, ProvidersPriorityType priority,
-			String fullAccountNumberFields, //
+			String datasetFilter, String name, ProvidersPriorityType priority, String fullAccountNumberFields, //
 			ApiCallback<ProvidersCountResponse> apiCallback) throws ApiException {
 		LOGGER.info("Providers getProvidersCountAsync API execution started");
-		ProvidersValidator.validateGetProvidersCount(this, ApiUtils.getMethodName(), capability, datasetFilter,
-				fullAccountNumberFields, name, priority);
+		ProvidersValidator.validateGetProvidersCount(this, ApiUtils.getMethodName(), capability, datasetFilter, name,
+				priority, fullAccountNumberFields);
 		CallContext callContext =
-				buildGetProvidersCountContext(capability, datasetFilter, fullAccountNumberFields, name, priority);
+				buildGetProvidersCountContext(capability, datasetFilter, name, priority, fullAccountNumberFields);
 		callContext.getApiClient().executeAsync(callContext.getCall(), ProvidersCountResponse.class, apiCallback);
 	}
 
 	private CallContext buildGetProvidersCountContext(ProvidersCapability capability,//
-			String datasetFilter, String fullAccountNumberFields, String name, ProvidersPriorityType priority)
+			String datasetFilter, String name, ProvidersPriorityType priority, String fullAccountNumberFields)
 			throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiCallModel = new ApiContext(ApiEndpoint.PROVIDERS_COUNT, HttpMethod.GET, null);

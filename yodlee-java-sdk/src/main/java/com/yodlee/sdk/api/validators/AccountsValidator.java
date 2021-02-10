@@ -22,8 +22,10 @@ import com.yodlee.api.model.validator.Problem;
 import com.yodlee.sdk.api.AccountsApi;
 import com.yodlee.sdk.api.exception.ApiException;
 import com.yodlee.sdk.api.util.ApiUtils;
+
 /**
- * <b> Note : </b> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and response.
+ * <b> Note : </b> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter and
+ * response.
  */
 public class AccountsValidator {
 
@@ -43,9 +45,9 @@ public class AccountsValidator {
 	}
 
 	public static void validateGetAccount(AccountsApi accountsApi, String methodName, Long accountId,
-			Container container, IncludeParameterValue[] include) throws ApiException {
-		Class<?>[] argTypes = new Class[] {Long.class, Container.class, IncludeParameterValue[].class};
-		Object[] argValues = new Object[] {accountId, container, include};
+			IncludeParameterValue[] include) throws ApiException {
+		Class<?>[] argTypes = new Class[] {long.class, IncludeParameterValue[].class};
+		Object[] argValues = new Object[] {accountId, include};
 		List<Problem> methodProblems = ApiValidator.validate(accountsApi, methodName, argTypes, argValues);
 		List<Problem> contextProblems = ApiValidator.validateUserContext(accountsApi);
 		ApiValidator.collectProblems(methodProblems, contextProblems);
@@ -77,9 +79,9 @@ public class AccountsValidator {
 		ApiValidator.collectProblems(problems, methodProblems, contextProblems);
 	}
 
-	public static void validateDeleteAccount(AccountsApi accountsApi, String methodName, Long accountId)
+	public static void validateDeleteAccount(AccountsApi accountsApi, String methodName, long accountId)
 			throws ApiException {
-		Class<?>[] argTypes = new Class[] {Long.class};
+		Class<?>[] argTypes = new Class[] {long.class};
 		Object[] argValues = new Object[] {accountId};
 		List<Problem> methodProblems = ApiValidator.validate(accountsApi, methodName, argTypes, argValues);
 		List<Problem> contextProblems = ApiValidator.validateUserContext(accountsApi);
@@ -97,9 +99,9 @@ public class AccountsValidator {
 		ApiValidator.collectProblems(problems, methodProblems, modelProblems, contextProblems);
 	}
 
-	public static void validateUpdateAccount(AccountsApi accountsApi, String methodName, Long accountId,
+	public static void validateUpdateAccount(AccountsApi accountsApi, String methodName, long accountId,
 			UpdateAccountRequest accountRequest) throws ApiException {
-		Class<?>[] argTypes = new Class[] {Long.class, UpdateAccountRequest.class};
+		Class<?>[] argTypes = new Class[] {long.class, UpdateAccountRequest.class};
 		Object[] argValues = new Object[] {accountId, accountRequest};
 		List<Problem> methodProblems = ApiValidator.validate(accountsApi, methodName, argTypes, argValues);
 		List<Problem> modelProblems = ApiValidator.validate(accountRequest);
@@ -171,7 +173,8 @@ public class AccountsValidator {
 			String includeInNetWorth = accountInfo.getIncludeInNetWorth();
 			problems.addAll(isValidIncludeInNetworth(includeInNetWorth));
 			problems.addAll(validAccountStatus(accountInfo));
-			problems.addAll(ApiUtils.validatePattern(accountInfo.getAccountName(), "^\\s+.*", "accounts.accountName.space"));
+			problems.addAll(
+					ApiUtils.validatePattern(accountInfo.getAccountName(), "^\\s+.*", "accounts.accountName.space"));
 		}
 		return problems;
 	}
@@ -237,7 +240,7 @@ public class AccountsValidator {
 				validateCityStateOrZipPresent(evaluateAddressRequest.getAddress());
 		ApiValidator.collectProblems(methodProblems, contextProblems, modelProblems, cityStateOrZipPresentProblems);
 	}
-	
+
 	private static List<Problem> validateCityStateOrZipPresent(EvaluateAccountAddress evaluateAccountAddress) {
 		List<Problem> problems = new ArrayList<>();
 		if (evaluateAccountAddress != null && isZipEmpty(evaluateAccountAddress)) {
@@ -265,7 +268,7 @@ public class AccountsValidator {
 	private static boolean isStateEmpty(EvaluateAccountAddress evaluateAccountAddress) {
 		return StringUtils.isEmpty(evaluateAccountAddress.getState());
 	}
-	
+
 	public static void validateMigrateAccounts(AccountsApi accountsApi, String methodName, long providerAccountId)
 			throws ApiException {
 		Class<?>[] argTypes = new Class[] {long.class};
@@ -274,7 +277,7 @@ public class AccountsValidator {
 		List<Problem> contextProblems = ApiValidator.validateUserContext(accountsApi);
 		ApiValidator.collectProblems(methodProblems, contextProblems);
 	}
-	
+
 	public static void validateAssociatedAccounts(AccountsApi accountsApi, String methodName, long providerAccountId)
 			throws ApiException {
 		Class<?>[] argTypes = new Class[] {long.class};
@@ -283,5 +286,4 @@ public class AccountsValidator {
 		List<Problem> contextProblems = ApiValidator.validateUserContext(accountsApi);
 		ApiValidator.collectProblems(methodProblems, contextProblems);
 	}
-
 }

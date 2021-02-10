@@ -80,8 +80,6 @@ public class AccountsApi extends AbstractApi {
 	 * and response.
 	 * 
 	 * @param accountId accountId (required)
-	 * @param container bank/creditCard/investment/insurance/loan/reward/bill/realEstate/otherAssets/otherLiabilities
-	 *        (required)
 	 * @param include profile, holder, fullAccountNumberList, paymentProfile, autoRefresh (optional)
 	 * @return {@link ApiResponse}&lt;{@link AccountResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
@@ -90,11 +88,10 @@ public class AccountsApi extends AbstractApi {
 	public ApiResponse<AccountResponse> getAccount(//
 			@Digits(integer = 11, fraction = 0, message = "{accounts.param.accountId.invalid}") //
 			@Min(value = 1, message = "{accounts.param.accountId.invalid}") long accountId,//
-			@NotNull(message = "{accounts.param.container.required}") Container container,//
 			IncludeParameterValue[] include) throws ApiException {
 		LOGGER.info("Accounts getAccount API execution started");
-		AccountsValidator.validateGetAccount(this, ApiUtils.getMethodName(), accountId, container, include);
-		CallContext callContext = buildGetAccountContext(accountId, container, include);
+		AccountsValidator.validateGetAccount(this, ApiUtils.getMethodName(), accountId, include);
+		CallContext callContext = buildGetAccountContext(accountId, include);
 		return callContext.getApiClient().execute(callContext.getCall(), AccountResponse.class);
 	}
 
@@ -106,8 +103,6 @@ public class AccountsApi extends AbstractApi {
 	 * and response.
 	 * 
 	 * @param accountId accountId (required)
-	 * @param container bank/creditCard/investment/insurance/loan/reward/bill/realEstate/otherAssets/otherLiabilities
-	 *        (required)
 	 * @param include profile, holder, fullAccountNumberList, paymentProfile, autoRefresh (optional)
 	 * @param apiCallback {@link ApiCallback}&lt;{@link AccountResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
@@ -116,23 +111,18 @@ public class AccountsApi extends AbstractApi {
 	public void getAccountAsync(//
 			@Digits(integer = 11, fraction = 0, message = "{accounts.param.accountId.invalid}") //
 			@Min(value = 1, message = "{accounts.param.accountId.invalid}") long accountId,//
-			@NotNull(message = "{accounts.param.container.required}") Container container,//
 			IncludeParameterValue[] include, ApiCallback<AccountResponse> apiCallback) throws ApiException {
 		LOGGER.info("Accounts getAccountAsync API execution started");
-		AccountsValidator.validateGetAccount(this, ApiUtils.getMethodName(), accountId, container, include);
-		CallContext callContext = buildGetAccountContext(accountId, container, include);
+		AccountsValidator.validateGetAccount(this, ApiUtils.getMethodName(), accountId, include);
+		CallContext callContext = buildGetAccountContext(accountId, include);
 		callContext.getApiClient().executeAsync(callContext.getCall(), AccountResponse.class, apiCallback);
 	}
 
-	private CallContext buildGetAccountContext(long accountId, Container container, IncludeParameterValue[] include)
-			throws ApiException {
+	private CallContext buildGetAccountContext(long accountId, IncludeParameterValue[] include) throws ApiException {
 		String endPoint =
 				replacePathVariable(ApiEndpoint.ACCOUNT_ACCOUNTID, PARAM_ACCOUNT_ID, String.valueOf(accountId));
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endPoint, HttpMethod.GET, null);
-		if (container != null) {
-			apiContext.addQueryParam(new Pair(PARAM_CONTAINER, container.name()));
-		}
 		if (include != null) {
 			apiContext.addQueryParam(new Pair(PARAM_INCLUDE, ApiUtils.convertArrayToString(include)));
 		}
@@ -419,7 +409,6 @@ public class AccountsApi extends AbstractApi {
 	}
 
 	private CallContext buildcreateManualAccountContext(CreateAccountRequest accountParam) throws ApiException {
-		AccountsValidator.validateCreateManualAccount(this, ApiUtils.getMethodName(), accountParam);
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.ACCOUNTS, HttpMethod.POST, accountParam);
 		registerResponseInterceptor(apiClient);

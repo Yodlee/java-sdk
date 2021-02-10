@@ -50,6 +50,7 @@ public class ApiValidator {
 			}
 		} catch (NoSuchMethodException | SecurityException e) {
 			LOGGER.error("Exception in method validation", e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 		return problems;
 	}
