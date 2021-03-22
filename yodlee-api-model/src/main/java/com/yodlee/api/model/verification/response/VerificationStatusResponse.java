@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Response;
-import com.yodlee.api.model.verification.Verification;
+import com.yodlee.api.model.verification.VerificationStatus;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -19,15 +19,15 @@ public class VerificationStatusResponse extends AbstractModelComponent implement
 
 	@ApiModelProperty(readOnly = true)
 	@JsonProperty("verification")
-	private List<Verification> verifications;
+	private List<VerificationStatus> verificationStatus;
 
-	@JsonProperty("verification")
-	public List<Verification> getVerifications() {
-		return verifications == null ? null : Collections.unmodifiableList(verifications);
+	
+	public List<VerificationStatus> getVerificationStatus() {
+		return verificationStatus == null ? null : Collections.unmodifiableList(verificationStatus);
 	}
 
 	@Override
 	public String toString() {
-		return "VerificationStatusResponse [verification=" + verifications + "]";
+		return "VerificationStatusResponse [verificationStatus=" + verificationStatus + "]";
 	}
 }

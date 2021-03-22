@@ -14,7 +14,7 @@ import com.yodlee.api.model.AbstractModelComponent;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"user", "holding", "transaction", "account", "providerAccount"})
+@JsonPropertyOrder({"user", "holding", "totalTransactionsCount", "transaction", "account", "providerAccount"})
 public class DataExtractsUserData extends AbstractModelComponent {
 
 	@ApiModelProperty(readOnly = true)
@@ -25,6 +25,10 @@ public class DataExtractsUserData extends AbstractModelComponent {
 	@JsonProperty("holding")
 	private List<DataExtractsHolding> holdings;
 
+	@ApiModelProperty(readOnly = true)
+	@JsonProperty("totalTransactionsCount")
+	private Long totalTransactionsCount;
+	
 	@ApiModelProperty(readOnly = true)
 	@JsonProperty("transaction")
 	private List<DataExtractsTransaction> transactions;
@@ -40,6 +44,11 @@ public class DataExtractsUserData extends AbstractModelComponent {
 	@JsonProperty("holding")
 	public List<DataExtractsHolding> getHoldings() {
 		return holdings == null ? null : Collections.unmodifiableList(holdings);
+	}
+	
+	@JsonProperty("totalTransactionsCount")
+	public Long getTotalTransactionsCount() {
+		return totalTransactionsCount;
 	}
 
 	@JsonProperty("transaction")
@@ -63,7 +72,8 @@ public class DataExtractsUserData extends AbstractModelComponent {
 
 	@Override
 	public String toString() {
-		return "DataExtractsUserData [holdings=" + holdings + ", transactions=" + transactions + ", accounts="
+		return "DataExtractsUserData [holdings=" + holdings + ", totalTransactionsCount=" + 
+				+ totalTransactionsCount + ", transactions=" + transactions + ", accounts="
 				+ accounts + ", providerAccounts=" + providerAccounts + ", user=" + user + "]";
 	}
 }

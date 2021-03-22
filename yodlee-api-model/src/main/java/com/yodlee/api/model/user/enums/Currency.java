@@ -65,5 +65,9 @@ public enum Currency {
 	/**
 	 * Viet Nam Dong
 	 */
-	VND
+	VND,//
+	/**
+	 * Malaysian Ringgit
+	 */
+	MYR
 }
