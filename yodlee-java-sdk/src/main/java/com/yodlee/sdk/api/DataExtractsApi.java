@@ -117,10 +117,17 @@ public class DataExtractsApi extends AbstractApi {
 	}
 
 	/**
-	 * Get userData The get user data service is used to get a user's modified data for a particular period of time for
-	 * accounts, transactions, holdings, and provider account information.<br>
-	 * Cobrand session only has to be passed to invoke this service. The time difference between fromDate and toDate
-	 * fields cannot be more than 60 minutes.<br>
+	 * The get user data service is used to get a user's modified data for a particular period of time for accounts,
+	 * transactions, holdings, and provider account information.<br>
+	 * The time difference between fromDate and toDate fields cannot be more than 60 minutes.<br>
+	 * By default, pagination is available for the transaction entity in this API. In the first response, the API will
+	 * retrieve 500 transactions along with other data. The response header will provide a link to retrieve the next set
+	 * of transactions. In the response body of the first API response, totalTransactionsCount indicates the total
+	 * number of transactions the API will retrieve for the user. This service is only invoked with either admin access
+	 * token or a cobrand session.<br/>
+	 * Refer to <a href=\"https:developer.yodlee.com/docs/api/1.1/DataExtracts\">dataExtracts</a> page for more
+	 * information. <b>Note:</b>This service supports the localization feature and accepts locale as a header
+	 * parameter.<br>
 	 * 
 	 * @param fromDate From DateTime (YYYY-MM-DDThh:mm:ssZ) (required)
 	 * @param loginName Login Name (required)
@@ -143,10 +150,17 @@ public class DataExtractsApi extends AbstractApi {
 	}
 
 	/**
-	 * Get userData The get user data service is used to get a user's modified data for a particular period of time for
-	 * accounts, transactions, holdings, and provider account information.<br>
-	 * Cobrand session only has to be passed to invoke this service. The time difference between fromDate and toDate
-	 * fields cannot be more than 60 minutes.<br>
+	 * The get user data service is used to get a user's modified data for a particular period of time for accounts,
+	 * transactions, holdings, and provider account information.<br>
+	 * The time difference between fromDate and toDate fields cannot be more than 60 minutes.<br>
+	 * By default, pagination is available for the transaction entity in this API. In the first response, the API will
+	 * retrieve 500 transactions along with other data. The response header will provide a link to retrieve the next set
+	 * of transactions. In the response body of the first API response, totalTransactionsCount indicates the total
+	 * number of transactions the API will retrieve for the user. This service is only invoked with either admin access
+	 * token or a cobrand session.<br/>
+	 * Refer to <a href=\"https:developer.yodlee.com/docs/api/1.1/DataExtracts\">dataExtracts</a> page for more
+	 * information. <b>Note:</b>This service supports the localization feature and accepts locale as a header
+	 * parameter.<br>
 	 * 
 	 * @param fromDate From Date (required)
 	 * @param loginName Login Name (required)
