@@ -124,8 +124,8 @@ public class DataExtractsApi extends AbstractApi {
 	 * retrieve 500 transactions along with other data. The response header will provide a link to retrieve the next set
 	 * of transactions. In the response body of the first API response, totalTransactionsCount indicates the total
 	 * number of transactions the API will retrieve for the user. This service is only invoked with either admin access
-	 * token or a cobrand session.<br/>
-	 * Refer to <a href=\"https:developer.yodlee.com/docs/api/1.1/DataExtracts\">dataExtracts</a> page for more
+	 * token or a cobrand session.<br>
+	 * Refer to <a href="https:developer.yodlee.com/docs/api/1.1/DataExtracts">dataExtracts</a> page for more
 	 * information. <b>Note:</b>This service supports the localization feature and accepts locale as a header
 	 * parameter.<br>
 	 * 
@@ -157,8 +157,8 @@ public class DataExtractsApi extends AbstractApi {
 	 * retrieve 500 transactions along with other data. The response header will provide a link to retrieve the next set
 	 * of transactions. In the response body of the first API response, totalTransactionsCount indicates the total
 	 * number of transactions the API will retrieve for the user. This service is only invoked with either admin access
-	 * token or a cobrand session.<br/>
-	 * Refer to <a href=\"https:developer.yodlee.com/docs/api/1.1/DataExtracts\">dataExtracts</a> page for more
+	 * token or a cobrand session.<br>
+	 * Refer to <a href="https:developer.yodlee.com/docs/api/1.1/DataExtracts">dataExtracts</a> page for more
 	 * information. <b>Note:</b>This service supports the localization feature and accepts locale as a header
 	 * parameter.<br>
 	 * 
