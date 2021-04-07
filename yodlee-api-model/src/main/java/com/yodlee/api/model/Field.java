@@ -8,7 +8,7 @@ package com.yodlee.api.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -27,9 +27,9 @@ public class Field extends AbstractModelComponent {
 			+ "<li>GET providerAccounts/{providerAccountId}</li>"//
 			+ "<li>GET providers/{providerId}</li>"//
 			+ "</ul>")
-	@NotNull(message = "{providerAccounts.param.field.id.required}")
+	@NotEmpty(message = "{providerAccounts.param.field.id.required}")
 	@JsonProperty("id")
-	private Long id;
+	private String id;
 
 	@ApiModelProperty(readOnly = true,
 					  value = "Name of the field."//
@@ -154,6 +154,15 @@ public class Field extends AbstractModelComponent {
 	@JsonProperty("suffix")
 	private String suffix;
 
+	@ApiModelProperty(value = "Image displayed at the endsite."//
+			+ "<br><br>"//
+			+ "<b>Endpoints</b>:"//
+			+ "<ul>"//
+			+ "<li>GET providerAccounts/{providerAccountId}</li>"//
+			+ "</ul>")
+	@JsonProperty("image")
+	private String image;
+	
 	/**
 	 * Identifier for the field. <br>
 	 * <br>
@@ -165,11 +174,11 @@ public class Field extends AbstractModelComponent {
 	 * 
 	 * @return id
 	 */
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -411,12 +420,28 @@ public class Field extends AbstractModelComponent {
 	public void setSuffix(String suffix) {
 		this.suffix = suffix;
 	}
+	
+	/**
+	 * Image displayed at the endsite.
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET providerAccounts/{providerAccountId}</li>
+	 * </ul>
+	 */
+	public String getImage() {
+		return image;
+	}
+	
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	@Override
 	public String toString() {
 		return "Field [id=" + id + ", name=" + name + ", maxLength=" + maxLength + ", minLength=" + minLength
 				+ ", type=" + type + ", isValueProvided=" + isValueProvided + ", value=" + value + ", isOptional="
 				+ isOptional + ", valueEditable=" + valueEditable + ", options=" + options + ", prefix=" + prefix
-				+ ", suffix=" + suffix + "]";
+				+ ", suffix=" + suffix + ", image=" + image + "]";
 	}
 }
