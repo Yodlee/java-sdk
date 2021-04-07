@@ -428,6 +428,8 @@ public class Field extends AbstractModelComponent {
 	 * <ul>
 	 * <li>GET providerAccounts/{providerAccountId}</li>
 	 * </ul>
+	 * 
+	 * @return image
 	 */
 	public String getImage() {
 		return image;
