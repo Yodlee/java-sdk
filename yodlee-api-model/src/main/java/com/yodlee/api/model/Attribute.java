@@ -12,23 +12,34 @@ import com.yodlee.api.model.providers.ContainerAttributes;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"name", "container", "containerAttributes"})
+@JsonPropertyOrder({"name", "container", "containerAttributes", "fromDate", "toDate", "fromFinYear", "toFinYear"})
 public class Attribute extends AbstractAttribute {
 
 	/**
-	 * Applicable only to Attributes of type Transaction Datasets in Providers GET.
+	 * Applicable only to TRANSACTIONS attributes of BASIC_AGG_DATA dataset.
 	 */
-	@ApiModelProperty(readOnly = true)
+	@ApiModelProperty(readOnly = true, value = "Applicable only to TRANSACTIONS attributes of BASIC_AGG_DATA dataset."//
+			+ "<br><br>"//
+			+ "<b>Endpoints</b>:"//
+			+ "<ul>"//
+			+ "<li>GET providers</li>"//
+			+ "<li>GET providers/{providerId}</li>"//
+			+ "<li>POST providerAccounts</li>"//
+			+ "<li>PUT providerAccounts</li>"//
+			+ "</ul>"//
+	)
 	@JsonProperty("containerAttributes")
 	private ContainerAttributes containerAttributes;
 
 	/**
-	 * Containers for which the attributes are supported. <br>
+	 * Applicable only to TRANSACTIONS attributes of BASIC_AGG_DATA dataset. <br>
 	 * <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET providers</li>
 	 * <li>GET providers/{providerId}</li>
+	 * <li>POST providerAccounts</li>
+	 * <li>PUT providerAccounts</li>
 	 * </ul>
 	 * 
 	 * @return container attributes
@@ -41,9 +52,135 @@ public class Attribute extends AbstractAttribute {
 		this.containerAttributes = containerAttributes;
 	}
 
+	@ApiModelProperty(readOnly = true, value = "Applicable only to EBILLS and STATEMENTS attributes of DOCUMENT dataset."//
+			+ "<br><br>"//
+			+ "<b>Endpoints</b>:"//
+			+ "<ul>"//
+			+ "<li>POST providerAccounts</li>"//
+			+ "<li>PUT providerAccounts</li>"//
+			+ "</ul>"//
+	)
+	@JsonProperty("fromDate")
+	private String fromDate;
+	
+	@ApiModelProperty(readOnly = true, value = "Applicable only to EBILLS and STATEMENTS attributes of DOCUMENT dataset."//
+			+ "<br><br>"//
+			+ "<b>Endpoints</b>:"//
+			+ "<ul>"//
+			+ "<li>POST providerAccounts</li>"//
+			+ "<li>PUT providerAccounts</li>"//
+			+ "</ul>"//
+	)
+	@JsonProperty("toDate")
+	private String toDate;
+	
+	@ApiModelProperty(readOnly = true, value = "Applicable only to TAX attribute of DOCUMENT dataset."//
+			+ "<br><br>"//
+			+ "<b>Endpoints</b>:"//
+			+ "<ul>"//
+			+ "<li>POST providerAccounts</li>"//
+			+ "<li>PUT providerAccounts</li>"//
+			+ "</ul>"//
+	)
+	@JsonProperty("fromFinYear")
+	private String fromFinYear;
+	
+	@ApiModelProperty(readOnly = true, value = "Applicable only to TAX attribute of DOCUMENT dataset."//
+			+ "<br><br>"//
+			+ "<b>Endpoints</b>:"//
+			+ "<ul>"//
+			+ "<li>POST providerAccounts</li>"//
+			+ "<li>PUT providerAccounts</li>"//
+			+ "</ul>"//
+	)
+	@JsonProperty("toFinYear")
+	private String toFinYear;
+
+	
+	/**
+	 * Applicable only to EBILLS and STATEMENTS attributes of DOCUMENT dataset.
+	 * <br><br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>POST providerAccounts</li>
+	 * <li>PUT providerAccounts</li>
+	 * </ul>
+	 * 
+	 * @return fromDate
+	 */
+	public String getFromDate() {
+		return fromDate;
+	}
+
+	
+	public void setFromDate(String fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	/**
+	 * Applicable only to EBILLS and STATEMENTS attributes of DOCUMENT dataset.
+	 * <br><br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>POST providerAccounts</li>
+	 * <li>PUT providerAccounts</li>
+	 * </ul>
+	 * 
+	 * @return toDate
+	 */
+	public String getToDate() {
+		return toDate;
+	}
+
+	
+	public void setToDate(String toDate) {
+		this.toDate = toDate;
+	}
+
+	/**
+	 * Applicable only to TAX attribute of DOCUMENT dataset.
+	 * <br><br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>POST providerAccounts</li>
+	 * <li>PUT providerAccounts</li>
+	 * </ul> 
+	 * 
+	 * @return fromFinYear
+	 */
+	public String getFromFinYear() {
+		return fromFinYear;
+	}
+
+	
+	public void setFromFinYear(String fromFinYear) {
+		this.fromFinYear = fromFinYear;
+	}
+
+	/**
+	 * Applicable only to TAX attribute of DOCUMENT dataset.
+	 * <br><br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>POST providerAccounts</li>
+	 * <li>PUT providerAccounts</li>
+	 * </ul> 
+	 * 
+	 * @return toFinYear
+	 */
+	public String getToFinYear() {
+		return toFinYear;
+	}
+
+	
+	public void setToFinYear(String toFinYear) {
+		this.toFinYear = toFinYear;
+	}
+
 	@Override
 	public String toString() {
-		return "Attribute [containerAttributes=" + containerAttributes + ", name=" + name + ", containers=" + containers
-				+ "]";
+		return "Attribute [containerAttributes=" + containerAttributes + ", fromDate=" + fromDate + ", toDate=" + toDate
+				+ ", fromFinYear=" + fromFinYear + ", toFinYear=" + toFinYear + ", name=" + name + ", containers="
+				+ containers + "]";
 	}
 }

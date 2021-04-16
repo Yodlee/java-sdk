@@ -21,5 +21,10 @@ public enum TransactionStatus {
 	/**
 	 * Denotes the failed transactions. It is only applicable to rejected claims in a Flexible Spending account
 	 */
-	FAILED
+	FAILED,
+	/**
+	 * Denotes that the manual transaction is added via Envestnet | Yodlee Financial Wellness Solutions or 
+	 * a transaction that the system has created when an account is closed using API or an application
+	 */
+	CLEARED
 }
