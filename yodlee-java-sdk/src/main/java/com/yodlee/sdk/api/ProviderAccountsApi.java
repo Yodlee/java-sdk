@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Field;
+import com.yodlee.api.model.provideraccounts.request.AbstractProviderAccountRequest;
 import com.yodlee.api.model.provideraccounts.request.ProviderAccountPreferencesRequest;
 import com.yodlee.api.model.provideraccounts.request.ProviderAccountRequest;
 import com.yodlee.api.model.provideraccounts.request.RefreshProviderAccountRequest;
@@ -131,7 +132,7 @@ public class ProviderAccountsApi extends AbstractApi {
 			RefreshProviderAccountRequest refreshProviderAccountRequest) throws ApiException {
 		ProviderAccountsValidator.validateRefreshProviderAccount(this, ApiUtils.getMethodName(), providerAccountId,
 				refreshProviderAccountRequest);
-		return editCredentialsOrRefreshProviderAccount(String.valueOf(providerAccountId), null);
+		return editCredentialsOrRefreshProviderAccount(String.valueOf(providerAccountId), refreshProviderAccountRequest);
 	}
 
 	/**
@@ -150,8 +151,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * sent to the callback URL.<br>
 	 * Updating preferences using this API will trigger refreshes
 	 * 
-	 * @param refreshProviderAccountRequest - Refresh Information
 	 * @param providerAccountId - ProviderAccountId
+	 * @param refreshProviderAccountRequest - Refresh Information
 	 * @param apiCallback {@link ApiCallback}&lt;{@link UpdatedProviderAccountResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -164,7 +165,7 @@ public class ProviderAccountsApi extends AbstractApi {
 			ApiCallback<UpdatedProviderAccountResponse> apiCallback) throws ApiException {
 		ProviderAccountsValidator.validateRefreshProviderAccount(this, ApiUtils.getMethodName(), providerAccountId,
 				refreshProviderAccountRequest);
-		editCredentialsOrRefreshProviderAccountAsync(String.valueOf(providerAccountId), null, apiCallback);
+		editCredentialsOrRefreshProviderAccountAsync(String.valueOf(providerAccountId), refreshProviderAccountRequest, apiCallback);
 	}
 
 	/**
@@ -639,7 +640,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	}
 
 	private ApiResponse<UpdatedProviderAccountResponse> editCredentialsOrRefreshProviderAccount(
-			String providerAccountIds, ProviderAccountRequest providerAccountRequest) throws ApiException {
+			String providerAccountIds, AbstractProviderAccountRequest providerAccountRequest) throws ApiException {
 		LOGGER.info("ProviderAccount editCredentialsOrRefreshProviderAccount API execution started");
 		CallContext callContext =
 				buildEditCredentialsOrRefreshProviderAccountContext(providerAccountIds, providerAccountRequest);
@@ -647,7 +648,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	}
 
 	private void editCredentialsOrRefreshProviderAccountAsync(String providerAccountIds,
-			ProviderAccountRequest providerAccountRequest, ApiCallback<UpdatedProviderAccountResponse> apiCallback)
+			AbstractProviderAccountRequest providerAccountRequest, ApiCallback<UpdatedProviderAccountResponse> apiCallback)
 			throws ApiException {
 		LOGGER.info("ProviderAccount editCredentialsOrRefreshProviderAccountAsync API execution started");
 		CallContext callContext =
@@ -657,7 +658,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	}
 
 	private CallContext buildEditCredentialsOrRefreshProviderAccountContext(String providerAccountIds,
-			ProviderAccountRequest providerAccountRequest) throws ApiException {
+			AbstractProviderAccountRequest providerAccountRequest) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.PROVIDER_ACCOUNTS, HttpMethod.PUT, providerAccountRequest);
 		apiContext.addQueryParam(new Pair(PARAM_PROVIDER_ACCOUNT_IDS, providerAccountIds));
