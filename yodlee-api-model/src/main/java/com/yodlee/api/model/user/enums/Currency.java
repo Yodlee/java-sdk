@@ -69,5 +69,9 @@ public enum Currency {
 	/**
 	 * Malaysian Ringgit
 	 */
-	MYR
+	MYR,
+	/**
+	 * The Swiss Franc
+	 */
+	CHF
 }
