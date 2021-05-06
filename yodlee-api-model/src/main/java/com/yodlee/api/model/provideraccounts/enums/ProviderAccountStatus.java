@@ -35,5 +35,9 @@ public enum ProviderAccountStatus {
 	 * Additional authentication information is needed from the user
 	 * 
 	 */
-	FAILED
+	FAILED,//
+	/**
+	 * Indicates that the migration of the provider account to the open banking provider is in progress.
+	 */
+	MIGRATION_IN_PROGRESS
 }

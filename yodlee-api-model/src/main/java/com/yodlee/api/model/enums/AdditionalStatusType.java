@@ -205,5 +205,45 @@ public enum AdditionalStatusType {
 	 * <b>Description: </b>The dataset cannot be retrieved as the user has not enrolled for it. <br>
 	 * <b>Next Action: </b>Instruct the user to enroll for the dataset and then request for it
 	 */
-	ENROLLMENT_REQUIRED_FOR_DATASET
+	ENROLLMENT_REQUIRED_FOR_DATASET,
+	//
+	//
+	/**
+	 * 
+	 * <b>Description: </b>The user has to provide consent to access the account information through Open Banking.<br>
+	 * <b>Next Action: </b>Instruct the user to provide the consent through the edit account flow.
+	 */
+	CONSENT_REQUIRED,
+	//
+	//
+	/**
+	 * 
+	 * <b>Description: </b>The consent provided by the user to access the account information through Open Banking has expired.<br>
+	 * <b>Next Action: </b>Instruct the user to provide the consent through the edit account flow.
+	 */
+	CONSENT_EXPIRED,
+	//
+	//
+	/**
+	 * 
+	 * <b>Description: </b>The user has revoked the consent to access the account information through Open Banking.<br>
+	 * <b>Next Action: </b>Instruct the user to provide the consent through the add account flow.
+	 */
+	CONSENT_REVOKED,
+	//
+	//
+	/**
+	 * 
+	 * <b>Description: </b>Failed to log in to the Open Banking provider site due to incorrect token.<br>
+	 * <b>Next Action: </b>Instruct the user to provide the consent through the edit account flow.
+	 */
+	INCORRECT_OAUTH_TOKEN,
+	//
+	//
+	/**
+	 * 
+	 * <b>Description: </b>The account information is being migrated from the screen-scraping provider to the Open Banking provider site.<br>
+	 * <b>Next Action: </b>No action is required as it is a transient state.
+	 */
+	MIGRATION_IN_PROGRESS
 }
