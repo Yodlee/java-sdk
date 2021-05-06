@@ -81,7 +81,10 @@ public class ProviderAccountsValidator {
 		List<Problem> problems = new ArrayList<>();
 		if (fields == null)
 			return problems;
-		if (fields.size() < 2) {
+		if (fields.size() == 1 && !fields.get(0).getId().equalsIgnoreCase("authResponse")) {
+			problems.add(new Problem(ApiUtils.getErrorMessage("providerAccounts.param.field.id.authResponse.required"), ""));
+		}
+		if (fields.size() < 2 && !fields.get(0).getId().equalsIgnoreCase("authResponse")) {
 			problems.add(new Problem(ApiUtils.getErrorMessage("providerAccounts.param.field.required"), ""));
 		}
 		return problems;

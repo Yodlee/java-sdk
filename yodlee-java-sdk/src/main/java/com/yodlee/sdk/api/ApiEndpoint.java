@@ -117,4 +117,13 @@ public class ApiEndpoint {
 	static final String MIGRATEACCOUNTS_PROVIDERACCOUNTID = "/accounts/migrateAccounts/{providerAccountId}";
 	
 	static final String ASSOCIATEDACCOUNTS_PROVIDERACCOUNTID = "/accounts/associatedAccounts/{providerAccountId}";
+
+	static final String GETCONSENTS_CONSENTID = "/consents/{consentId}";
+
+	static final String PUTCONSENTS_CONSENTID = "/consents/{consentId}";
+	
+	static final String POSTCONSENTS = "/consents";
+	
+	static final String GETCONSENTS = "/consents";
+	
 }

@@ -21,7 +21,9 @@ import com.yodlee.api.model.account.request.CreateAccountRequest;
 import com.yodlee.api.model.account.request.EvaluateAddressRequest;
 import com.yodlee.api.model.account.request.UpdateAccountRequest;
 import com.yodlee.api.model.account.response.AccountHistoricalBalancesResponse;
+import com.yodlee.api.model.account.response.AccountMigrationResponse;
 import com.yodlee.api.model.account.response.AccountResponse;
+import com.yodlee.api.model.account.response.AssociatedAccountsResponse;
 import com.yodlee.api.model.account.response.CreatedAccountResponse;
 import com.yodlee.api.model.account.response.EvaluateAddressResponse;
 import com.yodlee.api.model.enums.Container;
@@ -574,7 +576,8 @@ public class AccountsApi extends AbstractApi {
 	}
 
 	/**
-	 * Migrate Accounts, This service is associated with the open banking (OB) flow.<br>
+	 * Migrate Accounts<br> 
+	 * This service is associated with the open banking (OB) flow.<br>
 	 * Before invoking this service, display all the associated accounts to the user by calling the GET
 	 * /associatedAccounts API.<br>
 	 * The migrate accounts API treats the user's consent acceptance to initiate account migration. Invoking this
@@ -592,11 +595,11 @@ public class AccountsApi extends AbstractApi {
 	 * in the migration process.<br>
 	 * 
 	 * @param providerAccountId (required)
-	 * @return null
+	 * @return {@link ApiResponse}&lt;{@link AccountMigrationResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
-	public ApiResponse<AbstractModelComponent> migrateAccounts(
+	public ApiResponse<AccountMigrationResponse> migrateAccounts(
 			@Digits(integer = 11,
 					fraction = 0,
 					message = "{accounts.param.providerAccountId.invalid}") long providerAccountId)
@@ -604,11 +607,12 @@ public class AccountsApi extends AbstractApi {
 		LOGGER.info("Accounts migrateAccounts API execution started");
 		AccountsValidator.validateMigrateAccounts(this, ApiUtils.getMethodName(), providerAccountId);
 		CallContext callContext = buildMigrateAccountsContext(providerAccountId);
-		return callContext.getApiClient().execute(callContext.getCall(), null);
+		return callContext.getApiClient().execute(callContext.getCall(), AccountMigrationResponse.class);
 	}
 
 	/**
-	 * Migrate Accounts, This service is associated with the open banking (OB) flow.<br>
+	 * Migrate Accounts<br> 
+	 * This service is associated with the open banking (OB) flow.<br>
 	 * Before invoking this service, display all the associated accounts to the user by calling the GET
 	 * /associatedAccounts API.<br>
 	 * The migrate accounts API treats the user's consent acceptance to initiate account migration. Invoking this
@@ -652,8 +656,8 @@ public class AccountsApi extends AbstractApi {
 	}
 
 	/**
-	 * Associated Accounts, Yodlee classifies providers into credential-based aggregation and Open Banking (OB)
-	 * providers.<br>
+	 * Associated Accounts<br> 
+	 * Yodlee classifies providers into credential-based aggregation and Open Banking (OB) providers.<br>
 	 * This service is associated with the OB aggregation flow. As part of the OB solution, financial institutions may
 	 * merge their subsidiaries and provide data as a single OB provider.<br>
 	 * Before the OB solution, this data was aggregated with different provider IDs.<br>
@@ -663,11 +667,11 @@ public class AccountsApi extends AbstractApi {
 	 * share account data.<br>
 	 * 
 	 * @param providerAccountId (required)
-	 * @return null
+	 * @return {@link ApiResponse}&lt;{@link AssociatedAccountsResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
-	public ApiResponse<AbstractModelComponent> getAssociatedAccounts(
+	public ApiResponse<AssociatedAccountsResponse> getAssociatedAccounts(
 			@Digits(integer = 11,
 					fraction = 0,
 					message = "{accounts.param.providerAccountId.invalid}") long providerAccountId)
@@ -675,12 +679,12 @@ public class AccountsApi extends AbstractApi {
 		LOGGER.info("Accounts getAssociatedAccounts API execution started");
 		AccountsValidator.validateAssociatedAccounts(this, ApiUtils.getMethodName(), providerAccountId);
 		CallContext callContext = buildAssociatedAccountsContext(providerAccountId);
-		return callContext.getApiClient().execute(callContext.getCall(), null);
+		return callContext.getApiClient().execute(callContext.getCall(), AssociatedAccountsResponse.class);
 	}
 
 	/**
-	 * Associated Accounts, Yodlee classifies providers into credential-based aggregation and Open Banking (OB)
-	 * providers.<br>
+	 * Associated Accounts<br> 
+	 * Yodlee classifies providers into credential-based aggregation and Open Banking (OB) providers.<br>
 	 * This service is associated with the OB aggregation flow. As part of the OB solution, financial institutions may
 	 * merge their subsidiaries and provide data as a single OB provider.<br>
 	 * Before the OB solution, this data was aggregated with different provider IDs.<br>
