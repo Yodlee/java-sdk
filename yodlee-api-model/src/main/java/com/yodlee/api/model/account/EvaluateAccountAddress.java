@@ -35,6 +35,12 @@ public class EvaluateAccountAddress extends AccountAddress {
 
 	@JsonIgnore
 	@Override
+	public String getAddress3() {
+		throw new UnsupportedOperationException("Address3 property not supported");
+	}
+
+	@JsonIgnore
+	@Override
 	public String getCountry() {
 		throw new UnsupportedOperationException("Country property not supported");
 	}
@@ -61,6 +67,12 @@ public class EvaluateAccountAddress extends AccountAddress {
 	@Override
 	public void setAddress2(String address2) {
 		throw new UnsupportedOperationException("Address2 property not supported");
+	}
+
+	@JsonIgnore
+	@Override
+	public void setAddress3(String address3) {
+		throw new UnsupportedOperationException("Address3 property not supported");
 	}
 
 	@JsonIgnore

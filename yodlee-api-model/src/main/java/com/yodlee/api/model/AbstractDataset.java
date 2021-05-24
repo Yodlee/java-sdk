@@ -54,6 +54,10 @@ public abstract class AbstractDataset extends AbstractModelComponent {
 	public DatasetNameType getName() {
 		return name;
 	}
+	
+	public void setName(DatasetNameType name) {
+		this.name = name;
+	}
 
 	@Override
 	public int hashCode() {

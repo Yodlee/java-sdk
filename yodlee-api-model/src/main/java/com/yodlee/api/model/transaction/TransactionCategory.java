@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"id", "highLevelCategoryName", "category", "source", "highLevelCategoryId", "type",
-		"detailCategory"})
+		"detailCategory", "defaultCategoryName", "defaultHighLevelCategoryName"})
 public class TransactionCategory extends AbstractModelComponent {
 
 	@ApiModelProperty(readOnly = true,
@@ -88,6 +88,22 @@ public class TransactionCategory extends AbstractModelComponent {
 	)
 	@JsonProperty("classification")
 	private TransactionCategoryClassification classification;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "A attribute which will always hold the first value(initial name) of Yodlee defined category attribute."//
+							  + "<br><br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
+	)
+	@JsonProperty("defaultCategoryName")
+	private String defaultCategoryName;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "A attribute which will always hold the first value(initial name) of Yodlee defined highLevelCategoryName attribute."//
+							  + "<br><br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
+	)
+	@JsonProperty("defaultHighLevelCategoryName")
+	private String defaultHighLevelCategoryName;
 
 	/**
 	 * Unique identifier of the category. <br>
@@ -188,10 +204,34 @@ public class TransactionCategory extends AbstractModelComponent {
 		return classification;
 	}
 
+	/**
+	 * A attribute which will always hold the first value(initial name) of Yodlee defined category attribute. <br>
+	 * <br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
+	 * 
+	 * @return defaultCategoryName
+	 */
+	public String getDefaultCategoryName() {
+		return defaultCategoryName;
+	}
+
+	/**
+	 * A attribute which will always hold the first value(initial name) of Yodlee defined highLevelCategoryName
+	 * attribute. <br>
+	 * <br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
+	 * 
+	 * @return defaultHighLevelCategoryName
+	 */
+	public String getDefaultHighLevelCategoryName() {
+		return defaultHighLevelCategoryName;
+	}
+
 	@Override
 	public String toString() {
 		return "TransactionCategory [id=" + id + ", highLevelCategoryName=" + highLevelCategoryName + ", category="
 				+ category + ", source=" + source + ", highLevelCategoryId=" + highLevelCategoryId + ", type=" + type
-				+ ", detailCategory=" + detailCategory + "]";
+				+ ", detailCategory=" + detailCategory + ", classification=" + classification + ", defaultCategoryName="
+				+ defaultCategoryName + ", defaultHighLevelCategoryName=" + defaultHighLevelCategoryName + "]";
 	}
 }

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Response;
-import com.yodlee.api.model.cobrand.CreateCobrandNotificationEvent;
+import com.yodlee.api.model.cobrand.CobrandNotificationEvent;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -19,10 +19,10 @@ public class CobrandNotificationResponse extends AbstractModelComponent implemen
 
 	@ApiModelProperty(readOnly = true)
 	@JsonProperty("event")
-	private List<CreateCobrandNotificationEvent> events;
+	private List<CobrandNotificationEvent> events;
 
 	@JsonProperty("event")
-	public List<CreateCobrandNotificationEvent> getEvent() {
+	public List<CobrandNotificationEvent> getEvent() {
 		return events == null ? null : Collections.unmodifiableList(events);
 	}
 

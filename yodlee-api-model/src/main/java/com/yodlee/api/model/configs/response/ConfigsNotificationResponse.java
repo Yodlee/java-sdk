@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Response;
-import com.yodlee.api.model.configs.CreateConfigsNotificationEvent;
+import com.yodlee.api.model.configs.ConfigsNotificationEvent;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -19,10 +19,10 @@ public class ConfigsNotificationResponse extends AbstractModelComponent implemen
 
 	@ApiModelProperty(readOnly = true)
 	@JsonProperty("event")
-	private List<CreateConfigsNotificationEvent> events;
+	private List<ConfigsNotificationEvent> events;
 
 	@JsonProperty("event")
-	public List<CreateConfigsNotificationEvent> getEvent() {
+	public List<ConfigsNotificationEvent> getEvent() {
 		return events == null ? null : Collections.unmodifiableList(events);
 	}
 

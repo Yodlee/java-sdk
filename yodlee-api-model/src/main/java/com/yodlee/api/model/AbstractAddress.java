@@ -17,6 +17,9 @@ public abstract class AbstractAddress extends AbstractModelComponent {
 	@JsonProperty("address2")
 	protected String address2;
 
+	@JsonProperty("address3")
+	protected String address3;
+
 	@JsonProperty("state")
 	protected String state;
 
@@ -59,6 +62,14 @@ public abstract class AbstractAddress extends AbstractModelComponent {
 
 	public void setAddress2(String address2) {
 		this.address2 = address2;
+	}
+
+	public String getAddress3() {
+		return address3;
+	}
+
+	public void setAddress3(String address3) {
+		this.address3 = address3;
 	}
 
 	public String getCountry() {

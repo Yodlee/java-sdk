@@ -32,7 +32,7 @@ public enum ProviderAccountStatus {
 	 */
 	SUCCESS,//
 	/**
-	 * Additional authentication information is needed from the user
+	 * Data retrieval has failed
 	 * 
 	 */
 	FAILED,//

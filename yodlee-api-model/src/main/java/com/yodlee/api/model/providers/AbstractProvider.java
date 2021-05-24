@@ -528,6 +528,21 @@ public abstract class AbstractProvider extends AbstractModelComponent {
 	}
 
 	/**
+	 * Indicates that the site has been added by the user at least once. <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET providers/{providerId}</li>
+	 * <li>GET providers</li>
+	 * </ul>
+	 * 
+	 * @return the isAddedByUser
+	 */
+	public String getIsAddedByUser() {
+		return isAddedByUser;
+	}
+
+	/**
 	 * AuthParameter appears in the response only in case of token-based aggregation sites. <br>
 	 * <br>
 	 * <b>Endpoints</b>:
@@ -556,7 +571,22 @@ public abstract class AbstractProvider extends AbstractModelComponent {
 	public List<ProviderAccountType> getAccountType() {
 		return accountType == null ? null : Collections.unmodifiableList(accountType);
 	}
-	
+
+	/**
+	 * Indicates if a provider site requires consent. <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET providers/{providerId}</li>
+	 * <li>GET providers</li>
+	 * </ul>
+	 * 
+	 * @return isConsentRequired
+	 */
+	public Boolean getIsConsentRequired() {
+		return isConsentRequired;
+	}
+
 	@ApiModelProperty(readOnly = true,
 					  value = "The screen-scraping providers that are associated to the Open Banking provider ID."//
 							  + "<br><br>"//

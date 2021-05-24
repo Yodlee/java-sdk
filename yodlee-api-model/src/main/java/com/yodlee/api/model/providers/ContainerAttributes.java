@@ -29,14 +29,22 @@ public class ContainerAttributes extends AbstractModelComponent {
 	@JsonProperty("INSURANCE")
 	private TransactionDays insuranceTransactionDays;
 
+	@JsonProperty("CREDITCARD")
+	public TransactionDays getCreditTransactionDays() {
+		return creditTransactionDays;
+	}
+
+	public void setCreditTransactionDays(TransactionDays creditTransactionDays) {
+		this.creditTransactionDays = creditTransactionDays;
+	}
+
 	@JsonProperty("BANK")
 	public TransactionDays getBankTransactionDays() {
 		return bankTransactionDays;
 	}
 
-	@JsonProperty("CREDITCARD")
-	public TransactionDays getCreditTransactionDays() {
-		return creditTransactionDays;
+	public void setBankTransactionDays(TransactionDays bankTransactionDays) {
+		this.bankTransactionDays = bankTransactionDays;
 	}
 
 	@JsonProperty("LOAN")
@@ -44,13 +52,25 @@ public class ContainerAttributes extends AbstractModelComponent {
 		return loanTransactionDays;
 	}
 
+	public void setLoanTransactionDays(TransactionDays loanTransactionDays) {
+		this.loanTransactionDays = loanTransactionDays;
+	}
+
 	@JsonProperty("INVESTMENT")
 	public TransactionDays getInvestmentTransactionDays() {
 		return investmentTransactionDays;
 	}
 
+	public void setInvestmentTransactionDays(TransactionDays investmentTransactionDays) {
+		this.investmentTransactionDays = investmentTransactionDays;
+	}
+
 	public TransactionDays getInsuranceTransactionDays() {
 		return insuranceTransactionDays;
+	}
+
+	public void setInsuranceTransactionDays(TransactionDays insuranceTransactionDays) {
+		this.insuranceTransactionDays = insuranceTransactionDays;
 	}
 
 	@Override

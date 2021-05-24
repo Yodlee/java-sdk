@@ -5,84 +5,15 @@
  */
 package com.yodlee.api.model.configs;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.URL;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.yodlee.api.model.AbstractModelComponent;
-import com.yodlee.api.model.configs.enums.ConfigsNotificationEventType;
-import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"callbackUrl", "name"})
-public class CreateConfigsNotificationEvent extends AbstractModelComponent {
-
-	@NotEmpty(message = "{configs.event.callbackUrl.required}")
-	@URL(message = "{configs.event.callbackUrl.invalid}")
-	@ApiModelProperty(value = "URL to which the notification should be posted."//
-			+ "<br><br>"//
-			+ "<b>Endpoints</b>:"//
-			+ "<ul>"//
-			+ "<li>GET configs/notifications/events</li>"//
-			+ "</ul>")
-	@JsonProperty("callbackUrl")
-	private String callbackUrl;
-
-	@ApiModelProperty(value = "Name of the event for which the customers must subscribe to receive notifications."
-			+ "<br>" + "<b>Valid Value:</b> Notification Events Name"//
-			+ "<br><br>"//
-			+ "<b>Endpoints</b>:"//
-			+ "<ul>"//
-			+ "<li>GET configs/notifications/events</li>"//
-			+ "</ul>"//
-			+ "<b>Applicable Values</b><br>"//
-	)
-	@JsonProperty("name")
-	private ConfigsNotificationEventType configsNotificationEventName;
-
-	/**
-	 * URL to which the notification should be posted. <br>
-	 * <br>
-	 * <b>Endpoints</b>:
-	 * <ul>
-	 * <li>GET configs/notifications/events</li>
-	 * </ul>
-	 * 
-	 * @return callback URL
-	 */
-	public String getCallbackUrl() {
-		return callbackUrl;
-	}
-
-	public void setCallbackUrl(String callbackUrl) {
-		this.callbackUrl = callbackUrl;
-	}
-
-	/**
-	 * Name of the event for which the customers must subscribe to receive notifications. <br>
-	 * <b>Valid Value:</b> Notification Events Name <br>
-	 * <br>
-	 * <b>Endpoints</b>:
-	 * <ul>
-	 * <li>GET configs/notifications/events</li>
-	 * </ul>
-	 * <b>Applicable Values</b><br>
-	 * 
-	 * @return configs notification event type name
-	 */
-	@JsonProperty("name")
-	public ConfigsNotificationEventType getName() {
-		return configsNotificationEventName;
-	}
-
-	public void setConfigsNotificationEventName(ConfigsNotificationEventType configsNotificationEventName) {
-		this.configsNotificationEventName = configsNotificationEventName;
-	}
+@JsonPropertyOrder({"callbackUrl"})
+public class CreateConfigsNotificationEvent extends AbstractConfigsNotificationEvent {
 
 	@Override
 	public String toString() {
-		return "CreateConfigsNotificationEvent [callbackUrl=" + callbackUrl + ", configsNotificationEventName="
-				+ configsNotificationEventName + "]";
+		return "CreateConfigsNotificationEvent [callbackUrl=" + callbackUrl + "]";
 	}
 }

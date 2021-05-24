@@ -12,8 +12,8 @@ import com.yodlee.api.model.AbstractAddress;
 import com.yodlee.api.model.enums.AddressType;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"address1", "address2", "street", "city", "state", "zip",
-		"country", "sourceType", "type"})
+@JsonPropertyOrder({"address1", "address2", "address3", "street", "city", "state", "zip", "country", "sourceType",
+		"type"})
 public class AccountAddress extends AbstractAddress {
 
 	@JsonProperty("sourceType")
@@ -37,10 +37,14 @@ public class AccountAddress extends AbstractAddress {
 		return street;
 	}
 
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
 	@Override
 	public String toString() {
-		return "AccountAddress [sourceType=" + sourceType + ", type=" + type + ", address1=" + address1 + ", address2="
-				+ address2 + ", street=" + street + ", state=" + state + ", city=" + city + ", zip=" + zip
-				+ ", country=" + country + "]";
+		return "AccountAddress [sourceType=" + sourceType + ", type=" + type + ", street=" + street + ", address1="
+				+ address1 + ", address2=" + address2 + ", address3=" + address3 + ", state=" + state + ", city=" + city
+				+ ", zip=" + zip + ", country=" + country + "]";
 	}
 }

@@ -14,17 +14,25 @@ import com.yodlee.api.model.enums.FullAccountNumberFields;
 public class TransactionDays extends AbstractModelComponent {
 
 	private Integer numberOfTransactionDays;
-	
+
 	private List<FullAccountNumberFields> fullAccountNumberFields;
 
 	public Integer getNumberOfTransactionDays() {
 		return numberOfTransactionDays;
 	}
 
+	public void setNumberOfTransactionDays(Integer numberOfTransactionDays) {
+		this.numberOfTransactionDays = numberOfTransactionDays;
+	}
+
 	public List<FullAccountNumberFields> getFullAccountNumberFields() {
 		return fullAccountNumberFields;
 	}
-	
+
+	public void setFullAccountNumberFields(List<FullAccountNumberFields> fullAccountNumberFields) {
+		this.fullAccountNumberFields = fullAccountNumberFields;
+	}
+
 	@Override
 	public String toString() {
 		return "TransactionDays [numberOfTransactionDays=" + numberOfTransactionDays + ", fullAccountNumberFields="

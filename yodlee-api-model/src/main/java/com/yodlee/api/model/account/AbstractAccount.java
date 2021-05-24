@@ -834,16 +834,16 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "</ul>")
 	@JsonProperty("apr")
 	protected Double apr;
-	
+
 	@ApiModelProperty(readOnly = true,
-			  value = "Derived APR will be an estimated purchase APR based on consumers credit card transactions and credit card purchase.<br>"
-					  + "<b>Aggregated / Manual / Derived</b>: Derived<br>"//
-					  + "<b>Applicable containers</b>: creditCard<br>"//
-					  + "<b>Endpoints</b>:<br>"//
-					  + "<ul><li>GET accounts</li>"//
-					  + "<li>GET accounts/{accountId}</li>"//
-					  + "<li>GET dataExtracts/userData</li>"//
-					  + "</ul>")
+					  value = "Derived APR will be an estimated purchase APR based on consumers credit card transactions and credit card purchase.<br>"
+							  + "<b>Aggregated / Manual / Derived</b>: Derived<br>"//
+							  + "<b>Applicable containers</b>: creditCard<br>"//
+							  + "<b>Endpoints</b>:<br>"//
+							  + "<ul><li>GET accounts</li>"//
+							  + "<li>GET accounts/{accountId}</li>"//
+							  + "<li>GET dataExtracts/userData</li>"//
+							  + "</ul>")
 	@JsonProperty("derivedApr")
 	protected Double derivedApr;
 
@@ -2533,6 +2533,24 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	}
 
 	/**
+	 * A unique ID that the provider site has assigned to the account. The source ID is only available for the HELD
+	 * accounts.<br>
+	 * <br>
+	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, bill, reward<br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET accounts</li>
+	 * <li>GET accounts/{accountId}</li>
+	 * <li>GET dataExtracts/userData</li>
+	 * </ul>
+	 * 
+	 * @return the sourceId
+	 */
+	public String getSourceId() {
+		return sourceId;
+	}
+
+	/**
 	 * Logical grouping of dataset attributes into datasets such as Basic Aggregation Data, Account Profile and
 	 * Documents. <br>
 	 * <br>
@@ -2819,9 +2837,10 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	public Double getApr() {
 		return apr;
 	}
-	
+
 	/**
-	 * Derived APR will be an estimated purchase APR based on consumers credit card transactions and credit card purchase.<br>
+	 * Derived APR will be an estimated purchase APR based on consumers credit card transactions and credit card
+	 * purchase.<br>
 	 * <b>Aggregated / Manual / Derived</b>: Derived<br>
 	 * <b>Applicable containers</b>: creditCard<br>
 	 * <b>Endpoints</b>:<br>
@@ -3864,16 +3883,16 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	public String getLender() {
 		return lender;
 	}
-	
+
 	@ApiModelProperty(readOnly = true,
-			  value = "Indicates the migration status of the account from screen-scraping provider to the Open Banking provider. "//
-					  + "<br><br>"//
-					  + "<b>Endpoints</b>:"//
-					  + "<ul>"//
-					  + "<li>GET accounts</li>"//
-					  + "<li>GET accounts/{accountId}</li>"//
-					  + "<li>GET dataExtracts/userData</li>"//
-					  + "</ul>")
+					  value = "Indicates the migration status of the account from screen-scraping provider to the Open Banking provider. "//
+							  + "<br><br>"//
+							  + "<b>Endpoints</b>:"//
+							  + "<ul>"//
+							  + "<li>GET accounts</li>"//
+							  + "<li>GET accounts/{accountId}</li>"//
+							  + "<li>GET dataExtracts/userData</li>"//
+							  + "</ul>")
 	@JsonProperty("oauthMigrationStatus")
 	protected OpenBankingMigrationStatusType openBankingMigrationStatusType;
 

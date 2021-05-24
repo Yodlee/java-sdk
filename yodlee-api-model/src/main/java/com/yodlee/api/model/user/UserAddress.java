@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.yodlee.api.model.AbstractAddress;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"address1", "address2", "fullAddress", "state", "city", "zip", "country"})
+@JsonPropertyOrder({"address1", "address2", "address3", "fullAddress", "state", "city", "zip", "country"})
 public class UserAddress extends AbstractAddress {
 
 	@Override
 	public String toString() {
-		return "UserAddress [address1=" + address1 + ", address2=" + address2 + ", state=" + state + ", city=" + city
-				+ ", zip=" + zip + ", country=" + country + "]";
+		return "UserAddress [address1=" + address1 + ", address2=" + address2 + ", address3=" + address3 + ", state="
+				+ state + ", city=" + city + ", zip=" + zip + ", country=" + country + "]";
 	}
 }

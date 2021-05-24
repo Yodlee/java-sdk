@@ -13,4 +13,12 @@ public class VerificationStatus extends Verification {
 	@ApiModelProperty(readOnly = true)
 	@JsonProperty("remainingAttempts")
 	private Long remainingAttempts;
+
+	/**
+	 * 
+	 * @return remainingAttempts
+	 */
+	public Long getRemainingAttempts() {
+		return remainingAttempts;
+	}
 }
