@@ -54,7 +54,6 @@ public class AddAccountFlow {
 		ConfigsApi configsApi = new ConfigsApi(clientCredentialAdminContext);
 		CreateConfigsNotificationEventRequest eventRequest = new CreateConfigsNotificationEventRequest();
 		CreateConfigsNotificationEvent event = new CreateConfigsNotificationEvent();
-		event.setConfigsNotificationEventName(ConfigsNotificationEventType.REFRESH);
 		String dns = DemoAddAccountApplication.RESOURCES.getDnsName();
 		// Set callback URL to subscribe for REFRESH event
 		event.setCallbackUrl("http://" + dns + ":" + getPort() + "/yourApp/callback");

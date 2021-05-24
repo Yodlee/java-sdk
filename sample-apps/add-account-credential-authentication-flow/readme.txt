@@ -18,7 +18,7 @@ Steps to execute Demo application -
 	<PROVIDER_ID> - providerId to link an account
 	<FIELD_ID> - field id for link an account
 	<FIELD_VALUE> - field value for link an account
-3. Go to DemoAddAccountApplication.java and execute it.
+4. Go to DemoAddAccountApplication.java and execute it.
 
 
 The DemoAddAccountApplication (springboot application) does the following-

@@ -54,7 +54,6 @@ public class AddAccountFlow {
 		cobrandApi.setContext(jwtCobrandContext);
 		CreateCobrandNotificationEventRequest eventRequest = new CreateCobrandNotificationEventRequest();
 		CreateCobrandNotificationEvent event = new CreateCobrandNotificationEvent();
-		event.setCobrandNotificationEventName(CobrandNotificationEventType.REFRESH);
 		String dns = DemoAddAccountApplication.RESOURCES.getDnsName();
 		// Set callback URL to subscribe for REFRESH event
 		event.setCallbackUrl("http://" + dns + ":" + getPort() + "/yourApp/callback");
