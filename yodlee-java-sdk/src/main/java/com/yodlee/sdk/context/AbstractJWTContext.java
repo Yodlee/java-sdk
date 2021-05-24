@@ -9,6 +9,8 @@ import com.yodlee.sdk.configuration.cobrand.AbstractJWTConfiguration;
 
 public abstract class AbstractJWTContext<C extends AbstractJWTConfiguration> extends AbstractContext<C> {
 
+	private static final long serialVersionUID = 1L;
+
 	protected final C configuration;
 
 	protected String jwtToken;

@@ -14,6 +14,8 @@ import java.util.Set;
 
 public abstract class AbstractContext<T extends AbstractBaseConfiguration> implements Context<T> {
 
+	private static final long serialVersionUID = 1L;
+
 	protected abstract String getContextHeader();
 
 	@Override

@@ -12,6 +12,8 @@ import com.yodlee.sdk.configuration.cobrand.AbstractCobrandConfiguration;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserConfiguration extends AbstractCobrandConfiguration {
 
+	private static final long serialVersionUID = 1L;
+
 	@JsonProperty("issuer")
 	private String issuer;
 

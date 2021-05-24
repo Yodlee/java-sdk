@@ -9,6 +9,8 @@ import com.yodlee.sdk.configuration.cobrand.AbstractClientCredentialConfiguratio
 
 public class ClientCredentialUserConfiguration extends AbstractClientCredentialConfiguration {
 
+	private static final long serialVersionUID = 1L;
+
 	public ClientCredentialUserConfiguration() {
 		super();
 	}

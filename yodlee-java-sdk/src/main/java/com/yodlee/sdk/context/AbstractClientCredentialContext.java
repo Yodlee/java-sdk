@@ -9,6 +9,8 @@ import com.yodlee.sdk.configuration.cobrand.AbstractClientCredentialConfiguratio
 
 public abstract class AbstractClientCredentialContext<C extends AbstractClientCredentialConfiguration> extends AbstractContext<C> {
 
+	private static final long serialVersionUID = 1L;
+
 	private String accessToken;
 
 	private String issuedAt;

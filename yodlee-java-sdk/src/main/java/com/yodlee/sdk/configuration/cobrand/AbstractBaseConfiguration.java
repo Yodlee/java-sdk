@@ -17,6 +17,8 @@ import com.yodlee.sdk.configuration.AbstractConfiguration;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class AbstractBaseConfiguration extends AbstractConfiguration {
 
+	private static final long serialVersionUID = 1L;
+
 	@NotEmpty(message = "{config.basepath.required}")
 	@URL(message = "{config.basepath.invalid}")
 	@JsonProperty("basePath")

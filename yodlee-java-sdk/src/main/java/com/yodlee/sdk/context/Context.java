@@ -7,9 +7,10 @@ package com.yodlee.sdk.context;
 
 import com.yodlee.sdk.client.ApiClient;
 import com.yodlee.sdk.configuration.AbstractConfiguration;
+import java.io.Serializable;
 import java.util.Map;
 
-public interface Context<C extends AbstractConfiguration> {
+public interface Context<C extends AbstractConfiguration> extends Serializable {
 
 	public ContextType getContextType();
 

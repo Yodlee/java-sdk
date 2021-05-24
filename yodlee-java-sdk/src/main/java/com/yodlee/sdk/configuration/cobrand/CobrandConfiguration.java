@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CobrandConfiguration extends AbstractCobrandConfiguration {
 
+	private static final long serialVersionUID = 1L;
+
 	public CobrandConfiguration() {}
 
 	public CobrandConfiguration(String basePath, String apiVersion, String name) {

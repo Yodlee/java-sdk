@@ -9,6 +9,8 @@ import com.yodlee.sdk.configuration.user.ClientCredentialUserConfiguration;
 
 public class ClientCredentialUserContext extends AbstractClientCredentialContext<ClientCredentialUserConfiguration> {
 
+	private static final long serialVersionUID = 1L;
+
 	public ClientCredentialUserContext(String accessToken, String issuedAt, int expiresIn,
 			ClientCredentialUserConfiguration clientCredentialUserConfiguration) {
 		super(accessToken, issuedAt, expiresIn, clientCredentialUserConfiguration);

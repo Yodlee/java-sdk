@@ -9,6 +9,8 @@ import com.yodlee.sdk.configuration.cobrand.ClientCredentialAdminConfiguration;
 
 public class ClientCredentialAdminContext extends AbstractClientCredentialContext<ClientCredentialAdminConfiguration> {
 
+	private static final long serialVersionUID = 1L;
+
 	public ClientCredentialAdminContext(String accessToken, String issuedAt, int expiresIn,
 			ClientCredentialAdminConfiguration clientCredentialAdminConfiguration) {
 		super(accessToken, issuedAt, expiresIn, clientCredentialAdminConfiguration);

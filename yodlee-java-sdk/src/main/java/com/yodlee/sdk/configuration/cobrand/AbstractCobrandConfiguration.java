@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public abstract class AbstractCobrandConfiguration extends AbstractBaseConfiguration {
 
+	private static final long serialVersionUID = 1L;
+
 	@NotEmpty(message = "{config.cobrandName.required}")
 	@JsonProperty("cobrandName")
 	protected String name;

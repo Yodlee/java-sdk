@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public abstract class AbstractClientCredentialConfiguration extends AbstractBaseConfiguration {
 
+	private static final long serialVersionUID = 1L;
+
 	@NotEmpty(message = "{config.clientId.required}")
 	@JsonProperty("clientId")
 	private String clientId;

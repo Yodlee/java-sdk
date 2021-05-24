@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class JWTAppConfiguration extends AbstractJWTConfiguration {
 
+	private static final long serialVersionUID = 1L;
+
 	public JWTAppConfiguration() {}
 
 	public JWTAppConfiguration(String basePath, String apiVersion, String apiKey, String privateKey,

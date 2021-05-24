@@ -12,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public abstract class AbstractJWTConfiguration extends AbstractBaseConfiguration {
 
+	private static final long serialVersionUID = 1L;
+
 	@NotEmpty(message = "{config.jwt.apiKey.required}")
 	@JsonProperty("apiKey")
 	protected String apiKey;

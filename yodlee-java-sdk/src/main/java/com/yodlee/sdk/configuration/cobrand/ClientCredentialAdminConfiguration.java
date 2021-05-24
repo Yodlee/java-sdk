@@ -7,6 +7,8 @@ package com.yodlee.sdk.configuration.cobrand;
 
 public class ClientCredentialAdminConfiguration extends AbstractClientCredentialConfiguration {
 
+	private static final long serialVersionUID = 1L;
+
 	public ClientCredentialAdminConfiguration() {
 		super();
 	}

@@ -13,6 +13,8 @@ import com.yodlee.sdk.configuration.cobrand.JWTAppConfiguration;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class JWTUserConfiguration extends AbstractJWTConfiguration {
 
+	private static final long serialVersionUID = 1L;
+
 	@JsonProperty("sub")
 	private String user;
 

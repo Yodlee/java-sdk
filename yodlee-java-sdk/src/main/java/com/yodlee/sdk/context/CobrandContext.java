@@ -12,6 +12,8 @@ import com.yodlee.sdk.configuration.cobrand.CobrandConfiguration;
 
 public class CobrandContext extends AbstractContext<CobrandConfiguration> {
 
+	private static final long serialVersionUID = 1L;
+
 	private final String cobSession;
 
 	private final CobrandConfiguration cobrandConfiguration;

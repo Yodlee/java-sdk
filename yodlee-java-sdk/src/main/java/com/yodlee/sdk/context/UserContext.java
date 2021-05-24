@@ -12,6 +12,8 @@ import com.yodlee.sdk.configuration.user.UserConfiguration;
 
 public class UserContext extends AbstractContext<UserConfiguration> {
 
+	private static final long serialVersionUID = 1L;
+
 	private final String cobsession;
 
 	private final String userSession;

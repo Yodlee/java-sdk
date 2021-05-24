@@ -9,6 +9,8 @@ import com.yodlee.sdk.configuration.cobrand.JWTAppConfiguration;
 
 public class JWTAppContext extends AbstractJWTContext<JWTAppConfiguration> {
 
+	private static final long serialVersionUID = 1L;
+
 	public JWTAppContext(String jwtToken, JWTAppConfiguration jwtAppConfiguration) {
 		super(jwtToken, jwtAppConfiguration);
 	}

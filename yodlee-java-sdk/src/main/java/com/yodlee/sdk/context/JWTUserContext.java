@@ -9,6 +9,8 @@ import com.yodlee.sdk.configuration.user.JWTUserConfiguration;
 
 public class JWTUserContext extends AbstractJWTContext<JWTUserConfiguration> {
 
+	private static final long serialVersionUID = 1L;
+
 	public JWTUserContext(String jwtToken, JWTUserConfiguration jwtUserConfiguration) {
 		super(jwtToken, jwtUserConfiguration);
 	}
