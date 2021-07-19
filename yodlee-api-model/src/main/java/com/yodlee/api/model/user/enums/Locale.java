@@ -21,5 +21,9 @@ public enum Locale {
 	/**
 	 * Chinese - China
 	 */
-	zh_CN;
+	zh_CN,
+	/**
+	 * English - Australia
+	 */
+	en_AU;
 }
