@@ -18,5 +18,9 @@ public enum OpenBankingMigrationStatusType {
 	/**
 	 * Successfully migrated to the Open Banking provider.
 	 */
-	COMPLETED
+	COMPLETED,
+	/**
+	 * Indicates the status of the OAuth migration process.
+	 */
+	MIGRATED
 }

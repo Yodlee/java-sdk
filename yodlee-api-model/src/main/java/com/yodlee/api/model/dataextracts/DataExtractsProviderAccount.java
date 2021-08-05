@@ -5,6 +5,8 @@
  */
 package com.yodlee.api.model.dataextracts;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -13,7 +15,8 @@ import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"id", "aggregationSource", "providerId", "isManual", "createdDate", "requestId", "status",
-		"dataset", "loginForm", "isAutoRefreshPreferred", "isDataExtractsPreferred", "preferences", "isDeleted", "oauthMigrationStatus"})
+		"dataset", "loginForm", "isAutoRefreshPreferred", "isDataExtractsPreferred", "preferences", "isDeleted", "oauthMigrationStatus",
+		"destinationProviderAccountId", "sourceProviderAccountIds"})
 public class DataExtractsProviderAccount extends AbstractProviderAccount {
 
 	@ApiModelProperty(readOnly = true,
@@ -39,6 +42,24 @@ public class DataExtractsProviderAccount extends AbstractProviderAccount {
 							  + "</ul>")
 	@JsonProperty("isDeleted")
 	protected Boolean isDeleted;
+
+	@ApiModelProperty(readOnly = true,
+			  value = "The providerAccountId that is retained as part of the many-to-one OAuth migration process.<br>"//
+					  + "<b>Endpoints</b>:"//
+					  + "<ul>"//
+					  + "<li>GET dataExtracts/userData</li>"//
+					  + "</ul>")
+	@JsonProperty("destinationProviderAccountId")
+	protected Long destinationProviderAccountId;
+
+	@ApiModelProperty(readOnly = true,
+			  value = "The providerAccountIds that are deleted and merged into the destinationProviderAccountId as part of the many-to-one OAuth migration process.<br>"//
+					  + "<b>Endpoints</b>:"//
+					  + "<ul>"//
+					  + "<li>GET dataExtracts/userData</li>"//
+					  + "</ul>")
+	@JsonProperty("sourceProviderAccountIds")
+	protected List<Long> sourceProviderAccountIds;
 
 	/**
 	 * The date on when the provider account is created in the system. <br>
@@ -71,11 +92,42 @@ public class DataExtractsProviderAccount extends AbstractProviderAccount {
 		return isDeleted;
 	}
 
+
+
+	/**
+	 * The providerAccountId that is retained as part of the many-to-one OAuth migration process.<br>
+	 * <b>Endpoints</b>:<br>
+	 * <ul>
+	 * <li>GET dataExtracts/userData</li>
+	 * </ul>
+	 *
+	 * @return the destinationProviderAccountId
+	 */
+	public Long getDestinationProviderAccountId() {
+		return destinationProviderAccountId;
+	}
+
+
+
+	/**
+	 * The providerAccountIds that are deleted and merged into the destinationProviderAccountId as part of the many-to-one OAuth migration process.<br>
+	 * <b>Endpoints</b>:<br>
+	 * <ul>
+	 * <li>GET dataExtracts/userData</li>
+	 * </ul>
+	 *
+	 * @return the sourceProviderAccountIds
+	 */
+	public List<Long> getSourceProviderAccountIds() {
+		return sourceProviderAccountIds;
+	}
+
 	@Override
 	public String toString() {
 		return "DataExtractsProviderAccount [createdDate=" + createdDate + ", id=" + id + ", aggregationSource="
 				+ aggregationSource + ", providerId=" + providerId + ", isManual=" + isManual + ", requestId="
 				+ requestId + ", status=" + status + ", datasets=" + datasets + ", isDeleted=" + isDeleted 
-				+ ", oauthMigrationStatus=" + openBankingMigrationStatusType +"]";
+				+ ", oauthMigrationStatus=" + openBankingMigrationStatusType
+				+ ", destinationProviderAccountId=" + destinationProviderAccountId + ", sourceProviderAccountIds=" + sourceProviderAccountIds +"]";
 	}
 }

@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiModelProperty;
 		"valuationType", "homeValue", "estimatedDate", "address", "historicalBalances", "loanPayoffAmount",
 		"loanPayByDate", "bankTransferCode", "rewardBalance", "frequency", "amountDue", "minimumAmountDue", "dataset",
 		"associatedProviderAccountId", "loanPayOffDetails", "coverage", "sourceAccountStatus", "repaymentPlanType",
-		"guarantor", "lender", "oauthMigrationStatus"})
+		"guarantor", "lender", "oauthMigrationStatus", "sourceProviderAccountId"})
 public class DataExtractsAccount extends AbstractAccount {
 
 	@ApiModelProperty(readOnly = true,
@@ -42,6 +42,15 @@ public class DataExtractsAccount extends AbstractAccount {
 	@JsonProperty("isDeleted")
 	protected Boolean isDeleted;
 
+	@ApiModelProperty(readOnly = true,
+			  value = "The providerAccountId that is deleted and merged into the destinationProviderAccountId as part of the many-to-one OAuth migration process.<br>"//
+					  + "<b>Endpoints</b>:"//
+					  + "<ul>"//
+					  + "<li>GET dataExtracts/userData</li>"//
+					  + "</ul>")
+	@JsonProperty("sourceProviderAccountId")
+	protected Long sourceProviderAccountId;
+
 	/**
 	 * Indicates if the account is marked as deleted. <b>Applicable containers</b>: All Containers<br>
 	 * <b>Aggregated / Manual</b>: Both <br>
@@ -54,6 +63,19 @@ public class DataExtractsAccount extends AbstractAccount {
 	 */
 	public Boolean getIsDeleted() {
 		return isDeleted;
+	}
+
+	/**
+	 * The providerAccountId that is deleted and merged into the destinationProviderAccountId as part of the many-to-one OAuth migration process.<br>
+	 * <b>Endpoints</b>:<br>
+	 * <ul>
+	 * <li>GET dataExtracts/userData</li>
+	 * </ul>
+	 *
+	 * @return the sourceProviderAccountId
+	 */
+	public Long getSourceProviderAccountId() {
+		return sourceProviderAccountId;
 	}
 
 	@Override
@@ -97,6 +119,7 @@ public class DataExtractsAccount extends AbstractAccount {
 				+ datasets + ", associatedProviderAccountIds=" + associatedProviderAccountIds + ", loanPayOffDetails="
 				+ loanPayOffDetails + ", coverage=" + coverage + ", sourceAccountStatus=" + sourceAccountStatus
 				+ ", repaymentPlanType=" + repaymentPlanType + ", guarantor=" + guarantor + ", lender=" + lender 
-				+ ", oauthMigrationStatus=" + openBankingMigrationStatusType +"]";
+				+ ", oauthMigrationStatus=" + openBankingMigrationStatusType
+				+ ", sourceProviderAccountId=" + sourceProviderAccountId + "]";
 	}
 }
