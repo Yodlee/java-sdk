@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yodlee</groupId>
 	<artifactId>yodlee-api-model</artifactId>
-	<version>1.0.16</version>
+	<version>1.0.17-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Yodlee API Model</name>
 	<description>Yodlee API Model</description>
@@ -39,7 +39,7 @@
 		<connection>scm:git:git://github.com/Yodlee/java-sdk.git</connection>
 		<developerConnection>scm:git:git://github.com/Yodlee/java-sdk.git</developerConnection>
 		<url>https://github.com/Yodlee/java-sdk</url>
-		<tag>yodlee-api-model-1.0.16</tag>
+		<tag>yodlee-api-model-1.0.0</tag>
 	</scm>
 
 	<properties>
