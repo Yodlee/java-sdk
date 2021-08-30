@@ -21,7 +21,7 @@ public class ApiConstants {
 
 	public static final String YYYY_MM_DD = "yyyy-MM-dd";
 
-	public static final String ONLY_NUMBER = "[0-9]+";
+	public static final String ONLY_NUMBER = "[0-9]+(\\.[0-9]{1,4})?$";
 
 	public static final String CLIENT_ID = "clientId";
 

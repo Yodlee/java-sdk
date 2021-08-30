@@ -36,8 +36,6 @@ public class ContextBuilderFactory {
 	}
 
 	/**
-	 * 
-	 * 
 	 * This method is used to obtain Cobrand Context builder which helps creating Cobrand Context(CobSession).<br>
 	 * Cobrand Context can be used to invoke Cobrand bound APIs.
 	 * 
@@ -54,16 +52,30 @@ public class ContextBuilderFactory {
 	 * User Context can be used to invoke any API.
 	 * 
 	 * 
-	 * @return The User JWT token context builder
+	 * @return The User context builder
 	 */
 	public static UserContextBuilder createUserContextBuilder() {
 		return new UserContextBuilder();
 	}
 
+	/**
+	 * This method is used to obtain ClientCredential Admin/Cobrand Context builder which helps creating Cobrand Context.<br>
+	 * Cobrand Context can be used to invoke Cobrand bound APIs.
+	 * 
+	 * 
+	 * @return The Cobrand Client Credential context builder
+	 */
 	public static ClientCredentialAdminContextBuilder createClientCredentialAdminContextBuilder() {
 		return new ClientCredentialAdminContextBuilder();
 	}
 
+	/**
+	 * This method is used to obtain ClientCredential User Context builder which helps creating User Context.<br>
+	 * User Context can be used to invoke any API.
+	 * 
+	 * 
+	 * @return The User Client Credential context builder
+	 */
 	public static ClientCredentialUserContextBuilder createClientCredentialUserContextBuilder() {
 		return new ClientCredentialUserContextBuilder();
 	}
