@@ -7,6 +7,7 @@ package com.yodlee.sdk.api;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import org.slf4j.Logger;
@@ -64,16 +65,48 @@ public class StatementsApi extends AbstractApi {
 	 *         response body
 	 */
 	public ApiResponse<StatementResponse> getStatements(//
-			@Min(value = 1, message = "{statements.param.accountId.invalid}")//
-			@Digits(message = "{statements.param.accountId.invalid}", fraction = 0, integer = 11) Long accountId,//
-			Container container,//
-			Date fromDate,//
-			Boolean isLatest,//
+			@Min(value = 1, message = "{statements.param.accountId.invalid}") //
+			@Digits(message = "{statements.param.accountId.invalid}", fraction = 0, integer = 11) Long accountId, //
+			Container container, //
+			Date fromDate, //
+			Boolean isLatest, //
 			ItemAccountStatus status) throws ApiException {
 		LOGGER.info("Statements getStatements API execution started");
 		StatementsValidator.validateGetStatement(this, ApiUtils.getMethodName(), accountId, container, fromDate,
 				isLatest, status);
-		CallContext callContext = buildGetStatementsContext(accountId, container, fromDate, isLatest, status);
+		CallContext callContext = buildGetStatementsContext(accountId, container, fromDate, isLatest, status, null);
+		return callContext.getApiClient().execute(callContext.getCall(), StatementResponse.class);
+	}
+
+	/**
+	 * Get Statements with request Headers. <br>
+	 * The statements service is used to get the list of statement related information. <br>
+	 * 
+	 * 
+	 * @param accountId accountId (optional)
+	 * @param container creditCard/loan/bill/insurance (optional)
+	 * @param fromDate from date for statement retrieval (optional)
+	 * @param isLatest isLatest (true/false) (optional)
+	 * @param status ACTIVE/TO_BE_CLOSED/CLOSED (optional)
+	 * @param headers Map of headers key-value pair e.g (Accept-Encoding, gzip) (required)
+	 * @return {@link ApiResponse}&lt;{@link StatementResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<StatementResponse> getStatements(//
+			@Min(value = 1, message = "{statements.param.accountId.invalid}") //
+			@Digits(message = "{statements.param.accountId.invalid}", fraction = 0, integer = 11) Long accountId, //
+			Container container, //
+			Date fromDate, //
+			Boolean isLatest, //
+			ItemAccountStatus status, //
+			Map<String, String> headers) throws ApiException {
+		LOGGER.info("Statements getStatements API execution started");
+		StatementsValidator.validateGetStatement(this, ApiUtils.getMethodName(), accountId, container, fromDate,
+				isLatest, status);
+		String contentEncodingValue = headers.get(ApiConstants.ACCEPT_ENCODING);
+		CallContext callContext =
+				buildGetStatementsContext(accountId, container, fromDate, isLatest, status, contentEncodingValue);
 		return callContext.getApiClient().execute(callContext.getCall(), StatementResponse.class);
 	}
 
@@ -96,24 +129,25 @@ public class StatementsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void getStatementsAsync(//
-			@Min(value = 1, message = "{statements.param.accountId.invalid}")//
-			@Digits(message = "{statements.param.accountId.invalid}", fraction = 0, integer = 11) Long accountId,//
-			Container container,//
-			Date fromDate,//
-			Boolean isLatest,//
+			@Min(value = 1, message = "{statements.param.accountId.invalid}") //
+			@Digits(message = "{statements.param.accountId.invalid}", fraction = 0, integer = 11) Long accountId, //
+			Container container, //
+			Date fromDate, //
+			Boolean isLatest, //
 			ItemAccountStatus status, ApiCallback<StatementResponse> apiCallback) throws ApiException {
 		LOGGER.info("Statements getStatementsAsync API execution started");
 		StatementsValidator.validateGetStatement(this, ApiUtils.getMethodName(), accountId, container, fromDate,
 				isLatest, status);
-		CallContext callContext = buildGetStatementsContext(accountId, container, fromDate, isLatest, status);
+		CallContext callContext = buildGetStatementsContext(accountId, container, fromDate, isLatest, status, null);
 		callContext.getApiClient().executeAsync(callContext.getCall(), StatementResponse.class, apiCallback);
 	}
 
-	private CallContext buildGetStatementsContext(Long accountId,//
-			Container container,//
-			Date fromDate,//
-			Boolean isLatest,//
-			ItemAccountStatus status) throws ApiException {
+	private CallContext buildGetStatementsContext(Long accountId, //
+			Container container, //
+			Date fromDate, //
+			Boolean isLatest, //
+			ItemAccountStatus status, //
+			String contentEncoding) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.STATEMENTS, HttpMethod.GET, null);
 		SimpleDateFormat formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD);
@@ -132,6 +166,9 @@ public class StatementsApi extends AbstractApi {
 		if (fromDate != null) {
 			String formattedFromDate = formatter.format(fromDate);
 			apiContext.addQueryParam(new Pair(PARAM_FROM_DATE, formattedFromDate));
+		}
+		if (contentEncoding != null) {
+			apiContext.addHeaderParam(ApiConstants.ACCEPT_ENCODING, contentEncoding);
 		}
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());

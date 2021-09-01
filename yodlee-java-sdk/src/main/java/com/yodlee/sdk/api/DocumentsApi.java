@@ -7,6 +7,7 @@ package com.yodlee.sdk.api;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -69,16 +70,46 @@ public class DocumentsApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
-	public ApiResponse<DocumentResponse> getDocuments(String keyword,//
-			@Digits(integer = 11, fraction = 0, message = "{documents.param.accountId.invalid}")//
-			@Min(value = 1, message = "{documents.param.accountId.invalid}") Long accountId,//
+	public ApiResponse<DocumentResponse> getDocuments(String keyword, //
+			@Digits(integer = 11, fraction = 0, message = "{documents.param.accountId.invalid}") //
+			@Min(value = 1, message = "{documents.param.accountId.invalid}") Long accountId, //
 			DocType docType, //
-			Date fromDate,//
+			Date fromDate, //
 			Date toDate) throws ApiException {
 		LOGGER.info("Documents getDocuments API execution started");
 		DocumentsValidator.validateGetDocuments(this, ApiUtils.getMethodName(), keyword, accountId, docType, fromDate,
 				toDate);
-		CallContext callContext = buildGetDocumentsContext(keyword, accountId, docType, fromDate, toDate);
+		CallContext callContext = buildGetDocumentsContext(keyword, accountId, docType, fromDate, toDate, null);
+		return callContext.getApiClient().execute(callContext.getCall(), DocumentResponse.class);
+	}
+
+	/**
+	 * Get Documents with request Headers. <br>
+	 * The get documents service allows customers to search or retrieve metadata related to documents.
+	 * 
+	 * @param keyword The string used to search a document by its name. (optional)
+	 * @param accountId The unique identifier of an account. Retrieve documents for a given accountId. (optional)
+	 * @param docType Accepts only one of the following valid document types: STMT, TAX, and EBILL. (optional)
+	 * @param fromDate The date from which documents have to be retrieved. (optional)
+	 * @param toDate The date to which documents have to be retrieved. (optional)
+	 * @param headers Map of headers key-value pair e.g (Accept-Encoding, gzip) (required)
+	 * @return {@link ApiResponse}&lt;{@link DocumentResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<DocumentResponse> getDocuments(String keyword, //
+			@Digits(integer = 11, fraction = 0, message = "{documents.param.accountId.invalid}") //
+			@Min(value = 1, message = "{documents.param.accountId.invalid}") Long accountId, //
+			DocType docType, //
+			Date fromDate, //
+			Date toDate, //
+			Map<String, String> headers) throws ApiException {
+		LOGGER.info("Documents getDocuments API execution started");
+		DocumentsValidator.validateGetDocuments(this, ApiUtils.getMethodName(), keyword, accountId, docType, fromDate,
+				toDate);
+		String contentEncodingValue = headers.get(ApiConstants.ACCEPT_ENCODING);
+		CallContext callContext =
+				buildGetDocumentsContext(keyword, accountId, docType, fromDate, toDate, contentEncodingValue);
 		return callContext.getApiClient().execute(callContext.getCall(), DocumentResponse.class);
 	}
 
@@ -101,22 +132,22 @@ public class DocumentsApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
-	public void getDocumentsAsync(String keyword,//
+	public void getDocumentsAsync(String keyword, //
 			@Digits(integer = 11, fraction = 0, message = "{documents.param.accountId.invalid}") //
-			@Min(value = 1, message = "{documents.param.accountId.invalid}") Long accountId,//
-			DocType docType,//
-			Date fromDate,//
-			Date toDate,//
+			@Min(value = 1, message = "{documents.param.accountId.invalid}") Long accountId, //
+			DocType docType, //
+			Date fromDate, //
+			Date toDate, //
 			ApiCallback<DocumentResponse> apiCallback) throws ApiException {
 		LOGGER.info("Documents getDocumentsAsync API execution started");
 		DocumentsValidator.validateGetDocuments(this, ApiUtils.getMethodName(), keyword, accountId, docType, fromDate,
 				toDate);
-		CallContext callContext = buildGetDocumentsContext(keyword, accountId, docType, fromDate, toDate);
+		CallContext callContext = buildGetDocumentsContext(keyword, accountId, docType, fromDate, toDate, null);
 		callContext.getApiClient().executeAsync(callContext.getCall(), DocumentResponse.class, apiCallback);
 	}
 
 	private CallContext buildGetDocumentsContext(String keyword, Long accountId, DocType docType, Date fromDate,
-			Date toDate) throws ApiException {
+			Date toDate, String contentEncoding) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.DOCUMENTS, HttpMethod.GET, null);
 		SimpleDateFormat formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD);
@@ -136,6 +167,9 @@ public class DocumentsApi extends AbstractApi {
 		if (toDate != null) {
 			String formattedToDate = formatter.format(toDate);
 			apiContext.addQueryParam(new Pair(PARAM_TO_DATE, formattedToDate));
+		}
+		if (contentEncoding != null) {
+			apiContext.addHeaderParam(ApiConstants.ACCEPT_ENCODING, contentEncoding);
 		}
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -214,7 +248,7 @@ public class DocumentsApi extends AbstractApi {
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 */
 	public void deleteDocumentAsync(//
-			@NotNull(message = "{documents.param.documentId.required}") String documentId,//
+			@NotNull(message = "{documents.param.documentId.required}") String documentId, //
 			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
 		LOGGER.info("Documents deleteDocumentAsync API execution started");
 		DocumentsValidator.validateDeleteOrDownloadDocument(this, ApiUtils.getMethodName(), documentId);

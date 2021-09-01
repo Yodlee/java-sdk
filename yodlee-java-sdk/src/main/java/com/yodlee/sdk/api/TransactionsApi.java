@@ -7,6 +7,7 @@ package com.yodlee.sdk.api;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -119,21 +120,21 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public ApiResponse<TransactionResponse> getTransactions(
-			@Size(min = 0, max = 100, message = "{transactions.param.accountId.length.invalid}") Long[] accountId,//
-			BaseType baseType,//
+			@Size(min = 0, max = 100, message = "{transactions.param.accountId.length.invalid}") Long[] accountId, //
+			BaseType baseType, //
 			@Size(min = 0, max = 100, message = "{transactions.param.categoryId.length.invalid}") Long[] categoryId,
 			TransactionCategoryType categoryType, //
-			Container container,//
+			Container container, //
 			@Size(min = 0,
 				  max = 100,
 				  message = "{transactions.param.detailCategoryId.length.invalid}") Long[] detailCategoryId,
-			Date fromDate,//
+			Date fromDate, //
 			@Size(min = 0,
 				  max = 100,
 				  message = "{transactions.param.highLevelCategoryId.length.invalid}") Long[] highLevelCategoryId,
 			String keyword, //
-			@Min(value = 0, message = "{transactions.param.skip.invalid}") Integer skip,//
-			Date toDate,//
+			@Min(value = 0, message = "{transactions.param.skip.invalid}") Integer skip, //
+			Date toDate, //
 			@Min(value = 1, message = "{transactions.param.top.invalid}") //
 			@Max(value = 500, message = "{transactions.param.top.invalid}") Integer top, //
 			String type) throws ApiException {
@@ -142,7 +143,62 @@ public class TransactionsApi extends AbstractApi {
 				categoryType, container, detailCategoryId, fromDate, highLevelCategoryId, keyword, skip, toDate, top,
 				type);
 		CallContext callContext = buildGetTransactionsContext(accountId, baseType, categoryId, categoryType, container,
-				detailCategoryId, fromDate, highLevelCategoryId, keyword, skip, toDate, top, type);
+				detailCategoryId, fromDate, highLevelCategoryId, keyword, skip, toDate, top, type, null);
+		return callContext.getApiClient().execute(callContext.getCall(), TransactionResponse.class);
+	}
+
+	/**
+	 * Get Transactions with request Headers. <br>
+	 * The Transaction service is used to get a list of transactions for a user.<br>
+	 * 
+	 * 
+	 * @param accountId Comma separated accountIds (optional)
+	 * @param baseType DEBIT/CREDIT (optional)
+	 * @param categoryId Comma separated categoryIds (optional)
+	 * @param categoryType Transaction Category Type(UNCATEGORIZE, INCOME, TRANSFER, EXPENSE or DEFERRED_COMPENSATION)
+	 *        (optional)
+	 * @param container bank/creditCard/investment/insurance/loan (optional)
+	 * @param detailCategoryId Comma separated detailCategoryIds (optional)
+	 * @param fromDate Transaction from date (optional)
+	 * @param highLevelCategoryId Comma separated highLevelCategoryIds (optional)
+	 * @param keyword Transaction search text (optional)
+	 * @param skip skip (Min 0) (optional)
+	 * @param toDate Transaction end date (optional)
+	 * @param top top (Max 500) (optional)
+	 * @param type Transaction Type(SELL,SWEEP, etc.) for bank/creditCard/investment (optional)
+	 * @param headers Map of headers key-value pair e.g (Accept-Encoding, gzip) (required)
+	 * @return {@link ApiResponse}&lt;{@link TransactionResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<TransactionResponse> getTransactions(
+			@Size(min = 0, max = 100, message = "{transactions.param.accountId.length.invalid}") Long[] accountId, //
+			BaseType baseType, //
+			@Size(min = 0, max = 100, message = "{transactions.param.categoryId.length.invalid}") Long[] categoryId,
+			TransactionCategoryType categoryType, //
+			Container container, //
+			@Size(min = 0,
+				  max = 100,
+				  message = "{transactions.param.detailCategoryId.length.invalid}") Long[] detailCategoryId,
+			Date fromDate, //
+			@Size(min = 0,
+				  max = 100,
+				  message = "{transactions.param.highLevelCategoryId.length.invalid}") Long[] highLevelCategoryId,
+			String keyword, //
+			@Min(value = 0, message = "{transactions.param.skip.invalid}") Integer skip, //
+			Date toDate, //
+			@Min(value = 1, message = "{transactions.param.top.invalid}") //
+			@Max(value = 500, message = "{transactions.param.top.invalid}") Integer top, //
+			String type, //
+			Map<String, String> headers) throws ApiException {
+		LOGGER.info("Transactions getTransactions API execution started");
+		TransactionsValidator.validateGetTransactions(this, ApiUtils.getMethodName(), accountId, baseType, categoryId,
+				categoryType, container, detailCategoryId, fromDate, highLevelCategoryId, keyword, skip, toDate, top,
+				type);
+		String contentEncodingValue = headers.get(ApiConstants.ACCEPT_ENCODING);
+		CallContext callContext =
+				buildGetTransactionsContext(accountId, baseType, categoryId, categoryType, container, detailCategoryId,
+						fromDate, highLevelCategoryId, keyword, skip, toDate, top, type, contentEncodingValue);
 		return callContext.getApiClient().execute(callContext.getCall(), TransactionResponse.class);
 	}
 
@@ -182,21 +238,21 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void getTransactionsAsync(
-			@Size(min = 0, max = 100, message = "{transactions.param.accountId.length.invalid}") Long[] accountId,//
-			BaseType baseType,//
+			@Size(min = 0, max = 100, message = "{transactions.param.accountId.length.invalid}") Long[] accountId, //
+			BaseType baseType, //
 			@Size(min = 0, max = 100, message = "{transactions.param.categoryId.length.invalid}") Long[] categoryId,
 			TransactionCategoryType categoryType, //
-			Container container,//
+			Container container, //
 			@Size(min = 0,
 				  max = 100,
 				  message = "{transactions.param.detailCategoryId.length.invalid}") Long[] detailCategoryId,
-			Date fromDate,//
+			Date fromDate, //
 			@Size(min = 0,
 				  max = 100,
 				  message = "{transactions.param.highLevelCategoryId.length.invalid}") Long[] highLevelCategoryId,
 			String keyword, //
-			@Min(value = 0, message = "{transactions.param.skip.invalid}") Integer skip,//
-			Date toDate,//
+			@Min(value = 0, message = "{transactions.param.skip.invalid}") Integer skip, //
+			Date toDate, //
 			@Min(value = 1, message = "{transactions.param.top.invalid}") //
 			@Max(value = 500, message = "{transactions.param.top.invalid}") Integer top, //
 			String type, ApiCallback<TransactionResponse> apiCallback) throws ApiException {
@@ -205,14 +261,14 @@ public class TransactionsApi extends AbstractApi {
 				categoryType, container, detailCategoryId, fromDate, highLevelCategoryId, keyword, skip, toDate, top,
 				type);
 		CallContext callContext = buildGetTransactionsContext(accountId, baseType, categoryId, categoryType, container,
-				detailCategoryId, fromDate, highLevelCategoryId, keyword, skip, toDate, top, type);
+				detailCategoryId, fromDate, highLevelCategoryId, keyword, skip, toDate, top, type, null);
 		callContext.getApiClient().executeAsync(callContext.getCall(), TransactionResponse.class, apiCallback);
 	}
 
 	private CallContext buildGetTransactionsContext(Long[] accountId, BaseType baseType, Long[] categoryId,
 			TransactionCategoryType categoryType, Container container, Long[] detailCategoryId, Date fromDate,
-			Long[] highLevelCategoryId, String keyword, Integer skip, Date toDate, Integer top, String type)
-			throws ApiException {
+			Long[] highLevelCategoryId, String keyword, Integer skip, Date toDate, Integer top, String type,
+			String contentEncoding) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.TRANSACTIONS, HttpMethod.GET, null);
 		SimpleDateFormat formatter = new SimpleDateFormat(ApiConstants.YYYY_MM_DD);
@@ -259,6 +315,9 @@ public class TransactionsApi extends AbstractApi {
 		if (type != null) {
 			apiContext.addQueryParam(new Pair(PARAM_TYPE, type));
 		}
+		if (contentEncoding != null) {
+			apiContext.addHeaderParam(ApiConstants.ACCEPT_ENCODING, contentEncoding);
+		}
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
@@ -288,20 +347,20 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public ApiResponse<TransactionCountResponse> getTransactionsCount(
-			@Size(min = 0, max = 100, message = "{transactions.param.accountId.length.invalid}") Long[] accountId,//
-			BaseType baseType,//
-			@Size(min = 0, max = 100, message = "{transactions.param.categoryId.length.invalid}") Long[] categoryId,//
-			TransactionCategoryType categoryType,//
-			Container container,//
+			@Size(min = 0, max = 100, message = "{transactions.param.accountId.length.invalid}") Long[] accountId, //
+			BaseType baseType, //
+			@Size(min = 0, max = 100, message = "{transactions.param.categoryId.length.invalid}") Long[] categoryId, //
+			TransactionCategoryType categoryType, //
+			Container container, //
 			@Size(min = 0,
 				  max = 100,
-				  message = "{transactions.param.detailCategoryId.length.invalid}") Long[] detailCategoryId,//
-			Date fromDate,//
+				  message = "{transactions.param.detailCategoryId.length.invalid}") Long[] detailCategoryId, //
+			Date fromDate, //
 			@Size(min = 0,
 				  max = 100,
 				  message = "{transactions.param.highLevelCategoryId.length.invalid}") Long[] highLevelCategoryId, //
-			String keyword,//
-			Date toDate,//
+			String keyword, //
+			Date toDate, //
 			String type) throws ApiException {
 		LOGGER.info("Transactions getTransactionsCount API execution started");
 		TransactionsValidator.validateGetTransactionsCount(this, ApiUtils.getMethodName(), accountId, baseType,
@@ -336,20 +395,20 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void getTransactionsCountAsync(
-			@Size(min = 0, max = 100, message = "{transactions.param.accountId.length.invalid}") Long[] accountId,//
-			BaseType baseType,//
-			@Size(min = 0, max = 100, message = "{transactions.param.categoryId.length.invalid}") Long[] categoryId,//
-			TransactionCategoryType categoryType,//
-			Container container,//
+			@Size(min = 0, max = 100, message = "{transactions.param.accountId.length.invalid}") Long[] accountId, //
+			BaseType baseType, //
+			@Size(min = 0, max = 100, message = "{transactions.param.categoryId.length.invalid}") Long[] categoryId, //
+			TransactionCategoryType categoryType, //
+			Container container, //
 			@Size(min = 0,
 				  max = 100,
-				  message = "{transactions.param.detailCategoryId.length.invalid}") Long[] detailCategoryId,//
-			Date fromDate,//
+				  message = "{transactions.param.detailCategoryId.length.invalid}") Long[] detailCategoryId, //
+			Date fromDate, //
 			@Size(min = 0,
 				  max = 100,
 				  message = "{transactions.param.highLevelCategoryId.length.invalid}") Long[] highLevelCategoryId, //
-			String keyword,//
-			Date toDate,//
+			String keyword, //
+			Date toDate, //
 			String type, ApiCallback<TransactionCountResponse> apiCallback) throws ApiException {
 		LOGGER.info("Transactions getTransactionsCountAsync API execution started");
 		TransactionsValidator.validateGetTransactionsCount(this, ApiUtils.getMethodName(), accountId, baseType,
@@ -420,10 +479,10 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public ApiResponse<AbstractModelComponent> updateTransaction(//
-			@Min(value = 1, message = "{transactions.param.transactionId.invalid}")//
+			@Min(value = 1, message = "{transactions.param.transactionId.invalid}") //
 			@Digits(message = "{transactions.param.transactionId.invalid}",
 					fraction = 0,
-					integer = 11) long transactionId,//
+					integer = 11) long transactionId, //
 			@NotNull(message = "{transactions.updateTransaction.required}") TransactionRequest transactionRequest)
 			throws ApiException {
 		LOGGER.info("Transactions updateTransaction API execution started");
@@ -445,10 +504,10 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void updateTransactionAsync(//
-			@Min(value = 1, message = "{transactions.param.transactionId.invalid}")//
+			@Min(value = 1, message = "{transactions.param.transactionId.invalid}") //
 			@Digits(message = "{transactions.param.transactionId.invalid}",
 					fraction = 0,
-					integer = 11) long transactionId,//
+					integer = 11) long transactionId, //
 			@NotNull(message = "{transactions.updateTransaction.required}") TransactionRequest transactionRequest,
 			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
 		LOGGER.info("Transactions updateTransactionAsync API execution started");
@@ -459,7 +518,7 @@ public class TransactionsApi extends AbstractApi {
 	}
 
 	private CallContext buildUpdateTransactionContext(//
-			long transactionId,//
+			long transactionId, //
 			TransactionRequest transactionRequest) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String endpoint = replacePathVariable(ApiEndpoint.UPDATE_TRANSACTIONS, PARAM_TRANSACTION_ID,
@@ -641,7 +700,7 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public ApiResponse<AbstractModelComponent> deleteTransactionCategory(//
-			@Min(value = 1, message = "{transactions.param.categoryId.invalid}")//
+			@Min(value = 1, message = "{transactions.param.categoryId.invalid}") //
 			@Digits(message = "{transactions.param.categoryId.invalid}", fraction = 0, integer = 11) long categoryId)
 			throws ApiException {
 		LOGGER.info("Transactions deleteTransactionCategoryAsync API execution started");
@@ -660,7 +719,7 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void deleteTransactionCategoryAsync(//
-			@Min(value = 1, message = "{transactions.param.categoryId.invalid}")//
+			@Min(value = 1, message = "{transactions.param.categoryId.invalid}") //
 			@Digits(message = "{transactions.param.categoryId.invalid}", fraction = 0, integer = 11) long categoryId,
 			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
 		LOGGER.info("Transactions deleteTransactionCategoryAsync API execution started");
@@ -781,7 +840,7 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void createTransactionCategorizationRulesAsync(
-			@NotNull(message = "transactions.createTransactionCategorizationRules.required")//
+			@NotNull(message = "transactions.createTransactionCategorizationRules.required") //
 			TransactionCategorizationRuleRequest transactionCategorizationRuleRequest,
 			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
 		LOGGER.info("Transactions createTransactionCategorizationRulesAsync API execution started");
@@ -892,7 +951,7 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public ApiResponse<AbstractModelComponent> runTransactionCategorizationRule(//
-			@Min(value = 1, message = "{transactions.param.ruleId.invalid}")//
+			@Min(value = 1, message = "{transactions.param.ruleId.invalid}") //
 			@Digits(message = "{transactions.param.ruleId.invalid}", fraction = 0, integer = 11) long ruleId)
 			throws ApiException {
 		LOGGER.info("Transactions runTransactionCategorizationRule API execution started");
@@ -912,7 +971,7 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void runTransactionCategorizationRuleAsync(//
-			@Min(value = 1, message = "{transactions.param.ruleId.invalid}")//
+			@Min(value = 1, message = "{transactions.param.ruleId.invalid}") //
 			@Digits(message = "{transactions.param.ruleId.invalid}", fraction = 0, integer = 11) long ruleId,
 			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
 		LOGGER.info("Transactions runTransactionCategorizationRuleAsync API execution started");
@@ -945,8 +1004,8 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public ApiResponse<AbstractModelComponent> updateTransactionCategorizationRule(//
-			@Min(value = 1, message = "{transactions.param.ruleId.invalid}")//
-			@Digits(message = "{transactions.param.ruleId.invalid}", fraction = 0, integer = 11) long ruleId,//
+			@Min(value = 1, message = "{transactions.param.ruleId.invalid}") //
+			@Digits(message = "{transactions.param.ruleId.invalid}", fraction = 0, integer = 11) long ruleId, //
 			@NotNull(message = "{transactions.updateTransactionCategorizationRule.required}") TransactionCategorizationRuleRequest transactionCategoriesRuleRequest)
 			throws ApiException {
 		LOGGER.info("Transactions updateTransactionCategorizationRule API execution started");
@@ -970,8 +1029,8 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void updateTransactionCategorizationRuleAsync(//
-			@Min(value = 1, message = "{transactions.param.ruleId.invalid}")//
-			@Digits(message = "{transactions.param.ruleId.invalid}", fraction = 0, integer = 11) long ruleId,//
+			@Min(value = 1, message = "{transactions.param.ruleId.invalid}") //
+			@Digits(message = "{transactions.param.ruleId.invalid}", fraction = 0, integer = 11) long ruleId, //
 			@NotNull(message = "{transactions.updateTransactionCategorizationRule.required}") TransactionCategorizationRuleRequest transactionCategoriesRuleRequest,
 			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
 		LOGGER.info("Transactions updateTransactionCategorizationRuleAsync API execution started");
@@ -1006,7 +1065,7 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public ApiResponse<AbstractModelComponent> deleteTransactionCategorizationRule(//
-			@Min(value = 1, message = "{transactions.param.ruleId.invalid}")//
+			@Min(value = 1, message = "{transactions.param.ruleId.invalid}") //
 			@Digits(message = "{transactions.param.ruleId.invalid}", fraction = 0, integer = 11) long ruleId)
 			throws ApiException {
 		LOGGER.info("Transactions deleteTransactionCategorizationRule API execution started");
@@ -1028,7 +1087,7 @@ public class TransactionsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void deleteTransactionCategorizationRuleAsync(//
-			@Min(value = 1, message = "{transactions.param.ruleId.invalid}")//
+			@Min(value = 1, message = "{transactions.param.ruleId.invalid}") //
 			@Digits(message = "{transactions.param.ruleId.invalid}", fraction = 0, integer = 11) long ruleId,
 			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
 		LOGGER.info("Transactions deleteTransactionCategorizationRuleAsync API execution started");

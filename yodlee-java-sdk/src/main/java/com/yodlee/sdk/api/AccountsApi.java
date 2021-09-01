@@ -7,6 +7,7 @@ package com.yodlee.sdk.api;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -89,11 +90,37 @@ public class AccountsApi extends AbstractApi {
 	 */
 	public ApiResponse<AccountResponse> getAccount(//
 			@Digits(integer = 11, fraction = 0, message = "{accounts.param.accountId.invalid}") //
-			@Min(value = 1, message = "{accounts.param.accountId.invalid}") long accountId,//
+			@Min(value = 1, message = "{accounts.param.accountId.invalid}") long accountId, //
 			IncludeParameterValue[] include) throws ApiException {
 		LOGGER.info("Accounts getAccount API execution started");
 		AccountsValidator.validateGetAccount(this, ApiUtils.getMethodName(), accountId, include);
-		CallContext callContext = buildGetAccountContext(accountId, include);
+		CallContext callContext = buildGetAccountContext(accountId, include, null);
+		return callContext.getApiClient().execute(callContext.getCall(), AccountResponse.class);
+	}
+
+	/**
+	 * Get Account Details with request Headers. <br>
+	 * The get account details service provides detailed information of an account.<br>
+	 * 
+	 * <b> Note : </b> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter
+	 * and response.
+	 * 
+	 * @param accountId accountId (required)
+	 * @param include profile, holder, fullAccountNumberList, paymentProfile, autoRefresh (optional)
+	 * @param headers Map of headers key-value pair e.g (Accept-Encoding, gzip) (required)
+	 * @return {@link ApiResponse}&lt;{@link AccountResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<AccountResponse> getAccount(//
+			@Digits(integer = 11, fraction = 0, message = "{accounts.param.accountId.invalid}") //
+			@Min(value = 1, message = "{accounts.param.accountId.invalid}") long accountId, //
+			IncludeParameterValue[] include, //
+			Map<String, String> headers) throws ApiException {
+		LOGGER.info("Accounts getAccountwithGzip API execution started");
+		String contentEncodingValue = headers.get(ApiConstants.ACCEPT_ENCODING);
+		AccountsValidator.validateGetAccount(this, ApiUtils.getMethodName(), accountId, include);
+		CallContext callContext = buildGetAccountContext(accountId, include, contentEncodingValue);
 		return callContext.getApiClient().execute(callContext.getCall(), AccountResponse.class);
 	}
 
@@ -112,21 +139,25 @@ public class AccountsApi extends AbstractApi {
 	 */
 	public void getAccountAsync(//
 			@Digits(integer = 11, fraction = 0, message = "{accounts.param.accountId.invalid}") //
-			@Min(value = 1, message = "{accounts.param.accountId.invalid}") long accountId,//
+			@Min(value = 1, message = "{accounts.param.accountId.invalid}") long accountId, //
 			IncludeParameterValue[] include, ApiCallback<AccountResponse> apiCallback) throws ApiException {
 		LOGGER.info("Accounts getAccountAsync API execution started");
 		AccountsValidator.validateGetAccount(this, ApiUtils.getMethodName(), accountId, include);
-		CallContext callContext = buildGetAccountContext(accountId, include);
+		CallContext callContext = buildGetAccountContext(accountId, include, null);
 		callContext.getApiClient().executeAsync(callContext.getCall(), AccountResponse.class, apiCallback);
 	}
 
-	private CallContext buildGetAccountContext(long accountId, IncludeParameterValue[] include) throws ApiException {
+	private CallContext buildGetAccountContext(long accountId, IncludeParameterValue[] include, String contentEncoding)
+			throws ApiException {
 		String endPoint =
 				replacePathVariable(ApiEndpoint.ACCOUNT_ACCOUNTID, PARAM_ACCOUNT_ID, String.valueOf(accountId));
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endPoint, HttpMethod.GET, null);
 		if (include != null) {
 			apiContext.addQueryParam(new Pair(PARAM_INCLUDE, ApiUtils.convertArrayToString(include)));
+		}
+		if (contentEncoding != null) {
+			apiContext.addHeaderParam(ApiConstants.ACCEPT_ENCODING, contentEncoding);
 		}
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -154,13 +185,13 @@ public class AccountsApi extends AbstractApi {
 	 *         response body
 	 */
 	public ApiResponse<AccountResponse> getAllAccounts(//
-			@Size(min = 0, max = 100, message = "{accounts.param.accountId.length.invalid}") Long[] accountId,//
-			Container container,//
-			IncludeParameterValue[] include,//
+			@Size(min = 0, max = 100, message = "{accounts.param.accountId.length.invalid}") Long[] accountId, //
+			Container container, //
+			IncludeParameterValue[] include, //
 			@Size(min = 0,
 				  max = 100,
-				  message = "{accounts.param.providerAccountId.length.invalid}") Long[] providerAccountId,//
-			String requestId,//
+				  message = "{accounts.param.providerAccountId.length.invalid}") Long[] providerAccountId, //
+			String requestId, //
 			ItemAccountStatus[] status) throws ApiException {
 		LOGGER.info("Accounts getAllAccounts API execution started");
 		AccountsValidator.validateGetAllAccounts(this, ApiUtils.getMethodName(), accountId, container, include,
@@ -191,13 +222,13 @@ public class AccountsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void getAllAccountsAsync(//
-			@Size(min = 0, max = 100, message = "{accounts.param.accountId.length.invalid}") Long[] accountId,//
-			Container container,//
-			IncludeParameterValue[] include,//
+			@Size(min = 0, max = 100, message = "{accounts.param.accountId.length.invalid}") Long[] accountId, //
+			Container container, //
+			IncludeParameterValue[] include, //
 			@Size(min = 0,
 				  max = 100,
-				  message = "{accounts.param.providerAccountId.length.invalid}") Long[] providerAccountId,//
-			String requestId,//
+				  message = "{accounts.param.providerAccountId.length.invalid}") Long[] providerAccountId, //
+			String requestId, //
 			ItemAccountStatus[] status, ApiCallback<AccountResponse> apiCallback) throws ApiException {
 		LOGGER.info("Accounts getAllAccountsAsync API execution started");
 		AccountsValidator.validateGetAllAccounts(this, ApiUtils.getMethodName(), accountId, container, include,
@@ -207,11 +238,11 @@ public class AccountsApi extends AbstractApi {
 		callContext.getApiClient().executeAsync(callContext.getCall(), AccountResponse.class, apiCallback);
 	}
 
-	private CallContext buildAllAccountsContext(Long[] accountId,//
-			Container container,//
-			IncludeParameterValue[] include,//
-			Long[] providerAccountId,//
-			String requestId,//
+	private CallContext buildAllAccountsContext(Long[] accountId, //
+			Container container, //
+			IncludeParameterValue[] include, //
+			Long[] providerAccountId, //
+			String requestId, //
 			ItemAccountStatus[] status) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.ACCOUNTS, HttpMethod.GET, null);
@@ -268,12 +299,12 @@ public class AccountsApi extends AbstractApi {
 	 *         response body
 	 */
 	public ApiResponse<AccountHistoricalBalancesResponse> getHistoricalBalances(//
-			@Digits(integer = 11, fraction = 0, message = "{accounts.param.accountId.invalid}")//
-			@Min(value = 1, message = "{accounts.param.accountId.invalid}") Long accountId, Date toDate,//
-			Date fromDate,//
+			@Digits(integer = 11, fraction = 0, message = "{accounts.param.accountId.invalid}") //
+			@Min(value = 1, message = "{accounts.param.accountId.invalid}") Long accountId, Date toDate, //
+			Date fromDate, //
 			Boolean includeCF, //
 			HistoricalBalancesIntervalValue interval, //
-			@Min(value = 0, message = "{accounts.param.skip.invalid}") Integer skip,//
+			@Min(value = 0, message = "{accounts.param.skip.invalid}") Integer skip, //
 			@Min(value = 1, message = "{accounts.param.top.invalid}") //
 			@Max(value = 500, message = "{accounts.param.top.invalid}") Integer top) throws ApiException {
 		LOGGER.info("Accounts getHistoricalBalances API execution started");
@@ -313,12 +344,12 @@ public class AccountsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void getHistoricalBalancesAsync(
-			@Digits(integer = 11, fraction = 0, message = "{accounts.param.accountId.invalid}")//
-			@Min(value = 1, message = "{accounts.param.accountId.invalid}") Long accountId, Date toDate,//
-			Date fromDate,//
+			@Digits(integer = 11, fraction = 0, message = "{accounts.param.accountId.invalid}") //
+			@Min(value = 1, message = "{accounts.param.accountId.invalid}") Long accountId, Date toDate, //
+			Date fromDate, //
 			Boolean includeCF, //
 			HistoricalBalancesIntervalValue interval, //
-			@Min(value = 0, message = "{accounts.param.skip.invalid}") Integer skip,//
+			@Min(value = 0, message = "{accounts.param.skip.invalid}") Integer skip, //
 			@Min(value = 1, message = "{accounts.param.top.invalid}") //
 			@Max(value = 500, message = "{accounts.param.top.invalid}") Integer top,
 			ApiCallback<AccountHistoricalBalancesResponse> apiCallback) throws ApiException {
@@ -331,11 +362,11 @@ public class AccountsApi extends AbstractApi {
 				apiCallback);
 	}
 
-	private CallContext buildGetHistoricalBalancesContext(Long accountId, Date toDate,//
-			Date fromDate,//
+	private CallContext buildGetHistoricalBalancesContext(Long accountId, Date toDate, //
+			Date fromDate, //
 			Boolean includeCF, //
 			HistoricalBalancesIntervalValue interval, //
-			Integer skip,//
+			Integer skip, //
 			Integer top) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.GET_HISTORICAL_BALANCES, HttpMethod.GET, null);
@@ -576,7 +607,7 @@ public class AccountsApi extends AbstractApi {
 	}
 
 	/**
-	 * Migrate Accounts<br> 
+	 * Migrate Accounts<br>
 	 * This service is associated with the open banking (OB) flow.<br>
 	 * Before invoking this service, display all the associated accounts to the user by calling the GET
 	 * /associatedAccounts API.<br>
@@ -611,7 +642,7 @@ public class AccountsApi extends AbstractApi {
 	}
 
 	/**
-	 * Migrate Accounts<br> 
+	 * Migrate Accounts<br>
 	 * This service is associated with the open banking (OB) flow.<br>
 	 * Before invoking this service, display all the associated accounts to the user by calling the GET
 	 * /associatedAccounts API.<br>
@@ -656,7 +687,7 @@ public class AccountsApi extends AbstractApi {
 	}
 
 	/**
-	 * Associated Accounts<br> 
+	 * Associated Accounts<br>
 	 * Yodlee classifies providers into credential-based aggregation and Open Banking (OB) providers.<br>
 	 * This service is associated with the OB aggregation flow. As part of the OB solution, financial institutions may
 	 * merge their subsidiaries and provide data as a single OB provider.<br>
@@ -683,7 +714,7 @@ public class AccountsApi extends AbstractApi {
 	}
 
 	/**
-	 * Associated Accounts<br> 
+	 * Associated Accounts<br>
 	 * Yodlee classifies providers into credential-based aggregation and Open Banking (OB) providers.<br>
 	 * This service is associated with the OB aggregation flow. As part of the OB solution, financial institutions may
 	 * merge their subsidiaries and provide data as a single OB provider.<br>

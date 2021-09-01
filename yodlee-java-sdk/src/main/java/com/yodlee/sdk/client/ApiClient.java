@@ -90,7 +90,8 @@ public class ApiClient {
 		httpBuilder = new OkHttpClient().newBuilder()//
 				.connectTimeout(socketTimeOut, TimeUnit.MILLISECONDS)//
 				.readTimeout(readTimeOut, TimeUnit.MILLISECONDS)//
-				.writeTimeout(writeTimeOut, TimeUnit.MILLISECONDS);
+				.writeTimeout(writeTimeOut, TimeUnit.MILLISECONDS)//
+				.addInterceptor(new UnzippingInterceptor());
 		httpClient = httpBuilder.build();
 		setUserAgent("JavaSDK" + AbstractConfiguration.SDK_VERSION);
 	}

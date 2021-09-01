@@ -5,6 +5,7 @@
  */
 package com.yodlee.sdk.api;
 
+import java.util.Map;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -76,7 +77,37 @@ public class HoldingsApi extends AbstractApi {
 		HoldingsValidator.validateGetHoldings(this, ApiUtils.getMethodName(), accountId,
 				assetClassificationClassificationType, classificationValue, include, providerAccountId);
 		CallContext callContext = buildGetHoldingsContext(accountId, assetClassificationClassificationType,
-				classificationValue, include, providerAccountId);
+				classificationValue, include, providerAccountId, null);
+		return callContext.getApiClient().execute(callContext.getCall(), HoldingResponse.class);
+	}
+
+	/**
+	 * Get Holdings with request Headers. <br>
+	 * The get holdings service is used to get the list of holdings of a user.<br>
+	 * 
+	 * 
+	 * @param accountId Comma separated accountId (optional)
+	 * @param assetClassificationClassificationType e.g. Country, Sector, etc. (optional)
+	 * @param classificationValue e.g. US (optional)
+	 * @param include assetClassification (optional)
+	 * @param providerAccountId providerAccountId (optional)
+	 * @param headers Map of headers key-value pair e.g (Accept-Encoding, gzip) (required)
+	 * @return {@link ApiResponse}&lt;{@link HoldingResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<HoldingResponse> getHoldings(//
+			@Size(min = 0, max = 100, message = "{holdings.param.accountId.length.invalid}") Long[] accountId,
+			String assetClassificationClassificationType, String classificationValue, HoldingInclude include,
+			@Digits(message = "{holdings.param.providerAccountId.invalid}", fraction = 0, integer = 11) //
+			@Min(value = 1, message = "{holdings.param.providerAccountId.invalid}") Long providerAccountId, //
+			Map<String, String> headers) throws ApiException {
+		LOGGER.info("Holdings getHoldings API execution started");
+		HoldingsValidator.validateGetHoldings(this, ApiUtils.getMethodName(), accountId,
+				assetClassificationClassificationType, classificationValue, include, providerAccountId);
+		String contentEncodingValue = headers.get(ApiConstants.ACCEPT_ENCODING);
+		CallContext callContext = buildGetHoldingsContext(accountId, assetClassificationClassificationType,
+				classificationValue, include, providerAccountId, contentEncodingValue);
 		return callContext.getApiClient().execute(callContext.getCall(), HoldingResponse.class);
 	}
 
@@ -106,12 +137,13 @@ public class HoldingsApi extends AbstractApi {
 		HoldingsValidator.validateGetHoldings(this, ApiUtils.getMethodName(), accountId,
 				assetClassificationClassificationType, classificationValue, include, providerAccountId);
 		CallContext callContext = buildGetHoldingsContext(accountId, assetClassificationClassificationType,
-				classificationValue, include, providerAccountId);
+				classificationValue, include, providerAccountId, null);
 		callContext.getApiClient().executeAsync(callContext.getCall(), HoldingResponse.class, apiCallback);
 	}
 
 	private CallContext buildGetHoldingsContext(Long[] accountId, String assetClassificationClassificationType,
-			String classificationValue, HoldingInclude include, Long providerAccountId) throws ApiException {
+			String classificationValue, HoldingInclude include, Long providerAccountId, String contentEncoding)
+			throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.HOLDINGS, HttpMethod.GET, null);
 		if (accountId != null) {
@@ -129,6 +161,9 @@ public class HoldingsApi extends AbstractApi {
 		}
 		if (providerAccountId != null) {
 			apiContext.addQueryParam(new Pair(PARAM_PROVIDER_ACCOUNT_ID, providerAccountId.toString()));
+		}
+		if (contentEncoding != null) {
+			apiContext.addHeaderParam(ApiConstants.ACCEPT_ENCODING, contentEncoding);
 		}
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());

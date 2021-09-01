@@ -34,4 +34,10 @@ public class ApiConstants {
 	public static final String LOGIN_NAME = "loginName";
 
 	public static final String LOCALE = "locale";
+
+	public static final String ACCEPT_ENCODING = "Accept-Encoding";
+
+	public static final String CONTENT_ENCODING = "Content-Encoding";
+
+	public static final String GZIP = "gzip";
 }

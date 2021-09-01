@@ -6,6 +6,7 @@
 package com.yodlee.sdk.api;
 
 import java.util.Arrays;
+import java.util.Map;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -132,7 +133,8 @@ public class ProviderAccountsApi extends AbstractApi {
 			RefreshProviderAccountRequest refreshProviderAccountRequest) throws ApiException {
 		ProviderAccountsValidator.validateRefreshProviderAccount(this, ApiUtils.getMethodName(), providerAccountId,
 				refreshProviderAccountRequest);
-		return editCredentialsOrRefreshProviderAccount(String.valueOf(providerAccountId), refreshProviderAccountRequest);
+		return editCredentialsOrRefreshProviderAccount(String.valueOf(providerAccountId),
+				refreshProviderAccountRequest);
 	}
 
 	/**
@@ -165,7 +167,8 @@ public class ProviderAccountsApi extends AbstractApi {
 			ApiCallback<UpdatedProviderAccountResponse> apiCallback) throws ApiException {
 		ProviderAccountsValidator.validateRefreshProviderAccount(this, ApiUtils.getMethodName(), providerAccountId,
 				refreshProviderAccountRequest);
-		editCredentialsOrRefreshProviderAccountAsync(String.valueOf(providerAccountId), refreshProviderAccountRequest, apiCallback);
+		editCredentialsOrRefreshProviderAccountAsync(String.valueOf(providerAccountId), refreshProviderAccountRequest,
+				apiCallback);
 	}
 
 	/**
@@ -197,10 +200,10 @@ public class ProviderAccountsApi extends AbstractApi {
 	 *         response body
 	 */
 	public ApiResponse<UpdatedProviderAccountResponse> editProviderAccountCredentials(
-			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}")//
+			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}") //
 			@Digits(message = "{providerAccounts.param.providerAccountId.invalid}",
 					fraction = 0, //
-					integer = 11) long providerAccountId,//
+					integer = 11) long providerAccountId, //
 			@NotNull(message = "{providerAccounts.param.providerAccountRequest.required}") ProviderAccountRequest providerAccountRequest)
 			throws ApiException {
 		ProviderAccountsValidator.validateUpdateProviderAccount(this, ApiUtils.getMethodName(), providerAccountId,
@@ -237,10 +240,10 @@ public class ProviderAccountsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void editProviderAccountCredentialsAsync(
-			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}")//
+			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}") //
 			@Digits(message = "{providerAccounts.param.providerAccountId.invalid}",
 					fraction = 0, //
-					integer = 11) long providerAccountId,//
+					integer = 11) long providerAccountId, //
 			@NotNull(message = "{providerAccounts.param.providerAccountRequest.required}") ProviderAccountRequest providerAccountRequest,
 			ApiCallback<UpdatedProviderAccountResponse> apiCallback) throws ApiException {
 		ProviderAccountsValidator.validateUpdateProviderAccount(this, ApiUtils.getMethodName(), providerAccountId,
@@ -268,10 +271,10 @@ public class ProviderAccountsApi extends AbstractApi {
 	 *         response body
 	 */
 	public ApiResponse<UpdatedProviderAccountResponse> submitProviderAccountMFA(//
-			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}")//
-			@Digits(message = "{providerAccounts.param.providerAccountId.invalid}",//
+			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}") //
+			@Digits(message = "{providerAccounts.param.providerAccountId.invalid}", //
 					fraction = 0, //
-					integer = 11) long providerAccountId,//
+					integer = 11) long providerAccountId, //
 			Field[] mfaFields) throws ApiException {
 		ProviderAccountsValidator.validateMFAProviderAccount(this, ApiUtils.getMethodName(), providerAccountId,
 				mfaFields);
@@ -299,10 +302,10 @@ public class ProviderAccountsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void submitProviderAccountMFAAsync(//
-			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}")//
-			@Digits(message = "{providerAccounts.param.providerAccountId.invalid}",//
+			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}") //
+			@Digits(message = "{providerAccounts.param.providerAccountId.invalid}", //
 					fraction = 0, //
-					integer = 11) long providerAccountId,//
+					integer = 11) long providerAccountId, //
 			Field[] mfaFields, ApiCallback<UpdatedProviderAccountResponse> apiCallback) throws ApiException {
 		ProviderAccountsValidator.validateMFAProviderAccount(this, ApiUtils.getMethodName(), providerAccountId,
 				mfaFields);
@@ -324,7 +327,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	 *         response body
 	 */
 	public ApiResponse<AbstractModelComponent> deleteProviderAccount(//
-			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}")//
+			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}") //
 			@Digits(message = "{providerAccounts.param.providerAccountId.invalid}",
 					fraction = 0, //
 					integer = 11) long providerAccountId)
@@ -347,7 +350,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	 *         response body
 	 */
 	public void deleteProviderAccountAsync(//
-			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}")//
+			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}") //
 			@Digits(message = "{providerAccounts.param.providerAccountId.invalid}",
 					fraction = 0, //
 					integer = 11) long providerAccountId,
@@ -378,12 +381,42 @@ public class ProviderAccountsApi extends AbstractApi {
 			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}") //
 			@Digits(message = "{providerAccounts.param.providerAccountId.invalid}",
 					fraction = 0, //
-					integer = 11) long providerAccountId,//
+					integer = 11) long providerAccountId, //
 			ProviderAccountInclude[] include, String requestId) throws ApiException {
 		LOGGER.info("ProviderAccount getProviderAccount API execution started");
 		ProviderAccountsValidator.validateGetProviderAccount(this, ApiUtils.getMethodName(), providerAccountId, include,
 				requestId);
-		CallContext callContext = buildGetProviderAccountContext(providerAccountId, include, requestId);
+		CallContext callContext = buildGetProviderAccountContext(providerAccountId, include, requestId, null);
+		return callContext.getApiClient().execute(callContext.getCall(), ProviderAccountDetailResponse.class);
+	}
+
+	/**
+	 * Get Provider Account Details with request Headers. <br>
+	 * The get provider account details service is used to learn the status of adding accounts and updating
+	 * accounts.<br>
+	 * 
+	 * 
+	 * @param providerAccountId providerAccountId (required)
+	 * @param include include credentials,questions (optional)
+	 * @param requestId The unique identifier for the request that returns contextual data (optional)
+	 * @param headers Map of headers key-value pair e.g (Accept-Encoding, gzip) (required)
+	 * @return {@link ApiResponse}&lt;{@link ProviderAccountDetailResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<ProviderAccountDetailResponse> getProviderAccount(//
+			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}") //
+			@Digits(message = "{providerAccounts.param.providerAccountId.invalid}",
+					fraction = 0, //
+					integer = 11) long providerAccountId, //
+			ProviderAccountInclude[] include, String requestId, //
+			Map<String, String> headers) throws ApiException {
+		LOGGER.info("ProviderAccount getProviderAccount API execution started");
+		ProviderAccountsValidator.validateGetProviderAccount(this, ApiUtils.getMethodName(), providerAccountId, include,
+				requestId);
+		String contentEncodingValue = headers.get(ApiConstants.ACCEPT_ENCODING);
+		CallContext callContext =
+				buildGetProviderAccountContext(providerAccountId, include, requestId, contentEncodingValue);
 		return callContext.getApiClient().execute(callContext.getCall(), ProviderAccountDetailResponse.class);
 	}
 
@@ -407,13 +440,13 @@ public class ProviderAccountsApi extends AbstractApi {
 			@Min(value = 1L, message = "{providerAccounts.param.providerAccountId.invalid}") //
 			@Digits(message = "{providerAccounts.param.providerAccountId.invalid}",
 					fraction = 0, //
-					integer = 11) long providerAccountId,//
+					integer = 11) long providerAccountId, //
 			ProviderAccountInclude[] include, String requestId, ApiCallback<ProviderAccountDetailResponse> apiCallback)
 			throws ApiException {
 		LOGGER.info("ProviderAccount getProviderAccountAsync API execution started");
 		ProviderAccountsValidator.validateGetProviderAccount(this, ApiUtils.getMethodName(), providerAccountId, include,
 				requestId);
-		CallContext callContext = buildGetProviderAccountContext(providerAccountId, include, requestId);
+		CallContext callContext = buildGetProviderAccountContext(providerAccountId, include, requestId, null);
 		callContext.getApiClient().executeAsync(callContext.getCall(), ProviderAccountDetailResponse.class,
 				apiCallback);
 	}
@@ -648,8 +681,8 @@ public class ProviderAccountsApi extends AbstractApi {
 	}
 
 	private void editCredentialsOrRefreshProviderAccountAsync(String providerAccountIds,
-			AbstractProviderAccountRequest providerAccountRequest, ApiCallback<UpdatedProviderAccountResponse> apiCallback)
-			throws ApiException {
+			AbstractProviderAccountRequest providerAccountRequest,
+			ApiCallback<UpdatedProviderAccountResponse> apiCallback) throws ApiException {
 		LOGGER.info("ProviderAccount editCredentialsOrRefreshProviderAccountAsync API execution started");
 		CallContext callContext =
 				buildEditCredentialsOrRefreshProviderAccountContext(providerAccountIds, providerAccountRequest);
@@ -677,8 +710,8 @@ public class ProviderAccountsApi extends AbstractApi {
 		return new CallContext(apiClient, call);
 	}
 
-	private CallContext buildGetProviderAccountContext(long providerAccountId,//
-			ProviderAccountInclude[] include, String requestId) throws ApiException {
+	private CallContext buildGetProviderAccountContext(long providerAccountId, //
+			ProviderAccountInclude[] include, String requestId, String contentEncoding) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String apiEndPoint = replacePathVariable(ApiEndpoint.PROVIDER_ACCOUNT_DETAILS, PROVIDER_ACCOUNT_ID,
 				String.valueOf(providerAccountId));
@@ -688,6 +721,9 @@ public class ProviderAccountsApi extends AbstractApi {
 		}
 		if (!StringUtils.isEmpty(requestId)) {
 			apiContext.addQueryParam(new Pair(PARAM_REQUEST_ID, requestId));
+		}
+		if (contentEncoding != null) {
+			apiContext.addHeaderParam(ApiConstants.ACCEPT_ENCODING, contentEncoding);
 		}
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -709,21 +745,21 @@ public class ProviderAccountsApi extends AbstractApi {
 		return new CallContext(apiClient, call);
 	}
 
-	private ApiResponse<AddedProviderAccountResponse> linkProviderAccount(ProviderAccountRequest providerAccountRequest,//
+	private ApiResponse<AddedProviderAccountResponse> linkProviderAccount(ProviderAccountRequest providerAccountRequest, //
 			Long providerId) throws ApiException {
 		LOGGER.info("ProviderAccount linkProviderAccount API execution started");
 		CallContext callContext = buildLinkProviderAccountContext(providerAccountRequest, providerId);
 		return callContext.getApiClient().execute(callContext.getCall(), AddedProviderAccountResponse.class);
 	}
 
-	private void linkProviderAccountAsync(ProviderAccountRequest providerAccountRequest,//
+	private void linkProviderAccountAsync(ProviderAccountRequest providerAccountRequest, //
 			Long providerId, ApiCallback<AddedProviderAccountResponse> apiCallback) throws ApiException {
 		LOGGER.info("ProviderAccount linkProviderAccountAsync API execution started");
 		CallContext callContext = buildLinkProviderAccountContext(providerAccountRequest, providerId);
 		callContext.getApiClient().executeAsync(callContext.getCall(), AddedProviderAccountResponse.class, apiCallback);
 	}
 
-	private CallContext buildLinkProviderAccountContext(ProviderAccountRequest providerAccountRequest,//
+	private CallContext buildLinkProviderAccountContext(ProviderAccountRequest providerAccountRequest, //
 			Long providerId) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.PROVIDER_ACCOUNTS, HttpMethod.POST, providerAccountRequest);
