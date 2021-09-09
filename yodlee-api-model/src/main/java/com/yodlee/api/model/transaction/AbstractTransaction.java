@@ -5,6 +5,9 @@
  */
 package com.yodlee.api.model.transaction;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
@@ -345,6 +348,30 @@ public abstract class AbstractTransaction extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true, value = "")
 	@JsonProperty("lastUpdated")
 	protected String lastUpdated;
+	
+	@ApiModelProperty(readOnly = true,
+			  		  value = "The intermediary of the transaction."//
+					  + "<br><br>"//
+					  + "<b>Applicable containers</b>:  bank,creditCard,investment,loan<br>"//
+	)
+	@JsonProperty("intermediary")
+	protected List<String> intermediary;
+	
+	@ApiModelProperty(readOnly = true,
+			  value = "Indicates if the transaction is happened online or in-store. "//
+					  + "<br><br>"//
+					  + "<b>Applicable containers</b>: bank,creditCard,investment,loan<br>"//
+			)
+	@JsonProperty("isPhysical")
+	protected Boolean isPhysical;
+	
+	@ApiModelProperty(readOnly = true,
+			  value = "Indicates the merchantType of the transaction.e.g:-BILLERS,SUBSCRIPTION,OTHERS "//
+					  + "<br><br>"//
+					  + "<b>Applicable containers</b>: bank,creditCard,investment,loan<br>"//
+			)
+	@JsonProperty("merchantType")
+	protected String merchantType;
 
 	/**
 	 * Additional notes provided by the user for a particular transaction through application or API services. <br>
@@ -957,5 +984,49 @@ public abstract class AbstractTransaction extends AbstractModelComponent {
 
 	public void setLastUpdated(String lastUpdated) {
 		this.lastUpdated = lastUpdated;
+	}	
+	
+	/**
+	 * The intermediary of the transaction. <br>
+	 * <br>
+	 * <b>Applicable containers</b>: bank,creditCard,investment,loan<br>
+	 * 
+	 * @return intermediary
+	 */
+	@JsonProperty("intermediary")
+	public List<String> getIntermediary() {
+		return intermediary == null ? null : Collections.unmodifiableList(intermediary);
 	}
+	
+	/**
+	 * Indicates if the transaction is happened online or in-store. <br>
+	 * <br>
+	 * <b>Applicable containers</b>: bank,creditCard,investment,loan<br>
+	 * 
+	 * @return isPhysical
+	 */
+	public Boolean getIsPhysical() {
+		return isPhysical;
+	}
+
+	public void setIsPhysical(Boolean isPhysical) {
+		this.isPhysical = isPhysical;
+	}
+
+	/**
+	 * Indicates the merchantType of the transaction.e.g:-BILLERS,SUBSCRIPTION,OTHERS . <br>
+	 * <br>
+	 * <b>Applicable containers</b>: bank,creditCard,investment,loan<br>
+	 * 
+	 * @return merchantType
+	 */
+	public String getMerchantType() {
+		return merchantType;
+	}
+
+	public void setMerchantType(String merchantType) {
+		this.merchantType = merchantType;
+	}
+
+	
 }

@@ -29,7 +29,7 @@ public class Transaction extends AbstractTransaction {
 				+ holdingDescription + ", interest=" + interest + ", price=" + price + ", principal=" + principal
 				+ ", quantity=" + quantity + ", settleDate=" + settleDate + ", symbol=" + symbol + ", transactionDate="
 				+ transactionDate + ", parentCategoryId=" + parentCategoryId + ", detailCategoryId=" + detailCategoryId
-				+ ", checkNumber=" + checkNumber + ", commission=" + commission + ", sourceType=" + sourceType
-				+ ", createdDate=" + createdDate + ", lastUpdated=" + lastUpdated + "]";
+				+ ", checkNumber=" + checkNumber + ", commission=" + commission + ", intermediary=" + intermediary + ", sourceType=" + sourceType
+				+ ", isPhysical=" + isPhysical + ", merchantType=" + merchantType + ",createdDate=" + createdDate + ", lastUpdated=" + lastUpdated + "]";
 	}
 }
