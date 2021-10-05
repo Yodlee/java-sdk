@@ -23,7 +23,7 @@ public enum AccountLatestBalanceFailedReason {
 	 */
 	INCORRECT_CREDENTIALS,//
 	/**
-	 * All errors that need a user action at the site. Example- Accept T&C, etc.
+	 * All errors that need a user action at the site.
 	 */
 	USER_ACTION_NEEDED_AT_SITE,//
 	/**

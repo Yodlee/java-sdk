@@ -691,6 +691,8 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	 * <li>PENSION_PLAN</li>
 	 * <li>OTHER</li>
 	 * </ul>
+	 * 
+	 * @return accountType
 	 */
 	public String getAccountType() {
 		return accountType;
