@@ -34,6 +34,10 @@ public enum Container {
 	 */
 	reward,
 	/**
+	 * Applicable for Aggregated and Manual
+	 */
+	bill,
+	/**
 	 * Applicable for Manual
 	 */
 	realEstate,
@@ -51,6 +55,6 @@ public enum Container {
 	}
 
 	public static Set<Container> getStatementContainers() {
-		return EnumSet.of(creditCard, insurance, loan);
+		return EnumSet.of(creditCard, insurance, loan, bill);
 	}
 }
