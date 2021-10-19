@@ -189,7 +189,28 @@ public class DocumentsApi extends AbstractApi {
 			@NotNull(message = "{documents.param.documentId.required}") String documentId) throws ApiException {
 		LOGGER.info("Documents downloadDocument API execution started");
 		DocumentsValidator.validateDeleteOrDownloadDocument(this, ApiUtils.getMethodName(), documentId);
-		CallContext callContext = buildDownloadDocumentContext(documentId);
+		CallContext callContext = buildDownloadDocumentContext(documentId, null);
+		return callContext.getApiClient().execute(callContext.getCall(), DocumentDownloadResponse.class);
+	}
+	
+	/**
+	 * Download a Documents with request Headers. <br>
+	 * The get document details service allows consumers to download a document. The document is
+	 * provided in base64.<br>
+	 * Documents can be downloaded only if the document related dataset attributes are subscribed. <br>
+	 * 
+	 * @param documentId documentId (required)
+	 * @param headers Map of headers key-value pair e.g (Accept-Encoding, gzip) (required)
+	 * @return {@link ApiResponse}&lt;{@link DocumentDownloadResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 */
+	public ApiResponse<DocumentDownloadResponse> downloadDocument(
+			@NotNull(message = "{documents.param.documentId.required}") String documentId, //
+			Map<String, String> headers) throws ApiException {
+		LOGGER.info("Documents downloadDocument API execution started");
+		DocumentsValidator.validateDeleteOrDownloadDocument(this, ApiUtils.getMethodName(), documentId);
+		String contentEncodingValue = headers.get(ApiConstants.ACCEPT_ENCODING);
+		CallContext callContext = buildDownloadDocumentContext(documentId, contentEncodingValue);
 		return callContext.getApiClient().execute(callContext.getCall(), DocumentDownloadResponse.class);
 	}
 
@@ -206,14 +227,17 @@ public class DocumentsApi extends AbstractApi {
 			ApiCallback<DocumentDownloadResponse> apiCallback) throws ApiException {
 		LOGGER.info("Documents downloadDocumentAsync API execution started");
 		DocumentsValidator.validateDeleteOrDownloadDocument(this, ApiUtils.getMethodName(), documentId);
-		CallContext callContext = buildDownloadDocumentContext(documentId);
+		CallContext callContext = buildDownloadDocumentContext(documentId, null);
 		callContext.getApiClient().executeAsync(callContext.getCall(), DocumentDownloadResponse.class, apiCallback);
 	}
 
-	private CallContext buildDownloadDocumentContext(String documentId) throws ApiException {
+	private CallContext buildDownloadDocumentContext(String documentId, String contentEncoding) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		String endpoint = replacePathVariable(ApiEndpoint.DOCUMENTS_WITH_ID, PARAM_DOCUMENT_ID, documentId);
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.GET, null);
+		if (contentEncoding != null) {
+			apiContext.addHeaderParam(ApiConstants.ACCEPT_ENCODING, contentEncoding);
+		}
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);

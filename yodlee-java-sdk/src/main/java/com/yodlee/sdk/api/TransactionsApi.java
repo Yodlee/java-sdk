@@ -468,7 +468,7 @@ public class TransactionsApi extends AbstractApi {
 	}
 
 	/**
-	 * Update Transaction The update transaction service is used to update the category,consumer description, memo for a
+	 * Update Transaction The update transaction service is used to update the category,consumer description, memo,isPhysical, merchantType, detailCategory for a
 	 * transaction.<br>
 	 * The HTTP response code is 204 (Success without content).<br>
 	 * 
@@ -493,7 +493,7 @@ public class TransactionsApi extends AbstractApi {
 	}
 
 	/**
-	 * Update Transaction The update transaction service is used to update the category,consumer description, memo for a
+	 * Update Transaction The update transaction service is used to update the category,consumer description, memo,isPhysical, merchantType, detailCategory for a
 	 * transaction.<br>
 	 * The HTTP response code is 204 (Success without content).<br>
 	 * 

@@ -14,6 +14,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.yodlee.api.model.AbstractModelComponent;
@@ -21,6 +22,7 @@ import com.yodlee.api.model.account.enums.ItemAccountStatus;
 import com.yodlee.api.model.account.request.CreateAccountRequest;
 import com.yodlee.api.model.account.request.EvaluateAddressRequest;
 import com.yodlee.api.model.account.request.UpdateAccountRequest;
+import com.yodlee.api.model.account.response.AccountBalanceResponse;
 import com.yodlee.api.model.account.response.AccountHistoricalBalancesResponse;
 import com.yodlee.api.model.account.response.AccountMigrationResponse;
 import com.yodlee.api.model.account.response.AccountResponse;
@@ -197,7 +199,49 @@ public class AccountsApi extends AbstractApi {
 		AccountsValidator.validateGetAllAccounts(this, ApiUtils.getMethodName(), accountId, container, include,
 				providerAccountId, requestId, status);
 		CallContext callContext =
-				buildAllAccountsContext(accountId, container, include, providerAccountId, requestId, status);
+				buildAllAccountsContext(accountId, container, include, providerAccountId, requestId, status, null);
+		return callContext.getApiClient().execute(callContext.getCall(), AccountResponse.class);
+	}
+	
+	
+	/**
+	 * Get All Accounts with Gzip Header
+	 * Get Accounts The get accounts service provides information about accounts added by the user.<br>
+	 * By default, this service returns information for active and to be closed accounts.<br>
+	 * If requestId is provided, the accounts that are updated in the context of the requestId will be provided in the
+	 * response.<br>
+	 * 
+	 * <b> Note : </b> fullAccountNumber is deprecated and is replaced with fullAccountNumberList in include parameter
+	 * and response.
+	 * 
+	 * @param accountId Comma separated accountIds (optional)
+	 * @param container bank/creditCard/investment/insurance/loan/reward/bill/realEstate/otherAssets/otherLiabilities
+	 *        (optional)
+	 * @param include profile, holder, fullAccountNumberList, paymentProfile, autoRefresh (optional)
+	 * @param providerAccountId Comma separated providerAccountIds (optional)
+	 * @param requestId The unique identifier that returns contextual data (optional)
+	 * @param status Comma separated values ACTIVE/INACTIVE/TO_BE_CLOSED/CLOSED (optional)
+	 * @param headers Map of headers key-value pair e.g (Accept-Encoding, gzip) (required)
+	 * @return {@link ApiResponse}&lt;{@link AccountResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<AccountResponse> getAllAccounts(//
+			@Size(min = 0, max = 100, message = "{accounts.param.accountId.length.invalid}") Long[] accountId, //
+			Container container, //
+			IncludeParameterValue[] include, //
+			@Size(min = 0,
+				  max = 100,
+				  message = "{accounts.param.providerAccountId.length.invalid}") Long[] providerAccountId, //
+			String requestId, //
+			ItemAccountStatus[] status, //
+			Map<String, String> headers) throws ApiException {
+		LOGGER.info("Accounts getAllAccounts API execution started");
+		String contentEncodingValue = headers.get(ApiConstants.ACCEPT_ENCODING);
+		AccountsValidator.validateGetAllAccounts(this, ApiUtils.getMethodName(), accountId, container, include,
+				providerAccountId, requestId, status);
+		CallContext callContext =
+				buildAllAccountsContext(accountId, container, include, providerAccountId, requestId, status, contentEncodingValue);
 		return callContext.getApiClient().execute(callContext.getCall(), AccountResponse.class);
 	}
 
@@ -234,16 +278,17 @@ public class AccountsApi extends AbstractApi {
 		AccountsValidator.validateGetAllAccounts(this, ApiUtils.getMethodName(), accountId, container, include,
 				providerAccountId, requestId, status);
 		CallContext callContext =
-				buildAllAccountsContext(accountId, container, include, providerAccountId, requestId, status);
+				buildAllAccountsContext(accountId, container, include, providerAccountId, requestId, status, null);
 		callContext.getApiClient().executeAsync(callContext.getCall(), AccountResponse.class, apiCallback);
 	}
-
+	
 	private CallContext buildAllAccountsContext(Long[] accountId, //
 			Container container, //
 			IncludeParameterValue[] include, //
 			Long[] providerAccountId, //
 			String requestId, //
-			ItemAccountStatus[] status) throws ApiException {
+			ItemAccountStatus[] status, //
+			String contentEncoding) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.ACCOUNTS, HttpMethod.GET, null);
 		if (accountId != null) {
@@ -264,6 +309,9 @@ public class AccountsApi extends AbstractApi {
 		}
 		if (status != null) {
 			apiContext.addQueryParam(new Pair(PARAM_STATUS, ApiUtils.convertArrayToString(status)));
+		}
+		if (contentEncoding != null) {
+			apiContext.addHeaderParam(ApiConstants.ACCEPT_ENCODING, contentEncoding);
 		}
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
@@ -360,7 +408,7 @@ public class AccountsApi extends AbstractApi {
 				buildGetHistoricalBalancesContext(accountId, toDate, fromDate, includeCF, interval, skip, top);
 		callContext.getApiClient().executeAsync(callContext.getCall(), AccountHistoricalBalancesResponse.class,
 				apiCallback);
-	}
+		}
 
 	private CallContext buildGetHistoricalBalancesContext(Long accountId, Date toDate, //
 			Date fromDate, //
@@ -745,6 +793,59 @@ public class AccountsApi extends AbstractApi {
 				PARAM_PROVIDER_ACCOUNT_ID, String.valueOf(providerAccountId));
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.GET, null);
+		registerResponseInterceptor(apiClient);
+		Call call = apiClient.buildCall(apiContext, requestListener());
+		return new CallContext(apiClient, call);
+	}
+
+	/**
+	 * Latest Balance<br>
+	 * The latest balances service provides the latest account balance by initiating a new balance refresh request.
+	 * 
+	 * @param accountId accountId (required)
+	 * @param providerAccountId providerAccountId (required)
+	 * @return {@link ApiResponse}&lt;{@link AccountBalanceResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<AccountBalanceResponse>
+			getAccountBalance(@Size(min = 0, max = 10, message = "{accounts.param.accountId.length.invalid}") //
+					@NotEmpty(message = "{accounts.param.accountId.required}") Long[] accountId,//
+					@Digits(integer = 11, fraction = 0, message = "{accounts.param.providerAccountId.invalid}")//
+					@NotNull(message = "{providerAccounts.param.providerAccountId.required}") long providerAccountId)
+					throws ApiException {
+		LOGGER.info("Accounts getAccountBal API execution started");
+		AccountsValidator.validateAccountBalance(this, ApiUtils.getMethodName(), accountId, providerAccountId);
+		CallContext callContext = buildAccountBalanceContext(accountId, providerAccountId);
+		return callContext.getApiClient().execute(callContext.getCall(), AccountBalanceResponse.class);
+	}
+
+	/**
+	 * Latest Balance<br>
+	 * The latest balances service provides the latest account balance by initiating a new balance refresh request.
+	 * 
+	 * @param accountId accountId (required)
+	 * @param providerAccountId providerAccountId (required)
+	 * @param apiCallback {@link ApiCallback}&lt;{@link AccountBalanceResponse}&gt; (required)
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public void getAccountBalanceAsync(@Size(min = 0, max = 10, message = "{accounts.param.accountId.length.invalid}") //
+		@NotEmpty(message = "{accounts.param.accountId.required}") Long[] accountId,//
+		@Digits(integer = 11, fraction = 0, message = "{accounts.param.providerAccountId.invalid}")//
+		@NotNull(message = "{providerAccounts.param.providerAccountId.required}")//
+		long providerAccountId, ApiCallback<AccountBalanceResponse> apiCallback) throws ApiException {
+		LOGGER.info("Accounts getAccountBal API execution started");
+		AccountsValidator.validateAccountBalance(this, ApiUtils.getMethodName(), accountId, providerAccountId);
+		CallContext callContext = buildAccountBalanceContext(accountId, providerAccountId);
+		callContext.getApiClient().executeAsync(callContext.getCall(), AccountBalanceResponse.class, apiCallback);
+	}
+
+	private CallContext buildAccountBalanceContext(Long[] accountId, long providerAccountId) throws ApiException {
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
+		ApiContext apiContext = new ApiContext(ApiEndpoint.ACCOUNT_BALANCE, HttpMethod.GET, null);
+		apiContext.addQueryParam(new Pair(PARAM_ACCOUNT_ID, ApiUtils.convertArrayToString(accountId)));
+		apiContext.addQueryParam(new Pair(PARAM_PROVIDER_ACCOUNT_ID, String.valueOf(providerAccountId)));
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);

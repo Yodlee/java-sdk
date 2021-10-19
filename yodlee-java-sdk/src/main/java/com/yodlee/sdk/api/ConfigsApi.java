@@ -40,7 +40,7 @@ public class ConfigsApi extends AbstractApi {
 	/**
 	 * Subscribe Event The subscribe events service is used to subscribe to an event for receiving notifications.<br>
 	 * The callback URL, where the notification will be posted should be provided to this service.<br>
-	 * Customers can subscribe to REFRESH,DATA_UPDATES and AUTO_REFRESH_UPDATES event.<br>
+	 * Customers can subscribe to REFRESH,DATA_UPDATES,AUTO_REFRESH_UPDATES and LATEST_BALANCE_UPDATES event.<br>
 	 * <br>
 	 * <b>Notes</b>:<br>
 	 * This service is not available in developer sandbox/test environment and will be made available for testing in
@@ -67,7 +67,7 @@ public class ConfigsApi extends AbstractApi {
 	/**
 	 * Subscribe Event The subscribe events service is used to subscribe to an event for receiving notifications.<br>
 	 * The callback URL, where the notification will be posted should be provided to this service.<br>
-	 * Customers can subscribe to REFRESH,DATA_UPDATES and AUTO_REFRESH_UPDATES event.<br>
+	 * Customers can subscribe to REFRESH,DATA_UPDATES,AUTO_REFRESH_UPDATES and LATEST_BALANCE_UPDATES event.<br>
 	 * <br>
 	 * <b>Notes</b>:<br>
 	 * This service is not available in developer sandbox/test environment and will be made available for testing in

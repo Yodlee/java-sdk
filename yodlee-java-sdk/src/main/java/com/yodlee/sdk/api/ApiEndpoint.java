@@ -126,4 +126,6 @@ public class ApiEndpoint {
 	
 	static final String GETCONSENTS = "/consents";
 	
+	static final String ACCOUNT_BALANCE = "/accounts/latestBalances";
+	
 }

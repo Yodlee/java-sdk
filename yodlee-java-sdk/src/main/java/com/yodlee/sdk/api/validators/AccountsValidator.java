@@ -165,7 +165,7 @@ public class AccountsValidator {
 		UpdateAccountInfo accountInfo = accountRequest.getAccountInfo();
 		if (accountInfo != null) {
 			Container container = accountInfo.getContainer();
-			if (container != null && container != Container.bill && container != Container.creditCard
+			if (container != null && container != Container.creditCard
 					&& container != Container.loan && container != Container.insurance) {
 				FrequencyType frequency = accountInfo.getFrequency();
 				problems.addAll(isFrequencyExist(frequency));
@@ -282,6 +282,15 @@ public class AccountsValidator {
 			throws ApiException {
 		Class<?>[] argTypes = new Class[] {long.class};
 		Object[] argValues = new Object[] {providerAccountId};
+		List<Problem> methodProblems = ApiValidator.validate(accountsApi, methodName, argTypes, argValues);
+		List<Problem> contextProblems = ApiValidator.validateUserContext(accountsApi);
+		ApiValidator.collectProblems(methodProblems, contextProblems);
+	}
+	
+	public static void validateAccountBalance(AccountsApi accountsApi, String methodName, Long[] accountIds, long providerAccountId)
+			throws ApiException {
+		Class<?>[] argTypes = new Class[] {Long[].class, long.class};
+		Object[] argValues = new Object[] {accountIds, providerAccountId};
 		List<Problem> methodProblems = ApiValidator.validate(accountsApi, methodName, argTypes, argValues);
 		List<Problem> contextProblems = ApiValidator.validateUserContext(accountsApi);
 		ApiValidator.collectProblems(methodProblems, contextProblems);

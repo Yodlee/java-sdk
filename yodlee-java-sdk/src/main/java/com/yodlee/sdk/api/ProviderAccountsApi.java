@@ -466,7 +466,32 @@ public class ProviderAccountsApi extends AbstractApi {
 			Long[] providerIds) throws ApiException {
 		LOGGER.info("ProviderAccount getAllProviderAccounts API execution started");
 		ProviderAccountsValidator.validateGetAllProviderAccounts(this, ApiUtils.getMethodName(), include, providerIds);
-		CallContext callContext = buildGetAllProviderAccountsContext(include, providerIds);
+		CallContext callContext = buildGetAllProviderAccountsContext(include, providerIds, null);
+		return callContext.getApiClient().execute(callContext.getCall(), ProviderAccountResponse.class);
+	}
+	
+	
+	/**
+	 * Get Provider Account with request Headers. <br>
+	 * 
+	 * Get Provider Accounts The get provider accounts service is used to return all the provider accounts added by the
+	 * user. <br>
+	 * This includes the failed and successfully added provider accounts.<br>
+	 * 
+	 * @param include - preferences
+	 * @param providerIds - Comma separated providerIds
+	 * @param headers Map of headers key-value pair e.g (Accept-Encoding, gzip) (required)
+	 * @return {@link ApiResponse}{@literal <}{@link ProviderAccountResponse}{@literal >}
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<ProviderAccountResponse> getAllProviderAccounts(ProviderAccountDetailsInclude include, //
+			Long[] providerIds, //
+			Map<String, String> headers) throws ApiException {
+		LOGGER.info("ProviderAccount getAllProviderAccounts API execution started");
+		ProviderAccountsValidator.validateGetAllProviderAccounts(this, ApiUtils.getMethodName(), include, providerIds);
+		String contentEncodingValue = headers.get(ApiConstants.ACCEPT_ENCODING);
+		CallContext callContext = buildGetAllProviderAccountsContext(include, providerIds, contentEncodingValue);
 		return callContext.getApiClient().execute(callContext.getCall(), ProviderAccountResponse.class);
 	}
 
@@ -485,7 +510,7 @@ public class ProviderAccountsApi extends AbstractApi {
 			Long[] providerIds, ApiCallback<ProviderAccountResponse> apiCallback) throws ApiException {
 		LOGGER.info("ProviderAccount getAllProviderAccountsAsync API execution started");
 		ProviderAccountsValidator.validateGetAllProviderAccounts(this, ApiUtils.getMethodName(), include, providerIds);
-		CallContext callContext = buildGetAllProviderAccountsContext(include, providerIds);
+		CallContext callContext = buildGetAllProviderAccountsContext(include, providerIds, null);
 		callContext.getApiClient().executeAsync(callContext.getCall(), ProviderAccountResponse.class, apiCallback);
 	}
 
@@ -731,7 +756,7 @@ public class ProviderAccountsApi extends AbstractApi {
 	}
 
 	private CallContext buildGetAllProviderAccountsContext(ProviderAccountDetailsInclude include, //
-			Long[] providerIds) throws ApiException {
+			Long[] providerIds, String contentEncoding) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.PROVIDER_ACCOUNTS, HttpMethod.GET, null);
 		if (include != null) {
@@ -739,6 +764,9 @@ public class ProviderAccountsApi extends AbstractApi {
 		}
 		if (providerIds != null) {
 			apiContext.addQueryParam(new Pair(PARAM_PROVIDER_IDS, ApiUtils.convertArrayToString(providerIds)));
+		}
+		if (contentEncoding != null) {
+			apiContext.addHeaderParam(ApiConstants.ACCEPT_ENCODING, contentEncoding);
 		}
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
