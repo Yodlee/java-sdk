@@ -18,7 +18,7 @@ public class DocumentDownload extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The document's primary key and unique identifier."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>"//
+							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("id")
 	private String id;
@@ -26,7 +26,7 @@ public class DocumentDownload extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Contents of the document in Base64 format."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>"//
+							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("docContent")
 	private String docContent;
@@ -34,7 +34,7 @@ public class DocumentDownload extends AbstractModelComponent {
 	/**
 	 * The document's primary key and unique identifier. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>
+	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>
 	 * 
 	 * @return id
 	 */
@@ -45,7 +45,7 @@ public class DocumentDownload extends AbstractModelComponent {
 	/**
 	 * Contents of the document in Base64 format. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>
+	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>
 	 * 
 	 * @return docContent
 	 */

@@ -10,143 +10,80 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Money;
-import com.yodlee.api.model.enums.Container;
+import com.yodlee.api.model.account.enums.AccountLatestBalanceContainer;
+import com.yodlee.api.model.account.enums.AccountLatestBalanceFailedReason;
+import com.yodlee.api.model.account.enums.AccountLatestBalanceRefreshStatus;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"CONTAINER", "lastUpdated", "id", "accountName", "accountNumber", "accountType", "providerId",
-		"providerName", "providerAccountId", "availableBalance", "balance", "currentBalance"})
-public class AssociatedAccount extends AbstractModelComponent {
+@JsonPropertyOrder({"CONTAINER", "providerId", "providerAccountId", "accountId", "providerName", "accountType",
+		"accountNumber", "accountName", "availableBalance", "currentBalance", "balance", "totalBalance", "cash",
+		"lastUpdated", "refreshStatus", "failedReason"})
+public class AccountLatestBalance extends AbstractModelComponent {
 
 	@ApiModelProperty(readOnly = true,
-					  value = "The type of service. E.g., Bank, Credit Card, Investment, Insurance, etc.<br><br>"//
-							  + "<b>Associated Accounts<br>"//
-							  + "<b>Applicable containers</b>: All containers<br>"//
+					  value = "The type of service. E.g., Bank, Investment <br><br>"//
+							  + "Aggregated<br>"//
+							  + "<b>Applicable containers</b>: bank, investment<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
-							  + "<li>GET Associated Accounts/{providerAccountId}</li>"//
-							  + "</ul>")
+							  + "<li>GET accounts/latestBalances</li>"//
+							  + "</ul>"//
+							  + "<b>Applicable Values</b><br>"//
+	)
 	@JsonProperty("CONTAINER")
-	private Container container;
-
-	@ApiModelProperty(readOnly = true,
-					  value = "The primary key of the provider account resource."//
-							  + "<br><br>"//
-							  + "<b>Associated Accounts<br>"//
-							  + "<b>Applicable containers</b>: All containers<br>"//
-							  + "<b>Endpoints</b>:"//
-							  + "<ul>"//
-							  + "<li>GET Associated Accounts/{providerAccountId}</li>"//
-							  + "</ul>")
-	@JsonProperty("providerAccountId")
-	private Long providerAccountId;
-
-	@ApiModelProperty(readOnly = true,
-					  value = "The account name as it appears at the site.<br>"//
-							  + "(The POST accounts service response return this field as name)<br>"//
-							  + "<b>Associated Accounts<br>"//
-							  + "<b>Applicable containers</b>: All containers<br>"//
-							  + "<b>Endpoints</b>:"//
-							  + "<ul>"//
-							  + "<li>GET Associated Accounts/{providerAccountId}</li>"//
-							  + "</ul>")
-	@JsonProperty("accountName")
-	private String accountName;
-
-	@ApiModelProperty(readOnly = true,
-					  value = "The account number as it appears on the site. (The POST accounts service response return this field as number)<br>"
-							  + "<b>Additional Details</b>:<b> Bank/ Loan/ Insurance/ Investment</b>:<br>"
-							  + " The account number for the bank account as it appears at the site.<br>"
-							  + "<b>Credit Card</b>: The account number of the card account as it appears at the site,<br>"
-							  + "i.e., the card number.The account number can be full or partial based on how it is displayed in the account summary page of the site."
-							  + "In most cases, the site does not display the full account number in the account summary page "
-							  + "and additional navigation is required to aggregate it.<br>"//
-							  + "<b>Associated Accounts<br>"//
-							  + "<b>Applicable containers</b>: All containers<br>"//
-							  + "<b>Endpoints</b>:"//
-							  + "<ul>"//
-							  + "<li>GET Associated Accounts/{providerAccountId}</li>"//
-							  + "</ul>")
-	@JsonProperty("accountNumber")
-	private String accountNumber;
-
-	@ApiModelProperty(readOnly = true,
-					  value = "The total account value. " + "<br><b>Additional Details:</b>"
-							  + "<br><b>Bank:</b> available balance or current balance."
-							  + "<br><b>Credit Card:</b> running Balance."
-							  + "<br><b>Investment:</b> The total balance of all the investment account, as it appears on the FI site."
-							  + "<br><b>Insurance:</b> CashValue or amountDue" + "<br><b>Loan:</b> principalBalance<br>"
-							  + "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, otherAssets, otherLiabilities, realEstate<br>"//
-							  + "<b>Associated Accounts<br>"//
-							  + "<b>Endpoints</b>:"//
-							  + "<ul>"//
-							  + "<li>GET Associated Accounts/{providerAccountId}</li>"//
-							  + "</ul>")
-	@JsonProperty("balance")
-	private Money balance;
-
-	@ApiModelProperty(readOnly = true,
-					  value = "The primary key of the account resource and the unique identifier for the account.<br><br>"//
-							  + "<b>Associated Accounts<br>"//
-							  + "<b>Applicable containers</b>: All containers<br>"//
-							  + "<b>Endpoints</b>:"//
-							  + "<ul>"//
-							  + "<li>GET Associated Accounts/{providerAccountId}</li>"//
-							  + "</ul>")
-	@JsonProperty("id")
-	private Long id;
+	protected AccountLatestBalanceContainer container;
 
 	@ApiModelProperty(readOnly = true,
 					  value = "Identifier of the provider site. The primary key of provider resource. "//
 							  + "<br><br>"//
-							  + "<b>Associated Accounts<br>"//
-							  + "<b>Applicable containers</b>: All containers<br>"//
+							  + "<b>Aggregated</b> <br>"//
+							  + "<b>Applicable containers</b>: bank, investment<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
-							  + "<li>GET Associated Accounts/{providerAccountId}</li>"//
+							  + "<li>GET accounts/latestBalances</li>"//
 							  + "</ul>")
 	@JsonProperty("providerId")
-	private String providerId;
+	protected String providerId;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "The primary key of the provider account resource."//
+							  + "<br><br>"//
+							  + "<b>Aggregated</b> <br>"//
+							  + "<b>Applicable containers</b>: bank, investment<br>"//
+							  + "<b>Endpoints</b>:"//
+							  + "<ul>"//
+							  + "<li>GET accounts/latestBalances</li>"//
+							  + "</ul>")
+	@JsonProperty("providerAccountId")
+	protected Long providerAccountId;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "The primary key of the provider account resource."//
+							  + "<br><br>"//
+							  + "<b>Aggregated</b> <br>"//
+							  + "<b>Applicable containers</b>: bank, investment<br>"//
+							  + "<b>Endpoints</b>:"//
+							  + "<ul>"//
+							  + "<li>GET accounts/latestBalances</li>"//
+							  + "</ul>")
+	@JsonProperty("accountId")
+	protected Long accountId;
 
 	@ApiModelProperty(readOnly = true,
 					  value = "Service provider or institution name where the account originates. This belongs to the provider resource."//
 							  + "<br><br>"//
-							  + "<b>Associated Accounts<br>"//
-							  + "<b>Applicable containers</b>: All containers<br>"//
+							  + "<b>Aggregated</b> <br>"//
+							  + "<b>Applicable containers</b>: bank, investment<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
-							  + "<li>GET Associated Accounts/{providerAccountId}</li>"//
+							  + "<li>GET accounts/latestBalances</li>"//
 							  + "</ul>")
 	@JsonProperty("providerName")
-	private String providerName;
+	protected String providerName;
 
 	@ApiModelProperty(readOnly = true,
-					  value = "The balance in the account that is available for spending. "
-							  + "For checking accounts with overdraft, available balance may include "
-							  + "overdraft amount, if end site adds overdraft balance to available balance.<br>"//
-							  + "<b>Applicable containers</b>: bank, investment<br>"//
-							  + "<b>Associated Accounts<br>"//
-							  + "<b>Endpoints</b>:"//
-							  + "<ul>"//
-							  + "<li>GET Associated Accounts/{providerAccountId}</li>"//
-							  + "</ul>")
-	@JsonProperty("availableBalance")
-	private Money availableBalance;
-
-	@ApiModelProperty(readOnly = true,
-					  value = "The balance in the account that is available at the beginning of the "
-							  + "business day; it is equal to the ledger balance of the account.<br><br>"//
-							  + "<b>Applicable containers</b>: bank<br>"//
-							  + "<b>Associated Accounts<br>"//
-							  + "<b>Endpoints</b>:"//
-							  + "<ul>"//
-							  + "<li>GET Associated Accounts/{providerAccountId}</li>"//
-							  + "</ul>")
-	@JsonProperty("currentBalance")
-	private Money currentBalance;
-
-	@ApiModelProperty(readOnly = true,
-					  value = "The type of account that is aggregated, i.e., savings, checking, credit card, charge, HELOC, etc. "
+					  value = "The type of account that is aggregated, i.e., savings, checking, charge, HELOC, etc. "
 							  + "The account type is derived based on the attributes of the account. " //
 							  + "<br><b>Valid Values:</b>"//
 							  + "<br><b>Aggregated Account Type</b>"//
@@ -161,14 +98,6 @@ public class AssociatedAccount extends AbstractModelComponent {
 							  + "<li>MONEY_MARKET</li>"//
 							  + "<li>IRA</li>"//
 							  + "<li>PREPAID</li>"//
-							  + "</ul>"//
-							  + "<b>creditCard</b>"//
-							  + "<ul>"//
-							  + "<li>OTHER</li>"//
-							  + "<li>CREDIT</li>"//
-							  + "<li>STORE</li>"//
-							  + "<li>CHARGE</li>"//
-							  + "<li>OTHER</li>"//
 							  + "</ul>"//
 							  + "<b>investment (SN 1.0)</b>"//
 							  + "<ul>" + "<li>BROKERAGE_MARGIN</li>"//
@@ -359,216 +288,147 @@ public class AssociatedAccount extends AbstractModelComponent {
 							  + "<li>PENSION_PLAN</li>"//
 							  + "<li>OTHER</li>"//
 							  + "</ul>"//
-							  + "<b>loan</b>"//
 							  + "<ul>"//
-							  + "<li>MORTGAGE</li>"//
-							  + "<li>INSTALLMENT_LOAN</li>"//
-							  + "<li>PERSONAL_LOAN</li>"//
-							  + "<li>HOME_EQUITY_LINE_OF_CREDIT</li>"//
-							  + "<li>LINE_OF_CREDIT</li>"//
-							  + "<li>AUTO_LOAN</li>"//
-							  + "<li>STUDENT_LOAN</li>"//
-							  + "<li>HOME_LOAN</li>"//
-							  + "</ul>"//
-							  + "<b>insurance</b>"//
-							  + "<ul>"//
-							  + "<li>AUTO_INSURANCE</li>"//
-							  + "<li>HEALTH_INSURANCE</li>"//
-							  + "<li>HOME_INSURANCE</li>"//
-							  + "<li>LIFE_INSURANCE</li>"//
-							  + "<li>ANNUITY</li>"//
-							  + "<li>TRAVEL_INSURANCE</li>"//
-							  + "<li>INSURANCE</li>"//
-							  + "</ul>"//
-							  + "<b>realEstate</b>"//
-							  + "<ul> " + "<li>REAL_ESTATE</li>"//
-							  + "</ul>"//
-							  + "<b>reward</b>"//
-							  + "<ul>"//
-							  + "<li>REWARD_POINTS</li>"//
-							  + "</ul>"//
-							  + "<b>Manual Account Type</b><br>"//
-							  + "<b>bank</b>"//
-							  + "<ul>"//
-							  + "<li>CHECKING</li>"//
-							  + "<li>SAVINGS</li>"//
-							  + "<li>CD</li>"//
-							  + "<li>PREPAID</li>"//
-							  + "</ul>"//
-							  + "<b>credit</b>"//
-							  + "<ul>  " + "<li>CREDIT</li>"//
-							  + "</ul>"//
-							  + "<b>loan</b>"//
-							  + "<ul>  " + "<li>PERSONAL_LOAN</li>"//
-							  + "<li>HOME_LOAN</li>"//
-							  + "</ul>"//
-							  + "<b>insurance</b>"//
-							  + "<ul>"//
-							  + "<li>INSURANCE</li>"//
-							  + "<li>ANNUITY</li>"//
-							  + "</ul>"//
-							  + "<b>investment</b>"//
-							  + "<ul>"//
-							  + "<li>BROKERAGE_CASH</li>"//
-							  + "</ul>"//
-							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bank<br>"//
-							  + "<b>Associated Accounts<br>"//
-							  + "<b>Endpoints</b>:"//
-							  + "<ul>"//
-							  + "<li>GET Associated Accounts/{providerAccountId}</li>"//
+							  + "<li>GET accounts/latestBalances</li>"//
 							  + "</ul>")
 	@JsonProperty("accountType")
-	private String accountType;
+	protected String accountType;
 
 	@ApiModelProperty(readOnly = true,
-					  value = "The date time the account information was last retrieved from the provider site and updated in the Yodlee system.<br>"//
+					  value = "The account number as it appears on the site. (The POST accounts service response return this field as number)<br>"
+							  + "<b>Additional Details</b>:<b> Bank / Investment</b>:<br>"
+							  + " The account number for the bank account as it appears at the site.<br>"
+							  + "In most cases, the site does not display the full account number in the account summary page "
+							  + "and additional navigation is required to aggregate it.<br>"//
+							  + "<b>Applicable containers</b>: bank, investment<br>"//
+							  + "<b>Aggregated</b> <br>"//
+							  + "<b>Endpoints</b>:<br>"//
+							  + "<ul>"//
+							  + "<li>GET accounts/latestBalances</li>"//
+							  + "</ul>")
+	@JsonProperty("accountNumber")
+	protected String accountNumber;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "The account name as it appears at the site.<br>"//
+							  + "(The POST accounts service response return this field as name)<br>"//
+							  + "<b>Applicable containers</b>: bank, investment<br>"//
+							  + "<b>Aggregated </b> <br>"//
+							  + "<b>Endpoints</b>:<br>"//
+							  + "<ul>"//
+							  + "<li>GET accounts/latestBalances</li>"//
+							  + "</ul>")
+	@JsonProperty("accountName")
+	protected String accountName;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "The balance in the account that is available for spending. "
+							  + "For checking accounts with overdraft, available balance may include "
+							  + "overdraft amount, if end site adds overdraft balance to available balance.<br>"//
+							  + "<b>Applicable containers</b>: bank, investment<br>"//
+							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
+							  + "<b>Endpoints</b>:<br>"//
+							  + "<ul>"//
+							  + "<li>GET accounts/latestBalances</li>"//
+							  + "</ul>")
+	@JsonProperty("availableBalance")
+	protected Money availableBalance;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "The balance in the account that is available at the beginning of the "
+							  + "business day; it is equal to the ledger balance of the account.<br><br>"//
+							  + "<b>Aggregated </b>: Aggregated<br>"//
 							  + "<b>Applicable containers</b>: bank<br>"//
-							  + "<b>Associated Accounts<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
-							  + "<li>GET Associated Accounts/{providerAccountId}</li>"//
+							  + "<li>GET accounts/latestBalances</li>"//
+							  + "</ul>")
+	@JsonProperty("currentBalance")
+	protected Money currentBalance;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "The total account value. " + "<br><b>Additional Details:</b>"
+							  + "<br><b>Bank:</b> available balance or current balance."
+							  + "<br><b>Investment:</b> The total balance of all the investment account, as it appears on the FI site."
+							  + "<b>Applicable containers</b>: bank, investment <br>"//
+							  + "<b>Aggregated</b><br>"//
+							  + "<b>Endpoints</b>:<br>"//
+							  + "<ul>"//
+							  + "<li>GET accounts/latestBalances</li>"//
+							  + "</ul>")
+	@JsonProperty("balance")
+	protected Money balance;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "The total account value. " + "<br><b>Additional Details:</b>"
+							  + "<br><b>Investment:</b> The total balance of all the investment account, as it appears on the FI site."
+							  + "<b>Applicable containers</b>: investment <br>"//
+							  + "<b>Aggregated</b><br>"//
+							  + "<b>Endpoints</b>:<br>"//
+							  + "<ul>"//
+							  + "<li>GET accounts/latestBalances</li>"//
+							  + "</ul>")
+	@JsonProperty("totalBalance")
+	protected Money totalBalance;
+	
+	@ApiModelProperty(readOnly = true,
+					  value = "The date time the account information was last retrieved from the provider site and updated in the Yodlee system.<br>"//
+							  + "<br><b>Aggregated <br>"//
+							  + "<b>Applicable containers</b>: bank, investment<br>"//
+							  + "<b>Endpoints</b>:"//
+							  + "<ul><li>GET accounts/latestBalances</li>"//
 							  + "</ul>")
 	@JsonProperty("lastUpdated")
-	private String lastUpdated;
+	protected String lastUpdated;
+
+	@ApiModelProperty(readOnly = true,
+					  value = "The amount that is available for immediate withdrawal or the total amount available to purchase securities in a brokerage or investment account."
+							  + "<br><b>Note:</b> The cash balance field is only applicable to brokerage related accounts.<br><br>"//
+							  + "<b>Aggregated </b><br>"//
+							  + "<b>Applicable containers</b>: investment<br>"//
+							  + "<b>Endpoints</b>:"//
+							  + "<ul><li>GET accounts/latestBalances</li>"//
+							  + "</ul>")
+	@JsonProperty("cash")
+	protected Money cash;
+
+	@ApiModelProperty(readOnly = true, value = "The status of the account balance refresh request."//
+	)
+	@JsonProperty("refreshStatus")
+	protected AccountLatestBalanceRefreshStatus refreshStatus;
+
+	@ApiModelProperty(readOnly = true, value = "The reason the account balance refresh failed.")//
+	@JsonProperty("failedReason")
+	protected AccountLatestBalanceFailedReason failedReason;
 
 	/**
-	 * The type of service. E.g., Bank, Credit Card, Investment, Insurance, etc.<br>
+	 * The type of service. E.g., Bank, Investment,.<br>
 	 * <br>
-	 * <b>Associated Accounts</b><br>
-	 * <b>Applicable containers</b>: All containers<br>
+	 * <b>Aggregated</b>: Aggregated<br>
+	 * <b>Applicable containers</b>: bank, investment<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
-	 * <li>GET Associated Accounts/{providerAccountId}</li>
+	 * <li>GET accounts/latestBalances</li>
 	 * </ul>
 	 * <b>Applicable Values</b><br>
-	 *
+	 * 
 	 * @return CONTAINER
 	 */
 	@JsonProperty("CONTAINER")
-	public Container getContainer() {
+	public AccountLatestBalanceContainer getContainer() {
 		return container;
-	}
-
-	/**
-	 * The primary key of the provider account resource. <br>
-	 * <br>
-	 * <b>Associated Accounts</b><br>
-	 * <b>Applicable containers</b>: All containers<br>
-	 * <b>Endpoints</b>:
-	 * <ul>
-	 * <li>GET Associated Accounts/{providerAccountId}</li>
-	 * </ul>
-	 *
-	 * @return providerAccountId
-	 */
-	public Long getProviderAccountId() {
-		return providerAccountId;
-	}
-
-	/**
-	 * The account number as it appears on the site. (The POST accounts service response return this field as
-	 * number)<br>
-	 * <b>Additional Details</b>:<b> Bank/ Loan/ Insurance/ Investment</b>:<br>
-	 * The account number for the bank account as it appears at the site.<br>
-	 * <b>Credit Card</b>: The account number of the card account as it appears at the site,<br>
-	 * i.e., the card number.The account number can be full or partial based on how it is displayed in the account
-	 * summary page of the site. In most cases, the site does not display the full account number in the account summary
-	 * page and additional navigation is required to aggregate it.<br>
-	 * <b>Associated Accounts</b><br>
-	 * <b>Applicable containers</b>: All containers<br>
-	 * <b>Endpoints</b>:
-	 * <ul>
-	 * <li>GET Associated Accounts/{providerAccountId}</li>
-	 * </ul>
-	 * 
-	 * @return accountNumber
-	 */
-	public String getAccountNumber() {
-		return accountNumber;
-	}
-
-	/**
-	 * The total account value. * <br>
-	 * <b>Additional Details:</b> <br>
-	 * <b>Bank:</b> available balance or current balance. <br>
-	 * <b>Credit Card:</b> running Balance. <br>
-	 * <b>Investment:</b> The total balance of all the investment account, as it appears on the FI site. <br>
-	 * <b>Insurance:</b> CashValue or amountDue * <br>
-	 * <b>Loan:</b> principalBalance <br>
-	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, otherAssets, otherLiabilities,
-	 * realEstate<br>
-	 * <b>Associated Accounts</b><br>
-	 * <b>Endpoints</b>:
-	 * <ul>
-	 * <li>GET Associated Accounts/{providerAccountId}</li>
-	 * </ul>
-	 *
-	 * @return balance
-	 */
-	public Money getBalance() {
-		return balance;
-	}
-
-	/**
-	 * The primary key of the account resource and the unique identifier for the account.<br>
-	 * <br>
-	 * <b>Associated Accounts</b><br>
-	 * <b>Applicable containers</b>: All containers<br>
-	 * <b>Endpoints</b>:
-	 * <ul>
-	 * <li>GET Associated Accounts/{providerAccountId}</li>
-	 * </ul>
-	 *
-	 * @return id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * The date time the account information was last retrieved from the provider site and updated in the Yodlee
-	 * system.<br>
-	 * <br>
-	 * <b>Associated Accounts</b><br>
-	 * <b>Applicable containers</b>: All containers<br>
-	 * <b>Endpoints</b>:
-	 * <ul>
-	 * <li>GET Associated Accounts/{providerAccountId}</li>
-	 * </ul>
-	 *
-	 * @return lastUpdated
-	 */
-	public String getLastUpdated() {
-		return lastUpdated;
-	}
-
-	/**
-	 * Service provider or institution name where the account originates. This belongs to the provider resource. <br>
-	 * <br>
-	 * <b>Associated Accounts</b><br>
-	 * <b>Applicable containers</b>: All containers<br>
-	 * <b>Endpoints</b>:
-	 * <ul>
-	 * <li>GET Associated Accounts/{providerAccountId}</li>
-	 * </ul>
-	 *
-	 * @return providerName
-	 */
-	public String getProviderName() {
-		return providerName;
 	}
 
 	/**
 	 * Identifier of the provider site. The primary key of provider resource. <br>
 	 * <br>
-	 * <b>Associated Accounts</b><br>
-	 * <b>Applicable containers</b>: All containers<br>
+	 * <b>Aggregated</b> <br>
+	 * <b>Applicable containers</b>: bank, investment<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
-	 * <li>GET Associated Accounts/{providerAccountId}</li>
+	 * <li>GET accounts/latestBalances</li>
 	 * </ul>
-	 *
+	 * 
 	 * @return providerId
 	 */
 	public String getProviderId() {
@@ -576,41 +436,56 @@ public class AssociatedAccount extends AbstractModelComponent {
 	}
 
 	/**
-	 * The balance in the account that is available for spending. For checking accounts with overdraft, available
-	 * balance may include overdraft amount, if end site adds overdraft balance to available balance.<br>
+	 * The primary key of the provider account resource. <br>
+	 * <br>
+	 * <b>Aggregated</b> <br>
 	 * <b>Applicable containers</b>: bank, investment<br>
-	 * <b>Associated Accounts</b><br>
 	 * <b>Endpoints</b>:
 	 * <ul>
-	 * <li>GET Associated Accounts/{providerAccountId}</li>
+	 * <li>GET accounts/latestBalances</li>
 	 * </ul>
 	 * 
-	 * @return availableBalance
+	 * @return providerAccountId
 	 */
-	public Money getAvailableBalance() {
-		return availableBalance;
+	public Long getProviderAccountId() {
+		return providerAccountId;
 	}
 
 	/**
-	 * The balance in the account that is available at the beginning of the business day; it is equal to the ledger
-	 * balance of the account.<br>
+	 * The primary key of the provider account resource. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bank<br>
-	 * <b>Associated Accounts</b><br>
+	 * <b>Aggregated</b>: Both <br>
+	 * <b>Applicable containers</b>: bank, investment<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
-	 * <li>GET Associated Accounts/{providerAccountId}</li>
+	 * <li>GET accounts/latestBalances</li>
 	 * </ul>
-	 *
-	 * @return currentBalance
+	 * 
+	 * @return accountId
 	 */
-	public Money getCurrentBalance() {
-		return currentBalance;
+	public Long getAccountId() {
+		return accountId;
 	}
 
 	/**
-	 * The type of account that is aggregated, i.e., savings, checking, credit card, charge, HELOC, etc. The account
-	 * type is derived based on the attributes of the account. <br>
+	 * Service provider or institution name where the account originates. This belongs to the provider resource. <br>
+	 * <br>
+	 * <b>Aggregated</b> <br>
+	 * <b>Applicable containers</b>: bank, investment<br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET accounts/latestBalances</li>
+	 * </ul>
+	 * 
+	 * @return providerName
+	 */
+	public String getProviderName() {
+		return providerName;
+	}
+
+	/**
+	 * The type of account that is aggregated, i.e., savings, checking, charge, HELOC, etc. The account type is derived
+	 * based on the attributes of the account. <br>
 	 * <b>Valid Values:</b> <br>
 	 * <b>Aggregated Account Type</b> <br>
 	 * <b>bank</b>
@@ -624,14 +499,6 @@ public class AssociatedAccount extends AbstractModelComponent {
 	 * <li>MONEY_MARKET</li>
 	 * <li>IRA</li>
 	 * <li>PREPAID</li>
-	 * </ul>
-	 * <b>creditCard</b>
-	 * <ul>
-	 * <li>OTHER</li>
-	 * <li>CREDIT</li>
-	 * <li>STORE</li>
-	 * <li>CHARGE</li>
-	 * <li>OTHER</li>
 	 * </ul>
 	 * <b>investment (SN 1.0)</b>
 	 * <ul>
@@ -824,73 +691,7 @@ public class AssociatedAccount extends AbstractModelComponent {
 	 * <li>PENSION_PLAN</li>
 	 * <li>OTHER</li>
 	 * </ul>
-	 * <b>loan</b>
-	 * <ul>
-	 * <li>MORTGAGE</li>
-	 * <li>INSTALLMENT_LOAN</li>
-	 * <li>PERSONAL_LOAN</li>
-	 * <li>HOME_EQUITY_LINE_OF_CREDIT</li>
-	 * <li>LINE_OF_CREDIT</li>
-	 * <li>AUTO_LOAN</li>
-	 * <li>STUDENT_LOAN</li>
-	 * <li>HOME_LOAN</li>
-	 * </ul>
-	 * <b>insurance</b>
-	 * <ul>
-	 * <li>AUTO_INSURANCE</li>
-	 * <li>HEALTH_INSURANCE</li>
-	 * <li>HOME_INSURANCE</li>
-	 * <li>LIFE_INSURANCE</li>
-	 * <li>ANNUITY</li>
-	 * <li>TRAVEL_INSURANCE</li>
-	 * <li>INSURANCE</li>
-	 * </ul>
-	 * <b>realEstate</b>
-	 * <ul>
-	 *
-	 * <li>REAL_ESTATE</li>
-	 * </ul>
-	 * <b>reward</b>
-	 * <ul>
-	 * <li>REWARD_POINTS</li>
-	 * </ul>
-	 * <b>Manual Account Type</b><br>
-	 * <b>bank</b>
-	 * <ul>
-	 * <li>CHECKING</li>
-	 * <li>SAVINGS</li>
-	 * <li>CD</li>
-	 * <li>PREPAID</li>
-	 * </ul>
-	 * <b>credit</b>
-	 * <ul>
-	 *
-	 * <li>CREDIT</li>
-	 * </ul>
-	 * <b>loan</b>
-	 * <ul>
-	 *
-	 * <li>PERSONAL_LOAN</li>
-	 * <li>HOME_LOAN</li>
-	 * </ul>
-	 * <b>insurance</b>
-	 * <ul>
-	 * <li>INSURANCE</li>
-	 * <li>ANNUITY</li>
-	 * </ul>
-	 * <b>investment</b>
-	 * <ul>
-	 * <li>BROKERAGE_CASH</li>
-	 * </ul>
-	 * <br>
-	 * <br>
-	 * <b>Associated Accounts</b><br>
-	 * <b>Applicable containers</b>: All containers<br>
-	 * <b>Endpoints</b>:
-	 * <ul>
-	 * <li>GET Associated Accounts/{providerAccountId}</li>
-	 * </ul>
-	 *
+	 * 
 	 * @return accountType
 	 */
 	public String getAccountType() {
@@ -898,18 +699,169 @@ public class AssociatedAccount extends AbstractModelComponent {
 	}
 
 	/**
+	 * The account number as it appears on the site. (The POST accounts service response return this field as
+	 * number)<br>
+	 * <b>Additional Details</b>:<b> Bank/ Investment</b>:<br>
+	 * The account number for the bank account as it appears at the site.<br>
+	 * The account number can be full or partial based on how it is displayed in the account summary page of the site.
+	 * In most cases, the site does not display the full account number in the account summary page and additional
+	 * navigation is required to aggregate it.<br>
+	 * <b>Applicable containers</b>: bank, investment<br>
+	 * <b>Aggregated</b> <br>
+	 * <b>Endpoints</b>:<br>
+	 * <ul>
+	 * <li>GET accounts/latestBalances</li>
+	 * </ul>
+	 * 
+	 * @return accountNumber
+	 */
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	/**
 	 * The account name as it appears at the site.<br>
 	 * (The POST accounts service response return this field as name)<br>
-	 * <b>Associated Accounts</b><br>
-	 * <b>Applicable containers</b>: All containers<br>
-	 * <b>Endpoints</b>:
+	 * <b>Applicable containers</b>: bank, investment<br>
+	 * <b>Aggregated </b> <br>
+	 * <b>Endpoints</b>:<br>
 	 * <ul>
-	 * <li>GET Associated Accounts/{providerAccountId}</li>
+	 * <li>GET accounts/latestBalances</li>
 	 * </ul>
-	 *
+	 * 
 	 * @return accountName
 	 */
 	public String getAccountName() {
 		return accountName;
 	}
+
+	/**
+	 * The balance in the account that is available for spending. For checking accounts with overdraft, available
+	 * balance may include overdraft amount, if end site adds overdraft balance to available balance.<br>
+	 * <b>Applicable containers</b>: bank, investment<br>
+	 * <b>Aggregated </b><br>
+	 * <b>Endpoints</b>:<br>
+	 * GET accounts/latestBalances
+	 * 
+	 * @return availableBalance
+	 */
+	public Money getAvailableBalance() {
+		return availableBalance;
+	}
+
+	/**
+	 * The balance in the account that is available at the beginning of the business day; it is equal to the ledger
+	 * balance of the account.<br>
+	 * <br>
+	 * <b>Aggregated </b>: Aggregated<br>
+	 * <b>Applicable containers</b>: bank<br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET accounts/latestBalances</li>
+	 * </ul>
+	 * 
+	 * @return currentBalance
+	 */
+	public Money getCurrentBalance() {
+		return currentBalance;
+	}
+
+	/**
+	 * The total account value. * <br>
+	 * <b>Additional Details:</b> <br>
+	 * <b>Bank:</b> available balance or current balance. <br>
+	 * <b>Investment:</b> The total balance of all the investment account, as it appears on the FI site. <br>
+	 * <b>Applicable containers</b>: bank, investment<br>
+	 * <b>Aggregated </b> <br>
+	 * <b>Endpoints</b>:<br>
+	 * <ul>
+	 * <li>GET accounts/latestBalances</li>
+	 * </ul>
+	 * 
+	 * @return balance
+	 */
+	public Money getBalance() {
+		return balance;
+	}
+
+	/**
+	 * The total account value. * <br>
+	 * <b>Additional Details:</b> <br>
+	 * <b>Investment:</b> The total balance of all the investment account, as it appears on the FI site. <br>
+	 * <b>Applicable containers</b>: bank, investment<br>
+	 * <b>Aggregated </b> <br>
+	 * <b>Endpoints</b>:<br>
+	 * <ul>
+	 * <li>GET accounts/latestBalances</li>
+	 * </ul>
+	 * 
+	 * @return totalBalance
+	 */
+	public Money getTotalBalance() {
+		return totalBalance;
+	}
+
+	/**
+	 * The amount that is available for immediate withdrawal or the total amount available to purchase securities in a
+	 * brokerage or investment account. <br>
+	 * <b>Note:</b> The cash balance field is only applicable to brokerage related accounts.<br>
+	 * <br>
+	 * <b>Aggregated</b>: Aggregated<br>
+	 * <b>Applicable containers</b>: investment<br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET accounts/latestBalances</li>
+	 * </ul>
+	 * 
+	 * @return cash
+	 */
+	public Money getCash() {
+		return cash;
+	}
+
+	/**
+	 * The date time the account information was last retrieved from the provider site and updated in the Yodlee
+	 * system.<br>
+	 * <br>
+	 * <b>Aggregated </b> <br>
+	 * <b>Applicable containers</b>: bank, investment<br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET accounts/latestBalances</li>
+	 * </ul>
+	 * 
+	 * @return lastUpdated
+	 */
+	public String getLastUpdated() {
+		return lastUpdated;
+	}
+
+	/**
+	 * The status of the account balance refresh request.
+	 * 
+	 * @return refreshStatus
+	 */
+	public AccountLatestBalanceRefreshStatus getRefreshStatus() {
+		return refreshStatus;
+	}
+
+	/**
+	 * The reason the account balance refresh failed.
+	 * 
+	 * @return failedReason
+	 */
+	public AccountLatestBalanceFailedReason getFailedReason() {
+		return failedReason;
+	}
+ 
+	@Override
+	public String toString() {
+		return "AccountLatestBalance [container=" + container + ", providerId=" + providerId + ", providerAccountId="
+				+ providerAccountId + ", accountId=" + accountId + ", providerName=" + providerName + ", accountType="
+				+ accountType + ", accountNumber=" + accountNumber + ", accountName=" + accountName
+				+ ", availableBalance=" + availableBalance + ", currentBalance=" + currentBalance + ", balance="
+				+ balance + ", totalBalance=" + totalBalance + ", lastUpdated=" + lastUpdated + ", cash=" + cash
+				+ ", refreshStatus=" + refreshStatus + ", failedReason=" + failedReason + "]";
+	}
+		
 }

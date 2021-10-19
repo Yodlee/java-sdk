@@ -16,7 +16,7 @@ public class DetailCategory extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The unique identifier of the detail category."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("id")
 	private Long id;
@@ -24,7 +24,7 @@ public class DetailCategory extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The name of the detail category"//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("name")
 	private String name;
@@ -32,7 +32,7 @@ public class DetailCategory extends AbstractModelComponent {
 	/**
 	 * The unique identifier of the detail category. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return id
 	 */
@@ -47,7 +47,7 @@ public class DetailCategory extends AbstractModelComponent {
 	/**
 	 * The name of the detail category <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return name
 	 */

@@ -14,11 +14,12 @@ import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.enums.AggregationSource;
 import com.yodlee.api.model.enums.Container;
 import io.swagger.annotations.ApiModelProperty;
+import com.yodlee.api.model.transaction.enums.MerchantType;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"accountId", "merchant", "status", "CONTAINER", "isManual", "postDate", "categoryType",
 		"categoryId", "lastUpdated", "type", "date", "runningBalance", "id", "amount", "category", "baseType",
-		"highLevelCategoryId", "subType", "description", "createdDate", "categorySource", "memo"})
+		"highLevelCategoryId", "subType", "description", "createdDate", "categorySource", "memo","isPhysical","merchantType","detailCategoryId"})
 public class UpdateTransaction extends AbstractModelComponent {
 
 	@NotNull(message = "{transactions.container.required}")
@@ -42,6 +43,15 @@ public class UpdateTransaction extends AbstractModelComponent {
 
 	@JsonProperty("memo")
 	private String memo;
+	
+	@JsonProperty("isPhysical")
+	private Boolean isPhysical;
+	
+	@JsonProperty("merchantType")
+	private MerchantType merchantType;
+	
+	@JsonProperty("detailCategoryId")
+	private Long detailCategoryId;
 
 	public Container getContainer() {
 		return container;
@@ -83,9 +93,34 @@ public class UpdateTransaction extends AbstractModelComponent {
 		this.memo = memo;
 	}
 
+	public Boolean getIsPhysical() {
+		return isPhysical;
+	}
+
+	public void setIsPhysical(Boolean isPhysical) {
+		this.isPhysical = isPhysical;
+	}
+
+	public MerchantType getMerchantType() {
+		return merchantType;
+	}
+
+	public void setMerchantType(MerchantType merchantType) {
+		this.merchantType = merchantType;
+	}
+
+	public Long getDetailCategoryId() {
+		return detailCategoryId;
+	}
+
+	public void setDetailCategoryId(Long detailCategoryId) {
+		this.detailCategoryId = detailCategoryId;
+	}
+	
 	@Override
 	public String toString() {
 		return "UpdateTransaction [container=" + container + ", categoryId=" + categoryId + ", description="
-				+ description + ", categorySource=" + categorySource + ", memo=" + memo + "]";
+				+ description + ", categorySource=" + categorySource + ",  memo=" + memo + " , isPhysical=" + isPhysical
+				+ ", " + " detailCategoryId= " + detailCategoryId + ", merchantType=" + merchantType + "]";
 	}
 }

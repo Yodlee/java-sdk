@@ -7,6 +7,10 @@ package com.yodlee.api.model.user.enums;
 
 public enum Currency {
 	/**
+	 * United States Dollar
+	 */
+	USD,//
+	/**
 	 * Australia Dollar
 	 */
 	AUD,//
@@ -50,10 +54,6 @@ public enum Currency {
 	 * Singapore Dollar
 	 */
 	SGD,//
-	/**
-	 * United States Dollar
-	 */
-	USD,//
 	/**
 	 * South Africa Rand
 	 */

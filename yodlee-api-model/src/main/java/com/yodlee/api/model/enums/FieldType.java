@@ -17,7 +17,7 @@ public enum FieldType {
 	/**
 	 * The field values should be displayed in a drop down
 	 */
-	option,//
+	options,//
 	/**
 	 * The field values should be displayed in a check box
 	 */

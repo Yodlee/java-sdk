@@ -20,7 +20,7 @@ public class TransactionCategorizationRule extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Unique identifier generated for every rule the user creates."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("userDefinedRuleId")
 	private Long userDefinedRuleId;
@@ -28,7 +28,7 @@ public class TransactionCategorizationRule extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Unique identifier of the user."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("memId")
 	private Long memId;
@@ -36,7 +36,7 @@ public class TransactionCategorizationRule extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Category id that is assigned to the transaction when the transaction matches the rule clause. This is the id field of the transaction category resource."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("transactionCategorisationId")
 	private Long transactionCategorisationId;
@@ -44,7 +44,7 @@ public class TransactionCategorizationRule extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The order in which the rules get executed on transactions."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("rulePriority")
 	private Integer rulePriority;
@@ -52,7 +52,7 @@ public class TransactionCategorizationRule extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Details of rules. "//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("ruleClauses")
 	private List<RuleClause> ruleClauses;
@@ -60,7 +60,7 @@ public class TransactionCategorizationRule extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The level of the category for which the rule is created."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, insurance, loan<br>"//
 	)
 	@JsonProperty("categoryLevelId")
 	private Integer categoryLevelId;
@@ -68,7 +68,7 @@ public class TransactionCategorizationRule extends AbstractModelComponent {
 	/**
 	 * Details of rules. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return ruleClauses
 	 */
@@ -80,7 +80,7 @@ public class TransactionCategorizationRule extends AbstractModelComponent {
 	/**
 	 * Unique identifier generated for every rule the user creates. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return userDefinedRuleId
 	 */
@@ -91,7 +91,7 @@ public class TransactionCategorizationRule extends AbstractModelComponent {
 	/**
 	 * Unique identifier of the user. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return memId
 	 */
@@ -103,7 +103,7 @@ public class TransactionCategorizationRule extends AbstractModelComponent {
 	 * Category id that is assigned to the transaction when the transaction matches the rule clause. This is the id
 	 * field of the transaction category resource. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return transactionCategorisationId
 	 */
@@ -114,7 +114,7 @@ public class TransactionCategorizationRule extends AbstractModelComponent {
 	/**
 	 * The order in which the rules get executed on transactions. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return rulePriority
 	 */
@@ -125,7 +125,7 @@ public class TransactionCategorizationRule extends AbstractModelComponent {
 	/**
 	 * The level of the category for which the rule is created. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, insurance, loan<br>
 	 * 
 	 * @return categoryLevelId
 	 */

@@ -21,7 +21,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Unique identifier for the statement."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("id")
 	private Long id;
@@ -29,7 +29,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The field is set to true if the statement is the latest generated statement."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("isLatest")
 	private Boolean isLatest;
@@ -37,7 +37,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The end date of the statement period."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("billingPeriodEnd")
 	private String billingPeriodEnd;
@@ -45,7 +45,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Account to which the statement belongs to."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("accountId")
 	private Long accountId;
@@ -53,7 +53,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The last payment done for the previous billing cycle in the current statement period."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("lastPaymentAmount")
 	private Money lastPaymentAmount;
@@ -61,7 +61,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The date on which the last payment was done during the billing cycle."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("lastPaymentDate")
 	private String lastPaymentDate;
@@ -69,7 +69,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The start date of the statement period."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("billingPeriodStart")
 	private String billingPeriodStart;
@@ -77,7 +77,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The date on which the statement is generated."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("statementDate")
 	private String statementDate;
@@ -85,7 +85,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The date when the account was last updated by Yodlee."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("lastUpdated")
 	private String lastUpdated;
@@ -93,7 +93,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The total amount owed at the end of the billing period."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("amountDue")
 	private Money amountDue;
@@ -102,7 +102,7 @@ public class Statement extends AbstractModelComponent {
 					  value = "The date by when the minimum payment is due to be paid." + "<br>"//
 							  + "<b>Note:</b> The due date that appears in the statement may differ from the due date at the account-level."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("dueDate")
 	private String dueDate;
@@ -110,7 +110,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "<b>Credit Card:</b> The minimum amount that the consumer has to pay every month on the credit card account. Data provides an up-to-date information to the consumer."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("minimumPayment")
 	private Money minimumPayment;
@@ -118,7 +118,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "New charges on the statement (i.e., charges since last statement to end of the billing period). Applicable to line of credit loan type."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("newCharges")
 	private Money newCharges;
@@ -128,7 +128,7 @@ public class Statement extends AbstractModelComponent {
 							  + "<br>"//
 							  + "<b>Note:</b> In case of variable APR, the APR available on the statement might differ from the APR available at the account-level."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("apr")
 	private Double apr;
@@ -136,7 +136,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The APR applicable to cash withdrawals on the credit card account."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("cashApr")
 	private Double cashApr;
@@ -144,7 +144,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The interest amount that is part of the amount due or the payment amount."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("interestAmount")
 	private Money interestAmount;
@@ -152,7 +152,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The principal amount that is part of the amount due or the payment amount."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("principalAmount")
 	private Money principalAmount;
@@ -160,7 +160,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The outstanding principal balance on the loan account."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("loanBalance")
 	private Money loanBalance;
@@ -168,7 +168,7 @@ public class Statement extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Cash Advance is the amount that is withdrawn from credit card over the counter or from an ATM up to the available credit/cash limit."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: creditCard, bill, loan, insurance<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("cashAdvance")
 	private Money cashAdvance;
@@ -176,7 +176,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * The end date of the statement period. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return billingPeriodEnd
 	 */
@@ -187,7 +187,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * The last payment done for the previous billing cycle in the current statement period. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return lastPaymentAmount
 	 */
@@ -198,7 +198,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * The date on which the last payment was done during the billing cycle. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return lastPaymentDate
 	 */
@@ -209,7 +209,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * The start date of the statement period. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return billingPeriodStart
 	 */
@@ -220,7 +220,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * The date on which the statement is generated. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return statementDate
 	 */
@@ -231,7 +231,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * The date when the account was last updated by Yodlee. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return lastUpdated
 	 */
@@ -242,7 +242,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * The total amount owed at the end of the billing period. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return amountDue
 	 */
@@ -254,7 +254,7 @@ public class Statement extends AbstractModelComponent {
 	 * The date by when the minimum payment is due to be paid. * <br>
 	 * <b>Note:</b> The due date that appears in the statement may differ from the due date at the account-level. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return dueDate
 	 */
@@ -265,7 +265,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * Unique identifier for the statement. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return id
 	 */
@@ -276,7 +276,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * The field is set to true if the statement is the latest generated statement. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return isLatest
 	 */
@@ -287,7 +287,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * Account to which the statement belongs to. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return accountId
 	 */
@@ -299,7 +299,7 @@ public class Statement extends AbstractModelComponent {
 	 * <b>Credit Card:</b> The minimum amount that the consumer has to pay every month on the credit card account. Data
 	 * provides an up-to-date information to the consumer. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return minimumPayment
 	 */
@@ -311,7 +311,7 @@ public class Statement extends AbstractModelComponent {
 	 * New charges on the statement (i.e., charges since last statement to end of the billing period). Applicable to
 	 * line of credit loan type. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return newCharges
 	 */
@@ -324,7 +324,7 @@ public class Statement extends AbstractModelComponent {
 	 * <b>Note:</b> In case of variable APR, the APR available on the statement might differ from the APR available at
 	 * the account-level. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return apr
 	 */
@@ -335,7 +335,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * The APR applicable to cash withdrawals on the credit card account. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return cashApr
 	 */
@@ -346,7 +346,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * The interest amount that is part of the amount due or the payment amount. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return interestAmount
 	 */
@@ -357,7 +357,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * The principal amount that is part of the amount due or the payment amount. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return principalAmount
 	 */
@@ -368,7 +368,7 @@ public class Statement extends AbstractModelComponent {
 	/**
 	 * The outstanding principal balance on the loan account. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return loanBalance
 	 */
@@ -380,7 +380,7 @@ public class Statement extends AbstractModelComponent {
 	 * Cash Advance is the amount that is withdrawn from credit card over the counter or from an ATM up to the available
 	 * credit/cash limit. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: creditCard, bill, loan, insurance<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * 
 	 * @return cashAdvance
 	 */

@@ -24,7 +24,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Unique identifier of the category."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("id")
 	private Long id;
@@ -32,7 +32,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The name of the high level category. A group of similar transaction categories are clubbed together to form a high-level category."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("highLevelCategoryName")
 	private String highLevelCategoryName;
@@ -41,7 +41,7 @@ public class TransactionCategory extends AbstractModelComponent {
 					  value = "The name of the category."
 							  + "<br><b>Note</b>: Transaction categorization is one of the core features offered by Yodlee and the categories are assigned to the transactions by the system. Transactions can be clubbed together by the category that is assigned to them.  "//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("category")
 	private String category;
@@ -49,7 +49,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Source used to identify whether the transaction category is user defined category or system created category."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 							  + "<b>Applicable Values</b><br>"//
 	)
 	@JsonProperty("source")
@@ -58,7 +58,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The unique identifier of the high level category."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("highLevelCategoryId")
 	private Long highLevelCategoryId;
@@ -66,7 +66,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Transaction categories and high-level categories are further mapped to five transaction category types. Customers, based on their needs can either use the transaction categories, the high-level categories, or the transaction category types. "//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 							  + "<b>Applicable Values</b><br>"//
 	)
 	@JsonProperty("type")
@@ -75,7 +75,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Entity that provides detail category attributes"//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("detailCategory")
 	private List<DetailCategory> detailCategory;
@@ -83,7 +83,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Category Classification."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 							  + "<b>Applicable Values</b><br>"//
 	)
 	@JsonProperty("classification")
@@ -108,7 +108,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	/**
 	 * Unique identifier of the category. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return id
 	 */
@@ -120,7 +120,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	 * The name of the high level category. A group of similar transaction categories are clubbed together to form a
 	 * high-level category. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return highLevelCategoryName
 	 */
@@ -134,7 +134,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	 * assigned to the transactions by the system. Transactions can be clubbed together by the category that is assigned
 	 * to them. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return category
 	 */
@@ -146,7 +146,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	 * Source used to identify whether the transaction category is user defined category or system created category.
 	 * <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * <b>Applicable Values</b><br>
 	 * 
 	 * @return source
@@ -158,7 +158,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	/**
 	 * The unique identifier of the high level category. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return highLevelCategoryId
 	 */
@@ -171,7 +171,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	 * Customers, based on their needs can either use the transaction categories, the high-level categories, or the
 	 * transaction category types. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * <b>Applicable Values</b><br>
 	 * 
 	 * @return type
@@ -183,7 +183,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	/**
 	 * Entity that provides detail category attributes <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: 	creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return detailCategory
 	 */
@@ -195,7 +195,7 @@ public class TransactionCategory extends AbstractModelComponent {
 	/**
 	 * Category Classification. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * <b>Applicable Values</b><br>
 	 * 
 	 * @return classification

@@ -39,7 +39,7 @@
 		<connection>scm:git:git://github.com/Yodlee/java-sdk.git</connection>
 		<developerConnection>scm:git:git://github.com/Yodlee/java-sdk.git</developerConnection>
 		<url>https://github.com/Yodlee/java-sdk</url>
-		<tag>yodlee-api-model-1.0.0</tag>
+		<tag>yodlee-api-model-1.0.21</tag>
 	</scm>
 
 	<properties>

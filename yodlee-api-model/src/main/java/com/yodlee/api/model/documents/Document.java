@@ -20,7 +20,7 @@ public class Document extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Indicates the type of the document."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>"//
+							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("docType")
 	private DocType docType;
@@ -28,7 +28,7 @@ public class Document extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The document's primary key and unique identifier."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>"//
+							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("id")
 	private String id;
@@ -36,7 +36,7 @@ public class Document extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The unique identifier for the account. The account ID to which the document is linked."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>"//
+							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("accountID")
 	private Long accountID;
@@ -44,7 +44,7 @@ public class Document extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Indicates the name of the document."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>"//
+							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("name")
 	private String name;
@@ -52,7 +52,7 @@ public class Document extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Indicates the date and time the document was last updated."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>"//
+							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("lastUpdated")
 	private String lastUpdated;
@@ -60,7 +60,7 @@ public class Document extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Indicates the status of the document download."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>"//
+							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("status")
 	private String status;
@@ -68,7 +68,7 @@ public class Document extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Indicates the type of the tax form."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>"//
+							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("formType")
 	private String formType;
@@ -76,7 +76,7 @@ public class Document extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Indicates the source of the document download."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>"//
+							  + "<b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>"//
 	)
 	@JsonProperty("source")
 	private String source;
@@ -84,7 +84,7 @@ public class Document extends AbstractModelComponent {
 	/**
 	 * The document's primary key and unique identifier. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>
+	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>
 	 * 
 	 * @return id
 	 */
@@ -95,7 +95,7 @@ public class Document extends AbstractModelComponent {
 	/**
 	 * The unique identifier for the account. The account ID to which the document is linked. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>
+	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>
 	 * 
 	 * @return accountID
 	 */
@@ -106,7 +106,7 @@ public class Document extends AbstractModelComponent {
 	/**
 	 * Indicates the type of the tax form. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>
+	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>
 	 * 
 	 * @return formType
 	 */
@@ -117,7 +117,7 @@ public class Document extends AbstractModelComponent {
 	/**
 	 * Indicates the type of the document. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>
+	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>
 	 * 
 	 * @return docType
 	 */
@@ -128,7 +128,7 @@ public class Document extends AbstractModelComponent {
 	/**
 	 * Indicates the status of the document download. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>
+	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>
 	 * 
 	 * @return status
 	 */
@@ -139,7 +139,7 @@ public class Document extends AbstractModelComponent {
 	/**
 	 * Indicates the name of the document. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>
+	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>
 	 * 
 	 * @return name
 	 */
@@ -150,7 +150,7 @@ public class Document extends AbstractModelComponent {
 	/**
 	 * Indicates the date and time the document was last updated. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>
+	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>
 	 * 
 	 * @return lastUpdated
 	 */
@@ -161,7 +161,7 @@ public class Document extends AbstractModelComponent {
 	/**
 	 * Indicates the source of the document download. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, bills, insurance<br>
+	 * <b>Applicable containers</b>: bank, investment, creditCard, loan, insurance<br>
 	 * 
 	 * @return source
 	 */

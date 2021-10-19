@@ -16,7 +16,7 @@ import com.yodlee.api.model.transaction.enums.TransactionMerchantSource;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"id", "source", "address", "categoryLabel", "name", "coordinates", "contact", "website"})
+@JsonPropertyOrder({"id", "source", "address", "categoryLabel", "name", "coordinates", "contact", "website","logoURL"})
 public class Merchant extends AbstractModelComponent {
 
 	@ApiModelProperty(readOnly = true,
@@ -84,6 +84,14 @@ public class Merchant extends AbstractModelComponent {
 	@JsonProperty("website")
 	private String website;
 
+	@ApiModelProperty(readOnly = true,
+			  value = "The logoURL of the merchant."//
+					  + "<br><br>"//
+					  + "<b>Applicable containers</b>: bank,creditCard,investment,loan<br>"//
+			)
+	@JsonProperty("logoURL")
+	private String logoURL;
+	
 	/**
 	 * Identifier of the merchant. <br>
 	 * <br>
@@ -181,10 +189,23 @@ public class Merchant extends AbstractModelComponent {
 		return website;
 	}
 
+	/**
+	 * The logoURL of the merchant<br>
+	 * <br>
+	 * <b>Applicable containers</b>: bank,creditCard,investment,loan<br>
+	 * <b>Applicable Values</b><br>
+	 * 
+	 * @return logoURL
+	 */
+	public String getLogoURL() {
+		return logoURL;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Merchant [id=" + id + ", source=" + source + ", address=" + address + ", categoryLabel=" + categoryLabel
-				+ ", name=" + name + ", coordinates=" + coordinates + ", contact=" + contact + ", website=" + website
+				+ ", name=" + name + ", coordinates=" + coordinates + ", contact=" + contact + ", website=" + website +",logoURL="+logoURL 
 				+ "]";
 	}
 }

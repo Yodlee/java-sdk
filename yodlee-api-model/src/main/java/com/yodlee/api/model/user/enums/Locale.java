@@ -6,8 +6,8 @@
 package com.yodlee.api.model.user.enums;
 
 public enum Locale {
-	en_AN,
 	en_US,
+	en_AN,
 	en_GB,
 	en_AU,
 	en_BE,

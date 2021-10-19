@@ -30,13 +30,13 @@ public class VerifiedAccount extends AbstractModelComponent {
 
 	@ApiModelProperty(readOnly = true,
 					  value = ""//
-							  + "<b>Applicable containers</b>: reward, bank, creditCard, investment, loan, insurance, realEstate, bill, otherLiabilities<br>")
+							  + "<b>Applicable containers</b>: reward, bank, creditCard, investment, loan, insurance, realEstate, otherLiabilities<br>")
 	@JsonProperty("providerName")
 	private String providerName;
 
 	@ApiModelProperty(readOnly = true,
 					  value = "The account number as it appears on the site. (The POST accounts service response return this field as number)<br>"
-							  + "<b>Additional Details</b>:<b> Bank/ Loan/ Insurance/ Investment/Bill</b>:<br>"
+							  + "<b>Additional Details</b>:<b> Bank/ Loan/ Insurance/ Investment</b>:<br>"
 							  + " The account number for the bank account as it appears at the site.<br>"
 							  + "<b>Credit Card</b>: The account number of the card account as it appears at the site,<br>"
 							  + "i.e., the card number.The account number can be full or partial based on how it is displayed in the account summary page of the site."
@@ -267,14 +267,6 @@ public class VerifiedAccount extends AbstractModelComponent {
 							  + "<li>PENSION_PLAN</li>"//
 							  + "<li>OTHER</li>"//
 							  + "</ul>"//
-							  + "<b>bill</b>"//
-							  + "<ul>"//
-							  + "<li>TELEPHONE</li>"//
-							  + "<li>UTILITY</li>"//
-							  + "<li>CABLE</li>"//
-							  + "<li>WIRELESS</li>"//
-							  + "<li>BILLS</li>"//
-							  + "</ul>"//
 							  + "<b>loan</b>"//
 							  + "<ul>"//
 							  + "<li>MORTGAGE</li>"//
@@ -317,10 +309,6 @@ public class VerifiedAccount extends AbstractModelComponent {
 							  + "<b>loan</b>"//
 							  + "<ul>  " + "<li>PERSONAL_LOAN</li>"//
 							  + "<li>HOME_LOAN</li>"//
-							  + "</ul>"//
-							  + "<b>bill</b>"//
-							  + "<ul>"//
-							  + "<li>BILLS</li>"//
 							  + "</ul>"//
 							  + "<b>insurance</b>"//
 							  + "<ul>"//

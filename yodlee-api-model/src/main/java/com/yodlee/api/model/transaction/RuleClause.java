@@ -20,7 +20,7 @@ public class RuleClause extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Unique identifier generated for the rule clause."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("ruleClauseId")
 	private Long ruleClauseId;
@@ -28,7 +28,7 @@ public class RuleClause extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Unique identifier generated for every rule the user creates."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("userDefinedRuleId")
 	private Long userDefinedRuleId;
@@ -37,7 +37,7 @@ public class RuleClause extends AbstractModelComponent {
 					  value = "Field for which the clause is created."//
 							  + "<br><br>"//
 							  + "<br><b>Valid Values</b>:amount,description"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("field")
 	private TransactionClauseType field;
@@ -45,7 +45,7 @@ public class RuleClause extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Operation for which the clause is created."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("operation")
 	private Operation operation;
@@ -53,7 +53,7 @@ public class RuleClause extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The value would be the amount value in case of amount based rule clause or the string value in case of description based rule clause."//
 							  + "<br><br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, investment, insurance, loan<br>"//
 	)
 	@JsonProperty("fieldValue")
 	private String fieldValue;
@@ -62,7 +62,7 @@ public class RuleClause extends AbstractModelComponent {
 	 * Field for which the clause is created. <br>
 	 * <br>
 	 * <br>
-	 * <b>Valid Values</b>:amount,description <b>Applicable containers</b>: bill, creditCard, investment, insurance,
+	 * <b>Valid Values</b>:amount,description <b>Applicable containers</b>: creditCard, investment, insurance,
 	 * loan<br>
 	 * 
 	 * @return field
@@ -78,7 +78,7 @@ public class RuleClause extends AbstractModelComponent {
 	/**
 	 * Operation for which the clause is created. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return operation
 	 */
@@ -93,7 +93,7 @@ public class RuleClause extends AbstractModelComponent {
 	/**
 	 * Unique identifier generated for the rule clause. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return ruleClauseId
 	 */
@@ -109,7 +109,7 @@ public class RuleClause extends AbstractModelComponent {
 	 * The value would be the amount value in case of amount based rule clause or the string value in case of
 	 * description based rule clause. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return fieldValue
 	 */
@@ -124,7 +124,7 @@ public class RuleClause extends AbstractModelComponent {
 	/**
 	 * Unique identifier generated for every rule the user creates. <br>
 	 * <br>
-	 * <b>Applicable containers</b>: bill, creditCard, investment, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, investment, insurance, loan<br>
 	 * 
 	 * @return userDefinedRuleId
 	 */

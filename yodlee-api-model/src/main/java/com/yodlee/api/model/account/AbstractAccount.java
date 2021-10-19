@@ -98,7 +98,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 
 	@ApiModelProperty(readOnly = true,
 					  value = "The account number as it appears on the site. (The POST accounts service response return this field as number)<br>"
-							  + "<b>Additional Details</b>:<b> Bank/ Loan/ Insurance/ Investment/Bill</b>:<br>"
+							  + "<b>Additional Details</b>:<b> Bank/ Loan/ Insurance/ Investment</b>:<br>"
 							  + " The account number for the bank account as it appears at the site.<br>"
 							  + "<b>Credit Card</b>: The account number of the card account as it appears at the site,<br>"
 							  + "i.e., the card number.The account number can be full or partial based on how it is displayed in the account summary page of the site."
@@ -150,9 +150,8 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "<br><b>Bank:</b> available balance or current balance."
 							  + "<br><b>Credit Card:</b> running Balance."
 							  + "<br><b>Investment:</b> The total balance of all the investment account, as it appears on the FI site."
-							  + "<br><b>Insurance:</b> CashValue or amountDue" + "<br><b>Loan:</b> principalBalance"
-							  + "<br><b>Bill:</b> amountDue<br>"//
-							  + "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, bill, otherAssets, otherLiabilities, realEstate<br>"//
+							  + "<br><b>Insurance:</b> CashValue or amountDue" + "<br><b>Loan:</b> principalBalance<br>"
+							  + "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, otherAssets, otherLiabilities, realEstate<br>"//
 							  + "<b>Aggregated / Manual</b>: Both <br>"//
 							  + "<b>Endpoints</b>:<br>"//
 							  + "<ul>"//
@@ -180,7 +179,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 
 	@ApiModelProperty(readOnly = true,
 					  value = ""//
-							  + "<b>Applicable containers</b>: reward, bank, creditCard, investment, loan, insurance, realEstate, bill, otherLiabilities<br>"//
+							  + "<b>Applicable containers</b>: reward, bank, creditCard, investment, loan, insurance, realEstate, otherLiabilities<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul><li>GET accounts </li>"//
 							  + "<li>GET accounts/{accountId}</li>"//
@@ -490,14 +489,6 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "<li>PENSION_PLAN</li>"//
 							  + "<li>OTHER</li>"//
 							  + "</ul>"//
-							  + "<b>bill</b>"//
-							  + "<ul>"//
-							  + "<li>TELEPHONE</li>"//
-							  + "<li>UTILITY</li>"//
-							  + "<li>CABLE</li>"//
-							  + "<li>WIRELESS</li>"//
-							  + "<li>BILLS</li>"//
-							  + "</ul>"//
 							  + "<b>loan</b>"//
 							  + "<ul>"//
 							  + "<li>MORTGAGE</li>"//
@@ -541,10 +532,6 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "<ul>  " + "<li>PERSONAL_LOAN</li>"//
 							  + "<li>HOME_LOAN</li>"//
 							  + "</ul>"//
-							  + "<b>bill</b>"//
-							  + "<ul>"//
-							  + "<li>BILLS</li>"//
-							  + "</ul>"//
 							  + "<b>insurance</b>"//
 							  + "<ul>"//
 							  + "<li>INSURANCE</li>"//
@@ -573,7 +560,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "name in the account summary page."//
 							  + "<br><br>"//
 							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
-							  + "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, bill, reward<br>"//
+							  + "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
 							  + "<li>GET accounts</li>"//
@@ -602,7 +589,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "A unique ID that the provider site has assigned to the account. "
 							  + "The source ID is only available for the HELD accounts." + "<br><br>"//
-							  + "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, bill, reward<br>"//
+							  + "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
 							  + "<li>GET accounts</li>"//
@@ -620,7 +607,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "information in the aggregated card account data provides an up-to-date information to the consumer."
 							  + "<br><br>"//
 							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
-							  + "<b>Applicable containers</b>: creditCard, loan, insurance, bill<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul><li>GET accounts</li>"//
 							  + "<li>GET accounts/{accountId}</li>"//
@@ -996,7 +983,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "If payment is yet to be done for the current billing cycle, then the "
 							  + "field indicates the payment that was made for any of the previous billing cycles.<br>"
 							  + "<br><b>Aggregated / Manual</b>: Aggregated<br>"//
-							  + "<b>Applicable containers</b>: creditCard, loan, insurance, bill<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul><li>GET accounts</li>"//
 							  + "<li>GET accounts/{accountId}</li>"//
@@ -1015,7 +1002,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "statement-level, as the information in the aggregated card account data provides an "
 							  + "up-to-date information to the consumer.<br>"//
 							  + "<br><b>Aggregated / Manual</b>: Aggregated<br>"//
-							  + "<b>Applicable containers</b>: creditCard, loan, insurance, bill<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul><li>GET accounts</li>"//
 							  + "<li>GET accounts/{accountId}</li>"//
@@ -1603,13 +1590,13 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	protected List<RewardBalance> rewardBalance;
 
 	@ApiModelProperty(readOnly = true,
-					  value = "The frequency of the billing cycle of the account in case of card "
-							  + "and bills. The frequency in which premiums are paid in an "
+					  value = "The frequency of the billing cycle of the account in case of card. "
+							  + "The frequency in which premiums are paid in an "
 							  + "insurance policy such as monthly, quarterly, and annually. "
 							  + "The frequency in which due amounts are paid in a loan  account."//
 							  + "<br><br>"//
 							  + "<b>Aggregated / Manual</b>: Both <br>"//
-							  + "<b>Applicable containers</b>: bill, creditCard, insurance, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, insurance, loan<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
 							  + "<li>GET accounts</li>"//
@@ -1627,7 +1614,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "<b>Credit Card:</b> The total amount due for the purchase of goods or services that must be paid by the due date.<br>"
 							  + "<b>Loan:</b> The amount due to be paid on the due date.<br>"
 							  + "<b>Note:</b> The amount due at the account-level can differ from the amount due at the statement-level, as the information in the aggregated card account data provides more up-to-date information.<br>"//
-							  + "<b>Applicable containers</b>: creditCard, loan, insurance, bill<br>"//
+							  + "<b>Applicable containers</b>: creditCard, loan, insurance<br>"//
 							  + "<b>Aggregated / Manual</b>: Both <br>"//
 							  + "<b>Endpoints</b>:<br>"//
 							  + "<ul>"//
@@ -1642,7 +1629,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 					  value = "The minimum amount due is the lowest amount of money that a consumer is required to pay each month."
 							  + "<br><br>"//
 							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
-							  + "<b>Applicable containers</b>: creditCard, insurance, bill, loan<br>"//
+							  + "<b>Applicable containers</b>: creditCard, insurance, loan<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
 							  + "<li>GET accounts</li>"//
@@ -1819,7 +1806,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 * information in the aggregated card account data provides an up-to-date information to the consumer. <br>
 	 * <br>
 	 * <b>Aggregated / Manual</b>: Aggregated<br>
-	 * <b>Applicable containers</b>: creditCard, loan, insurance, bill<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET accounts</li>
@@ -1833,12 +1820,12 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	}
 
 	/**
-	 * The frequency of the billing cycle of the account in case of card and bills. The frequency in which premiums are
+	 * The frequency of the billing cycle of the account in case of card. The frequency in which premiums are
 	 * paid in an insurance policy such as monthly, quarterly, and annually. The frequency in which due amounts are paid
 	 * in a loan account. <br>
 	 * <br>
 	 * <b>Aggregated / Manual</b>: Both <br>
-	 * <b>Applicable containers</b>: bill, creditCard, insurance, loan<br>
+	 * <b>Applicable containers</b>: creditCard, insurance, loan<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET accounts</li>
@@ -1859,7 +1846,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 * <b>Loan:</b> The amount due to be paid on the due date.<br>
 	 * <b>Note:</b> The amount due at the account-level can differ from the amount due at the statement-level, as the
 	 * information in the aggregated card account data provides more up-to-date information.<br>
-	 * <b>Applicable containers</b>: creditCard, loan, insurance, bill<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * <b>Aggregated / Manual</b>: Both <br>
 	 * <b>Endpoints</b>:<br>
 	 * <ul>
@@ -1877,7 +1864,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 * The minimum amount due is the lowest amount of money that a consumer is required to pay each month. <br>
 	 * <br>
 	 * <b>Aggregated / Manual</b>: Aggregated<br>
-	 * <b>Applicable containers</b>: creditCard, insurance, bill, loan<br>
+	 * <b>Applicable containers</b>: creditCard, insurance, loan<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET accounts</li>
@@ -1955,7 +1942,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	/**
 	 * The account number as it appears on the site. (The POST accounts service response return this field as
 	 * number)<br>
-	 * <b>Additional Details</b>:<b> Bank/ Loan/ Insurance/ Investment/Bill</b>:<br>
+	 * <b>Additional Details</b>:<b> Bank/ Loan/ Insurance/ Investment</b>:<br>
 	 * The account number for the bank account as it appears at the site.<br>
 	 * <b>Credit Card</b>: The account number of the card account as it appears at the site,<br>
 	 * i.e., the card number.The account number can be full or partial based on how it is displayed in the account
@@ -2018,8 +2005,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 * <b>Investment:</b> The total balance of all the investment account, as it appears on the FI site. <br>
 	 * <b>Insurance:</b> CashValue or amountDue * <br>
 	 * <b>Loan:</b> principalBalance <br>
-	 * <b>Bill:</b> amountDue<br>
-	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, bill, otherAssets, otherLiabilities,
+	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, otherAssets, otherLiabilities,
 	 * realEstate<br>
 	 * <b>Aggregated / Manual</b>: Both <br>
 	 * <b>Endpoints</b>:<br>
@@ -2074,7 +2060,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 
 	/**
 	 *
-	 * <b>Applicable containers</b>: reward, bank, creditCard, investment, loan, insurance, realEstate, bill,
+	 * <b>Applicable containers</b>: reward, bank, creditCard, investment, loan, insurance, realEstate,
 	 * otherLiabilities<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
@@ -2407,14 +2393,6 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 * <li>PENSION_PLAN</li>
 	 * <li>OTHER</li>
 	 * </ul>
-	 * <b>bill</b>
-	 * <ul>
-	 * <li>TELEPHONE</li>
-	 * <li>UTILITY</li>
-	 * <li>CABLE</li>
-	 * <li>WIRELESS</li>
-	 * <li>BILLS</li>
-	 * </ul>
 	 * <b>loan</b>
 	 * <ul>
 	 * <li>MORTGAGE</li>
@@ -2464,10 +2442,6 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 * <li>PERSONAL_LOAN</li>
 	 * <li>HOME_LOAN</li>
 	 * </ul>
-	 * <b>bill</b>
-	 * <ul>
-	 * <li>BILLS</li>
-	 * </ul>
 	 * <b>insurance</b>
 	 * <ul>
 	 * <li>INSURANCE</li>
@@ -2500,7 +2474,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 * summary page. <br>
 	 * <br>
 	 * <b>Aggregated / Manual</b>: Aggregated<br>
-	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, bill, reward<br>
+	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET accounts</li>
@@ -2536,7 +2510,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 * A unique ID that the provider site has assigned to the account. The source ID is only available for the HELD
 	 * accounts.<br>
 	 * <br>
-	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, bill, reward<br>
+	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET accounts</li>
@@ -3048,7 +3022,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 * field indicates the payment that was made for any of the previous billing cycles.<br>
 	 * <br>
 	 * <b>Aggregated / Manual</b>: Aggregated<br>
-	 * <b>Applicable containers</b>: creditCard, loan, insurance, bill<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET accounts</li>
@@ -3070,7 +3044,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 * information in the aggregated card account data provides an up-to-date information to the consumer.<br>
 	 * <br>
 	 * <b>Aggregated / Manual</b>: Aggregated<br>
-	 * <b>Applicable containers</b>: creditCard, loan, insurance, bill<br>
+	 * <b>Applicable containers</b>: creditCard, loan, insurance<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
 	 * <li>GET accounts</li>

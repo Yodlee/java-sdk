@@ -39,7 +39,7 @@ public class Account extends AbstractAccount {
 							  + "For student loan account the account number that will be used for ACH or fund transfer"//
 							  + "<br><br>"//
 							  + "<b>Aggregated / Manual</b>: Both <br>"//
-							  + "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward, bill, otherAssets, otherLiabilities <br>"//
+							  + "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward, otherAssets, otherLiabilities <br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
 							  + "<li>GET accounts</li>"//
@@ -53,7 +53,7 @@ public class Account extends AbstractAccount {
 					  value = "Full account number List of the account that is included only when include = fullAccountNumberList is provided in the request. "
 							  + "<br><br>"//
 							  + "<b>Aggregated / Manual</b>: Both <br>"//
-							  + "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward, bill, otherAssets, otherLiabilities <br>"////
+							  + "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward, otherAssets, otherLiabilities <br>"////
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
 							  + "<li>GET accounts</li>"//
@@ -134,7 +134,7 @@ public class Account extends AbstractAccount {
 	 * request. For student loan account the account number that will be used for ACH or fund transfer <br>
 	 * <br>
 	 * <b>Aggregated / Manual</b>: Both <br>
-	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward, bill, otherAssets,
+	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward, otherAssets,
 	 * otherLiabilities <br>
 	 * <b>Endpoints</b>:
 	 * <ul>
@@ -156,7 +156,7 @@ public class Account extends AbstractAccount {
 	 * request. <br>
 	 * <br>
 	 * <b>Aggregated / Manual</b>: Both <br>
-	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward, bill, otherAssets,
+	 * <b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, reward, otherAssets,
 	 * otherLiabilities <br>
 	 * <b>Endpoints</b>:
 	 * <ul>

@@ -20,5 +20,10 @@ public enum ConfigsNotificationEventType {
 	/**
 	 * Events that gets triggered once there is a change in the state of cache refresh
 	 */
-	AUTO_REFRESH_UPDATES
+	AUTO_REFRESH_UPDATES,//
+	
+	/**
+	 *  Events that gets triggered once balance refresh completes 
+	 */
+	LATEST_BALANCE_UPDATES;
 }
