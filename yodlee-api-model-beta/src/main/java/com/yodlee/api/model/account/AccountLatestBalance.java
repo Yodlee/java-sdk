@@ -500,7 +500,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	 * <li>IRA</li>
 	 * <li>PREPAID</li>
 	 * </ul>
-	 * * <b>investment (SN 1.0)</b>
+	 * <b>investment (SN 1.0)</b>
 	 * <ul>
 	 *
 	 * <li>BROKERAGE_MARGIN</li>

@@ -7,6 +7,10 @@ package com.yodlee.api.model.consent.enums;
 
 
 public enum ConsentStatus {
+	/**
+	 *	The consent is Active when the user adds/edits an account with a
+	 * 	generated consent ID.
+	 */
 	ACTIVE,//
 	/**
 	* Consent generated from input dataset or implicit dataset.<br>
@@ -23,5 +27,18 @@ public enum ConsentStatus {
 	/**
 	* When user provides not accepted consent id or already authorized consent for add/update account.<br>
 	*/
-	CONSENT_MISMATCH//
+	CONSENT_MISMATCH,//
+	/**
+	 * The consent is PENDING when it is yet to be authorized by the user
+	 * with the generated consent ID.
+	 */
+	PENDING,//
+	/**
+	 * The consent is expired when it runs out of its expiry period.
+	 */
+	EXPIRED,//
+	/**
+	 * The consent is revoked when the user explicitly revokes it.
+	 */
+	REVOKED
 }
