@@ -245,5 +245,20 @@ public enum AdditionalStatusType {
 	 * <b>Description: </b>The account information is being migrated from the screen-scraping provider to the Open Banking provider site.<br>
 	 * <b>Next Action: </b>No action is required as it is a transient state.
 	 */
-	MIGRATION_IN_PROGRESS
+	MIGRATION_IN_PROGRESS,
+	
+	/**
+	 * <b>Description: </b>Required data is not available.<br>
+	 */
+	REQUIRED_DATA_NOT_AVAILABLE,
+
+	/**
+	 * <b>Description: </b>Matching failed.<br>
+	 */
+	MATCHING_FAILED,
+	
+	/**
+	 * <b>Description: </b>No eligible accounts for given configuration.<br>
+	 */
+	NO_ELIGIBLE_ACCOUNTS
 }

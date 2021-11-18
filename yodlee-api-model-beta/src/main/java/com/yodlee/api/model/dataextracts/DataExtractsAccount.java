@@ -50,6 +50,35 @@ public class DataExtractsAccount extends AbstractAccount {
 					  + "</ul>")
 	@JsonProperty("sourceProviderAccountId")
 	protected Long sourceProviderAccountId;
+	
+	@ApiModelProperty(readOnly = true,
+			  value = "Indicates if the account is selected by user for aggregation.<br>"//
+					  + "<b>Applicable containers</b>: All Containers<br>"//
+					  + "<b>Aggregated / Manual</b>: Both <br>"//
+					  + "<b>Endpoints</b>:<br>"//
+					  + "<ul>"//
+					  + "<li>GET dataExtracts/userData</li>"//
+					  + "</ul>")
+	@JsonProperty("isSelectedForAggregation")
+	protected Boolean isSelectedForAggregation;
+
+	/**
+	 * Indicates if the account is selected by user for aggregation. <b>Applicable containers</b>: All Containers<br>
+	 * <b>Aggregated / Manual</b>: Both <br>
+	 * <b>Endpoints</b>:<br>
+	 * <ul>
+	 * <li>GET dataExtracts/userData</li>
+	 * </ul>
+	 * 
+	 * @return isSelectedForAggregation
+	 */
+	public Boolean getIsSelectedForAggregation() {
+		return isSelectedForAggregation;
+	}
+
+	public void setIsSelectedForAggregation(Boolean isSelectedForAggregation) {
+		this.isSelectedForAggregation = isSelectedForAggregation;
+	}
 
 	/**
 	 * Indicates if the account is marked as deleted. <b>Applicable containers</b>: All Containers<br>
