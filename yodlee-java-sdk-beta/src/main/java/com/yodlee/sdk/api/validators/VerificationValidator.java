@@ -8,6 +8,8 @@ package com.yodlee.sdk.api.validators;
 import java.util.ArrayList;
 import java.util.List;
 import com.yodlee.api.model.account.enums.BankTransferCodeType;
+import com.yodlee.api.model.account.enums.ItemAccountStatus;
+import com.yodlee.api.model.enums.Container;
 import com.yodlee.api.model.validator.Problem;
 import com.yodlee.api.model.verification.MatchingVerification;
 import com.yodlee.api.model.verification.UpdateVerification;
@@ -16,18 +18,25 @@ import com.yodlee.api.model.verification.VerificationAccount;
 import com.yodlee.api.model.verification.VerificationBankTransferCode;
 import com.yodlee.api.model.verification.VerificationTransaction;
 import com.yodlee.api.model.verification.enums.VerificationType;
+import com.yodlee.api.model.verification.enums.VerifiedAccountsVerificationStatus;
 import com.yodlee.api.model.verification.request.UpdateVerificationRequest;
 import com.yodlee.api.model.verification.request.VerificationMatchingRequest;
 import com.yodlee.api.model.verification.request.VerificationRequest;
+import com.yodlee.sdk.api.AccountsApi;
 import com.yodlee.sdk.api.VerificationApi;
 import com.yodlee.sdk.api.exception.ApiException;
 import com.yodlee.sdk.api.util.ApiUtils;
+import com.yodlee.sdk.api.validators.AccountsValidator.IncludeParameterValue;
 
 public class VerificationValidator {
 
 	private VerificationValidator() {}
 
 	private static final String VERIFICATIONS_VERIFICATION_TYPE_INVALID = "verifications.verificationType.invalid";
+	
+	private static final String PARAM_TRUE = "true";
+	
+	private static final String PARAM_FALSE = "false";
 
 	public static void validateGetVerificationDetails(VerificationApi verificationApi, String methodName,
 			Long[] providerAccountId, Long[] accountId, VerificationType verificationType) throws ApiException {
@@ -163,5 +172,29 @@ public class VerificationValidator {
 				problems.add(new Problem(errorMessage, ""));
 			}
 		}
+	}
+	
+	private static void validateIsSelected(List<Problem> problems, String[] isSelected) {
+		if (isSelected == null) {
+			return;
+		}
+		for(String isSelectedValue : isSelected) {
+			if(PARAM_TRUE.equals(isSelectedValue)  || PARAM_FALSE.equals(isSelectedValue)) {
+				continue;
+			}
+			problems.add(new Problem(ApiUtils.getErrorMessage("verifications.param.isselected.invalid"), ""));
+		}
+	}
+	
+	public static void validateVerifiedAccounts(VerificationApi verificationApi, String methodName, Long providerAccountId, Long[] accountId,
+			VerifiedAccountsVerificationStatus[] verificationStatus,
+			String[] isSelected) throws ApiException {
+		List<Problem> problems = new ArrayList<>();
+		validateIsSelected(problems, isSelected);
+		Class<?>[] argTypes = new Class[] {Long.class, Long[].class, VerifiedAccountsVerificationStatus[].class, String[].class};
+		Object[] argValues = new Object[] {providerAccountId, accountId, verificationStatus, isSelected};
+		List<Problem> methodProblems = ApiValidator.validate(verificationApi, methodName, argTypes, argValues);
+		List<Problem> contextProblems = ApiValidator.validateUserContext(verificationApi);
+		ApiValidator.collectProblems(problems, methodProblems, contextProblems);
 	}
 }

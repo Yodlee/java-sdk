@@ -41,7 +41,7 @@ public class ConsentsApi extends AbstractApi {
 	}
 	
 	/**
-	 * Get Consent Details<br> 
+	 * Get Authorization Details<br> 
 	 * The get authorization URL for consent service provides the authorization URL for the renew consent flow, 
 	 * within the consent dashboard.<br>
 	 * Note:This service supports the localization feature and accepts locale as a header parameter.<br>
@@ -63,7 +63,7 @@ public class ConsentsApi extends AbstractApi {
 	}
 	
 	/**
-	 * Get Consent Details<br> 
+	 * Get Authorization Details<br> 
 	 * The get authorization URL for consent service provides the authorization URL for the renew consent flow, 
 	 * within the consent dashboard.<br>
 	 * Note:This service supports the localization feature and accepts locale as a header parameter.<br>

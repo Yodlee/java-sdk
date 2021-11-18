@@ -6,14 +6,18 @@
 package com.yodlee.sdk.api;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.yodlee.api.model.verification.enums.VerificationType;
+import com.yodlee.api.model.verification.enums.VerifiedAccountsVerificationStatus;
 import com.yodlee.api.model.verification.request.UpdateVerificationRequest;
 import com.yodlee.api.model.verification.request.VerificationMatchingRequest;
 import com.yodlee.api.model.verification.request.VerificationRequest;
 import com.yodlee.api.model.verification.response.VerificationResponse;
 import com.yodlee.api.model.verification.response.VerificationStatusResponse;
+import com.yodlee.api.model.verification.response.VerifiedAccountResponse;
 import com.yodlee.sdk.api.exception.ApiException;
 import com.yodlee.sdk.api.util.ApiUtils;
 import com.yodlee.sdk.api.validators.VerificationValidator;
@@ -31,9 +35,13 @@ public class VerificationApi extends AbstractApi {
 
 	private static final String VERIFICATION_TYPE = "verificationType";
 
-	private static final String PROVIDER_ACCOUNT_ID = "providerAccountId";
+	private static final String PARAM_PROVIDER_ACCOUNT_ID = "providerAccountId";
 
-	private static final String ACCOUNT_ID = "accountId";
+	private static final String PARAM_ACCOUNT_ID = "accountId";
+	
+	private static final String PARAM_VERIFICATION_STATUS = "verificationStatus";
+	
+	private static final String PARAM_IS_SELECTED = "isSelected";
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(VerificationApi.class);
 
@@ -95,10 +103,10 @@ public class VerificationApi extends AbstractApi {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.VERIFICATION, HttpMethod.GET, null);
 		if (accountId != null && accountId.length > 0) {
-			apiContext.addQueryParam(new Pair(ACCOUNT_ID, ApiUtils.convertArrayToString(accountId)));
+			apiContext.addQueryParam(new Pair(PARAM_ACCOUNT_ID, ApiUtils.convertArrayToString(accountId)));
 		}
 		if (providerAccountId != null && providerAccountId.length > 0) {
-			apiContext.addQueryParam(new Pair(PROVIDER_ACCOUNT_ID, ApiUtils.convertArrayToString(providerAccountId)));
+			apiContext.addQueryParam(new Pair(PARAM_PROVIDER_ACCOUNT_ID, ApiUtils.convertArrayToString(providerAccountId)));
 		}
 		if (verificationType != null) {
 			apiContext.addQueryParam(new Pair(VERIFICATION_TYPE, verificationType.toString()));
@@ -277,6 +285,78 @@ public class VerificationApi extends AbstractApi {
 			throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(ApiEndpoint.VERIFICATION, HttpMethod.PUT, updateVerificationRequest);
+		registerResponseInterceptor(apiClient);
+		Call call = apiClient.buildCall(apiContext, requestListener());
+		return new CallContext(apiClient, call);
+	}
+	
+	/**
+	 * Verified Accounts<br>
+	 * The Verified Accounts API v1.1 provides information of bank and investment accounts that are verified by the user 
+	 * and applies only to Instant Account Verification (IAV) customers using FastLink 4.0.
+	 * By default, the API only returns successfully verified accounts' information.
+	 * 
+	 * @param providerAccountId providerAccountId (required)
+	 * @param accountId accountId (optional)
+	 * @param verificationStatus verificationStatus (optional)
+	 * @param isSelected isSelected (optional)
+	 * @return {@link ApiResponse}&lt;{@link VerifiedAccountResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<VerifiedAccountResponse>
+		getVerifiedAccounts(//
+					@NotNull(message = "{verifications.param.providerAccountId.provided}") long providerAccountId,
+					@Size(min = 0, max = 10, message = "{verifications.param.accountId.length.invalid}") Long[] accountId,
+					@Size(min = 0, max = 2, message = "{verifications.param.verificationstatus.length.invalid}") VerifiedAccountsVerificationStatus[] verificationStatus,//todo:: use @Min and @Max
+					@Size(min = 0, max = 2, message = "{verifications.param.isselected.length.invalid}") String[] isSelected)
+					throws ApiException {
+		LOGGER.info("Verification getVerifiedAccounts API execution started");
+		VerificationValidator.validateVerifiedAccounts(this, ApiUtils.getMethodName(), providerAccountId, accountId, verificationStatus, isSelected);
+		CallContext callContext = buildVerifiedAccountsContext(providerAccountId, accountId, verificationStatus, isSelected);
+		return callContext.getApiClient().execute(callContext.getCall(), VerifiedAccountResponse.class);
+	}
+
+	/**
+	 * Verified Accounts<br>
+	 * The Verified Accounts API v1.1 provides information of bank and investment accounts that are verified by the user 
+	 * and applies only to Instant Account Verification (IAV) customers using FastLink 4.0.
+	 * By default, the API only returns successfully verified accounts' information.
+	 * 
+	 * @param providerAccountId providerAccountId (required)
+	 * @param accountId accountId (optional)
+	 * @param verificationStatus verificationStatus (optional)
+	 * @param isSelected isSelected (optional)
+	 * @param apiCallback {@link ApiResponse}&lt;{@link VerifiedAccountResponse}&gt; (required)
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public void getVerifiedAccountsAsync(
+		@NotNull(message = "{providerAccounts.param.providerAccountId.required}")//
+		long providerAccountId,
+		Long[] accountId,//
+		VerifiedAccountsVerificationStatus[] verificationStatus,
+		String[] isSelected, ApiCallback<VerifiedAccountResponse> apiCallback) throws ApiException {
+		LOGGER.info("Verification getVerifiedAccounts API execution started");
+		VerificationValidator.validateVerifiedAccounts(this, ApiUtils.getMethodName(), providerAccountId, accountId, verificationStatus, isSelected);
+		CallContext callContext = buildVerifiedAccountsContext(providerAccountId, accountId, verificationStatus, isSelected);
+		callContext.getApiClient().executeAsync(callContext.getCall(), VerifiedAccountResponse.class, apiCallback);
+	}
+
+	private CallContext buildVerifiedAccountsContext(long providerAccountId, Long[] accountId, VerifiedAccountsVerificationStatus[] verificationStatus,
+			String[] isSelected) throws ApiException {
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
+		ApiContext apiContext = new ApiContext(ApiEndpoint.VERIFIED_ACCOUNTS, HttpMethod.GET, null);
+		apiContext.addQueryParam(new Pair(PARAM_PROVIDER_ACCOUNT_ID, String.valueOf(providerAccountId)));
+		if(null != accountId) {
+			apiContext.addQueryParam(new Pair(PARAM_ACCOUNT_ID, ApiUtils.convertArrayToString(accountId)));
+		}
+		if(null != verificationStatus) {
+			apiContext.addQueryParam(new Pair(PARAM_VERIFICATION_STATUS, ApiUtils.convertArrayToString(verificationStatus)));
+		}
+		if(null != isSelected) {
+			apiContext.addQueryParam(new Pair(PARAM_IS_SELECTED, ApiUtils.convertArrayToString(isSelected)));
+		}
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
