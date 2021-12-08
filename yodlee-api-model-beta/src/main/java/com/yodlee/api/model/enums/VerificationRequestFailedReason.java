@@ -5,63 +5,7 @@
  */
 package com.yodlee.api.model.enums;
 
-public enum AdditionalStatusType {
-	/**
-	 * <b>Description: </b>Login to provider site is in progress <br>
-	 * <b>Next Action: </b>Not applicable as it is not a final status
-	 */
-	LOGIN_IN_PROGRESS,
-	//
-	//
-	/**
-	 * 
-	 * <b>Description: </b>Data aggregation is in progress. <br>
-	 * <b>Next Action: </b>Not applicable as it is not a final status
-	 */
-	DATA_RETRIEVAL_IN_PROGRESS,
-	//
-	//
-	/**
-	 * 
-	 * <b>Description: </b>Basic account data is retrieved. k<br>
-	 * <b>Next Action: </b>Not applicable as it is not a final status
-	 */
-	ACCT_SUMMARY_RECEIVED,
-	//
-	//
-	/**
-	 * 
-	 * <b>Description: </b>All the data available at the provider site is retrieved for the provided dataset. <br>
-	 * <b>Next Action: </b>Not applicable
-	 */
-	AVAILABLE_DATA_RETRIEVED,
-	//
-	//
-	/**
-	 * 
-	 * <b>Description: </b>Partial data is retrieved for the dataset. <br>
-	 * <b>Next Action: </b>Instruct the user to try again if the mandatory data is missing. If the request fails
-	 * repeatedly, report the issue to the customer service team
-	 */
-	PARTIAL_DATA_RETRIEVED,
-	//
-	//
-	/**
-	 * 
-	 * <b>Description: </b>Failed to retrieve the data due to unexpected issues. <br>
-	 * <b>Next Action: </b>Instruct the user to try again later. If the request fails repeatedly, report the issue to
-	 * the customer service team
-	 */
-	DATA_RETRIEVAL_FAILED,
-	//
-	//
-	/**
-	 * 
-	 * <b>Description: </b>The requested data or document is not available at the provider site. <br>
-	 * <b>Next Action: </b>Instruct the user to check with the respective data provider or provider site. <br>
-	 * 
-	 */
-	DATA_NOT_AVAILABLE,
+public enum VerificationRequestFailedReason {
 	/**
 	 * <b>Description: </b>The account is locked at the provider site. The user has exceeded the maximum number of
 	 * incorrect login attempts resulting in the account getting locked. <br>
@@ -76,11 +20,8 @@ public enum AdditionalStatusType {
 	 * <b>Next Action: </b>
 	 */
 	ADDL_AUTHENTICATION_REQUIRED, //
-	/**
-	 * <b>Description: </b> <br>
-	 * <b>Next Action: </b>
-	 */
-	BETA_SITE_DEV_IN_PROGRESS, //
+	//
+	//
 	/**
 	 * <b>Description: </b>Unable to log in to the provider site due to out-dated credentials. The site may be prompting
 	 * the user to change or verify the credentials. <br>
@@ -97,11 +38,6 @@ public enum AdditionalStatusType {
 	 * <b>Next Action: </b>Instruct the user to provide the correct credentials by invoking the edit account flow.
 	 */
 	INCORRECT_CREDENTIALS, //
-	/**
-	 * <b>Description: </b>The property value is not available. <br>
-	 * <b>Next Action: </b>Instruct the user to provide the property value
-	 */
-	PROPERTY_VALUE_NOT_AVAILABLE,
 	//
 	//
 	/**
@@ -194,21 +130,6 @@ public enum AdditionalStatusType {
 	//
 	//
 	/**
-	 * <b>Description: </b>The requested datasets are not supported. <br>
-	 * <b>Next Action: </b>Either get the dataset/attribute enabled or remove the dataset/attribute from the input
-	 */
-	DATASET_NOT_SUPPORTED,
-	//
-	//
-	/**
-	 * 
-	 * <b>Description: </b>The dataset cannot be retrieved as the user has not enrolled for it. <br>
-	 * <b>Next Action: </b>Instruct the user to enroll for the dataset and then request for it
-	 */
-	ENROLLMENT_REQUIRED_FOR_DATASET,
-	//
-	//
-	/**
 	 * 
 	 * <b>Description: </b>The user has to provide consent to access the account information through Open Banking.<br>
 	 * <b>Next Action: </b>Instruct the user to provide the consent through the edit account flow.
@@ -241,9 +162,30 @@ public enum AdditionalStatusType {
 	//
 	//
 	/**
-	 * 
-	 * <b>Description: </b>The account information is being migrated from the screen-scraping provider to the Open Banking provider site.<br>
-	 * <b>Next Action: </b>No action is required as it is a transient state.
+	 * <b>Description: </b>Required data is not available.<br>
+	 * <b>Next Action: </b>No action is required as it is an end state.
 	 */
-	MIGRATION_IN_PROGRESS
+	REQUIRED_DATA_NOT_AVAILABLE,
+	//
+	//
+	/**
+	 * <b>Description: </b>Matching failed.<br>
+	 * <b>Next Action: </b>No action is required as it is an end state.
+	 */
+	MATCHING_FAILED,
+	//
+	//
+	/**
+	 * <b>Description: </b>No eligible accounts for given configuration.<br>
+	 * <b>Next Action: </b>No action is required as it is an end state.
+	 */
+	NO_ELIGIBLE_ACCOUNTS,
+	//
+	//
+	/**
+	 * <b>Description: </b>Additional MFA information required from the user.
+	 * <br>
+	 * <b>Next Action: </b>Instruct the user to provide the MFA information
+	 */
+	USER_INPUT_REQUIRED
 }

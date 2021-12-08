@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Response;
 import com.yodlee.api.model.enums.AdditionalStatusType;
+import com.yodlee.api.model.enums.VerificationRequestFailedReason;
 import com.yodlee.api.model.verification.VerifiedAccounts;
 import com.yodlee.api.model.verification.enums.VerifiedAccountsVerificationState;
 
@@ -38,7 +39,7 @@ public class VerifiedAccountResponse extends AbstractModelComponent implements R
 
 	@ApiModelProperty(readOnly = true, value= "The reason for the failure of the verification request")
 	@JsonProperty("failedReason")
-	private AdditionalStatusType failedReason;
+	private VerificationRequestFailedReason failedReason;
 
 	@JsonProperty("verifiedAccount")
 	public List<VerifiedAccounts> getVerifiedAccountList() {
@@ -61,7 +62,7 @@ public class VerifiedAccountResponse extends AbstractModelComponent implements R
 	}
 
 	@JsonProperty("failedReason")
-	public AdditionalStatusType getFailedReason() {
+	public VerificationRequestFailedReason getFailedReason() {
 		return failedReason;
 	}
 

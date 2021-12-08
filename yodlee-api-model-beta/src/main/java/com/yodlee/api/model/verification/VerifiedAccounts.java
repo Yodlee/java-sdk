@@ -18,7 +18,7 @@ import com.yodlee.api.model.account.BankTransferCode;
 import com.yodlee.api.model.account.FullAccountNumberList;
 import com.yodlee.api.model.account.enums.AccountClassification;
 import com.yodlee.api.model.verification.enums.VerifiedAccountsContainer;
-import com.yodlee.api.model.verification.enums.VerifiedAccountsFailedReason;
+import com.yodlee.api.model.verification.enums.VerificationAccountFailedReason;
 import com.yodlee.api.model.verification.enums.VerifiedAccountsVerificationStatus;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -221,7 +221,7 @@ public class VerifiedAccounts extends AbstractModelComponent {
 
 	@ApiModelProperty(readOnly = true, value = "The reason for the verification failure of the account.")//
 	@JsonProperty("failedReason")
-	protected VerifiedAccountsFailedReason failedReason;
+	protected VerificationAccountFailedReason failedReason;
 	
 	@ApiModelProperty(readOnly = true,
 			  value = "The classification of the account such as personal, corporate, etc.<br><br>"//
@@ -545,7 +545,7 @@ public class VerifiedAccounts extends AbstractModelComponent {
 	 * 
 	 * @return failedReason
 	 */
-	public VerifiedAccountsFailedReason getFailedReason() {
+	public VerificationAccountFailedReason getFailedReason() {
 		return failedReason;
 	}
 	
