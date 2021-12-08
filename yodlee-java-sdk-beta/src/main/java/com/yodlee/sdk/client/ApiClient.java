@@ -34,6 +34,7 @@ import com.yodlee.sdk.configuration.cobrand.AbstractBaseConfiguration;
 import com.yodlee.sdk.context.Context;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.ConnectionPool;
 import okhttp3.FormBody;
 import okhttp3.FormBody.Builder;
 import okhttp3.Headers;
@@ -51,6 +52,10 @@ import okhttp3.logging.HttpLoggingInterceptor.Level;
 public class ApiClient {
 
 	private static final int DEFAULT_TIMEOUT = 10000;
+
+	private static final int DEFAULT_MAX_IDLE_CONNECTION = 30;
+
+	private static final Integer DEFAULT_CONNECTION_KEEP_ALIVE_DURATION = 5000;
 
 	private static final String APPLICATION_JSON = "application/json";
 
@@ -83,14 +88,20 @@ public class ApiClient {
 	public ApiClient(AbstractConfiguration configuration) {
 		this(configuration == null ? DEFAULT_TIMEOUT : getSocketTimeOutFromConfig(configuration),
 				configuration == null ? DEFAULT_TIMEOUT : getReadTimeOutFromConfig(configuration),
-				configuration == null ? DEFAULT_TIMEOUT : getWriteTimeOutFromConfig(configuration));
+				configuration == null ? DEFAULT_TIMEOUT : getWriteTimeOutFromConfig(configuration),
+				configuration == null ? DEFAULT_MAX_IDLE_CONNECTION : getMaxIdleConnectionFromConfig(configuration),
+				configuration == null ? DEFAULT_CONNECTION_KEEP_ALIVE_DURATION
+						: getConnectionKeepAliveDurationFromConfig(configuration));
 	}
 
-	public ApiClient(int socketTimeOut, int readTimeOut, int writeTimeOut) {
+	public ApiClient(int socketTimeOut, int readTimeOut, int writeTimeOut, int maxIdleConnection,
+			int connectionKeepAliveDuration) {
 		httpBuilder = new OkHttpClient().newBuilder()//
 				.connectTimeout(socketTimeOut, TimeUnit.MILLISECONDS)//
 				.readTimeout(readTimeOut, TimeUnit.MILLISECONDS)//
 				.writeTimeout(writeTimeOut, TimeUnit.MILLISECONDS)//
+				.connectionPool(
+						new ConnectionPool(maxIdleConnection, connectionKeepAliveDuration, TimeUnit.MILLISECONDS))
 				.addInterceptor(new UnzippingInterceptor());
 		httpClient = httpBuilder.build();
 		setUserAgent("JavaSDK" + AbstractConfiguration.SDK_VERSION);
@@ -121,6 +132,24 @@ public class ApiClient {
 			return writeTimeout == null ? DEFAULT_TIMEOUT : writeTimeout;
 		}
 		return DEFAULT_TIMEOUT;
+	}
+
+	private static int getMaxIdleConnectionFromConfig(AbstractConfiguration configuration) {
+		if (configuration instanceof AbstractBaseConfiguration) {
+			AbstractBaseConfiguration config = (AbstractBaseConfiguration) configuration;
+			Integer maxIdleConnection = config.getMaxIdleConnection();
+			return maxIdleConnection == null ? DEFAULT_MAX_IDLE_CONNECTION : maxIdleConnection;
+		}
+		return DEFAULT_MAX_IDLE_CONNECTION;
+	}
+
+	private static int getConnectionKeepAliveDurationFromConfig(AbstractConfiguration configuration) {
+		if (configuration instanceof AbstractBaseConfiguration) {
+			AbstractBaseConfiguration config = (AbstractBaseConfiguration) configuration;
+			Integer keepAliveDuration = config.getWriteTimeout();
+			return keepAliveDuration == null ? DEFAULT_CONNECTION_KEEP_ALIVE_DURATION : keepAliveDuration;
+		}
+		return DEFAULT_CONNECTION_KEEP_ALIVE_DURATION;
 	}
 
 	public String getBasePath() {

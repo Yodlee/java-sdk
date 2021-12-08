@@ -186,12 +186,12 @@ public class VerificationValidator {
 		}
 	}
 	
-	public static void validateVerifiedAccounts(VerificationApi verificationApi, String methodName, Long providerAccountId, Long[] accountId,
+	public static void validateVerifiedAccounts(VerificationApi verificationApi, String methodName, long providerAccountId, Long[] accountId,
 			VerifiedAccountsVerificationStatus[] verificationStatus,
 			String[] isSelected) throws ApiException {
 		List<Problem> problems = new ArrayList<>();
 		validateIsSelected(problems, isSelected);
-		Class<?>[] argTypes = new Class[] {Long.class, Long[].class, VerifiedAccountsVerificationStatus[].class, String[].class};
+		Class<?>[] argTypes = new Class[] {long.class, Long[].class, VerifiedAccountsVerificationStatus[].class, String[].class};
 		Object[] argValues = new Object[] {providerAccountId, accountId, verificationStatus, isSelected};
 		List<Problem> methodProblems = ApiValidator.validate(verificationApi, methodName, argTypes, argValues);
 		List<Problem> contextProblems = ApiValidator.validateUserContext(verificationApi);
