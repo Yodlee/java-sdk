@@ -23,7 +23,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 
 	@ApiModelProperty(readOnly = true,
 					  value = "The type of service. E.g., Bank, Investment <br><br>"//
-							  + "Aggregated<br>"//
+							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
 							  + "<b>Applicable containers</b>: bank, investment<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
@@ -37,7 +37,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Identifier of the provider site. The primary key of provider resource. "//
 							  + "<br><br>"//
-							  + "<b>Aggregated</b> <br>"//
+							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
 							  + "<b>Applicable containers</b>: bank, investment<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
@@ -49,7 +49,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The primary key of the provider account resource."//
 							  + "<br><br>"//
-							  + "<b>Aggregated</b> <br>"//
+							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
 							  + "<b>Applicable containers</b>: bank, investment<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
@@ -61,7 +61,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The primary key of the provider account resource."//
 							  + "<br><br>"//
-							  + "<b>Aggregated</b> <br>"//
+							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
 							  + "<b>Applicable containers</b>: bank, investment<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
@@ -73,7 +73,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "Service provider or institution name where the account originates. This belongs to the provider resource."//
 							  + "<br><br>"//
-							  + "<b>Aggregated</b> <br>"//
+							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
 							  + "<b>Applicable containers</b>: bank, investment<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
@@ -301,7 +301,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 							  + "In most cases, the site does not display the full account number in the account summary page "
 							  + "and additional navigation is required to aggregate it.<br>"//
 							  + "<b>Applicable containers</b>: bank, investment<br>"//
-							  + "<b>Aggregated</b> <br>"//
+							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
 							  + "<b>Endpoints</b>:<br>"//
 							  + "<ul>"//
 							  + "<li>GET accounts/latestBalances</li>"//
@@ -313,7 +313,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 					  value = "The account name as it appears at the site.<br>"//
 							  + "(The POST accounts service response return this field as name)<br>"//
 							  + "<b>Applicable containers</b>: bank, investment<br>"//
-							  + "<b>Aggregated </b> <br>"//
+							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
 							  + "<b>Endpoints</b>:<br>"//
 							  + "<ul>"//
 							  + "<li>GET accounts/latestBalances</li>"//
@@ -337,7 +337,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The balance in the account that is available at the beginning of the "
 							  + "business day; it is equal to the ledger balance of the account.<br><br>"//
-							  + "<b>Aggregated </b>: Aggregated<br>"//
+							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
 							  + "<b>Applicable containers</b>: bank<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul>"//
@@ -351,7 +351,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 							  + "<br><b>Bank:</b> available balance or current balance."
 							  + "<br><b>Investment:</b> The total balance of all the investment account, as it appears on the FI site."
 							  + "<b>Applicable containers</b>: bank, investment <br>"//
-							  + "<b>Aggregated</b><br>"//
+							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
 							  + "<b>Endpoints</b>:<br>"//
 							  + "<ul>"//
 							  + "<li>GET accounts/latestBalances</li>"//
@@ -363,7 +363,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 					  value = "The total account value. " + "<br><b>Additional Details:</b>"
 							  + "<br><b>Investment:</b> The total balance of all the investment account, as it appears on the FI site."
 							  + "<b>Applicable containers</b>: investment <br>"//
-							  + "<b>Aggregated</b><br>"//
+							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
 							  + "<b>Endpoints</b>:<br>"//
 							  + "<ul>"//
 							  + "<li>GET accounts/latestBalances</li>"//
@@ -373,7 +373,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	
 	@ApiModelProperty(readOnly = true,
 					  value = "The date time the account information was last retrieved from the provider site and updated in the Yodlee system.<br>"//
-							  + "<br><b>Aggregated <br>"//
+							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
 							  + "<b>Applicable containers</b>: bank, investment<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul><li>GET accounts/latestBalances</li>"//
@@ -384,7 +384,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	@ApiModelProperty(readOnly = true,
 					  value = "The amount that is available for immediate withdrawal or the total amount available to purchase securities in a brokerage or investment account."
 							  + "<br><b>Note:</b> The cash balance field is only applicable to brokerage related accounts.<br><br>"//
-							  + "<b>Aggregated </b><br>"//
+							  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
 							  + "<b>Applicable containers</b>: investment<br>"//
 							  + "<b>Endpoints</b>:"//
 							  + "<ul><li>GET accounts/latestBalances</li>"//
@@ -404,7 +404,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	/**
 	 * The type of service. E.g., Bank, Investment,.<br>
 	 * <br>
-	 * <b>Aggregated</b>: Aggregated<br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <b>Applicable containers</b>: bank, investment<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
@@ -422,7 +422,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	/**
 	 * Identifier of the provider site. The primary key of provider resource. <br>
 	 * <br>
-	 * <b>Aggregated</b> <br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <b>Applicable containers</b>: bank, investment<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
@@ -438,7 +438,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	/**
 	 * The primary key of the provider account resource. <br>
 	 * <br>
-	 * <b>Aggregated</b> <br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <b>Applicable containers</b>: bank, investment<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
@@ -454,7 +454,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	/**
 	 * The primary key of the provider account resource. <br>
 	 * <br>
-	 * <b>Aggregated</b>: Both <br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <b>Applicable containers</b>: bank, investment<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
@@ -470,7 +470,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	/**
 	 * Service provider or institution name where the account originates. This belongs to the provider resource. <br>
 	 * <br>
-	 * <b>Aggregated</b> <br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <b>Applicable containers</b>: bank, investment<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
@@ -707,7 +707,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	 * In most cases, the site does not display the full account number in the account summary page and additional
 	 * navigation is required to aggregate it.<br>
 	 * <b>Applicable containers</b>: bank, investment<br>
-	 * <b>Aggregated</b> <br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <b>Endpoints</b>:<br>
 	 * <ul>
 	 * <li>GET accounts/latestBalances</li>
@@ -723,7 +723,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	 * The account name as it appears at the site.<br>
 	 * (The POST accounts service response return this field as name)<br>
 	 * <b>Applicable containers</b>: bank, investment<br>
-	 * <b>Aggregated </b> <br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <b>Endpoints</b>:<br>
 	 * <ul>
 	 * <li>GET accounts/latestBalances</li>
@@ -738,8 +738,8 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	/**
 	 * The balance in the account that is available for spending. For checking accounts with overdraft, available
 	 * balance may include overdraft amount, if end site adds overdraft balance to available balance.<br>
-	 * <b>Applicable containers</b>: bank, investment<br>
-	 * <b>Aggregated </b><br>
+	 * <b>Applicable containers</b>: bank<br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <b>Endpoints</b>:<br>
 	 * GET accounts/latestBalances
 	 * 
@@ -753,7 +753,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	 * The balance in the account that is available at the beginning of the business day; it is equal to the ledger
 	 * balance of the account.<br>
 	 * <br>
-	 * <b>Aggregated </b>: Aggregated<br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <b>Applicable containers</b>: bank<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
@@ -772,7 +772,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	 * <b>Bank:</b> available balance or current balance. <br>
 	 * <b>Investment:</b> The total balance of all the investment account, as it appears on the FI site. <br>
 	 * <b>Applicable containers</b>: bank, investment<br>
-	 * <b>Aggregated </b> <br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <b>Endpoints</b>:<br>
 	 * <ul>
 	 * <li>GET accounts/latestBalances</li>
@@ -789,7 +789,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	 * <b>Additional Details:</b> <br>
 	 * <b>Investment:</b> The total balance of all the investment account, as it appears on the FI site. <br>
 	 * <b>Applicable containers</b>: bank, investment<br>
-	 * <b>Aggregated </b> <br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <b>Endpoints</b>:<br>
 	 * <ul>
 	 * <li>GET accounts/latestBalances</li>
@@ -806,7 +806,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	 * brokerage or investment account. <br>
 	 * <b>Note:</b> The cash balance field is only applicable to brokerage related accounts.<br>
 	 * <br>
-	 * <b>Aggregated</b>: Aggregated<br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <b>Applicable containers</b>: investment<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
@@ -823,7 +823,7 @@ public class AccountLatestBalance extends AbstractModelComponent {
 	 * The date time the account information was last retrieved from the provider site and updated in the Yodlee
 	 * system.<br>
 	 * <br>
-	 * <b>Aggregated </b> <br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <b>Applicable containers</b>: bank, investment<br>
 	 * <b>Endpoints</b>:
 	 * <ul>
