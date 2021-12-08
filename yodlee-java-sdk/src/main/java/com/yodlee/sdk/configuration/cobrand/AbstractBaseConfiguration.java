@@ -47,6 +47,16 @@ public abstract class AbstractBaseConfiguration extends AbstractConfiguration {
 	@JsonProperty("writeTimeout")
 	protected Integer writeTimeout;
 
+	@Min(value = 1, message = "{config.maxIdleConnection.min}")
+	@Max(value = Integer.MAX_VALUE, message = "{config.maxIdleConnection.max}")
+	@JsonProperty("maxIdleConnection")
+	protected Integer maxIdleConnection;
+
+	@Min(value = 1, message = "{config.connectionKeepAliveDuration.min}")
+	@Max(value = Integer.MAX_VALUE, message = "{config.connectionKeepAliveDuration.max}")
+	@JsonProperty("connectionKeepAliveDuration")
+	protected Integer connectionKeepAliveDuration;
+
 	public AbstractBaseConfiguration() {}
 
 	public AbstractBaseConfiguration(String basePath, String apiVersion) {
@@ -100,5 +110,21 @@ public abstract class AbstractBaseConfiguration extends AbstractConfiguration {
 
 	public void setWriteTimeout(Integer writeTimeout) {
 		this.writeTimeout = writeTimeout;
+	}
+
+	public Integer getMaxIdleConnection() {
+		return maxIdleConnection;
+	}
+
+	public void setMaxIdleConnection(Integer maxIdleConnection) {
+		this.maxIdleConnection = maxIdleConnection;
+	}
+
+	public Integer getConnectionKeepAliveDuration() {
+		return connectionKeepAliveDuration;
+	}
+
+	public void setConnectionKeepAliveDuration(Integer connectionKeepAliveDuration) {
+		this.connectionKeepAliveDuration = connectionKeepAliveDuration;
 	}
 }
