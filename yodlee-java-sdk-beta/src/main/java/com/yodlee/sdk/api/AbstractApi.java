@@ -97,18 +97,20 @@ public abstract class AbstractApi {
 	}
 
 	protected void registerResponseInterceptor(final ApiClient apiClient) {
-		final ProgressListener progressListener =
-				(bytesRead, contentLength, done) -> fireResponseUpdate(bytesRead, contentLength, done);
-		Interceptor interceptor = new Interceptor() {
+		if (apiClient.shouldRegisterNetworkInterceptor()) {
+			final ProgressListener progressListener =
+					(bytesRead, contentLength, done) -> fireResponseUpdate(bytesRead, contentLength, done);
+			Interceptor interceptor = new Interceptor() {
 
-			@Override
-			public Response intercept(Interceptor.Chain chain) throws IOException {
-				Response originalResponse = chain.proceed(chain.request());
-				return originalResponse.newBuilder()
-						.body(new ProgressResponseBody(originalResponse.body(), progressListener)).build();
-			}
-		};
-		apiClient.registerNetworkInterceptor(interceptor);
+				@Override
+				public Response intercept(Interceptor.Chain chain) throws IOException {
+					Response originalResponse = chain.proceed(chain.request());
+					return originalResponse.newBuilder()
+							.body(new ProgressResponseBody(originalResponse.body(), progressListener)).build();
+				}
+			};
+			apiClient.registerNetworkInterceptor(interceptor);
+		}
 	}
 
 	protected ProgressRequestListener requestListener() {

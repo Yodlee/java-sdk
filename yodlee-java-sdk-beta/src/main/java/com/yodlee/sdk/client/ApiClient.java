@@ -29,12 +29,12 @@ import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.validator.Problem;
 import com.yodlee.sdk.api.exception.ApiException;
 import com.yodlee.sdk.api.util.ApiUtils;
+import com.yodlee.sdk.client.util.OkHttpUtil;
 import com.yodlee.sdk.configuration.AbstractConfiguration;
 import com.yodlee.sdk.configuration.cobrand.AbstractBaseConfiguration;
 import com.yodlee.sdk.context.Context;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.ConnectionPool;
 import okhttp3.FormBody;
 import okhttp3.FormBody.Builder;
 import okhttp3.Headers;
@@ -55,7 +55,7 @@ public class ApiClient {
 
 	private static final int DEFAULT_MAX_IDLE_CONNECTION = 30;
 
-	private static final Integer DEFAULT_CONNECTION_KEEP_ALIVE_DURATION = 5000;
+	private static final Integer DEFAULT_CONNECTION_KEEP_ALIVE_DURATION = 30000;
 
 	private static final String APPLICATION_JSON = "application/json";
 
@@ -96,14 +96,9 @@ public class ApiClient {
 
 	public ApiClient(int socketTimeOut, int readTimeOut, int writeTimeOut, int maxIdleConnection,
 			int connectionKeepAliveDuration) {
-		httpBuilder = new OkHttpClient().newBuilder()//
-				.connectTimeout(socketTimeOut, TimeUnit.MILLISECONDS)//
-				.readTimeout(readTimeOut, TimeUnit.MILLISECONDS)//
-				.writeTimeout(writeTimeOut, TimeUnit.MILLISECONDS)//
-				.connectionPool(
-						new ConnectionPool(maxIdleConnection, connectionKeepAliveDuration, TimeUnit.MILLISECONDS))
-				.addInterceptor(new UnzippingInterceptor());
-		httpClient = httpBuilder.build();
+		httpClient = OkHttpUtil.OKHTTP_INSTANCE.getOkHttpClient(socketTimeOut, readTimeOut, writeTimeOut,
+				maxIdleConnection, connectionKeepAliveDuration);
+		httpBuilder = OkHttpUtil.OKHTTP_INSTANCE.getOkHttpBuilder();
 		setUserAgent("JavaSDK" + AbstractConfiguration.SDK_VERSION);
 	}
 
@@ -861,6 +856,13 @@ public class ApiClient {
 	}
 
 	public void registerNetworkInterceptor(Interceptor interceptor) {
-		httpClient = httpBuilder.addNetworkInterceptor(interceptor).build();
+		if (shouldRegisterNetworkInterceptor()) {
+			httpClient = httpBuilder.addNetworkInterceptor(interceptor).build();
+		}
+	}
+
+	public boolean shouldRegisterNetworkInterceptor() {
+		return httpBuilder != null && httpBuilder.getNetworkInterceptors$okhttp() != null
+				&& httpBuilder.getNetworkInterceptors$okhttp().isEmpty();
 	}
 }
