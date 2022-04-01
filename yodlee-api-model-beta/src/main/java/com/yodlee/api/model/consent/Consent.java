@@ -11,10 +11,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"consentId", "title", "titleBody", "expirationDate","dataAccessFrequency","consentStatus","providerId", "providerAccountId","scope"})
+@JsonPropertyOrder({"consentId", "title", "titleBody", "expirationDate","dataAccessFrequency","consentStatus","providerId", "providerAccountId",
+		"renewal", "scope"})
 public class Consent extends AbstractConsent {
-	
-	
+
+
 	@ApiModelProperty(readOnly = true,
 			  value = "Unique identifier for the provider account resource. <br>" //
 			  		  + "This is created during account addition."//
@@ -25,7 +26,7 @@ public class Consent extends AbstractConsent {
 					  + "</ul>")
 	@JsonProperty("providerAccountId")
 	private Long id;
-	
+
 	/**
 	* Unique identifier for the provider account resource. <br>
 	* This is created during account addition. <br>
@@ -34,7 +35,7 @@ public class Consent extends AbstractConsent {
 	* <ul>
 	* <li>GET Consent</li>
 	* </ul>
-	* 
+	*
 	* @return id
 	*/
 	public Long getId() {
@@ -45,7 +46,7 @@ public class Consent extends AbstractConsent {
 	public String toString() {
 		return "Consent [id=" + id + ", consentId=" + consentId + ", title=" + title + ", titleBody=" + titleBody
 				+ ", expirationDate=" + expirationDate + ", dataAccessFrequency=" + dataAccessFrequency
-				+ ", consentStatus=" + consentStatus + ", providerId=" + providerId + ", scopes=" + scopes + "]";
+				+ ", consentStatus=" + consentStatus + ", providerId=" + providerId + ", renewal=" + renewal + ", scopes=" + scopes + "]";
 	}
-	
+
 }

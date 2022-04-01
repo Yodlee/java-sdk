@@ -271,7 +271,7 @@ public class VerifiedAccounts extends AbstractModelComponent {
 	private List<AccountHolder> holders;
 	
 	@ApiModelProperty(readOnly = true,
-			  value = "Indicates if an account is selected by the user in the FastLink 4.0 application")
+			  value = "Indicates if an account is selected by the user in the FastLink 4 application")
 	@JsonProperty("isSelected")
 	private Boolean isSelected;
 
@@ -623,7 +623,7 @@ public class VerifiedAccounts extends AbstractModelComponent {
 	
 	/**
 	 * 
-	 * Indicates if an account is selected by the user in the FastLink 4.0 application
+	 * Indicates if an account is selected by the user in the FastLink 4 application
 	 * <br>
 	 * <b>Aggregated / Manual</b>: Aggregated<br>
 	 * <br>

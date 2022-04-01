@@ -15,11 +15,10 @@ public class CreateConsent extends AbstractConsent {
 
 	@Override
 	public String toString() {
-		return "CreateConsent [getConsentId()=" + getConsentId() + ", getTitle()=" + getTitle() + ", getTitleBody()="
-				+ getTitleBody() + ", getScope()=" + getScopes() + ", getExpirationDate()=" + getExpirationDate()
-				+ ", getDataAccessFrequency()=" + getDataAccessFrequency() + ", getConsentStatus()="
-				+ getConsentStatus() + ", getProviderId()=" + getProviderId() + ", toString()=" + super.toString()
-				+ ", validate()=" + validate() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+		return "CreateConsent [consentId=" + consentId + ", title=" + title + ", titleBody=" + titleBody
+				+ ", expirationDate=" + expirationDate + ", startDate=" + startDate + ", applicationDisplayName="
+				+ applicationDisplayName + ", dataAccessFrequency=" + dataAccessFrequency + ", consentStatus="
+				+ consentStatus + ", providerId=" + providerId + ", renewal=" + renewal + ", scopes=" + scopes + "]";
 	}
-	
+
 }
