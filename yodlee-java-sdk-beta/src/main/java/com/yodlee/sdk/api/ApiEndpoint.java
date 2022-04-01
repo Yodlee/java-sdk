@@ -114,17 +114,19 @@ public class ApiEndpoint {
 
 	static final String EVALUATE_ADDRESS = "/accounts/evaluateAddress";
 
-	static final String MIGRATEACCOUNTS_PROVIDERACCOUNTID = "/accounts/migrateAccounts/{providerAccountId}";
+	static final String MIGRATE_ACCOUNTS_PROVIDERACCOUNTID = "/accounts/migrateAccounts/{providerAccountId}";
 	
-	static final String ASSOCIATEDACCOUNTS_PROVIDERACCOUNTID = "/accounts/associatedAccounts/{providerAccountId}";
+	static final String ASSOCIATED_ACCOUNTS_PROVIDERACCOUNTID = "/accounts/associatedAccounts/{providerAccountId}";
 
-	static final String GETCONSENTS_CONSENTID = "/consents/{consentId}";
+	static final String GET_CONSENTS_CONSENTID = "/consents/{consentId}";
 
-	static final String PUTCONSENTS_CONSENTID = "/consents/{consentId}";
+	static final String PUT_CONSENTS_CONSENTID = "/consents/{consentId}";
 	
-	static final String POSTCONSENTS = "/consents";
+	static final String RENEW_CONSENTS_CONSENTID = "/consents/{consentId}/renewal";
 	
-	static final String GETCONSENTS = "/consents";
+	static final String POST_CONSENTS = "/consents";
+	
+	static final String GET_CONSENTS = "/consents";
 	
 	static final String ACCOUNT_BALANCE = "/accounts/latestBalances";
 	

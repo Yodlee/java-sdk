@@ -8,6 +8,9 @@ package com.yodlee.sdk.api;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -41,6 +44,12 @@ public class DataExtractsApi extends AbstractApi {
 	private static final String PARAM_FROM_DATE = "fromDate";
 
 	private static final String PARAM_EVENT_NAME = "eventName";
+	
+	private static final String PARAM_SELECT = "select";
+
+	private static final String PARAM_TOP = "top";
+
+	private static final String PARAM_SKIP = "skip";
 
 	public DataExtractsApi(Context<?> context) {
 		super(context);
@@ -132,6 +141,9 @@ public class DataExtractsApi extends AbstractApi {
 	 * @param fromDate From DateTime (YYYY-MM-DDThh:mm:ssZ) (required)
 	 * @param loginName Login Name (required)
 	 * @param toDate To DateTime (YYYY-MM-DDThh:mm:ssZ) (required)
+	 * @param skip skip (Min 0) -  (optional)
+	 * @param top top (Max 500) -  (optional)
+	 * @param select select (transaction) (optional)
 	 * @return {@link ApiResponse}&lt;{@link DataExtractsUserDataResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -142,10 +154,14 @@ public class DataExtractsApi extends AbstractApi {
 			@NotEmpty(message = "{dataExtracts.param.loginName.required}") //
 			@Pattern(regexp = "[^\\s]+", message = "{user.loginName.invalid}") String loginName,
 			@NotNull(message = "{dataExtracts.param.toDate.required}") //
-			@Past(message = "{dataExtracts.param.toDate.invalid}") Date toDate) throws ApiException {
+			@Past(message = "{dataExtracts.param.toDate.invalid}") Date toDate,
+			@Min(value = 0, message = "{dataExtracts.param.skip.invalid}") Integer skip, //
+			@Min(value = 1, message = "{dataExtracts.param.top.invalid}") //
+			@Max(value = 500, message = "{dataExtracts.param.top.invalid}") Integer top, //
+			String select) throws ApiException {
 		LOGGER.info("DataExtracts getDataExtractsUserData API execution started");
-		DataExtractsValidator.validateDataExtractsUserData(this, ApiUtils.getMethodName(), fromDate, loginName, toDate);
-		CallContext callContext = buildGetDataExtractsUserDataContext(fromDate, loginName, toDate);
+		DataExtractsValidator.validateDataExtractsUserData(this, ApiUtils.getMethodName(), fromDate, loginName, toDate, skip, top, select);
+		CallContext callContext = buildGetDataExtractsUserDataContext(fromDate, loginName, toDate, skip, top, select);
 		return callContext.getApiClient().execute(callContext.getCall(), DataExtractsUserDataResponse.class);
 	}
 
@@ -165,6 +181,9 @@ public class DataExtractsApi extends AbstractApi {
 	 * @param fromDate From Date (required)
 	 * @param loginName Login Name (required)
 	 * @param toDate To Date (required)
+	 * @param skip skip (Min 0) -  (optional)
+	 * @param top top (Max 500) -  (optional)
+	 * @param select select (transaction) (optional)
 	 * @param apiCallback {@link ApiCallback}&lt;{@link DataExtractsUserDataResponse}&gt; (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -176,14 +195,18 @@ public class DataExtractsApi extends AbstractApi {
 			@Pattern(regexp = "[^\\s]+", message = "{user.loginName.invalid}") String loginName,
 			@NotNull(message = "{dataExtracts.param.toDate.required}") //
 			@Past(message = "{dataExtracts.param.toDate.invalid}") Date toDate,
+			@Min(value = 0, message = "{dataExtracts.param.skip.invalid}") Integer skip, //
+			@Min(value = 1, message = "{dataExtracts.param.top.invalid}") //
+			@Max(value = 500, message = "{dataExtracts.param.top.invalid}") Integer top, //
+			String select,
 			ApiCallback<DataExtractsUserDataResponse> apiCallback) throws ApiException {
 		LOGGER.info("DataExtracts getDataExtractsUserDataAsync API execution started");
-		DataExtractsValidator.validateDataExtractsUserData(this, ApiUtils.getMethodName(), fromDate, loginName, toDate);
-		CallContext callContext = buildGetDataExtractsUserDataContext(fromDate, loginName, toDate);
+		DataExtractsValidator.validateDataExtractsUserData(this, ApiUtils.getMethodName(), fromDate, loginName, toDate, skip, top, select);
+		CallContext callContext = buildGetDataExtractsUserDataContext(fromDate, loginName, toDate, skip, top, select);
 		callContext.getApiClient().executeAsync(callContext.getCall(), DataExtractsUserDataResponse.class, apiCallback);
 	}
 
-	private CallContext buildGetDataExtractsUserDataContext(Date fromDate, String loginName, Date toDate)
+	private CallContext buildGetDataExtractsUserDataContext(Date fromDate, String loginName, Date toDate, Integer skip, Integer top, String select)
 			throws ApiException {
 		SimpleDateFormat sdf = getUTCSimpleDateFormat();
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
@@ -192,6 +215,15 @@ public class DataExtractsApi extends AbstractApi {
 		apiContext.addQueryParam(new Pair(PARAM_LOGIN_NAME, loginName));
 		apiContext.addQueryParam(new Pair(PARAM_FROM_DATE, sdf.format(fromDate)));
 		apiContext.addQueryParam(new Pair(PARAM_TO_DATE, sdf.format(toDate)));
+		if (skip != null) {
+			apiContext.addQueryParam(new Pair(PARAM_SKIP, skip.toString()));
+		}
+		if (top != null) {
+			apiContext.addQueryParam(new Pair(PARAM_TOP, top.toString()));
+		}
+		if (select != null) {
+			apiContext.addQueryParam(new Pair(PARAM_SELECT, select));
+		}
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
 	}

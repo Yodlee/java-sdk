@@ -122,4 +122,5 @@ public class ApiValidator {
 	public static List<Problem> validateUserContext(AbstractApi api) {
 		return validateContextType(ContextType.USER, api.getContext().getContextType());
 	}
+
 }

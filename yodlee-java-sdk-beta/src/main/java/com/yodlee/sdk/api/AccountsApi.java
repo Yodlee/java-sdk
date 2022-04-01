@@ -725,7 +725,7 @@ public class AccountsApi extends AbstractApi {
 	}
 
 	private CallContext buildMigrateAccountsContext(long providerAccountId) throws ApiException {
-		String endpoint = replacePathVariable(ApiEndpoint.MIGRATEACCOUNTS_PROVIDERACCOUNTID, PARAM_PROVIDER_ACCOUNT_ID,
+		String endpoint = replacePathVariable(ApiEndpoint.MIGRATE_ACCOUNTS_PROVIDERACCOUNTID, PARAM_PROVIDER_ACCOUNT_ID,
 				String.valueOf(providerAccountId));
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.PUT, null);
@@ -789,7 +789,7 @@ public class AccountsApi extends AbstractApi {
 	}
 
 	private CallContext buildAssociatedAccountsContext(long providerAccountId) throws ApiException {
-		String endpoint = replacePathVariable(ApiEndpoint.ASSOCIATEDACCOUNTS_PROVIDERACCOUNTID,
+		String endpoint = replacePathVariable(ApiEndpoint.ASSOCIATED_ACCOUNTS_PROVIDERACCOUNTID,
 				PARAM_PROVIDER_ACCOUNT_ID, String.valueOf(providerAccountId));
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.GET, null);
