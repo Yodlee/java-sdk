@@ -12,9 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.consent.request.CreateConsentRequest;
+import com.yodlee.api.model.consent.request.RenewConsentRequest;
 import com.yodlee.api.model.consent.request.UpdateConsentRequest;
 import com.yodlee.api.model.consent.response.ConsentResponse;
 import com.yodlee.api.model.consent.response.CreatedConsentResponse;
+import com.yodlee.api.model.consent.response.RenewConsentResponse;
 import com.yodlee.api.model.consent.response.UpdatedConsentResponse;
 import com.yodlee.sdk.api.exception.ApiException;
 import com.yodlee.sdk.api.util.ApiUtils;
@@ -35,6 +37,8 @@ public class ConsentsApi extends AbstractApi {
 	
 	private static final String PARAM_CONSENTS_ID = "consentId";
 	private static final String PARAM_PROVIDERACCOUNTS_ID = "providerAccountId";
+	private static final String PARAM_INCLUDE = "include";
+	private static final String REDIRECT_URL = "redirectUrl";
 	
 	public ConsentsApi(Context<?> context) {
 		super(context);
@@ -85,7 +89,7 @@ public class ConsentsApi extends AbstractApi {
 	}
 
 	private CallContext buildGetAuthorizationURLContext(long consentId) throws ApiException {
-		String endpoint = replacePathVariable(ApiEndpoint.GETCONSENTS_CONSENTID,
+		String endpoint = replacePathVariable(ApiEndpoint.GET_CONSENTS_CONSENTID,
 				PARAM_CONSENTS_ID, String.valueOf(consentId));
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.GET, null);
@@ -144,7 +148,7 @@ public class ConsentsApi extends AbstractApi {
 	}
 
 	private CallContext buildCaptureConsentContext(long consentId, UpdateConsentRequest updateConsentRequest) throws ApiException {
-		String endpoint = replacePathVariable(ApiEndpoint.PUTCONSENTS_CONSENTID,
+		String endpoint = replacePathVariable(ApiEndpoint.PUT_CONSENTS_CONSENTID,
 				PARAM_CONSENTS_ID, String.valueOf(consentId));
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.PUT, updateConsentRequest);
@@ -200,7 +204,7 @@ public class ConsentsApi extends AbstractApi {
 	private CallContext buildCreateConsentContext(CreateConsentRequest createConsentRequest) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
 		ApiContext apiContext =
-				new ApiContext(ApiEndpoint.POSTCONSENTS, HttpMethod.POST, createConsentRequest);
+				new ApiContext(ApiEndpoint.POST_CONSENTS, HttpMethod.POST, createConsentRequest);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
@@ -211,9 +215,10 @@ public class ConsentsApi extends AbstractApi {
 	 * The get consent service is used to retrieve all the consents submitted to Yodlee.<br>
 	 * The service can be used to build a manage consent interface or a consent dashboard to implement the renew and revoke consent flows.<br>
 	 * Note:This service supports the localization feature and accepts locale as a header parameter.<br>
-	 * 
+	 *
 	 * @param consentIds Comma separated consentIds (optional)
 	 * @param providerAccountIds Comma separated providerAccountIds (optional)
+	 * @param includeConsentParam text renewal to be passed as value (optional)
 	 * @return {@link ApiResponse}&lt;{@link ConsentResponse}&gt;
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
@@ -222,47 +227,118 @@ public class ConsentsApi extends AbstractApi {
 			@Size(min = 0, max = 100,
 					message = "{consents.param.consentId.length.invalid}") Long[] consentIds,
 			@Size(min = 0, max = 100,
-        	message = "{consents.param.providerAccountId.length.invalid}") Long[] providerAccountIds)
+					message = "{consents.param.providerAccountId.length.invalid}") Long[] providerAccountIds,
+			IncludeConsentParam includeConsentParam)
 			throws ApiException {
 		LOGGER.info("Consents getAuthorizationURL API execution started");
-		ConsentsValidator.validateGetConsent(this, ApiUtils.getMethodName(), consentIds, providerAccountIds);
-		CallContext callContext = buildGetConsentContext(consentIds, providerAccountIds);
+		ConsentsValidator.validateGetConsent(this, ApiUtils.getMethodName(), consentIds, providerAccountIds,
+				includeConsentParam);
+		CallContext callContext = buildGetConsentContext(consentIds, providerAccountIds, includeConsentParam);
 		return callContext.getApiClient().execute(callContext.getCall(), ConsentResponse.class);
 	}
-	
+
 	/**
 	 * Get Consent<br> 
 	 * The get consent service is used to retrieve all the consents submitted to Yodlee.<br>
 	 * The service can be used to build a manage consent interface or a consent dashboard to implement the renew and revoke consent flows.<br>
 	 * Note:This service supports the localization feature and accepts locale as a header parameter.<br>
-	 * 
+	 *
 	 * @param consentIds Comma separated consentIds (optional)
 	 * @param providerAccountIds Comma separated providerAccountIds (optional)
+	 * @param includeConsentParam text renewal to be passed as value (optional)
 	 * @param apiCallback {@link ApiCallback} (required)
 	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
 	 *         response body
 	 */
 	public void getConsentAsync(
 			@Size(min = 0, max = 100,
-			message = "{consents.param.consentId.length.invalid}") Long[] consentIds,
+					message = "{consents.param.consentId.length.invalid}") Long[] consentIds,
 			@Size(min = 0, max = 100,
-        	message = "{consents.param.providerAccountId.length.invalid}") Long[] providerAccountIds,
+					message = "{consents.param.providerAccountId.length.invalid}") Long[] providerAccountIds,
+			IncludeConsentParam includeConsentParam,
 			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
 		LOGGER.info("Consents getAuthorizationURL API execution started");
-		ConsentsValidator.validateGetConsent(this, ApiUtils.getMethodName(), consentIds, providerAccountIds);
-		CallContext callContext = buildGetConsentContext(consentIds, providerAccountIds);
+		ConsentsValidator.validateGetConsent(this, ApiUtils.getMethodName(), consentIds, providerAccountIds,
+				includeConsentParam);
+		CallContext callContext = buildGetConsentContext(consentIds, providerAccountIds, includeConsentParam);
 		callContext.getApiClient().executeAsync(callContext.getCall(), apiCallback);
 	}
 
-	private CallContext buildGetConsentContext(Long[] consentIds, Long[] providerAccountIds) throws ApiException {
+	private CallContext buildGetConsentContext(Long[] consentIds, Long[] providerAccountIds,
+			IncludeConsentParam includeConsentParam) throws ApiException {
 		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
-		ApiContext apiContext = new ApiContext(ApiEndpoint.GETCONSENTS, HttpMethod.GET, null);
+		ApiContext apiContext = new ApiContext(ApiEndpoint.GET_CONSENTS, HttpMethod.GET, null);
 		if (consentIds != null) {
 			apiContext.addQueryParam(new Pair(PARAM_CONSENTS_ID, ApiUtils.convertArrayToString(consentIds)));
 		}
 		if (providerAccountIds != null) {
 			apiContext.addQueryParam(new Pair(PARAM_PROVIDERACCOUNTS_ID, ApiUtils.convertArrayToString(providerAccountIds)));
 		}
+		if (includeConsentParam !=null){
+			apiContext.addQueryParam(new Pair(PARAM_INCLUDE, includeConsentParam.getValue()));
+		}
+		registerResponseInterceptor(apiClient);
+		Call call = apiClient.buildCall(apiContext, requestListener());
+		return new CallContext(apiClient, call);
+	}
+	
+	/**
+	 * Put RenewConsent<br> 
+	 * "The consent renewal service is used to renew the consent by validating the consent state. This API supports both UK and AU Open Banking. <br>
+	 * <b>Renewing an UK Open Banking consent:</b><br>
+	 * Before the grace period of 90 days: The consent will be renewed using the third-party provider (TPP) renewal process that Yodlee does, and no consent reauthorisation is required.The API response will contain the complete renewed consent object.After the grace period of 90 days: The API will provide an authorisation URL to redirect the user to the financial institution site to complete the consent reauthorization process.<br>
+	 * <b>Renewing an AU Open Banking consent:</b><br>
+	 * Invoke this API, and in the API response, an authorisation URL will be provided to redirect the user to the financial institution site to complete the consent reauthorisation process.<br>
+	 
+	 * @param consentId (required)
+	 * @param renewConsentRequest renewConsentRequest (optional)
+	 * @return {@link ApiResponse}&lt;{@link RenewConsentResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<RenewConsentResponse> renewConsent(
+			@Digits(integer = 11,
+					fraction = 0,
+					message = "{consents.param.consentId.invalid}") long consentId,
+			RenewConsentRequest renewConsentRequest)
+			throws ApiException {
+		LOGGER.info("Consents renewConsent API execution started");
+		ConsentsValidator.validateRenewConsent(this, ApiUtils.getMethodName(), consentId, renewConsentRequest);
+		CallContext callContext = buildRenewConsentContext(consentId, renewConsentRequest);
+		return callContext.getApiClient().execute(callContext.getCall(), RenewConsentResponse.class);
+	}
+	
+	/**
+	 * Put Consent<br> 
+	 * "The consent renewal service is used to renew the consent by validating the consent state. This API supports both UK and AU Open Banking. <br>
+	 * <b>Renewing an UK Open Banking consent:</b><br>
+	 * Before the grace period of 90 days: The consent will be renewed using the third-party provider (TPP) renewal process that Yodlee does, and no consent reauthorisation is required.The API response will contain the complete renewed consent object.After the grace period of 90 days: The API will provide an authorisation URL to redirect the user to the financial institution site to complete the consent reauthorization process.<br>
+	 * <b>Renewing an AU Open Banking consent:</b><br>
+	 * Invoke this API, and in the API response, an authorisation URL will be provided to redirect the user to the financial institution site to complete the consent reauthorisation process.<br>
+	 * 
+	 * @param consentId (required)
+	 * @param renewConsentRequest renewConsentRequest (optional)
+	 * @param apiCallback {@link ApiCallback} (required)
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public void renewConsentAsync(
+			@Digits(integer = 11,
+					fraction = 0,
+					message = "{consents.param.consentId.invalid}") long consentId,
+			RenewConsentRequest renewConsentRequest,
+			ApiCallback<AbstractModelComponent> apiCallback) throws ApiException {
+		LOGGER.info("Consents renewConsent API execution started");
+		ConsentsValidator.validateRenewConsent(this, ApiUtils.getMethodName(), consentId, renewConsentRequest);
+		CallContext callContext = buildRenewConsentContext(consentId, renewConsentRequest);
+		callContext.getApiClient().executeAsync(callContext.getCall(), apiCallback);
+	}
+
+	private CallContext buildRenewConsentContext(long consentId, RenewConsentRequest renewConsentRequest) throws ApiException {
+		String endpoint = replacePathVariable(ApiEndpoint.RENEW_CONSENTS_CONSENTID,
+				PARAM_CONSENTS_ID, String.valueOf(consentId));
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
+		ApiContext apiContext = new ApiContext(endpoint, HttpMethod.PUT, renewConsentRequest);
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);

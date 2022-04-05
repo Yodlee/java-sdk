@@ -81,11 +81,14 @@ public class ProviderAccountsValidator {
 		List<Problem> problems = new ArrayList<>();
 		if (fields == null)
 			return problems;
-		if (fields.size() == 1 && !fields.get(0).getId().equalsIgnoreCase("authResponse")) {
-			problems.add(new Problem(ApiUtils.getErrorMessage("providerAccounts.param.field.id.authResponse.required"), ""));
+		if (fields.size() == 1 && !(fields.get(0).getId().equalsIgnoreCase("authResponse") ||
+				fields.get(0).getId().equalsIgnoreCase("authorizationCode"))) {
+			problems.add(new Problem(ApiUtils.getErrorMessage("providerAccounts.param.field.id.authorizationCode.required.OR.providerAccounts.param.field.id.authResponse.required"), ""));
+			System.out.println("For UK OB we require authorizationCode and for US/AU OB we require authResponse");
 		}
-		if (fields.size() < 2 && !fields.get(0).getId().equalsIgnoreCase("authResponse")) {
-			problems.add(new Problem(ApiUtils.getErrorMessage("providerAccounts.param.field.required"), ""));
+		if (fields.size() == 0) {
+			problems.add(new Problem(ApiUtils.getErrorMessage("providerAccounts.param.field.id.authorizationCode.required.OR.providerAccounts.param.field.id.authResponse.required"), ""));
+			System.out.println("For UK OB we require authorizationCode and for US/AU OB we require authResponse");
 		}
 		return problems;
 	}
