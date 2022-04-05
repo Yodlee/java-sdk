@@ -59,6 +59,20 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "</ul>")
 	@JsonProperty("providerAccountId")
 	protected Long providerAccountId;
+	
+	@ApiModelProperty(readOnly = true,
+			value = "List of Loan accountId(s) to which the real-estate account is linked"//
+			+ "<br><br>"//
+			+ "<b>Aggregated / Manual</b>: Both <br>"//
+			+ "<b>Applicable containers</b>: realEstate<br>"//
+			+ "<b>Endpoints</b>:"//
+			+ "<ul>"//
+			+ "<li>GET accounts</li>"//
+			+ "<li>GET accounts/{accountId}</li>"//
+			+ "<li>GET dataExtracts/userData</li>"//
+			+ "</ul>")
+	@JsonProperty("linkedAccountIds")
+	protected List<Long> linkedAccountIds;
 
 	@ApiModelProperty(readOnly = true,
 					  value = "The account name as it appears at the site.<br>"//

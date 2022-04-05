@@ -17,8 +17,8 @@ import com.yodlee.api.model.consent.enums.DataAccessFrequency;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"consentId", "title", "titleBody", "expirationDate", "dataAccessFrequency", "consentStatus",
-		"providerId", "scope"})
+@JsonPropertyOrder({"consentId", "title", "titleBody", "startDate","expirationDate","applicationDisplayName", "dataAccessFrequency", "consentStatus",
+		"providerId", "renewal", "scope"})
 public abstract class AbstractConsent extends AbstractModelComponent {
 
 	@ApiModelProperty(name = "consentId", required = true, value = "Consent Id generated through POST Consent.")
@@ -37,6 +37,14 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 	@JsonProperty("expirationDate")
 	protected String expirationDate;
 
+	@ApiModelProperty(name = "startDate", required = true, value = "Consent start date.")
+	@JsonProperty("startDate")
+	protected String startDate;
+
+	@ApiModelProperty(name = "applicationDisplayName", required = true, value = "Application display name.")
+	@JsonProperty("applicationDisplayName")
+	protected String applicationDisplayName;
+
 	@ApiModelProperty(name = "dataAccessFrequency",
 					  required = false,
 					  value = "Data Access Frequency explains the number of times that this consent can be used."
@@ -54,6 +62,12 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 					  value = "Provider Id for which the consent needs to be generated.")
 	@JsonProperty("providerId")
 	protected Long providerId;
+
+	@ApiModelProperty(name = "renewal",
+			required = false,
+			value = "Renewal describes the sharing duration and reauthorization required.")
+	@JsonProperty("renewal")
+	protected Renewal renewal;
 
 	@ApiModelProperty(name = "scope",
 					  required = true,
@@ -204,8 +218,7 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 		this.providerId = providerId;
 	}
 
-	@JsonProperty("scope")
-	public void setScopes(List<Scope> scope) {
+	@JsonProperty("scope") public void setScopes(List<Scope> scope) {
 		if (scopes == null) {
 			scopes = new ArrayList<>();
 		}
@@ -230,5 +243,59 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 		if (scopes != null) {
 			scopes.clear();
 		}
+	}
+
+	/**
+	 * Consent start date. <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET Consent</li>
+	 * </ul>
+	 *
+	 * @return startDate
+	 */
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	/**
+	 * application display name. <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET Consent</li>
+	 * </ul>
+	 *
+	 * @return applicationDisplayName
+	 */
+	public String getApplicationDisplayName() {
+		return applicationDisplayName;
+	}
+
+	public void setApplicationDisplayName(String applicationDisplayName) {
+		this.applicationDisplayName = applicationDisplayName;
+	}
+
+	/**
+	 * containing default consent duration and reauthorization eligibility. <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET Consent</li>
+	 * </ul>
+	 *
+	 * @return renewal
+	 */
+	public Renewal getRenewal() {
+		return renewal;
+	}
+
+	public void setRenewal(Renewal renewal) {
+		this.renewal = renewal;
 	}
 }

@@ -29,5 +29,10 @@ public enum FieldType {
 	/**
 	 * The field values should be displayed as image
 	 */
-	image
+	image,//
+	/**
+	 * The field values should be displayed in a drop down
+	 */
+	option
+	
 }
