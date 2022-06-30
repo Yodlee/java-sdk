@@ -12,16 +12,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.yodlee.api.model.user.enums.Currency;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"amount", "currency"})
+@JsonPropertyOrder({"amount", "currency", "convertedAmount", "convertedCurrency"})
 public class Money extends AbstractModelComponent {
 
 	@NotNull(message="{amount.required}")
 	@JsonProperty("amount")
 	private Double amount;
 
-	@NotNull(message="{currency.required}")
 	@JsonProperty("currency")
 	private Currency currency;
+
+	@JsonProperty("convertedAmount")
+	private Double convertedAmount;
+
+	@JsonProperty("convertedCurrency")
+	private Currency convertedCurrency;
 
 	public Double getAmount() {
 		return amount;
@@ -39,8 +44,24 @@ public class Money extends AbstractModelComponent {
 		this.currency = currency;
 	}
 
-	@Override
-	public String toString() {
-		return "Money [amount=" + amount + ", currency=" + currency + "]";
+	public Double getConvertedAmount() {
+		return convertedAmount;
+	}
+
+	public void setConvertedAmount(Double convertedAmount) {
+		this.convertedAmount = convertedAmount;
+	}
+
+	public Currency getConvertedCurrency() {
+		return convertedCurrency;
+	}
+
+	public void setConvertedCurrency(Currency convertedCurrency) {
+		this.convertedCurrency = convertedCurrency;
+	}
+
+	@Override public String toString() {
+		return "Money [" + "amount=" + amount + ", currency=" + currency + ", convertedAmount=" + convertedAmount
+				+ ", convertedCurrency=" + convertedCurrency + "}";
 	}
 }

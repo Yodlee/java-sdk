@@ -24,5 +24,5 @@ public enum HoldingType {
 	preferredStock,
 	ETF,
 	warrants,
-	ETN;
+	digitalAsset;
 }

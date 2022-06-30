@@ -385,6 +385,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "<li>PRESCRIBED_REGISTERED_RETIREMENT_INCOME_FUND</li>"//
 							  + "<li>GUARANTEED_INVESTMENT_CERTIFICATES</li>"//
 							  + "<li>REGISTERED_DISABILITY_SAVINGS_PLAN</li>"//
+							  + "<li>DIGITAL_WALLET</li>"//
 							  + "<li>OTHER</li>"//
 							  + "</ul>"//
 							  + "<b>investment (SN 2.0)</b>"//
@@ -501,6 +502,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "<li>INVESTMENT_LOAN_ACCOUNT</li>"//
 							  + "<li>GRANTOR_RETAINED_INCOME_TRUST</li>"//
 							  + "<li>PENSION_PLAN</li>"//
+							  + "<li>DIGITAL_WALLET</li>"//
 							  + "<li>OTHER</li>"//
 							  + "</ul>"//
 							  + "<b>loan</b>"//
@@ -1768,6 +1770,28 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 							  + "</ul>")
 	@JsonProperty("lender")
 	protected String lender;
+	
+	@ApiModelProperty(readOnly = true,
+			          value = "The type of account that is aggregated.")
+    @JsonProperty("aggregatedAccountType")
+    protected String aggregatedAccountType;
+
+	/**
+	 * The type of account that is aggregated. <br>
+	 * <br>
+	 * <b>Aggregated / Manual</b>: Aggregated<br>
+	 * <b>Applicable containers</b>: All Containers<br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET accounts</li>
+	 * <li>GET accounts/{accountId}</li>
+	 * </ul>
+	 * 
+	 * @return aggregatedAccountType
+	 */
+	public String getAggregatedAccountType() {
+		return aggregatedAccountType;
+	}
 
 	/**
 	 * The loan payoff details such as date by which the payoff amount should be paid, loan payoff amount, and the
@@ -2289,6 +2313,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 * <li>PRESCRIBED_REGISTERED_RETIREMENT_INCOME_FUND</li>
 	 * <li>GUARANTEED_INVESTMENT_CERTIFICATES</li>
 	 * <li>REGISTERED_DISABILITY_SAVINGS_PLAN</li>
+	 * <li>DIGITAL_WALLET</li>
 	 * <li>OTHER</li>
 	 * </ul>
 	 * <b>investment (SN 2.0)</b>
@@ -2405,6 +2430,7 @@ public abstract class AbstractAccount extends AbstractModelComponent {
 	 * <li>INVESTMENT_LOAN_ACCOUNT</li>
 	 * <li>GRANTOR_RETAINED_INCOME_TRUST</li>
 	 * <li>PENSION_PLAN</li>
+	 * <li>DIGITAL_WALLET</li>
 	 * <li>OTHER</li>
 	 * </ul>
 	 * <b>loan</b>
