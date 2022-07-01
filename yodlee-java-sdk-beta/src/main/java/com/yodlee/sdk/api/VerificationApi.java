@@ -15,6 +15,7 @@ import com.yodlee.api.model.verification.enums.VerifiedAccountsVerificationStatu
 import com.yodlee.api.model.verification.request.UpdateVerificationRequest;
 import com.yodlee.api.model.verification.request.VerificationMatchingRequest;
 import com.yodlee.api.model.verification.request.VerificationRequest;
+import com.yodlee.api.model.verification.response.HolderProfileResponse;
 import com.yodlee.api.model.verification.response.VerificationResponse;
 import com.yodlee.api.model.verification.response.VerificationStatusResponse;
 import com.yodlee.api.model.verification.response.VerifiedAccountResponse;
@@ -356,6 +357,69 @@ public class VerificationApi extends AbstractApi {
 		}
 		if(null != isSelected) {
 			apiContext.addQueryParam(new Pair(PARAM_IS_SELECTED, ApiUtils.convertArrayToString(isSelected)));
+		}
+		registerResponseInterceptor(apiClient);
+		Call call = apiClient.buildCall(apiContext, requestListener());
+		return new CallContext(apiClient, call);
+	}
+	
+	
+	/**
+	 * Get Holder Profile<br>
+	 * The Holder Profile API service allows retrieving the user's profile details 
+	 * (i.e., PII data such as name, email, phone number, and address) that are available 
+	 * at the provider account and each account level. The API accepts the providerAccountId and 
+	 * retrieves the profile information available under it and all the details available under each 
+	 * of the associated accounts. .
+	 * 
+	 * @param providerAccountId providerAccountId (required)
+	 * @param accountId accountId (optional)
+	 * @return {@link ApiResponse}&lt;{@link HolderProfileResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public ApiResponse<HolderProfileResponse>
+		getHolderProfileDetails(//
+					@NotNull(message = "{providerAccounts.param.providerAccountId.required}") long providerAccountId,
+					long accountId)
+					throws ApiException {
+		LOGGER.info("Verification getHolderProfileDetails API execution started");
+		VerificationValidator.validateHolderProfile(this, ApiUtils.getMethodName(), providerAccountId, accountId);
+		CallContext callContext = buildHolderProfileContext(providerAccountId, accountId);
+		return callContext.getApiClient().execute(callContext.getCall(), HolderProfileResponse.class);
+	}
+
+	/**
+	 * Get Holder Profile<br>
+	 * The Holder Profile API service allows retrieving the user's profile details 
+	 * (i.e., PII data such as name, email, phone number, and address) that are available 
+	 * at the provider account and each account level. The API accepts the providerAccountId and 
+	 * retrieves the profile information available under it and all the details available under each 
+	 * of the associated accounts. 
+	 * 
+	 * @param providerAccountId providerAccountId (required)
+	 * @param accountId accountId (optional)
+	 * @param apiCallback {@link ApiResponse}&lt;{@link HolderProfileResponse}&gt; (required)
+	 * @throws ApiException If the input validation fails or API call fails, e.g. server error or cannot deserialize the
+	 *         response body
+	 */
+	public void getHolderProfileDetailsAsync(
+		@NotNull(message = "{providerAccounts.param.providerAccountId.required}")//
+		long providerAccountId,
+		long accountId,//
+		ApiCallback<HolderProfileResponse> apiCallback) throws ApiException {
+		LOGGER.info("Verification getHolderProfileDetails API execution started");
+		VerificationValidator.validateHolderProfile(this, ApiUtils.getMethodName(), providerAccountId, accountId);
+		CallContext callContext = buildHolderProfileContext(providerAccountId, accountId);
+		callContext.getApiClient().executeAsync(callContext.getCall(), HolderProfileResponse.class, apiCallback);
+	}
+	
+	private CallContext buildHolderProfileContext(long providerAccountId, long accountId) throws ApiException {
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
+		ApiContext apiContext = new ApiContext(ApiEndpoint.HOLDER_PROFILE, HttpMethod.GET, null);
+		apiContext.addQueryParam(new Pair(PARAM_PROVIDER_ACCOUNT_ID, String.valueOf(providerAccountId)));
+		if(0L != accountId) {
+			apiContext.addQueryParam(new Pair(PARAM_ACCOUNT_ID, String.valueOf(accountId)));
 		}
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
