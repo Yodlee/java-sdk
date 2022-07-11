@@ -197,4 +197,14 @@ public class VerificationValidator {
 		List<Problem> contextProblems = ApiValidator.validateUserContext(verificationApi);
 		ApiValidator.collectProblems(problems, methodProblems, contextProblems);
 	}
+	
+	public static void validateHolderProfile(VerificationApi verificationApi, String methodName, long providerAccountId, 
+			long accountId) throws ApiException {
+		List<Problem> problems = new ArrayList<>();
+		Class<?>[] argTypes = new Class[] {long.class, long.class};
+		Object[] argValues = new Object[] {providerAccountId, accountId};
+		List<Problem> methodProblems = ApiValidator.validate(verificationApi, methodName, argTypes, argValues);
+		List<Problem> contextProblems = ApiValidator.validateUserContext(verificationApi);
+		ApiValidator.collectProblems(problems, methodProblems, contextProblems);
+	}
 }

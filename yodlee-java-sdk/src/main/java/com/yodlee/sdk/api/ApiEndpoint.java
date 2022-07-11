@@ -131,4 +131,6 @@ public class ApiEndpoint {
 	static final String ACCOUNT_BALANCE = "/accounts/latestBalances";
 	
 	static final String VERIFIED_ACCOUNTS = "/verification/verifiedAccounts";
+	
+	static final String HOLDER_PROFILE = "/verification/holderProfile";
 }
