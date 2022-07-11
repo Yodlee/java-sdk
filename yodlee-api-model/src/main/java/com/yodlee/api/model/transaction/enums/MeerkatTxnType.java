@@ -6,25 +6,15 @@
 package com.yodlee.api.model.transaction.enums;
 
 public enum MeerkatTxnType {
-	AUTHORIZATION(1),
 	CHARGES_FEES(2),
-	DEBIT(3),
 	INTEREST(4),
 	PURCHASE(5),
 	PAYMENT(6),
 	REFUND(7),
 	TRANSFER(8),
 	WITHDRAWAL(9),
-	CREDIT(10),
-	DEFERRED(11),
 	DEPOSIT(12),
-	VOID(13),
-	POS_DEBIT(14),
-	CASH_ADVANCE(15),
-	BANK_ADJUSTMENT(16),
-	DEPOSITS_CREDITS(17),
-	OTHER_DEPOSITS(18),
-	OTHER_WITHDRAWALS(19);
+	DEPOSITS_CREDITS(17);
 
 	private long id;
 
