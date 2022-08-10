@@ -15,7 +15,7 @@ public enum PolicyStatus {
 	/**
 	 * Denotes the policy is inactive
 	 */
-	INACTIVE,
+	IN_ACTIVE,
 	//
 	//
 	/**
