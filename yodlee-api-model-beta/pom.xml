@@ -4,8 +4,8 @@
 	<artifactId>yodlee-api-model-beta</artifactId>
 	<version>1.0.26.beta1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>Yodlee API Model</name>
-	<description>Yodlee API Model</description>
+	<name>Yodlee API Model Beta</name>
+	<description>Yodlee API Model Beta is the stage version</description>
 	<url>https://github.com/Yodlee/java-sdk</url>
 	<licenses>
 		<license>
@@ -39,7 +39,7 @@
 		<connection>scm:git:git://github.com/Yodlee/java-sdk.git</connection>
 		<developerConnection>scm:git:git://github.com/Yodlee/java-sdk.git</developerConnection>
 		<url>https://github.com/Yodlee/java-sdk</url>
-		<tag>yodlee-api-model-beta-1.0.25.beta1</tag>
+		<tag>yodlee-api-model-beta-1.0.26.beta1</tag>
 	</scm>
 
 	<properties>
