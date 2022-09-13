@@ -1,0 +1,2 @@
+testCaseId,testCaseName,groupBy,accountId,categoryId,categoryType,fromDate,include,includeUserCategory,interval,toDate,enabled
+1,getTransactionSummary,CATEGORY_TYPE,,,INCOME,2019-06-10,details,false,M,2019-06-15,TRUE

@@ -1,0 +1,7 @@
+testCaseId,testCaseName,providerAccountId,accountId,isSelected,verificationStatus,enabled
+1,SuccessVerifiedAccounts,11401358,1140236,true,SUCCESS,TRUE
+2,FailedVerifiedAccounts,11401358,1140236,true,FAILED,TRUE
+3,EmptyFilters,11401358,,,,TRUE
+4,falseIsSelectedVerifiedAccounts,11401358,1140236,false,FAILED,TRUE
+5,SuccessFailedVerifiedAccounts,11401358,1140236,true,SUCCESS#FAILED,TRUE
+

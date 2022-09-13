@@ -193,6 +193,11 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * SUCCESS</li>
 	 * </ul>
 	 * 
+	 * Only for the REDSYS/PSD2 UK OB integration, passing the state parameter is mandatory during the add or update 
+	 * account process. The state parameter key can be found in the authParameter attribute of the get provider or 
+	 * get provider details API response. The value for the state parameter is present in the Authorization URL. 
+	 * Append the callback URL to the state parameter while adding or updating an account.
+	 * 
 	 * @param providerAccountId - ProviderAccountId
 	 * @param providerAccountRequest - Credentials Information
 	 * @return {@link ApiResponse}&lt;{@link UpdatedProviderAccountResponse}&gt;
@@ -232,6 +237,11 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * continuously to know the process status, till the account addition status is FAILED or PARTIAL_SUCCESS or
 	 * SUCCESS</li>
 	 * </ul>
+	 * 
+	 * Only for the REDSYS/PSD2 UK OB integration, passing the state parameter is mandatory during the add or update 
+	 * account process. The state parameter key can be found in the authParameter attribute of the get provider or 
+	 * get provider details API response. The value for the state parameter is present in the Authorization URL. 
+	 * Append the callback URL to the state parameter while adding or updating an account.
 	 * 
 	 * @param providerAccountId - ProviderAccountId
 	 * @param providerAccountRequest - Credentials Information
@@ -545,6 +555,11 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * credentials using the encryption utility. The content type has to be passed as application/json in the body
 	 * parameter.
 	 * 
+	 * Only for the REDSYS/PSD2 UK OB integration, passing the state parameter is mandatory during the add or update 
+	 * account process. The state parameter key can be found in the authParameter attribute of the get provider or 
+	 * get provider details API response. The value for the state parameter is present in the Authorization URL. 
+	 * Append the callback URL to the state parameter while adding or updating an account.
+	 * 
 	 * @param providerAccountRequest - credentialsParam
 	 * @param providerId - providerId
 	 * @return {@link ApiResponse}{@literal <}{@link AddedProviderAccountResponse}{@literal >}
@@ -592,6 +607,11 @@ public class ProviderAccountsApi extends AbstractApi {
 	 * credential-based providerAccount belongs to the same institution. While testing the PKI feature, encrypt the
 	 * credentials using the encryption utility. The content type has to be passed as application/json in the body
 	 * parameter.
+	 * 
+	 * Only for the REDSYS/PSD2 UK OB integration, passing the state parameter is mandatory during the add or update 
+	 * account process. The state parameter key can be found in the authParameter attribute of the get provider or 
+	 * get provider details API response. The value for the state parameter is present in the Authorization URL. 
+	 * Append the callback URL to the state parameter while adding or updating an account.
 	 * 
 	 * @param providerAccountRequest - credentialsParam
 	 * @param providerId - ProviderId

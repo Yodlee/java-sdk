@@ -1,0 +1,2 @@
+testCaseId,testCaseName,createFileName,updateFileName,enabled
+1,Call UpdateTransactionCategorization Rules,/request/transactions/createTransactionCategorizationRule.json,/request/transactions/updateTransactionCategorizationRule.json,TRUE
