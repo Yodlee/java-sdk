@@ -15,6 +15,7 @@ import com.yodlee.api.model.Request;
 import com.yodlee.api.model.enums.AggregationSource;
 import com.yodlee.api.model.enums.DatasetNameType;
 import com.yodlee.api.model.provideraccounts.ProviderAccountPreferences;
+import com.yodlee.api.model.providers.enums.ProviderAuthParameter;
 
 public abstract class AbstractProviderAccountRequest extends AbstractModelComponent implements Request {
 
@@ -117,4 +118,5 @@ public abstract class AbstractProviderAccountRequest extends AbstractModelCompon
 	public AggregationSource getAggregationSource() {
 		return aggregationSource;
 	}
+
 }

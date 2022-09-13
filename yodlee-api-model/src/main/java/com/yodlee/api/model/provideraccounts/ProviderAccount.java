@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"id", "aggregationSource", "providerId", "consentId", "isManual", "createdDate", "requestId", "status",
+@JsonPropertyOrder({"id", "aggregationSource", "providerId", "consentId", "isManual", "isRealTimeMFA", "createdDate", "requestId", "status",
 		"dataset", "loginForm", "isAutoRefreshPreferred", "isDataExtractsPreferred", "preferences", "oauthMigrationStatus"})
 public class ProviderAccount extends AbstractProviderAccount {
 
@@ -53,6 +53,20 @@ public class ProviderAccount extends AbstractProviderAccount {
 	@JsonProperty("consentId")
 	private Long consentId;
 	
+	@ApiModelProperty(readOnly = true, value= "Attribute to specify whether the user has to input(credentials/MFA) for refreshing an account"//
+			  + "<br><br>"//
+			  + "<b>Endpoints</b>:"//
+			  + "<ul>"//
+			  + "<li>GET providerAccounts</li>"//
+			  + "<li>GET providerAccounts/{providerAccountId}</li>")
+	@JsonProperty("isRealTimeMFA")
+	private boolean isRealTimeMFA;
+
+	@JsonProperty("isRealTimeMFA")
+	public boolean getIsRealTimeMFA() {
+		return isRealTimeMFA;
+	}
+	
 	public Long getConsentId() {
 		return consentId;
 	}
@@ -91,6 +105,6 @@ public class ProviderAccount extends AbstractProviderAccount {
 
 	@Override
 	public String toString() {
-		return "ProviderAccount [createdDate=" + createdDate + ", consentId=" + consentId + ", preferences=" + preferences + ", oauthMigrationStatus=" + openBankingMigrationStatusType +"]";
+		return "ProviderAccount [createdDate=" + createdDate + ", consentId=" + consentId + ", isRealTimeMFA=" + isRealTimeMFA + ", preferences=" + preferences + ", oauthMigrationStatus=" + openBankingMigrationStatusType +"]";
 	}
 }

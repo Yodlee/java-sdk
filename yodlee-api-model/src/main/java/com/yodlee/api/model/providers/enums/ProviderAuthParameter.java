@@ -17,5 +17,9 @@ public enum ProviderAuthParameter {
 	/**
 	 * applicable only for all OAUTH sites for US.
 	 */
-	authResponse
+	authResponse,//
+	/**
+	 * applicable only for REDSYS/PSD2 UK OB integration.
+	 */
+	state
 }

@@ -41,12 +41,12 @@ public class Consent extends AbstractConsent {
 	public Long getId() {
 		return id;
 	}
-
 	@Override
 	public String toString() {
 		return "Consent [id=" + id + ", consentId=" + consentId + ", title=" + title + ", titleBody=" + titleBody
 				+ ", expirationDate=" + expirationDate + ", dataAccessFrequency=" + dataAccessFrequency
-				+ ", consentStatus=" + consentStatus + ", providerId=" + providerId + ", renewal=" + renewal + ", scopes=" + scopes + "]";
+				+ ", consentStatus=" + consentStatus + ", providerId=" + providerId + ", renewal=" + renewal
+				+ ", scopes=" + scopes + ", otspADR=" + otspADR + ", otspADRName=" + otspADRName + ", clientADR=" + clientADR + ", preferences=" + preferences + ", thirdPartyADR=" + thirdPartyADR + "]";
 	}
 
 }

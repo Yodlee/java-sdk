@@ -91,8 +91,9 @@ public class ProviderAccountRequest extends AbstractProviderAccountRequest {
 
 	@Override
 	public String toString() {
-		return "ProviderAccountRequest [consentId=" + consentId + ", datasets=" + datasets + ", preferences="
-				+ preferences + ", field=" + fields + ", datasetName=" + datasetNames + ", aggregationSource"
+		return "ProviderAccountRequest [consentId=" + consentId + ", fields=" + fields + ", datasets=" + datasets
+				+ ", preferences=" + preferences + ", datasetNames=" + datasetNames + ", aggregationSource="
 				+ aggregationSource + "]";
 	}
+
 }

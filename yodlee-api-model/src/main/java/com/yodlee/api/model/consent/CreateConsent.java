@@ -12,13 +12,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({"consentId", "title", "titleBody", "expirationDate", "dataAccessFrequency", "consentStatus",
 		"providerId", "scope"})
 public class CreateConsent extends AbstractConsent {
-
 	@Override
 	public String toString() {
 		return "CreateConsent [consentId=" + consentId + ", title=" + title + ", titleBody=" + titleBody
 				+ ", expirationDate=" + expirationDate + ", startDate=" + startDate + ", applicationDisplayName="
 				+ applicationDisplayName + ", dataAccessFrequency=" + dataAccessFrequency + ", consentStatus="
-				+ consentStatus + ", providerId=" + providerId + ", renewal=" + renewal + ", scopes=" + scopes + "]";
+				+ consentStatus + ", providerId=" + providerId + ", renewal=" + renewal + ", scopes=" + scopes
+				+ ", otspADR=" + otspADR + ", otspADRName=" + otspADRName + ", clientADR=" + clientADR + ", preferences=" + preferences + ", thirdPartyADR=" + thirdPartyADR + "]";
 	}
-
 }
