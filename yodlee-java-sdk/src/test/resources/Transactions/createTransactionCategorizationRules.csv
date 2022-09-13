@@ -1,0 +1,2 @@
+testCaseId,testCaseName,fileName,enabled
+1,Call createTransactionCategorizationRules API,/request/transactions/createTransactionCategorizationRule.json,TRUE

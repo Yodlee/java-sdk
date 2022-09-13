@@ -1,0 +1,2 @@
+testCaseId,testCaseName,cobrandLogin,cobrandPassword,locale,enabled
+1,Do cobrandLogin with valid credentials and then call cobrandLogout,yodlee_10000004,yodlee123,en_US,TRUE

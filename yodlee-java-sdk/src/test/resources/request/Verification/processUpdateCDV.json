@@ -1,0 +1,30 @@
+{
+	"verification": {
+		"verificationType": "CHALLENGE_DEPOSIT",
+		"accountId": 9999,
+		"providerAccountId": 1231,
+		"transaction": [
+			{
+				"amount": {
+					"amount": 0.68,
+					"currency": "USD"
+				},
+				"baseType": "CREDIT"
+			},
+			{
+				"amount": {
+					"amount": 0.21,
+					"currency": "USD"
+				},
+				"baseType": "CREDIT"
+			},
+			{
+				"amount": {
+					"amount": 0.94,
+					"currency": "USD"
+				},
+				"baseType": "DEBIT"
+			}
+		]
+	}
+}
