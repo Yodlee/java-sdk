@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Response;
+import com.yodlee.api.model.enums.AccountAgeClassification;
 import com.yodlee.api.model.enums.AdditionalStatusType;
 import com.yodlee.api.model.enums.VerificationRequestFailedReason;
 import com.yodlee.api.model.verification.VerifiedAccounts;
@@ -66,6 +67,7 @@ public class VerifiedAccountResponse extends AbstractModelComponent implements R
 		return failedReason;
 	}
 
+		
 	@Override
 	public String toString() {
 		return "VerifiedAccountResponse [verifiedAccountList=" + verifiedAccountList + ", requestId=" + requestId

@@ -17,6 +17,7 @@ import com.yodlee.api.model.Money;
 import com.yodlee.api.model.account.BankTransferCode;
 import com.yodlee.api.model.account.FullAccountNumberList;
 import com.yodlee.api.model.account.enums.AccountClassification;
+import com.yodlee.api.model.enums.AccountAgeClassification;
 import com.yodlee.api.model.verification.enums.VerifiedAccountsContainer;
 import com.yodlee.api.model.verification.enums.VerificationAccountFailedReason;
 import com.yodlee.api.model.verification.enums.VerifiedAccountsVerificationStatus;
@@ -275,6 +276,10 @@ public class VerifiedAccounts extends AbstractModelComponent {
 	@JsonProperty("isSelected")
 	private Boolean isSelected;
 
+	@ApiModelProperty(readOnly = true, value= "Attribute to return the classification of the account age by specifying whether the account is old/new/recent as relevant for a verification use case. If it could not be classified into any one of these values, the attribute would return the value as 'unclassified'")
+	@JsonProperty("accountAgeClassification")
+	private AccountAgeClassification accountAgeClassification;
+	
 	/**
 	 * The type of service. E.g., Bank, Investment,.<br>
 	 * <br>
@@ -640,6 +645,11 @@ public class VerifiedAccounts extends AbstractModelComponent {
 		return isSelected;
 	}
 
+	@JsonProperty("accountAgeClassification")
+	public AccountAgeClassification getAccountAgeClassification() {
+		return accountAgeClassification;
+	}
+	
 	@Override
 	public String toString() {
 		return "VerifiedAccounts [container=" + container + ", providerId=" + providerId + ", providerAccountId="
@@ -649,6 +659,6 @@ public class VerifiedAccounts extends AbstractModelComponent {
 				+ currentBalance + ", balance=" + balance + ", cash=" + cash + ", verificationStatus="
 				+ verificationStatus + ", failedReason=" + failedReason + ", classification=" + classification
 				+ ", bankTransferCode=" + bankTransferCode + ", fullAccountNumberList=" + fullAccountNumberList
-				+ ", holders=" + holders + ", isSelected=" + isSelected + "]";
+				+ ", holders=" + holders + ", isSelected=" + isSelected + ", accountAgeClassification=" + accountAgeClassification + "]";
 	}
 }

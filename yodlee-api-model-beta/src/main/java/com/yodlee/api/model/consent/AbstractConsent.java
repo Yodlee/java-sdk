@@ -17,8 +17,10 @@ import com.yodlee.api.model.consent.enums.DataAccessFrequency;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"consentId", "title", "titleBody", "startDate","expirationDate","applicationDisplayName", "dataAccessFrequency", "consentStatus",
-		"providerId", "renewal", "scope"})
+@JsonPropertyOrder({"consentId", "title", "titleBody", "startDate","expirationDate",
+		"dataAccessFrequency", "consentStatus",
+		"providerId", "applicationDisplayName","otspADR","otspADRName",
+		"clientADR","renewal","scope","preferences","thirdPartyADR"})
 public abstract class AbstractConsent extends AbstractModelComponent {
 
 	@ApiModelProperty(name = "consentId", required = true, value = "Consent Id generated through POST Consent.")
@@ -40,6 +42,18 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 	@ApiModelProperty(name = "startDate", required = true, value = "Consent start date.")
 	@JsonProperty("startDate")
 	protected String startDate;
+
+	@ApiModelProperty(name = "otspADR", required = false, value = "Unique/Accredition Id of the ADR")
+	@JsonProperty("otspADR")
+	protected String otspADR;
+
+	@ApiModelProperty(name = "otspADRName", required = false, value = "Name of the Accredited Data Recipient/Organization")
+	@JsonProperty("otspADRName")
+	protected String otspADRName;
+
+	@ApiModelProperty(name = "clientADR", required = true, value = "Client Name of the ADR")
+	@JsonProperty("clientADR")
+	protected String clientADR;
 
 	@ApiModelProperty(name = "applicationDisplayName", required = true, value = "Application display name.")
 	@JsonProperty("applicationDisplayName")
@@ -69,11 +83,23 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 	@JsonProperty("renewal")
 	protected Renewal renewal;
 
+	@ApiModelProperty(name = "preferences",
+			required = true,
+			value = "Preferences describes options about the additional usage of data or purge data")
+	@JsonProperty("preferences")
+	protected List<Preferences> preferences;
+
 	@ApiModelProperty(name = "scope",
 					  required = true,
 					  value = "Scope describes about the consent permissions and their purpose.")
 	@JsonProperty("scope")
 	protected List<Scope> scopes;
+
+	@ApiModelProperty(name = "thirdPartyADR",
+			required = false,
+			value = "ThirdPartyADR describes details of additional parties which are accredited data recipients under organization")
+	@JsonProperty("thirdPartyADR")
+	protected List<ThirdPartyADR> thirdPartyADR;
 
 	/**
 	 * Consent Id generated through POST Consent. <br>
@@ -297,5 +323,106 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 
 	public void setRenewal(Renewal renewal) {
 		this.renewal = renewal;
+	}
+	/**
+	 * containing ADR name and Details <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>POST Consent</li>
+	 * </ul>
+	 *
+	 * @return otspADR
+	 */
+	public String getOtspADR() {
+		return otspADR;
+	}
+
+	public void setOtspADR(String otspADR) {
+		this.otspADR = otspADR;
+	}
+
+	/**
+	 * containing ADR name and Details <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>POST Consent</li>
+	 * </ul>
+	 *
+	 * @return otspADRName
+	 */
+
+	public String getOtspADRName() {
+		return otspADRName;
+	}
+
+	public void setOtspADRName(String otspADRName) {
+		this.otspADRName = otspADRName;
+	}
+
+	/**
+	 * containing ADR name and Details <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>POST Consent</li>
+	 * </ul>
+	 *
+	 * @return clientADR
+	 */
+	public String getClientADR() {
+		return clientADR;
+	}
+
+	public void setClientADR(String clientADR) {
+		this.clientADR = clientADR;
+	}
+
+	/**
+	 * containing Preference of the User on the consent provided<br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>POST Consent</li>
+	 * </ul>
+	 *
+	 * @return preferences
+	 */
+	@JsonProperty("preferences")
+	public List<Preferences> getPreferences() {
+		return preferences == null ? null : Collections.unmodifiableList(preferences);
+	}
+
+
+	@JsonProperty("preferences")
+	public void setPreferences(List<Preferences> preference) {
+		if (preferences == null) {
+			preferences = new ArrayList<>();
+		}
+		preferences = preference;
+	}
+
+	/**
+	 * containing thirdPartyADR details on the consent provided<br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>POST Consent</li>
+	 * </ul>
+	 *
+	 * @return thirdPartyADR
+	 */
+	@JsonProperty("thirdPartyADR")
+	public List<ThirdPartyADR> getThirdPartyADR() {
+		return thirdPartyADR;
+	}
+
+	@JsonProperty("thirdPartyADR")
+	public void setThirdPartyADR(List<ThirdPartyADR> thirdPartyADR) {
+		if (thirdPartyADR == null) {
+			thirdPartyADR = new ArrayList<>();
+		}
+		this.thirdPartyADR = thirdPartyADR;
 	}
 }
