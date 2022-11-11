@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.yodlee.api.model.AbstractModelComponent;
+import com.yodlee.api.model.account.enums.UserClassification;
 import com.yodlee.api.model.verification.enums.VerificationAccountType;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -34,6 +35,9 @@ public class VerificationAccount extends AbstractModelComponent {
 
 	@JsonProperty("accountName")
 	private String accountName;
+	
+	@JsonProperty("userClassification")
+	private UserClassification userClassification;
 
 	public VerificationBankTransferCode getBankTransferCode() {
 		return bankTransferCode;
@@ -73,6 +77,6 @@ public class VerificationAccount extends AbstractModelComponent {
 	public String toString() {
 		return "VerificationAccount [accountNumber=" + accountNumber + ", verificationAccountType="
 				+ verificationAccountType + ", bankTransferCode=" + bankTransferCode + ", accountName=" + accountName
-				+ "]";
+				+ ", userClassification=" + userClassification + "]";
 	}
 }

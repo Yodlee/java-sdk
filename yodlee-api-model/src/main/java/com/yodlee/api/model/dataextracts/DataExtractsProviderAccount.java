@@ -60,6 +60,39 @@ public class DataExtractsProviderAccount extends AbstractProviderAccount {
 					  + "</ul>")
 	@JsonProperty("sourceProviderAccountIds")
 	protected List<Long> sourceProviderAccountIds;
+	
+	@ApiModelProperty(readOnly = true,
+			  value = "Attribute to specify whether the user has to input(credentials/MFA) for refreshing an account.<br>"//
+					  + "<b>Endpoints</b>:"//
+					  + "<ul>"//
+					  + "<li>GET providerAccounts</li>"//
+					  + "<li>GET GET providerAccounts/{providerAccountId}</li>"//
+					  + "</ul>")
+	
+	@JsonProperty("isRealTimeMFA")
+	protected boolean isRealTimeMFA;
+	
+	@ApiModelProperty(name = "consentId",
+			  required = false,
+			  value = "Consent Id generated through POST Consent."//
+			  + "<br><br>"//
+			  + "<b>Endpoints</b>:"//
+			  + "<ul>"//
+			  + "<li>GET providerAccounts</li>"//
+			  + "<li>POST providerAccounts</li>"//
+			  + "<li>PUT providerAccounts/{providerAccountId}</li>"//
+			  + "<li>GET providerAccounts/{providerAccountId}</li>"//
+			  + "</ul>")
+	@JsonProperty("consentId")
+	private Long consentId;
+
+	public boolean getIsRealTimeMFA() {
+		return isRealTimeMFA;
+	}
+	
+	public Long getConsentId() {
+		return consentId;
+	}
 
 	/**
 	 * The date on when the provider account is created in the system. <br>
