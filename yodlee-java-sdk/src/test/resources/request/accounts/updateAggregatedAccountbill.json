@@ -1,9 +1,0 @@
-{
-	"account": {
-		"nickname": "Flood Cash",
-		"accountStatus": "ACTIVE",
-		"includeInNetWorth": true,
-		"memo": "Personal Account",
-		"isEbillEnrolled": "TRUE"
-	}
-}

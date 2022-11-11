@@ -1,3 +1,0 @@
-testCaseId,testCaseName,fileNametoSubcribe,fileName,eventName,enabled
-1,Update REFRESH Events,/request/cobrand/subscribeEvents.json,/request/cobrand/updateSubscribedEvents.json,REFRESH,TRUE
-2,Update DATA_UPDATES events,/request/cobrand/subscribeEvents.json,/request/cobrand/updateSubscribedEvents.json,DATA_UPDATES,TRUE
