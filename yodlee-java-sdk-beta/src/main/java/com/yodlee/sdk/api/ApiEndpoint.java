@@ -133,4 +133,6 @@ public class ApiEndpoint {
 	static final String VERIFIED_ACCOUNTS = "/verification/verifiedAccounts";
 	
 	static final String HOLDER_PROFILE = "/verification/holderProfile";
+	
+	static final String CLASSIFICATION_SUMMARY = "/verification/classification/summary";
 }

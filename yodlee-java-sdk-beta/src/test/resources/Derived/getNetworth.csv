@@ -1,2 +1,0 @@
-testCaseId,testCaseName,accountIds,fromDate,include,interval,skip,toDate,top,container,enabled
-1,getNetworth,,10-06-2019,details,M,0,15-06-2019,100,bank,TRUE

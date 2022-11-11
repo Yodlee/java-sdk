@@ -1,8 +1,0 @@
-testCaseId,testCaseName,accountId,container,fromDate,isLatest,status,enabled
-1,Call Get Statements API with no input,,,,,,TRUE
-2,Call Get Statements API with all input,1112685802,bill,1558344837,false,ACTIVE,TRUE
-3,Call Get Statements API with id,1112685802,,,,,TRUE
-4,Call Get Statements API with container,,bill,,,,TRUE
-5,Call Get Statements API with isLatest,,,,false,,TRUE
-6,Call Get Statements API with fromDate,,,1558344837,,,TRUE
-7,Call Get Statements API with status,,,,,ACTIVE,TRUE

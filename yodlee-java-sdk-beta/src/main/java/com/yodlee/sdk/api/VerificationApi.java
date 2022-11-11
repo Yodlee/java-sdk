@@ -15,6 +15,7 @@ import com.yodlee.api.model.verification.enums.VerifiedAccountsVerificationStatu
 import com.yodlee.api.model.verification.request.UpdateVerificationRequest;
 import com.yodlee.api.model.verification.request.VerificationMatchingRequest;
 import com.yodlee.api.model.verification.request.VerificationRequest;
+import com.yodlee.api.model.verification.response.ClassificationSummaryResponse;
 import com.yodlee.api.model.verification.response.HolderProfileResponse;
 import com.yodlee.api.model.verification.response.VerificationResponse;
 import com.yodlee.api.model.verification.response.VerificationStatusResponse;
@@ -421,6 +422,57 @@ public class VerificationApi extends AbstractApi {
 		if(0L != accountId) {
 			apiContext.addQueryParam(new Pair(PARAM_ACCOUNT_ID, String.valueOf(accountId)));
 		}
+		registerResponseInterceptor(apiClient);
+		Call call = apiClient.buildCall(apiContext, requestListener());
+		return new CallContext(apiClient, call);
+	}
+	
+	/**
+	 * Get Classification Summary<br>
+	 * The get classification summary API service returns attributes that provide account-level and transaction-level summary for a user's account.<br><br>
+	 * As a prerequisite, the Account Verification customers should have Transactions enabled to fetch a response. 
+	 * The API can be invoked only for an account verified by the user following the get verified accounts API call. 
+	 * If the prerequisite is not satisfied, an appropriate error will be returned on invoking the API.
+	 * 
+	 * @param accountId accountId (required)
+	 * @return {@link ApiResponse}&lt;{@link ClassificationSummaryResponse}&gt;
+	 * @throws ApiException If the input validation fails or API call fails
+	 */
+	public ApiResponse<ClassificationSummaryResponse>
+		getClassificationSummary(//
+					@NotNull(message = "{verifications.param.accountId.required}") long accountId)
+					throws ApiException {
+		LOGGER.info("Verification getClassificationSummary API execution started");
+		VerificationValidator.validateClassificationmSummary(this, ApiUtils.getMethodName(), accountId);
+		CallContext callContext = buildClassificationSummaryContext(accountId);
+		return callContext.getApiClient().execute(callContext.getCall(), ClassificationSummaryResponse.class);
+	}
+	
+	/**
+	 * Get Classification Summary<br>
+	 * The get classification summary API service returns attributes that provide account-level and transaction-level summary for a user's account.<br><br>
+	 * As a prerequisite, the Account Verification customers should have Transactions enabled to fetch a response. 
+	 * The API can be invoked only for an account verified by the user following the get verified accounts API call. 
+	 * If the prerequisite is not satisfied, an appropriate error will be returned on invoking the API.
+	 * 
+	 * @param accountId accountId (required)
+	 * @param apiCallback {@link ApiResponse}&lt;{@link ClassificationSummaryResponse}&gt; (required)
+	 * @throws ApiException If the input validation fails or API call fails
+	 */
+	public void getClassificationSummaryAsync(
+		@NotNull(message = "{verifications.param.accountId.required}")//
+		long accountId,//
+		ApiCallback<ClassificationSummaryResponse> apiCallback) throws ApiException {
+		LOGGER.info("Verification getClassificationSummary API execution started");
+		VerificationValidator.validateClassificationmSummary(this, ApiUtils.getMethodName(), accountId);
+		CallContext callContext = buildClassificationSummaryContext(accountId);
+		callContext.getApiClient().executeAsync(callContext.getCall(), ClassificationSummaryResponse.class, apiCallback);
+	}
+	
+	private CallContext buildClassificationSummaryContext(long accountId) throws ApiException {
+		ApiClient apiClient = getContext().getApiClient(getRequestHeaderMap());
+		ApiContext apiContext = new ApiContext(ApiEndpoint.CLASSIFICATION_SUMMARY, HttpMethod.GET, null);
+		apiContext.addQueryParam(new Pair(PARAM_ACCOUNT_ID, String.valueOf(accountId)));
 		registerResponseInterceptor(apiClient);
 		Call call = apiClient.buildCall(apiContext, requestListener());
 		return new CallContext(apiClient, call);
