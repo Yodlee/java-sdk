@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"id", "loginName", "name", "address", "preferences", "roleType"})
+@JsonPropertyOrder({"id", "loginName", "name", "address", "preferences", "roleType", "phoneNumber"})
 public class UserDetail extends AbstractUser {
 
 	@ApiModelProperty(readOnly = true,
@@ -36,6 +36,9 @@ public class UserDetail extends AbstractUser {
 
 	@JsonProperty("segmentName")
 	protected String segmentName;
+	
+	@JsonProperty("phoneNumber")
+	protected String phoneNumber;
 
 	/**
 	 * The email address of the user. <br>
@@ -69,11 +72,15 @@ public class UserDetail extends AbstractUser {
 	public String getSegmentName() {
 		return segmentName;
 	}
+	
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
 
 	@Override
 	public String toString() {
 		return "UserDetail [email=" + email + ", id=" + id + ", loginName=" + loginName + ", name=" + name
-				+ ", address=" + address + ", preferences=" + preferences + ", roleType=" + roleType + ", segmentName="
-				+ segmentName + "]";
+				+ ", address=" + address + ", preferences=" + preferences + ", roleType=" + roleType + ", phoneNumber=" + phoneNumber + ","
+				+ " segmentName=" + segmentName + "]";
 	}
 }

@@ -34,6 +34,17 @@ public abstract class AbstractUserRegistration extends AbstractModelComponent {
 	public void setAddress(UserAddress address) {
 		this.address = address;
 	}
+	
+	@JsonProperty("phoneNumber")
+	protected String phoneNumber;
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
 	public Name getName() {
 		return name;
