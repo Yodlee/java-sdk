@@ -5,6 +5,9 @@
  */
 package com.yodlee.api.model.holdings;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
@@ -350,6 +353,25 @@ public abstract class AbstractHolding extends AbstractModelComponent {
 	)
 	@JsonProperty("holdingType")
 	protected HoldingType holdingType;
+	
+	@ApiModelProperty(readOnly = true, value = "The providerAccountIds that share the account with the primary providerAccountId that was created when the user had added the account for the first time."//
+			+ "<br><b>Additional Details</b>: This attribute is returned in the response only if the account deduplication feature is enabled and the same account is mapped to more than one provider account IDs indicating the account is owned by more than one user, for example, joint accounts."//
+			+ "<br><br>"//
+			+ "<b>Aggregated / Manual</b>: Aggregated<br>"//
+			+ "<b>Applicable containers</b>: All Containers<br>"//
+			+ "<b>Endpoints</b>:"//
+			+ "<ul>"//
+			+ "<li>GET accounts</li>"//
+			+ "<li>GET accounts/{accountId}</li>"//
+			+ "<li>GET dataExtracts/userData</li>"//
+			+ "</ul>")
+	@JsonProperty("associatedProviderAccountId")
+	protected List<Long> associatedProviderAccountIds;
+	
+	@JsonProperty("associatedProviderAccountId")
+	public List<Long> getAssociatedProviderAccountId() {
+		return associatedProviderAccountIds == null ? null : Collections.unmodifiableList(associatedProviderAccountIds);
+	}
 
 	/**
 	 * The CUSIP (Committee on Uniform Securities Identification Procedures) identifies most the financial instruments

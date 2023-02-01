@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonPropertyOrder({"consentId", "title", "titleBody", "startDate","expirationDate",
 		"dataAccessFrequency", "consentStatus",
 		"providerId", "applicationDisplayName","otspADR","otspADRName",
-		"clientADR","renewal","scope","preferences","thirdPartyADR"})
+		"clientADR","renewal","scope","preferences","thirdPartyADR", "userDataTreatment"})
 public abstract class AbstractConsent extends AbstractModelComponent {
 
 	@ApiModelProperty(name = "consentId", required = true, value = "Consent Id generated through POST Consent.")
@@ -100,6 +100,12 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 			value = "ThirdPartyADR describes details of additional parties which are accredited data recipients under organization")
 	@JsonProperty("thirdPartyADR")
 	protected List<ThirdPartyADR> thirdPartyADR;
+	
+	@ApiModelProperty(name = "userDataTreatment",
+			required = false,
+			value = "userDataTreatment describes details consumer data right policy and De-identification of data")
+	@JsonProperty("userDataTreatment")
+	protected UserDataTreatment userDataTreatment;
 
 	/**
 	 * Consent Id generated through POST Consent. <br>
@@ -425,4 +431,25 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 		}
 		this.thirdPartyADR = thirdPartyADR;
 	}
+	
+	/**
+	 * containing userDataTreatment details on the consent provided<br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>POST Consent</li>
+	 * </ul>
+	 *
+	 * @return userDataTreatment
+	 */
+
+	public UserDataTreatment getUserDataTreatment() {
+		return userDataTreatment;
+	}
+
+	public void setUserDataTreatment(UserDataTreatment userDataTreatment) {
+		this.userDataTreatment = userDataTreatment;
+	}
+	
+	
 }

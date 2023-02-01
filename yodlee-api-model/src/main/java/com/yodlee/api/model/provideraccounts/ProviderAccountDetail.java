@@ -69,6 +69,20 @@ public class ProviderAccountDetail extends AbstractProviderAccount {
 							  + "</ul>")
 	@JsonProperty("consentId")
 	private Long consentId;
+	
+	@ApiModelProperty(readOnly = true, value= "Attribute to specify whether the user has to input(credentials/MFA) for refreshing an account"//
+			  + "<br><br>"//
+			  + "<b>Endpoints</b>:"//
+			  + "<ul>"//
+			  + "<li>GET providerAccounts</li>"//
+			  + "<li>GET providerAccounts/{providerAccountId}</li>")
+	@JsonProperty("isRealTimeMFA")
+	private boolean isRealTimeMFA;
+
+	@JsonProperty("isRealTimeMFA")
+	public boolean getIsRealTimeMFA() {
+		return isRealTimeMFA;
+	}
 
 	public Long getConsentId() {
 		return consentId;

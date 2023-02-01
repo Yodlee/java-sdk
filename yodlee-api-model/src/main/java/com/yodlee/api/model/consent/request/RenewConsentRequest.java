@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.RenewalConsent;
 import com.yodlee.api.model.Request;
+import com.yodlee.api.model.consent.RenewConsentPreferences;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -24,6 +25,15 @@ public class RenewConsentRequest extends AbstractModelComponent implements Reque
 			+ "</ul>")
 	@JsonProperty(value = "renewal", required = true)
 	private RenewalConsent renewal;
+	
+	@ApiModelProperty(value = "preferences for consent renewal."//
+			+ "<br><br>"//
+			+ "<b>Endpoints</b>:"//
+			+ "<ul>"//
+			+ "<li>PUT consents/{consentId}/renewal</li>"//
+			+ "</ul>")
+	@JsonProperty("preferences")
+	private RenewConsentPreferences preferences;
 
 	/**
 	 * renewal entity from consent details service, containing default consent duration and reauthorization eligibility. <br>
@@ -40,5 +50,30 @@ public class RenewConsentRequest extends AbstractModelComponent implements Reque
 
 	public void setRenewal(RenewalConsent renewal) {
 		this.renewal = renewal;
+	}
+
+	
+	/**
+	 * preferences for consent renewal. <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>PUT consents/{consentId}/renewal</li>
+	 * </ul>
+	 * 
+	 * @return preferences
+	 */
+	
+	public RenewConsentPreferences getPreferences() {
+		return preferences;
+	}
+
+	public void setPreferences(RenewConsentPreferences preferences) {
+		this.preferences = preferences;
+	}
+	
+	@Override
+	public String toString() {
+		return "[renewal=" + renewal + ", preferences=" + preferences + "]";
 	}
 }
