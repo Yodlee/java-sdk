@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yodlee</groupId>
 	<artifactId>yodlee-api-model-beta</artifactId>
-	<version>1.0.29.beta1-SNAPSHOT</version>
+	<version>1.0.29.beta1</version>
 	<packaging>jar</packaging>
 	<name>Yodlee API Model Beta</name>
 	<description>Yodlee API Model Beta is the stage version</description>
