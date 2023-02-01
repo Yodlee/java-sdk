@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yodlee</groupId>
 	<artifactId>yodlee-api-model</artifactId>
-	<version>1.0.29-SNAPSHOT</version>
+	<version>1.0.29</version>
 	<packaging>jar</packaging>
 	<name>Yodlee API Model</name>
 	<description>Yodlee API Model</description>
