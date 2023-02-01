@@ -1,0 +1,2 @@
+testCaseId,testCaseName,fileName,enabled
+1,Call delete Account API,/request/accounts/createManualAccountbank.json,TRUE

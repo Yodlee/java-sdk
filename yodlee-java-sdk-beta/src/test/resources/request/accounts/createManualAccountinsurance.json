@@ -1,0 +1,11 @@
+{
+	"account": {
+		"accountType": "INSURANCE",
+		"accountName": "accountName",
+		"balance": {
+			"amount": 12345.12,
+			"currency": "USD"
+		},
+		"dueDate": "2090-01-01"
+	}
+}

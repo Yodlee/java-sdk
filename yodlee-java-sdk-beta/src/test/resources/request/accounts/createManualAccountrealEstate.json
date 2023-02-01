@@ -1,0 +1,11 @@
+{
+	"account": {
+		"accountType": "REAL_ESTATE",
+		"accountName": "accountName",
+		"homeValue": {
+			"amount": 12345.12,
+			"currency": "USD"
+		},
+		"valuationType": "MANUAL"
+	}
+}

@@ -1,0 +1,36 @@
+{
+	"providerId": 24016,
+	"applicationName": "IQBankApp",
+	"dataset": [
+		{
+			"name": "ACCT_PROFILE",
+			"attribute": [
+				{
+					"name": "FULL_ACCT_NUMBER",
+					"container": [
+						"bank",
+						"loan",
+						"investment"
+					]
+				},
+				{
+					"name": "BANK_TRANSFER_CODE",
+					"container": [
+						"bank",
+						"loan",
+						"investment"
+					]
+				},
+				{
+					"name": "HOLDER_NAME",
+					"container": [
+						"bank",
+						"creditCard",
+						"loan",
+						"investment"
+					]
+				}
+			]
+		}
+	]
+}

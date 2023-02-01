@@ -1,0 +1,5 @@
+{
+	"event": {
+		"callbackUrl": "http://192.168.112.183:8084/dataExtractsProj/split"
+	}
+}

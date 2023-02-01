@@ -1,0 +1,2 @@
+testCaseId,testCaseName,accountIds,classificationType,include,enabled
+1,getHoldingSummary,,,details,TRUE

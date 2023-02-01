@@ -1,0 +1,11 @@
+{
+	"transactionCriteria": [
+		{
+			"date": "2019-07-07",
+			"amount": 3465.00,
+			"keyword": "DESC",
+			"dateVariance": "+/-2",
+			"baseType": "CREDIT"
+		}
+	]
+}  
