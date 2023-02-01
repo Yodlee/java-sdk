@@ -1,2 +1,0 @@
-testCaseId,testCaseName,providerAccountIds,fileName,enabled
-11,updateProviderAccount,11704100,/request/providerAccounts/updateProviderAccountOB.json,TRUE

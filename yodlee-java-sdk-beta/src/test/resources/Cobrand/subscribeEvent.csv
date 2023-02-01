@@ -1,3 +1,0 @@
-testCaseId,testCaseName,fileName,eventName,enabled
-1,Call POST SubscribeEvents with eventName = REFRESH,/request/cobrand/subscribeEvents.json,REFRESH,TRUE
-2,Call POST SubscribeEvents with eventName = DATA_UPDATES,/request/cobrand/subscribeEvents.json,DATA_UPDATES,TRUE

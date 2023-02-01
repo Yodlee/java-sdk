@@ -1,3 +1,0 @@
-testCaseId,testCaseName,accountId,container,include,providerAccountId,requestId,status,enabled
-1,Call Get All Account API with inputs,1112685802,bill,holder#autoRefresh,11401358,,ACTIVE#CLOSED,TRUE
-2,Call Get All Account API with no inputs,,,,,,,TRUE

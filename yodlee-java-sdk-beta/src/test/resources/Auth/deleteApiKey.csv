@@ -1,2 +1,0 @@
-testCaseId,testCaseName,fileName,enabled
-1,delete new created api key,/request/auth/validPublicKey.json,TRUE
