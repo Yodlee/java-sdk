@@ -18,6 +18,6 @@ public class CreateConsent extends AbstractConsent {
 				+ ", expirationDate=" + expirationDate + ", startDate=" + startDate + ", applicationDisplayName="
 				+ applicationDisplayName + ", dataAccessFrequency=" + dataAccessFrequency + ", consentStatus="
 				+ consentStatus + ", providerId=" + providerId + ", renewal=" + renewal + ", scopes=" + scopes
-				+ ", otspADR=" + otspADR + ", otspADRName=" + otspADRName + ", clientADR=" + clientADR + ", preferences=" + preferences + ", thirdPartyADR=" + thirdPartyADR + "]";
+				+ ", otspADR=" + otspADR + ", otspADRName=" + otspADRName + ", clientADR=" + clientADR + ", preferences=" + preferences + ", thirdPartyADR=" + thirdPartyADR + ",userDataTreatment=" + userDataTreatment + "]";
 	}
 }
