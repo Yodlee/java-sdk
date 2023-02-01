@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yodlee</groupId>
 	<artifactId>yodlee-java-sdk-beta</artifactId>
-	<version>1.0.29.beta1</version>
+	<version>1.0.30.beta1-SNAPSHOT</version>
 	<name>Yodlee Java SDK Beta</name>
 	<description>Yodlee Java SDK Beta</description>
 	<url>https://github.com/Yodlee/java-sdk</url>
