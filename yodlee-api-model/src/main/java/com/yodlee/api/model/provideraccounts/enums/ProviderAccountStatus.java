@@ -39,5 +39,9 @@ public enum ProviderAccountStatus {
 	/**
 	 * Indicates that the migration of the provider account to the open banking provider is in progress.
 	 */
-	MIGRATION_IN_PROGRESS
+	MIGRATION_IN_PROGRESS,//
+	/**
+	 * Data retrieval has failed
+	 */
+	DATA_RETRIEVAL_FAILED
 }
