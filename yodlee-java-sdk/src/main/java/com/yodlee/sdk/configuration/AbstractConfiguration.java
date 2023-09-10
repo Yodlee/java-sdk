@@ -11,7 +11,7 @@ public abstract class AbstractConfiguration implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final String SDK_VERSION = "1.0.30";
+	public static final String SDK_VERSION = "1.0.31";
 
 	protected AbstractConfiguration() {}
 }
