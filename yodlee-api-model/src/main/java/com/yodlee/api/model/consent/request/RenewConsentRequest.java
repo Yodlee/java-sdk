@@ -5,12 +5,15 @@
  */
 package com.yodlee.api.model.consent.request;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.RenewalConsent;
 import com.yodlee.api.model.Request;
 import com.yodlee.api.model.consent.RenewConsentPreferences;
+import com.yodlee.api.model.consent.ClientTrustedAdvisor;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -34,6 +37,19 @@ public class RenewConsentRequest extends AbstractModelComponent implements Reque
 			+ "</ul>")
 	@JsonProperty("preferences")
 	private RenewConsentPreferences preferences;
+	
+	
+	@ApiModelProperty(required = true,value = "describes information of client trusted advisor.")
+	@JsonProperty("clientTrustedAdvisor")
+	private List<ClientTrustedAdvisor> clientTrustedAdvisor;
+
+	public List<ClientTrustedAdvisor> getClientTrustedAdvisor() {
+		return clientTrustedAdvisor;
+	}
+
+	public void setClientTrustedAdvisor(List<ClientTrustedAdvisor> clientTrustedAdvisor) {
+		this.clientTrustedAdvisor = clientTrustedAdvisor;
+	}
 
 	/**
 	 * renewal entity from consent details service, containing default consent duration and reauthorization eligibility. <br>
@@ -74,6 +90,6 @@ public class RenewConsentRequest extends AbstractModelComponent implements Reque
 	
 	@Override
 	public String toString() {
-		return "[renewal=" + renewal + ", preferences=" + preferences + "]";
+		return "[renewal=" + renewal + ", preferences=" + preferences + " , clientTrustedAdvisor= " +clientTrustedAdvisor +"]";
 	}
 }

@@ -42,8 +42,8 @@ public enum ConsentStatus {
 	 */
 	REVOKED,//
 	/**
-	 * The consent is invalid and needs reauthorization from provider end.
+	 * The consent is invalid and needs reauthorization from provider end
 	 */
-	CONSENT_REPEALED//
+	CONSENT_REPEALED
 	
 }

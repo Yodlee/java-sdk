@@ -15,6 +15,8 @@ import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Request;
 import com.yodlee.api.model.consent.enums.DataCluster;
 import io.swagger.annotations.ApiModelProperty;
+import com.yodlee.api.model.consent.ClientTrustedAdvisor;
+import com.yodlee.api.model.consent.RenewConsentPreferences;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"scopeId"})
@@ -28,6 +30,40 @@ public class UpdateConsentRequest extends AbstractModelComponent implements Requ
 			+ "</ul>")
 	@JsonProperty(value = "scopeId", required = true)
 	private List<DataCluster> scopeIds;
+	
+
+
+	@ApiModelProperty(value = "preferences for consent renewal."//
+			+ "<br><br>"//
+			+ "<b>Endpoints</b>:"//
+			+ "<ul>"//
+			+ "<li>PUT consents/{consentId}/renewal</li>"//
+			+ "</ul>")
+	@JsonProperty("preferences")
+	private RenewConsentPreferences preferences;
+	
+	public RenewConsentPreferences getPreferences() {
+		return preferences;
+	}
+
+	public void setPreferences(RenewConsentPreferences preferences) {
+		this.preferences = preferences;
+	}
+
+	@ApiModelProperty(required = true,
+			value = "describes information of client trusted advisor")
+	@JsonProperty("clientTrustedAdvisor")
+	protected List<ClientTrustedAdvisor> clientTrustedAdvisorList;
+
+	
+
+	public List<ClientTrustedAdvisor> getClientTrustedAdvisorList() {
+		return clientTrustedAdvisorList;
+	}
+
+	public void setClientTrustedAdvisorList(List<ClientTrustedAdvisor> clientTrustedAdvisorList) {
+		this.clientTrustedAdvisorList = clientTrustedAdvisorList;
+	}
 
 	/**
 	 * Applicable Open Banking data cluster values. <br>
@@ -74,6 +110,9 @@ public class UpdateConsentRequest extends AbstractModelComponent implements Requ
 
 	@Override
 	public String toString() {
-		return "UpdatedConsentRequest [scopeId = " + scopeIds + "]";
+		return "UpdateConsentRequest [scopeIds=" + scopeIds + ", preferences=" + preferences
+				+ ", clientTrustedAdvisorList=" + clientTrustedAdvisorList + "]";
 	}
+
+	
 }

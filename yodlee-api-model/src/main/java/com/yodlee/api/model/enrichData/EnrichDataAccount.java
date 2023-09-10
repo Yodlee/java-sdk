@@ -5,34 +5,37 @@
  */
 package com.yodlee.api.model.enrichData;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Money;
+import com.yodlee.api.model.account.BankTransferCode;
+import com.yodlee.api.model.account.enums.AccountClassification;
 import com.yodlee.api.model.account.enums.ItemAccountStatus;
-import com.yodlee.api.model.enums.Container;
+import com.yodlee.api.model.enrichData.EnrichDataContainer;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EnrichDataAccount extends AbstractModelComponent {
 
-	@ApiModelProperty(value = "The type of service. E.g., Bank, Credit Card, Investment, Insurance, etc.<br><br>"//
+	@ApiModelProperty(value = "The type of service. E.g., Bank, Credit Card,Loan <br><br>"//
 			+ "<b>Aggregated / Manual</b>: Aggregated<br>"//
-			+ "<b>Applicable containers</b>: All containers<br>"//
+			+ "<b>Applicable containers</b>: bank,creditcard,loan<br>"//
 			+ "<b>Endpoints</b>:"//
 			+ "<ul>"//
 			+ "<li>GET accounts</li>"//
 			+ "<li>GET accounts/{accountId}</li>"//
-			+ "<li>GET dataExtracts/userData</li>"//
 			+ "<li>POST dataEnrich/userData</li>"//
 			+ "</ul>"//
 			+ "<b>Applicable Values</b><br>"//
 	)
 	@NotNull(message = "{enrichData.data.invalid}")
 	@JsonProperty("container")
-	protected Container container;
+	protected EnrichDataContainer container;
 
 	@ApiModelProperty(value = "The amount that is available for an ATM withdrawal, i.e., the cash available after deducting the amount that is already withdrawn from the total cash limit. (totalCashLimit-cashAdvance= availableCash)"
 			+ "<br><b>Additional Details:</b> The available cash amount at the account-level can differ from the available cash at the statement-level, as the information in the aggregated card account data provides more up-to-date information.<br>"//
@@ -65,6 +68,21 @@ public class EnrichDataAccount extends AbstractModelComponent {
 	@JsonProperty("availableCredit")
 	@NotNull(message = "{enrichData.data.invalid}")
 	protected Money availableCredit;
+	
+	@ApiModelProperty(readOnly = true,
+			  value = "The balance in the account that is available for spending. "
+					  + "For checking accounts with overdraft, available balance may include "
+					  + "overdraft amount, if end site adds overdraft balance to available balance.<br>"//
+					  + "<b>Applicable containers</b>: bank <br>"//
+					  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
+					  + "<b>Endpoints</b>:<br>"//
+					  + "<ul>"//
+					  + "<li>GET accounts</li>"//
+					  + "<li>GET accounts/{accountId}</li>"//
+					  + "<li>GET dataExtracts/userData</li>"//
+					  + "</ul>")
+	@JsonProperty("availableBalance")
+	protected Money availableBalance;
 
 	@ApiModelProperty(value = "The account name as it appears at the site.<br>"//
 			+ "(The POST accounts service response return this field as name)<br>"//
@@ -86,7 +104,7 @@ public class EnrichDataAccount extends AbstractModelComponent {
 			+ "name in the account summary page."//
 			+ "<br><br>"//
 			+ "<b>Aggregated / Manual</b>: Aggregated<br>"//
-			+ "<b>Applicable containers</b>: bank, creditCard, investment, insurance, loan, bill, reward<br>"//
+			+ "<b>Applicable containers</b>: bank, creditCard, loan<br>"//
 			+ "<b>Endpoints</b>:"//
 			+ "<ul>"//
 			+ "<li>GET accounts</li>"//
@@ -419,10 +437,7 @@ public class EnrichDataAccount extends AbstractModelComponent {
 	@NotEmpty(message = "{enrichData.data.invalid}")
 	@JsonProperty("userLoginName")
 	protected String userLoginName;
-
-	@JsonProperty("asOfDate")
-	protected String asOfDate;
-
+	
 	@JsonProperty("accountHolderName")
 	protected String accountHolderName;
 
@@ -453,7 +468,7 @@ public class EnrichDataAccount extends AbstractModelComponent {
 			+ "<b>Credit Card:</b> The total amount due for the purchase of goods or services that must be paid by the due date.<br>"
 			+ "<b>Loan:</b> The amount due to be paid on the due date.<br>"
 			+ "<b>Note:</b> The amount due at the account-level can differ from the amount due at the statement-level, as the information in the aggregated card account data provides more up-to-date information.<br>"//
-			+ "<b>Applicable containers</b>: creditCard, loan, insurance, bill<br>"//
+			+ "<b>Applicable containers</b>: creditCard, loan<br>"//
 			+ "<b>Aggregated / Manual</b>: Both <br>"//
 			+ "<b>Endpoints</b>:<br>"//
 			+ "<ul>"//
@@ -472,7 +487,7 @@ public class EnrichDataAccount extends AbstractModelComponent {
 			+ "information in the aggregated card account data provides an up-to-date information to the consumer."
 			+ "<br><br>"//
 			+ "<b>Aggregated / Manual</b>: Aggregated<br>"//
-			+ "<b>Applicable containers</b>: creditCard, loan, insurance, bill<br>"//
+			+ "<b>Applicable containers</b>: creditCard, loan<br>"//
 			+ "<b>Endpoints</b>:"//
 			+ "<ul><li>GET accounts</li>"//
 			+ "<li>GET accounts/{accountId}</li>"//
@@ -485,7 +500,7 @@ public class EnrichDataAccount extends AbstractModelComponent {
 	@ApiModelProperty(value = "The minimum amount due is the lowest amount of money that a consumer is required to pay each month."
 			+ "<br><br>"//
 			+ "<b>Aggregated / Manual</b>: Aggregated<br>"//
-			+ "<b>Applicable containers</b>: creditCard, insurance, bill, loan<br>"//
+			+ "<b>Applicable containers</b>: creditCard, loan<br>"//
 			+ "<b>Endpoints</b>:"//
 			+ "<ul>"//
 			+ "<li>GET accounts</li>"//
@@ -509,12 +524,40 @@ public class EnrichDataAccount extends AbstractModelComponent {
 	@NotNull(message = "{enrichData.data.invalid}")
 	@JsonProperty("currentBalance")
 	protected Money currentBalance;
-
-	public Container getContainer() {
+	
+	@ApiModelProperty(readOnly = true,
+			  value = "The classification of the account such as personal, corporate, etc.<br><br>"//
+					  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
+					  + "<b>Applicable containers</b>: bank, creditCard, loan<br>"//
+					  + "<b>Endpoints</b>:"//
+					  + "<ul><li>GET accounts</li>"//
+					  + "<li>GET accounts/{accountId}</li>"//
+					  + "<li>GET dataExtracts/userData</li>"//
+					  + "</ul>"//
+					  + "<b>Applicable Values</b><br>"//
+	)
+	@JsonProperty("classification")
+	protected AccountClassification classification;
+	
+	@ApiModelProperty(readOnly = true,
+			  value = "Bank and branch identification information.<br>"//
+					  + "<b>Aggregated / Manual</b>: Aggregated<br>"//
+					  + "<b>Applicable containers</b>: bank, loan<br>"//
+					  + "<b>Endpoints</b>:<br>"//
+					  + "<ul>"//
+					  + "<li>GET accounts</li>"//
+					  + "<li>GET accounts/{accountId}</li>"//
+					  + "<li>GET dataExtracts/userData</li>"//
+					  + "</ul>"//
+	)
+	@JsonProperty("bankTransferCode")
+	protected List<BankTransferCode> bankTransferCode;
+	
+	public EnrichDataContainer getContainer() {
 		return container;
 	}
 
-	public void setContainer(Container container) {
+	public void setContainer(EnrichDataContainer container) {
 		this.container = container;
 	}
 
@@ -526,6 +569,14 @@ public class EnrichDataAccount extends AbstractModelComponent {
 		this.availableCash = availableCash;
 	}
 
+	public Money getAvailableBalance() {
+		return availableBalance;
+	}
+
+	public void setAvailableBalance(Money availableBalance) {
+		this.availableBalance = availableBalance;
+	}
+	
 	public Money getAvailableCredit() {
 		return availableCredit;
 	}
@@ -574,14 +625,6 @@ public class EnrichDataAccount extends AbstractModelComponent {
 		this.userLoginName = userLoginName;
 	}
 
-	public String getAsOfDate() {
-		return asOfDate;
-	}
-
-	public void setAsOfDate(String asOfDate) {
-		this.asOfDate = asOfDate;
-	}
-
 	public String getAccountHolderName() {
 		return accountHolderName;
 	}
@@ -597,7 +640,7 @@ public class EnrichDataAccount extends AbstractModelComponent {
 	public void setAccountStatus(ItemAccountStatus accountStatus) {
 		this.accountStatus = accountStatus;
 	}
-
+	
 	public Money getAmountDue() {
 		return amountDue;
 	}
@@ -630,13 +673,31 @@ public class EnrichDataAccount extends AbstractModelComponent {
 		this.currentBalance = currentBalance;
 	}
 
+	public AccountClassification getClassification() {
+		return classification;
+	}
+
+	public void setClassification(AccountClassification classification) {
+		this.classification = classification;
+	}
+
+	public List<BankTransferCode> getBankTransferCode() {
+		return bankTransferCode;
+	}
+
+	public void setBankTransferCode(List<BankTransferCode> bankTransferCode) {
+		this.bankTransferCode = bankTransferCode;
+	}
+	
 	@Override
 	public String toString() {
 		return "EnrichDataAccount [container=" + container + ", availableCash=" + availableCash + ", availableCredit="
-				+ availableCredit + ", accountName=" + accountName + ", displayedName=" + displayedName
-				+ ", accountType=" + accountType + ", accountNumber=" + accountNumber + ", userLoginName="
-				+ userLoginName + ", asOfDate=" + asOfDate + ", accountHolderName=" + accountHolderName
+				+ availableCredit + ", availableBalance=" + availableBalance + ", accountName=" + accountName
+				+ ", displayedName=" + displayedName + ", accountType=" + accountType + ", accountNumber="
+				+ accountNumber + ", userLoginName=" + userLoginName + ", accountHolderName=" + accountHolderName
 				+ ", accountStatus=" + accountStatus + ", amountDue=" + amountDue + ", dueDate=" + dueDate
-				+ ", minimumAmountDue=" + minimumAmountDue + ", currentBalance=" + currentBalance + "]";
+				+ ", minimumAmountDue=" + minimumAmountDue + ", currentBalance=" + currentBalance + ", classification="
+				+ classification + ", bankTransferCode=" + bankTransferCode + "]";
 	}
+
 }

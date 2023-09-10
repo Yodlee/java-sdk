@@ -5,23 +5,21 @@
  */
 package com.yodlee.api.model.enrichData;
 
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
-import com.yodlee.api.model.Name;
+import com.yodlee.api.model.enrichData.EnrichUserName;
 import com.yodlee.api.model.user.UserAddress;
-import com.yodlee.api.model.user.UserRequestPreferences;
+import com.yodlee.api.model.enrichData.UserPreferences;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EnrichDataUser extends AbstractModelComponent {
 
 	@NotEmpty(message = "{enrichData.data.invalid}")
 	@Size(min = 3, max = 150, message = "{user.loginName.length.invalid}")
-	@Pattern(regexp = "[^\\s]+", message = "{user.loginName.invalid}")
 	@JsonProperty("loginName")
 	private String loginName;
 
@@ -31,16 +29,14 @@ public class EnrichDataUser extends AbstractModelComponent {
 	private String email;
 
 	@JsonProperty("name")
-	protected Name name;
+	protected EnrichUserName name;
 
 	@JsonProperty("address")
 	protected UserAddress address;
 
 	@JsonProperty("preferences")
-	protected UserRequestPreferences preferences;
-
-	@JsonProperty("segmentName")
-	protected String segmentName;
+	protected UserPreferences preferences;
+	
 
 	public String getLoginName() {
 		return loginName;
@@ -58,11 +54,11 @@ public class EnrichDataUser extends AbstractModelComponent {
 		this.email = email;
 	}
 
-	public Name getName() {
+	public EnrichUserName getName() {
 		return name;
 	}
 
-	public void setName(Name name) {
+	public void setName(EnrichUserName name) {
 		this.name = name;
 	}
 
@@ -76,25 +72,17 @@ public class EnrichDataUser extends AbstractModelComponent {
 		this.address = address;
 	}
 
-	public UserRequestPreferences getPreferences() {
+	public UserPreferences getPreferences() {
 		return preferences;
 	}
 
-	public void setPreferences(UserRequestPreferences preferences) {
+	public void setPreferences(UserPreferences preferences) {
 		this.preferences = preferences;
-	}
-
-	public String getSegmentName() {
-		return segmentName;
-	}
-
-	public void setSegmentName(String segmentName) {
-		this.segmentName = segmentName;
-	}
+	}	
 
 	@Override
 	public String toString() {
-		return "DataEnrichUserRequest [loginName=" + loginName + ", email=" + email + ", name=" + name
-				+ ", preferences=" + preferences + ", segmentName=" + segmentName + "]";
+		return "EnrichDataUser [loginName=" + loginName + ", email=" + email + ", name=" + name + ", address=" + address
+				+ ", preferences=" + preferences + "]";
 	}
 }

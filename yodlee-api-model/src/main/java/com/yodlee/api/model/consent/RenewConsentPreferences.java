@@ -30,7 +30,7 @@ public class RenewConsentPreferences {
 			+ "<li>PUT consents/{consentId}/renewal</li>"//
 			+ "</ul>")
     @JsonProperty("value")
-    private Boolean value;
+    private String value;
 
     /**
 	 * preference id. <br>
@@ -61,11 +61,11 @@ public class RenewConsentPreferences {
 	 * @return value
 	 */
 	
-	public Boolean getValue() {
+	public String getValue() {
 		return value;
 	}
 
-	public void setValue(Boolean value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
     

@@ -80,4 +80,5 @@ public class RenewConsent extends AbstractConsent {
 				+ providerId + ", renewal=" + renewal + ", scopes=" + scopes + ", otspADR="
 				+ otspADR + ", otspADRName=" + otspADRName + ", clientADR=" + clientADR + ", preferences=" + preferences + ", thirdPartyADR=" + thirdPartyADR + "]";
 	}
+
 }

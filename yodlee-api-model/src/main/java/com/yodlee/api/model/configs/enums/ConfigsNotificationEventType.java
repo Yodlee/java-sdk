@@ -25,5 +25,9 @@ public enum ConfigsNotificationEventType {
 	/**
 	 *  Events that gets triggered once balance refresh completes 
 	 */
-	LATEST_BALANCE_UPDATES;
+	LATEST_BALANCE_UPDATES,//
+	/**
+	 *  Events that gets triggered once there is a change in the state of credit accelerator report
+	 */
+	CREDIT_ACCELERATOR_REPORT_UPDATES;
 }

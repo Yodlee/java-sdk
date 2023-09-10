@@ -17,9 +17,10 @@ import com.yodlee.api.model.consent.enums.DataAccessFrequency;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"consentId", "title", "titleBody", "startDate","expirationDate",
-		"dataAccessFrequency", "consentStatus",
-		"providerId", "applicationDisplayName","otspADR","otspADRName",
+@JsonPropertyOrder({"consentId", "title", "titleBody", "startDate","startDateTime",
+	"revokeDate","revokeDateTime","expirationDate","expirationDateTime","providerConsentId",
+		"dataAccessFrequency", "consentStatus", "providerId", 
+		"applicationDisplayName","otspADR","otspADRName",
 		"clientADR","renewal","scope","preferences","thirdPartyADR", "userDataTreatment"})
 public abstract class AbstractConsent extends AbstractModelComponent {
 
@@ -42,7 +43,28 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 	@ApiModelProperty(name = "startDate", required = true, value = "Consent start date.")
 	@JsonProperty("startDate")
 	protected String startDate;
+	
+	@ApiModelProperty(name = "revokeDate", required = true, value = "Consent revoke date.")
+	@JsonProperty("revokeDate")
+	protected String revokeDate;
 
+	
+
+	@ApiModelProperty(name = "providerConsentId", required = false, value = "Provider consent id")
+	@JsonProperty("providerConsentId")
+	protected String providerConsentId;
+
+	@ApiModelProperty(name = "revokeDateTime", required = true, value = "Consent revoke datetime.")
+	@JsonProperty("revokeDateTime")
+	protected String revokeDateTime;
+	
+	@ApiModelProperty(name = "expirationDateTime", required = true, value = "Consent expiry datetime.")
+	@JsonProperty("expirationDateTime")
+	protected String expirationDateTime; 
+	
+	@ApiModelProperty(name = "startDateTime", required = true, value = "Consent start datetime.")
+	@JsonProperty("startDateTime")
+	protected String startDateTime;
 	@ApiModelProperty(name = "otspADR", required = false, value = "Unique/Accredition Id of the ADR")
 	@JsonProperty("otspADR")
 	protected String otspADR;
@@ -88,6 +110,12 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 			value = "Preferences describes options about the additional usage of data or purge data")
 	@JsonProperty("preferences")
 	protected List<Preferences> preferences;
+	
+	@ApiModelProperty(name = "links",
+			required = true,
+			value = "GET consent preferences API details")
+	@JsonProperty("links")
+	protected List<Links> links;
 
 	@ApiModelProperty(name = "scope",
 					  required = true,
@@ -106,6 +134,20 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 			value = "userDataTreatment describes details consumer data right policy and De-identification of data")
 	@JsonProperty("userDataTreatment")
 	protected UserDataTreatment userDataTreatment;
+	
+	@ApiModelProperty(required = true,
+			value = "describes information of client trusted advisor")
+	@JsonProperty("clientTrustedAdvisor")
+	protected List<ClientTrustedAdvisor> clientTrustedAdvisorList;
+
+	public List<ClientTrustedAdvisor> getClientTrustedAdvisorList() {
+		return clientTrustedAdvisorList;
+	}
+
+	public void setClientTrustedAdvisorList(List<ClientTrustedAdvisor> clientTrustedAdvisorList) {
+		this.clientTrustedAdvisorList = clientTrustedAdvisorList;
+	}
+
 
 	/**
 	 * Consent Id generated through POST Consent. <br>
@@ -193,6 +235,24 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 		return dataAccessFrequency;
 	}
 
+	
+	
+	/**
+	 * Consent expiry datetime. <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>POST Consent and GET consent</li>
+	 * </ul>
+	 * 
+	 * @return expirationDate
+	 */
+	
+
+	public String getExpirationDateTime() {
+		return expirationDateTime;
+	}
+	
 	/**
 	 * Status of the consent. <br>
 	 * <br>
@@ -276,6 +336,10 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 			scopes.clear();
 		}
 	}
+	
+	public void setExpirationDateTime(String expirationDateTime) {
+		this.expirationDateTime = expirationDateTime;
+	}
 
 	/**
 	 * Consent start date. <br>
@@ -311,6 +375,25 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 
 	public void setApplicationDisplayName(String applicationDisplayName) {
 		this.applicationDisplayName = applicationDisplayName;
+	}
+	
+	/**
+	 * Consent start datetime. <br>
+	 * <br>
+	 * <b>Endpoints</b>:
+	 * <ul>
+	 * <li>GET Consent and POST consent</li>
+	 * </ul>
+	 *
+	 * @return startDateTime
+	 */
+	
+	public String getStartDateTime() {
+		return startDateTime;
+	}
+
+	public void setStartDateTime(String startDateTime) {
+		this.startDateTime = startDateTime;
 	}
 
 	/**
@@ -451,5 +534,29 @@ public abstract class AbstractConsent extends AbstractModelComponent {
 		this.userDataTreatment = userDataTreatment;
 	}
 	
+	public List<Links> getLinks() {
+		return links;
+	}
+
+	public void setLinks(List<Links> links) {
+		this.links = links;
+	}
 	
+	
+	public String getRevokeDate() {
+		return revokeDate;
+	}
+
+	public void setRevokeDate(String revokeDate) {
+		this.revokeDate = revokeDate;
+	}
+	
+	
+	public String getProviderConsentId() {
+		return providerConsentId;
+	}
+
+	public void setProviderConsentId(String providerConsentId) {
+		this.providerConsentId = providerConsentId;
+	}
 }

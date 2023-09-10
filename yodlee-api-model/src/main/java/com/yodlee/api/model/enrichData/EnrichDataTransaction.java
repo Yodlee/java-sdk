@@ -12,10 +12,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yodlee.api.model.AbstractModelComponent;
 import com.yodlee.api.model.Money;
-import com.yodlee.api.model.annotations.AllowedContainer;
 import com.yodlee.api.model.enums.BaseType;
-import com.yodlee.api.model.enums.Container;
-import com.yodlee.api.model.transaction.Description;
+import com.yodlee.api.model.enrichData.EnrichDataContainer;
 import com.yodlee.api.model.transaction.enums.TransactionStatus;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -32,16 +30,14 @@ public class EnrichDataTransaction extends AbstractModelComponent {
 	@JsonProperty("status")
 	protected TransactionStatus transactionStatus;
 
-	@AllowedContainer(value = {Container.bank, Container.creditCard},
-					  message = "{dataEnrich.transaction.container.invalid}")
 	@ApiModelProperty(value = "The account's container."//
 			+ "<br><br>"//
-			+ "<b>Applicable containers</b>: bank,creditCard<br>"//
+			+ "<b>Applicable containers</b>: bank,creditCard,loan<br>"//
 			+ "<b>Applicable Values</b><br>"//
 	)
 	@NotNull(message = "{enrichData.data.invalid}")
 	@JsonProperty("container")
-	protected Container container;
+	protected EnrichDataContainer container;
 
 	@ApiModelProperty(value = "The amount of the transaction as it appears at the FI site. "//
 			+ "<br><br>"//
@@ -57,7 +53,7 @@ public class EnrichDataTransaction extends AbstractModelComponent {
 	)
 	@NotNull(message = "{enrichData.data.invalid}")
 	@JsonProperty("description")
-	protected Description description;
+	protected EnrichTransactionDescription description;
 
 	@ApiModelProperty(value = "The date on which the transaction is posted to the account."//
 			+ "<br><br>"//
@@ -119,11 +115,11 @@ public class EnrichDataTransaction extends AbstractModelComponent {
 		this.sourceId = sourceId;
 	}
 
-	public Container getContainer() {
+	public EnrichDataContainer getContainer() {
 		return container;
 	}
 
-	public void setContainer(Container container) {
+	public void setContainer(EnrichDataContainer container) {
 		this.container = container;
 	}
 
@@ -135,11 +131,11 @@ public class EnrichDataTransaction extends AbstractModelComponent {
 		this.amount = amount;
 	}
 
-	public Description getDescription() {
+	public EnrichTransactionDescription getDescription() {
 		return description;
 	}
 
-	public void setDescription(Description description) {
+	public void setDescription(EnrichTransactionDescription description) {
 		this.description = description;
 	}
 
@@ -193,7 +189,7 @@ public class EnrichDataTransaction extends AbstractModelComponent {
 
 	@Override
 	public String toString() {
-		return "DataEnrichTransaction [sourceId=" + sourceId + ", transactionStatus=" + transactionStatus
+		return "EnrichDataTransaction [sourceId=" + sourceId + ", transactionStatus=" + transactionStatus
 				+ ", container=" + container + ", amount=" + amount + ", description=" + description + ", postDate="
 				+ postDate + ", userLoginName=" + userLoginName + ", accountNumber=" + accountNumber
 				+ ", transactionDate=" + transactionDate + ", baseType=" + baseType + "]";

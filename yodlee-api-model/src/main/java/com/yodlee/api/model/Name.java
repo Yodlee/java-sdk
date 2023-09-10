@@ -9,20 +9,26 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"first", "middle", "last", "fullName"})
 public class Name extends AbstractModelComponent {
 
 	@JsonProperty("first")
+	@ApiModelProperty(readOnly = true, value = "First name.")
 	private String first;
 
 	@JsonProperty("middle")
+	@ApiModelProperty(readOnly = true, value = "Middle name.")
 	private String middle;
 
 	@JsonProperty("last")
+	@ApiModelProperty(readOnly = true, value = "Last name.")
 	private String last;
 
 	@JsonProperty("fullName")
+	@ApiModelProperty(readOnly = true, value = "Full name.")
 	private String fullName;
 
 	public void setFirst(String first) {

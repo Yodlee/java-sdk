@@ -11,21 +11,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.yodlee.api.model.user.enums.Currency;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"amount", "currency", "convertedAmount", "convertedCurrency"})
 public class Money extends AbstractModelComponent {
 
 	@NotNull(message="{amount.required}")
 	@JsonProperty("amount")
+	@ApiModelProperty(readOnly = true, value = "Value of amount.")
 	private Double amount;
 
 	@JsonProperty("currency")
+	@ApiModelProperty(readOnly = true, value = "Currency should be a valid three-letter ISO Code.")
 	private Currency currency;
 
 	@JsonProperty("convertedAmount")
+	@ApiModelProperty(readOnly = true, value = "Value of the converted amount.")
 	private Double convertedAmount;
 
 	@JsonProperty("convertedCurrency")
+	@ApiModelProperty(readOnly = true, value = "Currency should be a valid three-letter ISO Code.")
 	private Currency convertedCurrency;
 
 	public Double getAmount() {

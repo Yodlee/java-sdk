@@ -34,7 +34,6 @@ public class Description extends AbstractModelComponent {
 
 	@ApiModelProperty(value = "The description of the transaction as defined by the consumer. The consumer can define or provide more details of the transaction in this field."//
 			+ "<br><br>"//
-			+ "<b>Applicable containers</b>: creditCard, insurance, loan<br>"//
 	)
 	@JsonProperty("consumer")
 	private String consumer;

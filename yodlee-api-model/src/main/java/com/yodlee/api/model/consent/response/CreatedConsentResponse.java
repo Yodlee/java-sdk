@@ -23,6 +23,7 @@ public class CreatedConsentResponse extends AbstractModelComponent implements Re
 
 	@JsonProperty("consent")
 	public List<CreateConsent> getConsents() {
+		consents.remove("links");
 		return consents == null ? null : Collections.unmodifiableList(consents);
 	}
 

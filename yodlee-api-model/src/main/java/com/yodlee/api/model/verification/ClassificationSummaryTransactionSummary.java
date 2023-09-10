@@ -167,7 +167,7 @@ public class ClassificationSummaryTransactionSummary extends AbstractModelCompon
 	/**
 	 * An array that lists the details about the latest 3 transactions that occurred in the user’s account
 	 * 
-	 * @return
+	 * @return latestTransactions
 	 */
 	public List<ClassificationSummaryTransaction> getLatestTransactions() {
 		return latestTransactions;
