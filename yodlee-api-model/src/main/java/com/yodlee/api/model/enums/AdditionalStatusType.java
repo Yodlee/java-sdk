@@ -243,7 +243,9 @@ public enum AdditionalStatusType {
 	/**
 	 * 
 	 * <b>Description: </b>The account information is being migrated from the screen-scraping provider to the Open Banking provider site.<br>
-	 * <b>Next Action: </b>No action is required as it is a transient state.
+	 * <b>Next Action: </b>No action is required as it is a transient state. 
 	 */
-	MIGRATION_IN_PROGRESS
+	MIGRATION_IN_PROGRESS,
+	
+	NOT_AVAILABLE
 }
